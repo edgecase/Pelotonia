@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "RidersViewController.h"
 #import "RiderDataController.h"
+#import "ProfileViewController.h"
 
 @interface RidersViewController ()
 
@@ -63,6 +64,17 @@
         _dataController = appDelegate.riderDataController;
     }
     return _dataController;
+}
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+}
+
+- (void)prepareProfile:(ProfileViewController *)profileViewController
+{
+    profileViewController.rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
 }
 
 
