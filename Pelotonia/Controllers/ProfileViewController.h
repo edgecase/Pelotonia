@@ -14,9 +14,6 @@
 @property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *riderIdLabel;
-@property (weak, nonatomic) IBOutlet UITextField *emailLabel;
-@property (weak, nonatomic) IBOutlet UITextField *donationLabel;
 
-- (IBAction)donatePressed:(id)sender;
 @end
 

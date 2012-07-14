@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "PledgeViewController.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -17,8 +18,6 @@
 @synthesize rider = _rider;
 @synthesize nameLabel = _nameLabel;
 @synthesize riderIdLabel = _riderIdLabel;
-@synthesize emailLabel = _emailLabel;
-@synthesize donationLabel = _donationLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,8 +38,6 @@
 {
     [self setNameLabel:nil];
     [self setRiderIdLabel:nil];
-    [self setEmailLabel:nil];
-    [self setDonationLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -63,8 +60,15 @@
     self.nameLabel.text = self.rider.name;
 }
 
-- (IBAction)donatePressed:(id)sender {
-    NSLog(@"sending mail to :%@", self.emailLabel.text);
-    NSLog(@"you have decided to pledge %@", self.donationLabel.text);
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
 }
+
+- (void)showPledge:(PledgeViewController *)pledgeViewController
+{
+    pledgeViewController.rider = self.rider;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "RidersViewController.h"
 #import "RiderDataController.h"
 #import "ProfileViewController.h"
+#import "SearchViewController.h"
 
 @interface RidersViewController ()
 
@@ -75,6 +76,11 @@
 - (void)prepareProfile:(ProfileViewController *)profileViewController
 {
     profileViewController.rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+}
+
+- (void)prepareSearch:(SearchViewController *)searchViewController
+{
+    
 }
 
 
