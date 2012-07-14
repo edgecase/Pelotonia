@@ -53,6 +53,12 @@
     for (Rider *rider in _ridersSelected) {
         [self.dataController addObject:rider];
     }
+    
+    // make sure we save our newly modified list of riders
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate archiveData];
+    
+    // go back to our original view
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -16,4 +16,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RiderDataController *riderDataController;
 
+- (void)archiveData;
+
 @end
