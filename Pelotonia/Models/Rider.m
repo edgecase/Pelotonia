@@ -10,11 +10,45 @@
 
 @implementation Rider
 @synthesize name = _name;
-@synthesize riderId;
+@synthesize riderId = _riderId;
 
+// NSObject methods
+
+- (id)init {
+    if (self = [super init]) {
+        return self;
+    }
+    return nil;
+}
+
+- (id)initWithName:(NSString *)name andId:(NSString *)riderId {
+    if (self = [super init]) {
+        _name = name;
+        _riderId = riderId;
+    }
+    return self;
+}
+
+// getters & setters
 - (NSString *)name
 {
   return [_name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
+
+
+// NSCoding
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:_riderId forKey:@"riderId"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        _name = [aDecoder decodeObjectForKey:@"name"];
+        _riderId = [aDecoder decodeObjectForKey:@"riderId"];
+    }
+    return self;
+}
+
 
 @end

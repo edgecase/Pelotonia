@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "RiderDataController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize riderDataController = _riderDataController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -43,5 +45,45 @@
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+// data controller methods
+#pragma mark -- data controller
+- (NSString *)PelotoniaFiles:(NSString *)fileName
+{
+    // get list of directories in sandbox
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    
+    // get the only directory from the list
+    NSString *documentDirectory = [documentDirectories objectAtIndex:0];
+    
+    // append passed in file name to the return value
+    return [documentDirectory stringByAppendingPathComponent:fileName];
+}
+
+- (NSString *)riderFilePath 
+{
+    return [self PelotoniaFiles:@"Riders"];
+}
+
+- (RiderDataController *)riderDataController {
+    if (_riderDataController == nil) {
+        _riderDataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[self riderFilePath]];
+        if (_riderDataController == nil) {
+            _riderDataController = [[RiderDataController alloc] init]; 
+        }
+    }
+    return _riderDataController;
+}
+
+- (void)archiveData
+{
+    // get the game list & write it out
+    [NSKeyedArchiver archiveRootObject:self.riderDataController toFile:[self riderFilePath]];
+    
+}
+
+
+
 
 @end

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RidersViewController : UITableViewController
+@class RiderDataController;
+
+@interface RidersViewController : UITableViewController {
+    RiderDataController *_dataController;
+}
+
+@property (strong, nonatomic) RiderDataController *dataController;
+
 
 @end

@@ -5,14 +5,19 @@
 //  Created by Adam McCrea on 7/11/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "RidersViewController.h"
+#import "RiderDataController.h"
 
 @interface RidersViewController ()
 
+
 @end
 
+
 @implementation RidersViewController
+
+@synthesize dataController = _dataController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,28 +51,38 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (RiderDataController *)dataController {
+    if (_dataController == nil) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        _dataController = appDelegate.riderDataController;
+    }
+    return _dataController;
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.dataController count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"riderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
+    cell.textLabel.text = rider.name;
+    cell.detailTextLabel.text = rider.riderId;
     
     return cell;
 }
