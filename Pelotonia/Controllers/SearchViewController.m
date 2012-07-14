@@ -62,14 +62,36 @@
   __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
   [request setCompletionBlock:^{
     TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-    NSString *xPath = @"//td[@class='rider']/a";
-    NSArray *riderNodes = [parser searchWithXPathQuery:xPath];
+    NSString *xPath = @"//table[@id='search-results']/tr";
+    NSArray *riderTableRows = [parser searchWithXPathQuery:xPath];
     
     NSMutableArray *riders = [NSMutableArray array];
-    for (TFHppleElement *riderElement in riderNodes) {
+    for (TFHppleElement *riderTableRow in riderTableRows) {
       Rider *rider = [[Rider alloc] init];
-      rider.name = [[riderElement firstChild] content];
-      [riders addObject:rider];
+      for (TFHppleElement *riderAttributeColumn in [riderTableRow children]) {
+        NSString *classAttribute = [[riderAttributeColumn attributes] valueForKey:@"class"];
+        
+        if ([classAttribute isEqualToString:@"rider"]) {
+          rider.name = [[[[riderAttributeColumn children] objectAtIndex:1] firstChild] content];
+        } else if ([classAttribute isEqualToString:@"id"]) {
+          rider.riderId = [[riderAttributeColumn firstChild] content];
+        } else if ([classAttribute isEqualToString:@"photo"]) {
+          NSString *relativeUrl = [[[[[[riderAttributeColumn children] objectAtIndex:1] children] objectAtIndex:1] attributes] valueForKey:@"src"];
+          rider.riderPhotoThumbUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", relativeUrl];
+        } else if ([classAttribute isEqualToString:@"donate"]) {
+          NSString *relativeUrl = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"href"];
+          rider.donateUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", relativeUrl];
+        } else if ([classAttribute isEqualToString:@"profile"]) {
+          NSString *relativeUrl = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"href"];
+          rider.profileUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", relativeUrl];
+        } else if ([classAttribute isEqualToString:@"type"]) {
+          rider.riderType = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"alt"];
+        }
+      }
+      
+      if (rider.name) {
+        [riders addObject:rider];
+      }
     }
     
     searchResultsViewController.riders = riders;

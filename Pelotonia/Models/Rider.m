@@ -11,6 +11,10 @@
 @implementation Rider
 @synthesize name = _name;
 @synthesize riderId = _riderId;
+@synthesize riderPhotoThumbUrl = _riderPhotoThumbUrl;
+@synthesize donateUrl = _donateUrl;
+@synthesize profileUrl = _profileUrl;
+@synthesize riderType = _riderType;
 
 // NSObject methods
 
@@ -40,12 +44,20 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:_riderId forKey:@"riderId"];
+    [aCoder encodeObject:_riderPhotoThumbUrl forKey:@"riderPhotoThumbUrl"];
+    [aCoder encodeObject:_donateUrl forKey:@"donateUrl"];
+    [aCoder encodeObject:_profileUrl forKey:@"profileUrl"];
+    [aCoder encodeObject:_riderType forKey:@"riderType"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
         _name = [aDecoder decodeObjectForKey:@"name"];
         _riderId = [aDecoder decodeObjectForKey:@"riderId"];
+        _riderPhotoThumbUrl = [aDecoder decodeObjectForKey:@"riderPhotoThumbUrl"];
+        _donateUrl = [aDecoder decodeObjectForKey:@"donateUrl"];
+        _profileUrl = [aDecoder decodeObjectForKey:@"profileUrl"];
+        _riderType = [aDecoder decodeObjectForKey:@"riderType"];
     }
     return self;
 }

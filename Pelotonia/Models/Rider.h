@@ -11,10 +11,18 @@
 @interface Rider : NSObject <NSCoding> {
     NSString *_name;
     NSString *_riderId;
+    NSString *_riderPhotoThumbUrl;
+    NSString *_donateUrl;
+    NSString *_profileUrl;
+    NSString *_riderType;
 }
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *riderId;
+@property (nonatomic, strong) NSString *riderPhotoThumbUrl;
+@property (nonatomic, strong) NSString *donateUrl;
+@property (nonatomic, strong) NSString *profileUrl;
+@property (nonatomic, strong) NSString *riderType;
 
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;
