@@ -12,16 +12,16 @@
 
 - (void)initializeDefaultGameList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
-    Rider *riderOne = [[Rider alloc] init];
-    riderOne.name = @"Mark Harris";
-    riderOne.riderId = @"MH0015";
-    
-    Rider *riderTwo = [[Rider alloc] init];
-    riderTwo.name = @"Monica McJunkin";
-    riderTwo.riderId = @"MM0100";
-    
-    [defaultList addObject:riderOne];
-    [defaultList addObject:riderTwo];
+//    Rider *riderOne = [[Rider alloc] init];
+//    riderOne.name = @"Mark Harris";
+//    riderOne.riderId = @"MH0015";
+//    
+//    Rider *riderTwo = [[Rider alloc] init];
+//    riderTwo.name = @"Monica McJunkin";
+//    riderTwo.riderId = @"MM0100";
+//    
+//    [defaultList addObject:riderOne];
+//    [defaultList addObject:riderTwo];
     
     _riderList = defaultList;
 }

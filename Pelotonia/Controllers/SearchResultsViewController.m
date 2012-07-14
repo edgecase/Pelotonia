@@ -5,7 +5,7 @@
 //  Created by Adam McCrea on 7/11/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "SearchResultsViewController.h"
 #import "Rider.h"
 
@@ -16,6 +16,7 @@
 @implementation SearchResultsViewController
 @synthesize searchResultsTable = _searchResultsTable;
 @synthesize riders = _riders;
+@synthesize dataController = _dataController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,6 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // prepare our set of selected people
+    _ridersSelected = [[NSMutableSet alloc] init];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -46,7 +50,10 @@
 }
 
 - (IBAction)done:(id)sender {
-  [self.navigationController popViewControllerAnimated:YES];
+    for (Rider *rider in _ridersSelected) {
+        [self.dataController addObject:rider];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)setRiders:(NSArray *)riders
@@ -54,6 +61,14 @@
   NSLog(@"setting riders");
   _riders = riders;
   [self.searchResultsTable reloadData];
+}
+
+- (RiderDataController *)dataController {
+    if (_dataController == nil) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        _dataController = appDelegate.riderDataController;
+    }
+    return _dataController;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,6 +95,8 @@
     
     Rider *rider = [self.riders objectAtIndex:indexPath.row];
     cell.textLabel.text = rider.name;
+    cell.accessoryType = ([_ridersSelected containsObject:rider])?UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+
     return cell;
 }
 
@@ -126,13 +143,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // makes nice animation
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // put the rider object into the "_ridersSelected" set
+    Rider *rider = [self.riders objectAtIndex:indexPath.row];
+    [_ridersSelected addObject:rider];
+    
+    [self.tableView reloadData];
+
 }
 
 @end
