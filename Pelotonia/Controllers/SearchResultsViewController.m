@@ -64,7 +64,6 @@
 
 - (void)setRiders:(NSArray *)riders
 {
-  NSLog(@"setting riders");
   _riders = riders;
   [self.searchResultsTable reloadData];
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72C15B132D1006E5D5D /* PledgeViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
+		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
 		4D35C72B15B132D1006E5D5D /* PledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PledgeViewController.h; sourceTree = "<group>"; };
@@ -120,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0531B93415B2227B0015A003 /* PelotoniaWeb */ = {
+			isa = PBXGroup;
+			children = (
+				0531B93615B222B10015A003 /* PelotoniaWeb.h */,
+				0531B93715B222B10015A003 /* PelotoniaWeb.m */,
+			);
+			name = PelotoniaWeb;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 				BCE3B80F15AE573F00205530 /* hpple */,
 				BCE3B7FA15AE518800205530 /* Reachability */,
 				BCE3B7DD15AE516500205530 /* ASIHTTPRequest */,
@@ -350,6 +363,7 @@
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */,
+				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
