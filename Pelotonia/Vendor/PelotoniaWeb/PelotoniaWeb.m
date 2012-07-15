@@ -102,7 +102,6 @@
             } else if ([header isEqualToString:@"Route I'm Riding:"]) { // rider
                 NSString *route = [self stripWhitespace:[content content]];
                 rider.route = route;
-                NSLog(@"route: %@", rider.route);
             } else if ([header isEqualToString:@"Peloton Funds Raised:"]) { // peloton
                 NSString *pelotonFundsRaised = [content content];
                 rider.pelotonFundsRaised = pelotonFundsRaised;
