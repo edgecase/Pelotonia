@@ -14,7 +14,9 @@
 @property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *riderIdLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *riderImageView;
+@property (weak, nonatomic) IBOutlet UILabel *routeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *riderImageView;
 
 @end
 

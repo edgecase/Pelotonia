@@ -16,7 +16,14 @@
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
 @synthesize route = _route;
+
 @synthesize riderPhotoUrl = _riderPhotoUrl;
+@synthesize amountRaised = _amountRaised;
+@synthesize myPeloton = _myPeloton;
+@synthesize pelotonFundsRaised = _pelotonFundsRaised;
+@synthesize pelotonTotalOfAllMembers = _pelotonTotalOfAllMembers;
+@synthesize pelotonGrandTotal = _pelotonGrandTotal;
+@synthesize pelotonCaptain = _pelotonCaptain;
 
 // NSObject methods
 
@@ -35,18 +42,6 @@
     return self;
 }
 
-// getters & setters
-- (NSString *)name
-{
-  return [_name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
-- (NSString *)route
-{
-    return [_route stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-}
-
-
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:_name forKey:@"name"];
@@ -56,7 +51,14 @@
     [aCoder encodeObject:_profileUrl forKey:@"profileUrl"];
     [aCoder encodeObject:_riderType forKey:@"riderType"];
     [aCoder encodeObject:_route forKey:@"route"];
+    
     [aCoder encodeObject:_riderPhotoUrl forKey:@"riderPhotoUrl"];
+    [aCoder encodeObject:_amountRaised forKey:@"amountRaised"];
+    [aCoder encodeObject:_myPeloton forKey:@"myPeloton"];
+    [aCoder encodeObject:_pelotonFundsRaised forKey:@"pelotonFundsRaised"];
+    [aCoder encodeObject:_pelotonTotalOfAllMembers forKey:@"pelotonTotalOfAllMembers"];
+    [aCoder encodeObject:_pelotonGrandTotal forKey:@"pelotonGrandTotal"];
+    [aCoder encodeObject:_pelotonCaptain forKey:@"pelotonCaptain"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -68,7 +70,14 @@
         _profileUrl = [aDecoder decodeObjectForKey:@"profileUrl"];
         _riderType = [aDecoder decodeObjectForKey:@"riderType"];
         _route = [aDecoder decodeObjectForKey:@"route"];
+        
         _riderPhotoUrl = [aDecoder decodeObjectForKey:@"riderPhotoUrl"];
+        _amountRaised = [aDecoder decodeObjectForKey:@"amountRaised"];
+        _myPeloton = [aDecoder decodeObjectForKey:@"myPeloton"];
+        _pelotonFundsRaised = [aDecoder decodeObjectForKey:@"pelotonFundsRaised"];
+        _pelotonTotalOfAllMembers = [aDecoder decodeObjectForKey:@"pelotonTotalOfAllMembers"];
+        _pelotonGrandTotal = [aDecoder decodeObjectForKey:@"pelotonGrandTotal"];
+        _pelotonCaptain = [aDecoder decodeObjectForKey:@"pelotonCaptain"];
     }
     return self;
 }

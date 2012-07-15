@@ -16,7 +16,14 @@
     NSString *_profileUrl;
     NSString *_riderType;
     NSString *_route;
+    
     NSString *_riderPhotoUrl;
+    NSString *_amountRaised;
+    NSString *_myPeloton;
+    NSString *_pelotonFundsRaised;
+    NSString *_pelotonTotalOfAllMembers;
+    NSString *_pelotonGrandTotal;
+    NSString *_pelotonCaptain;
 }
 
 @property (nonatomic, strong) NSString *name;
@@ -28,6 +35,12 @@
 @property (nonatomic, strong) NSString *route;
 
 @property (nonatomic, strong) NSString *riderPhotoUrl;
+@property (nonatomic, strong) NSString *amountRaised;
+@property (nonatomic, strong) NSString *myPeloton;
+@property (nonatomic, strong) NSString *pelotonFundsRaised;
+@property (nonatomic, strong) NSString *pelotonTotalOfAllMembers;
+@property (nonatomic, strong) NSString *pelotonGrandTotal;
+@property (nonatomic, strong) NSString *pelotonCaptain;
 
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;

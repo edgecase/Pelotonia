@@ -19,6 +19,8 @@
 @synthesize rider = _rider;
 @synthesize nameLabel = _nameLabel;
 @synthesize riderIdLabel = _riderIdLabel;
+@synthesize routeLabel = _routeLabel;
+@synthesize raisedLabel = _raisedLabel;
 @synthesize riderImageView = _riderImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -41,6 +43,8 @@
     [self setNameLabel:nil];
     [self setRiderIdLabel:nil];
     [self setRiderImageView:nil];
+    [self setRouteLabel:nil];
+    [self setRaisedLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -67,7 +71,13 @@
     // set the name & ID appropriately
     self.riderIdLabel.text = self.rider.riderId;
     self.nameLabel.text = self.rider.name;
-    self.riderImageView.image = [UIImage imageNamed:@"profile_default.jpg"];
+    self.routeLabel.text = self.rider.route;
+    self.raisedLabel.text = self.rider.amountRaised;
+    
+    if (!self.riderImageView.image) {
+        self.riderImageView.image = [UIImage imageNamed:@"profile_default.jpg"];
+    }
+    
     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]];
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{

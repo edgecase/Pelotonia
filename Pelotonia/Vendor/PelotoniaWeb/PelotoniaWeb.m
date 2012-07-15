@@ -10,6 +10,10 @@
 #import "ASIHTTPRequest.h"
 #import "TFHpple.h"
 
+@interface PelotoniaWeb()
++ (NSString *)stripWhitespace:(NSString *)input;
+@end
+
 @implementation PelotoniaWeb
 
 + (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
@@ -29,7 +33,7 @@
                 NSString *classAttribute = [[riderAttributeColumn attributes] valueForKey:@"class"];
                 
                 if ([classAttribute isEqualToString:@"rider"]) {
-                    rider.name = [[[[riderAttributeColumn children] objectAtIndex:1] firstChild] content];
+                    rider.name = [self stripWhitespace:[[[[riderAttributeColumn children] objectAtIndex:1] firstChild] content]];
                 } else if ([classAttribute isEqualToString:@"id"]) {
                     rider.riderId = [[riderAttributeColumn firstChild] content];
                 } else if ([classAttribute isEqualToString:@"photo"]) {
@@ -44,7 +48,7 @@
                 } else if ([classAttribute isEqualToString:@"type"]) {
                     rider.riderType = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"alt"];
                 } else if ([classAttribute isEqualToString:@"route"]) {
-                    rider.route = [[riderAttributeColumn firstChild] content];
+                    rider.route = [self stripWhitespace:[[riderAttributeColumn firstChild] content]];
                 }
             }
             
@@ -81,7 +85,39 @@
         NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
         
         rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
-        NSLog(@"url: %@", rider.riderPhotoUrl);
+        
+        NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
+        NSArray *metaDataFields = [parser searchWithXPathQuery:metaDataXPath];
+        
+        for (TFHppleElement *metaDataElement in metaDataFields) {
+            NSString *header = [[[metaDataElement firstChild] firstChild] content];
+            TFHppleElement *content = [[[metaDataElement children] objectAtIndex:2] firstChild];
+            
+            if ([header isEqualToString:@"I've Raised:"]) { // volunteer/rider/virtual rider
+                NSString *amountRaised = [content content];
+                rider.amountRaised = amountRaised;
+            } else if ([header isEqualToString:@"My Peloton:"]) { // rider/virtual rider
+                NSString *myPeloton = [[content firstChild] content];
+                rider.myPeloton = myPeloton;
+            } else if ([header isEqualToString:@"Route I'm Riding:"]) { // rider
+                NSString *route = [self stripWhitespace:[content content]];
+                rider.route = route;
+                NSLog(@"route: %@", rider.route);
+            } else if ([header isEqualToString:@"Peloton Funds Raised:"]) { // peloton
+                NSString *pelotonFundsRaised = [content content];
+                rider.pelotonFundsRaised = pelotonFundsRaised;
+            } else if ([header isEqualToString:@"Total of All Members:"]) { // peloton
+                NSString *pelotonTotalOfAllMembers = [content content];
+                rider.pelotonTotalOfAllMembers = pelotonTotalOfAllMembers;
+            } else if ([header isEqualToString:@"Grand Total Raised:"]) { // peloton
+                NSString *pelotonGrandTotal = [content content];
+                rider.pelotonGrandTotal = pelotonGrandTotal;
+            } else if ([header isEqualToString:@"Peloton Captain:"]) { // peloton
+                NSString *pelotonCaptain = [self stripWhitespace:[[[[[[metaDataElement children] objectAtIndex:2] children] objectAtIndex:1] firstChild] content]];
+                rider.pelotonCaptain = pelotonCaptain;
+            }
+        }
+
         if (completeBlock) {
             completeBlock(rider);
         }
@@ -96,6 +132,11 @@
     }];
     
     [request startAsynchronous];
+}
+
++ (NSString *)stripWhitespace:(NSString *)input
+{
+    return [input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 @end
