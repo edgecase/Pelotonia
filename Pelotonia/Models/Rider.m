@@ -15,6 +15,8 @@
 @synthesize donateUrl = _donateUrl;
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
+@synthesize route = _route;
+@synthesize riderPhotoUrl = _riderPhotoUrl;
 
 // NSObject methods
 
@@ -39,6 +41,11 @@
   return [_name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
+- (NSString *)route
+{
+    return [_route stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -48,6 +55,8 @@
     [aCoder encodeObject:_donateUrl forKey:@"donateUrl"];
     [aCoder encodeObject:_profileUrl forKey:@"profileUrl"];
     [aCoder encodeObject:_riderType forKey:@"riderType"];
+    [aCoder encodeObject:_route forKey:@"route"];
+    [aCoder encodeObject:_riderPhotoUrl forKey:@"riderPhotoUrl"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -58,6 +67,8 @@
         _donateUrl = [aDecoder decodeObjectForKey:@"donateUrl"];
         _profileUrl = [aDecoder decodeObjectForKey:@"profileUrl"];
         _riderType = [aDecoder decodeObjectForKey:@"riderType"];
+        _route = [aDecoder decodeObjectForKey:@"route"];
+        _riderPhotoUrl = [aDecoder decodeObjectForKey:@"riderPhotoUrl"];
     }
     return self;
 }

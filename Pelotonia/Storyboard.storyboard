@@ -95,6 +95,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="r2C-34-fiD">
+                                <rect key="frame" x="20" y="20" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -104,6 +108,7 @@
                         <outlet property="emailLabel" destination="y45-nt-1Bk" id="gYD-Be-XHD"/>
                         <outlet property="nameLabel" destination="oPX-Yb-lgA" id="W0m-We-F8k"/>
                         <outlet property="riderIdLabel" destination="8Ai-E7-FgB" id="tbt-1f-01t"/>
+                        <outlet property="riderImageView" destination="r2C-34-fiD" id="DzZ-CQ-l3z"/>
                     </connections>
                 </viewController>
             </objects>
@@ -304,6 +309,7 @@
             <relationships>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="riderIdLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="riderImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="RidersViewController" superclassName="UITableViewController">

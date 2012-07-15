@@ -10,6 +10,7 @@
 #import "RiderDataController.h"
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
+#import "PelotoniaWeb.h"
 
 @interface RidersViewController ()
 
@@ -75,7 +76,11 @@
 
 - (void)prepareProfile:(ProfileViewController *)profileViewController
 {
-    profileViewController.rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    Rider *rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    profileViewController.rider = rider;
+    [PelotoniaWeb profileForRider:rider onComplete:^(Rider *updatedRider) {
+        profileViewController.rider = updatedRider;
+    } onFailure:nil];
 }
 
 - (void)prepareSearch:(SearchViewController *)searchViewController

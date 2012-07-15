@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "PledgeViewController.h"
+#import "ASIHTTPRequest.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -18,6 +19,7 @@
 @synthesize rider = _rider;
 @synthesize nameLabel = _nameLabel;
 @synthesize riderIdLabel = _riderIdLabel;
+@synthesize riderImageView = _riderImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +40,7 @@
 {
     [self setNameLabel:nil];
     [self setRiderIdLabel:nil];
+    [self setRiderImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -47,9 +50,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)viewWillAppear:(BOOL)animated 
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self configureView];
+}
+
+- (void)setRider:(Rider *)rider
+{
+    _rider = rider;
     [self configureView];
 }
 
@@ -58,6 +67,16 @@
     // set the name & ID appropriately
     self.riderIdLabel.text = self.rider.riderId;
     self.nameLabel.text = self.rider.name;
+    
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]];
+    [request setCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *riderPhoto = [UIImage imageWithData:[request responseData]];
+            self.riderImageView.image = riderPhoto;
+            [self.view setNeedsDisplay];
+        });
+    }];
+    [request startAsynchronous];
 }
 
 #pragma mark - Segue

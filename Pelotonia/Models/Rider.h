@@ -15,6 +15,8 @@
     NSString *_donateUrl;
     NSString *_profileUrl;
     NSString *_riderType;
+    NSString *_route;
+    NSString *_riderPhotoUrl;
 }
 
 @property (nonatomic, strong) NSString *name;
@@ -23,6 +25,9 @@
 @property (nonatomic, strong) NSString *donateUrl;
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
+@property (nonatomic, strong) NSString *route;
+
+@property (nonatomic, strong) NSString *riderPhotoUrl;
 
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;
