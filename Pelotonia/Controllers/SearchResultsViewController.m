@@ -59,7 +59,7 @@
     [appDelegate archiveData];
     
     // go back to our original view
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setRiders:(NSArray *)riders
