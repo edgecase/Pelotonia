@@ -67,7 +67,7 @@
     // set the name & ID appropriately
     self.riderIdLabel.text = self.rider.riderId;
     self.nameLabel.text = self.rider.name;
-    
+    self.riderImageView.image = [UIImage imageNamed:@"profile_default.jpg"];
     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]];
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{

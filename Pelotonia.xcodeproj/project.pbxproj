@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
+		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72C15B132D1006E5D5D /* PledgeViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -46,6 +47,7 @@
 		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
 		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
 		0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default_thumb.jpg; sourceTree = "<group>"; };
+		0531B94115B3206D0015A003 /* profile_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default.jpg; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
 		4D35C72B15B132D1006E5D5D /* PledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PledgeViewController.h; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0531B94115B3206D0015A003 /* profile_default.jpg */,
 				0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */,
 			);
 			path = Assets;
@@ -344,6 +347,7 @@
 				BCE3B7C115AE49DA00205530 /* InfoPlist.strings in Resources */,
 				BCE3B7CE15AE4A0C00205530 /* Storyboard.storyboard in Resources */,
 				0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */,
+				0531B94215B3206D0015A003 /* profile_default.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
