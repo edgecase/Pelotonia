@@ -10,6 +10,7 @@
 #import "RiderDataController.h"
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
+#import "Pelotonia-Colors.h"
 
 @interface RidersViewController ()
 
@@ -39,6 +40,24 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    // set the colors appropriately
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:84.0/255.0 green:94.0/255.0 blue:101.0/255.0 alpha:1.0];
+    
+    // set the text in the navbar to use the Baksheesh font
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+    titleLabel.textColor = PRIMARY_GREEN;
+    titleLabel.font = PELOTONIA_FONT(22);
+    titleLabel.text = [NSString stringWithFormat:@"%@", @"PELOTONIA"];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.textAlignment = UITextAlignmentCenter; 
+    [titleLabel setShadowColor:[UIColor darkGrayColor]];
+    [titleLabel setShadowOffset:CGSizeMake(0, -0.5)];
+    
+    self.navigationItem.titleView = titleLabel;
+    
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
+    self.tableView.opaque = NO;
 }
 
 - (void)viewDidUnload

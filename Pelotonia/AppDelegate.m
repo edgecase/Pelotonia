@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RiderDataController.h"
+#import "Pelotonia-Colors.h"
 
 @implementation AppDelegate
 
@@ -16,6 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
+    [[UIButton appearance] setTintColor:PRIMARY_GREEN];
     return YES;
 }
 
