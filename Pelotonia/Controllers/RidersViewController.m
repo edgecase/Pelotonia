@@ -12,8 +12,15 @@
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
+#import "ASIHTTPRequest.h"
+#import "ASIDownloadCache.h"
+
 
 @interface RidersViewController ()
+@property (nonatomic, strong) NSMutableDictionary *imagesCache;
+
+- (void)loadImagesForOnScreenRows;
+- (void)loadImageAtIndexPath:(NSIndexPath *)indexPath;
 
 
 @end
@@ -22,6 +29,8 @@
 @implementation RidersViewController
 
 @synthesize dataController = _dataController;
+@synthesize riderTableView = _riderTableView;
+@synthesize imagesCache = _imagesCache;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,6 +51,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    self.imagesCache = [NSMutableDictionary dictionary];
+
     // set the colors appropriately
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:84.0/255.0 green:94.0/255.0 blue:101.0/255.0 alpha:1.0];
     
@@ -63,6 +74,8 @@
 
 - (void)viewDidUnload
 {
+    self.riderTableView = nil;
+    [self setRiderTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -108,6 +121,41 @@
 }
 
 
+#pragma mark - Image handling
+- (void)loadImagesForOnScreenRows
+{
+    NSArray *visiblePaths = [self.riderTableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in visiblePaths) {
+        [self loadImageAtIndexPath:indexPath];
+    }
+}
+
+- (void)loadImageAtIndexPath:(NSIndexPath *)indexPath
+{
+    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
+    
+    if ([[self.imagesCache allKeys] containsObject:rider.riderPhotoThumbUrl]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
+            UIImage *riderPhotoThumb = [self.imagesCache valueForKey:rider.riderPhotoThumbUrl];
+            cell.imageView.image = riderPhotoThumb;
+        });
+    } else {
+        __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]];
+        [request setCompletionBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
+                UIImage *riderPhotoThumb = [UIImage imageWithData:[request responseData]];
+                cell.imageView.image = riderPhotoThumb;
+                [self.imagesCache setValue:riderPhotoThumb forKey:rider.riderPhotoThumbUrl];
+            });
+        }];
+        [request startAsynchronous];
+    }
+}
+
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -130,7 +178,10 @@
     // Configure the cell...
     Rider *rider = [self.dataController objectAtIndex:indexPath.row];
     cell.textLabel.text = rider.name;
-    cell.detailTextLabel.text = rider.riderId;
+    cell.detailTextLabel.text = rider.amountRaised;
+    cell.imageView.image = [UIImage imageNamed:@"profile_default_thumb.jpg"];
+    [self loadImageAtIndexPath:indexPath];
+
     
     return cell;
 }

@@ -15,6 +15,7 @@
 }
 
 @property (strong, nonatomic) RiderDataController *dataController;
+@property (weak, nonatomic) IBOutlet UITableView *riderTableView;
 
 
 @end

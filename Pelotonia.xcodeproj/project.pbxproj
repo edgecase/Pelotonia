@@ -55,10 +55,10 @@
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
 		4D35C72B15B132D1006E5D5D /* PledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PledgeViewController.h; sourceTree = "<group>"; };
 		4D35C72C15B132D1006E5D5D /* PledgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PledgeViewController.m; sourceTree = "<group>"; };
-		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
+		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = ../Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
-		4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Baksheesh.ttf; sourceTree = "<group>"; };
-		4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "one-goal-wallpaper.jpg"; sourceTree = "<group>"; };
+		4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Baksheesh.ttf; path = ../Baksheesh.ttf; sourceTree = "<group>"; };
+		4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "one-goal-wallpaper.jpg"; path = "../one-goal-wallpaper.jpg"; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,14 +134,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4DD0407715B36DDF0073E7B6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */,
-				4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */,
-				4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */,
-			);
-			name = Resources;
 		0531B93415B2227B0015A003 /* PelotoniaWeb */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +146,9 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */,
+				4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */,
+				4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */,
 				0531B94115B3206D0015A003 /* profile_default.jpg */,
 				0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */,
 			);
@@ -195,13 +190,12 @@
 		BCE3B7BC15AE49DA00205530 /* Pelotonia */ = {
 			isa = PBXGroup;
 			children = (
-				4DD0407715B36DDF0073E7B6 /* Resources */,
 				0531B93E15B24FF00015A003 /* Assets */,
 				BCE3B81B15AE5B4F00205530 /* Models */,
-				BCE3B7DC15AE511F00205530 /* Vendor */,
 				BCE3B7CF15AE4DE000205530 /* Controllers */,
 				BCE3B7C515AE49DA00205530 /* AppDelegate.h */,
 				BCE3B7C615AE49DA00205530 /* AppDelegate.m */,
+				BCE3B7DC15AE511F00205530 /* Vendor */,
 				BCE3B7BD15AE49DA00205530 /* Supporting Files */,
 				BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */,
 			);
