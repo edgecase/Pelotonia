@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+
 #import "Rider.h"
 
-@interface PledgeViewController : UIViewController
+@interface PledgeViewController : UIViewController <MFMailComposeViewControllerDelegate> {
+
+}
 
 @property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UITextField *emailLabel;

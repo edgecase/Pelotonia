@@ -15,6 +15,9 @@
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD0407D15B4EEE20073E7B6 /* Baksheesh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */; };
 		4DD0407F15B4F3350073E7B6 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */; };
+		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
+		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
+		4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
 		BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7BA15AE49DA00205530 /* CoreGraphics.framework */; };
@@ -59,6 +62,9 @@
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
 		4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Baksheesh.ttf; path = ../Baksheesh.ttf; sourceTree = "<group>"; };
 		4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "one-goal-wallpaper.jpg"; path = "../one-goal-wallpaper.jpg"; sourceTree = "<group>"; };
+		4DD7F53915B5108300B1DF42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -120,6 +126,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */,
+				4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */,
+				4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */,
 				BCE3B81A15AE586800205530 /* libxml2.dylib in Frameworks */,
 				BCE3B80515AE51BC00205530 /* libz.dylib in Frameworks */,
 				BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */,
@@ -158,6 +167,9 @@
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
+				4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */,
+				4DD7F53915B5108300B1DF42 /* AddressBook.framework */,
+				4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */,
 				BCE3B81915AE586800205530 /* libxml2.dylib */,
 				BCE3B80415AE51BC00205530 /* libz.dylib */,
 				BCE3B80215AE51A800205530 /* MobileCoreServices.framework */,

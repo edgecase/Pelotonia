@@ -63,7 +63,26 @@
 - (IBAction)pledgePressed:(id)sender {
     NSLog(@"Email sent to: %@", self.emailLabel.text);
     NSLog(@"You have decided to sponsor %@ the amount %@", self.rider.name, self.amountLabel.text);
+    
+    MFMailComposeViewController *mailComposer; 
+    mailComposer  = [[MFMailComposeViewController alloc] init];
+    mailComposer.mailComposeDelegate = self;
+    [mailComposer setToRecipients:[NSArray arrayWithObject:self.emailLabel.text]];
+    [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
+    [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
+    NSString *msg = [NSString stringWithFormat:@"You have decided to sponsor %@ in the amount of $%@.  Thank you!", self.rider.name, self.amountLabel.text];
+    [mailComposer setMessageBody:msg isHTML:NO];
+    [self presentModalViewController:mailComposer animated:YES];
+    
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller 
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error 
+{ 
+    if(error) NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
     [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.amountLabel.text, self.rider.name]];
     [self dismissModalViewControllerAnimated:YES];
+    return;
 }
 @end
