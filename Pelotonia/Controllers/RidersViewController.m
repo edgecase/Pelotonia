@@ -178,7 +178,9 @@
     // Configure the cell...
     Rider *rider = [self.dataController objectAtIndex:indexPath.row];
     cell.textLabel.text = rider.name;
+    cell.textLabel.font = PELOTONIA_FONT(17);
     cell.detailTextLabel.text = rider.amountRaised;
+    cell.detailTextLabel.font = PELOTONIA_FONT(17);
     cell.imageView.image = [UIImage imageNamed:@"profile_default_thumb.jpg"];
     [self loadImageAtIndexPath:indexPath];
 
