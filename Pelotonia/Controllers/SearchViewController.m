@@ -8,9 +8,7 @@
 
 #import "SearchViewController.h"
 #import "SearchResultsViewController.h"
-#import "ASIHTTPRequest.h"
-#import "TFHpple.h"
-#import "Rider.h"
+#import "PelotoniaWeb.h"
 
 @interface SearchViewController ()
 
@@ -55,34 +53,9 @@
 
 - (void)prepareSearchResults:(SearchResultsViewController *)searchResultsViewController
 {
-  NSString *queryString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", self.lastNameField.text, self.riderIdField.text];
-
-  // do a post with the queryString
-  NSURL *url = [NSURL URLWithString:queryString];
-  __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-  [request setCompletionBlock:^{
-    TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-    NSString *xPath = @"//td[@class='rider']/a";
-    NSArray *riderNodes = [parser searchWithXPathQuery:xPath];
-    
-    NSMutableArray *riders = [NSMutableArray array];
-    for (TFHppleElement *riderElement in riderNodes) {
-      Rider *rider = [[Rider alloc] init];
-      rider.name = [[riderElement firstChild] content];
-      [riders addObject:rider];
-    }
-    
-    searchResultsViewController.riders = riders;
-  }];
-  
-  [request setFailedBlock:^{
-    NSError *error = [request error];
-    NSLog(@"%@", error);
-  }];
-  [request startAsynchronous];  
-  
-  // parse the returned values
-  
+  [PelotoniaWeb searchForRiderWithLastName:lastNameField.text riderId:riderIdField.text onComplete:^(NSArray *searchResults) {
+    searchResultsViewController.riders = searchResults;
+  } onFailure:nil];
 }
 
 -(IBAction)search:(id)sender {

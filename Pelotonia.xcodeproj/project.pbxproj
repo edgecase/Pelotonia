@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
+		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
+		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72C15B132D1006E5D5D /* PledgeViewController.m */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
@@ -44,6 +47,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
+		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
+		0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default_thumb.jpg; sourceTree = "<group>"; };
+		0531B94115B3206D0015A003 /* profile_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default.jpg; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
 		4D35C72B15B132D1006E5D5D /* PledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PledgeViewController.h; sourceTree = "<group>"; };
@@ -135,6 +142,22 @@
 				4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */,
 			);
 			name = Resources;
+		0531B93415B2227B0015A003 /* PelotoniaWeb */ = {
+			isa = PBXGroup;
+			children = (
+				0531B93615B222B10015A003 /* PelotoniaWeb.h */,
+				0531B93715B222B10015A003 /* PelotoniaWeb.m */,
+			);
+			name = PelotoniaWeb;
+			sourceTree = "<group>";
+		};
+		0531B93E15B24FF00015A003 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0531B94115B3206D0015A003 /* profile_default.jpg */,
+				0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		BCE3B7A715AE49DA00205530 = {
@@ -173,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD0407715B36DDF0073E7B6 /* Resources */,
+				0531B93E15B24FF00015A003 /* Assets */,
 				BCE3B81B15AE5B4F00205530 /* Models */,
 				BCE3B7DC15AE511F00205530 /* Vendor */,
 				BCE3B7CF15AE4DE000205530 /* Controllers */,
@@ -216,6 +240,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 				BCE3B80F15AE573F00205530 /* hpple */,
 				BCE3B7FA15AE518800205530 /* Reachability */,
 				BCE3B7DD15AE516500205530 /* ASIHTTPRequest */,
@@ -341,6 +366,8 @@
 				4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */,
 				4DD0407D15B4EEE20073E7B6 /* Baksheesh.ttf in Resources */,
 				4DD0407F15B4F3350073E7B6 /* one-goal-wallpaper.jpg in Resources */,
+				0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */,
+				0531B94215B3206D0015A003 /* profile_default.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +399,7 @@
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */,
+				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
