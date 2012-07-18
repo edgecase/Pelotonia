@@ -70,8 +70,9 @@
     [mailComposer setToRecipients:[NSArray arrayWithObject:self.emailLabel.text]];
     [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
     [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
-    NSString *msg = [NSString stringWithFormat:@"You have decided to sponsor %@ in the amount of $%@.  Thank you!", self.rider.name, self.amountLabel.text];
-    [mailComposer setMessageBody:msg isHTML:NO];
+    NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you for sponsoring my Pelotonia ride.  To complete your $%@ pledge, please click <a href=\"%@\">here</a>.<br/><br/>100%% of your donation goes to support life saving research at the James Comprehensive Cancer Center at The Ohio State University.<br/><br/>Your support is priceless,<br/><br/>%@</body></html>", self.amountLabel.text, self.rider.donateUrl, self.rider.name];
+    NSLog(@"msgBody: %@", msg);
+    [mailComposer setMessageBody:msg isHTML:YES];
     [self presentModalViewController:mailComposer animated:YES];
     
 }
@@ -80,9 +81,13 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error 
 { 
-    if(error) NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
-    [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.amountLabel.text, self.rider.name]];
+    if(error) {
+        NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);    
+        [self postAlert:[NSString stringWithFormat:@"Your email was cancelled."]];
+    }
+    else {
+        [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.amountLabel.text, self.rider.name]];
+    }
     [self dismissModalViewControllerAnimated:YES];
-    return;
 }
 @end
