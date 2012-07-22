@@ -11,6 +11,5 @@
 @interface SearchViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *lastNameField;
 @property (strong, nonatomic) IBOutlet UITextField *riderIdField;
-- (IBAction)search:(id)sender;
 
 @end

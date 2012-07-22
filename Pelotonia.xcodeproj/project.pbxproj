@@ -11,7 +11,6 @@
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
 		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
-		4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72C15B132D1006E5D5D /* PledgeViewController.m */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD0407D15B4EEE20073E7B6 /* Baksheesh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */; };
 		4DD0407F15B4F3350073E7B6 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407E15B4F3350073E7B6 /* one-goal-wallpaper.jpg */; };
@@ -56,8 +55,6 @@
 		0531B94115B3206D0015A003 /* profile_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default.jpg; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
-		4D35C72B15B132D1006E5D5D /* PledgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PledgeViewController.h; sourceTree = "<group>"; };
-		4D35C72C15B132D1006E5D5D /* PledgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PledgeViewController.m; sourceTree = "<group>"; };
 		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = ../Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
 		4DD0407C15B4EEE20073E7B6 /* Baksheesh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Baksheesh.ttf; path = ../Baksheesh.ttf; sourceTree = "<group>"; };
@@ -237,8 +234,6 @@
 				BCE3B7DA15AE4FAB00205530 /* SearchResultsViewController.m */,
 				BCE3B80B15AE53F900205530 /* ProfileViewController.h */,
 				BCE3B80C15AE53F900205530 /* ProfileViewController.m */,
-				4D35C72B15B132D1006E5D5D /* PledgeViewController.h */,
-				4D35C72C15B132D1006E5D5D /* PledgeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -404,7 +399,6 @@
 				BCE3B81815AE573F00205530 /* XPathQuery.m in Sources */,
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
-				4D35C72D15B132D1006E5D5D /* PledgeViewController.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

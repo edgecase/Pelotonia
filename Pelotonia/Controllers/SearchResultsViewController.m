@@ -44,6 +44,7 @@
     
     _imagesCache = [NSMutableDictionary dictionary];
     
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -216,10 +217,14 @@
     
     // put the rider object into the "_ridersSelected" set
     Rider *rider = [self.riders objectAtIndex:indexPath.row];
-    [_ridersSelected addObject:rider];
+    if ([_ridersSelected containsObject:rider]) {
+        [_ridersSelected removeObject:rider];
+    }
+    else {
+        [_ridersSelected addObject:rider];
+    }
     
     [self.tableView reloadData];
-    
 }
 
 @end

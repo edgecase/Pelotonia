@@ -31,6 +31,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
 }
 
 - (void)viewDidUnload
@@ -58,6 +59,11 @@
   } onFailure:nil];
 }
 
--(IBAction)search:(id)sender {
+- (BOOL)textFieldShouldReturn:(UITextField *)tf
+{
+    [self performSegueWithIdentifier:@"prepareSearchResults:" sender:self];
+    [tf resignFirstResponder];
+    return YES;
 }
+
 @end

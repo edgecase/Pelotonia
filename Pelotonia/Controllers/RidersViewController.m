@@ -54,16 +54,16 @@
     self.imagesCache = [NSMutableDictionary dictionary];
 
     // set the colors appropriately
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:84.0/255.0 green:94.0/255.0 blue:101.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
     
     // set the text in the navbar to use the Baksheesh font
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     titleLabel.textColor = PRIMARY_GREEN;
-    titleLabel.font = PELOTONIA_FONT(22);
-    titleLabel.text = [NSString stringWithFormat:@"%@", @"PELOTONIA"];
+    titleLabel.font = PELOTONIA_FONT(24);
+    titleLabel.text = [NSString stringWithFormat:@"%@", @"Pelotonia 2012"];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = UITextAlignmentCenter; 
-    [titleLabel setShadowColor:[UIColor darkGrayColor]];
+    [titleLabel setShadowColor: PRIMARY_DARK_GRAY];
     [titleLabel setShadowOffset:CGSizeMake(0, -0.5)];
     
     self.navigationItem.titleView = titleLabel;
@@ -178,9 +178,9 @@
     // Configure the cell...
     Rider *rider = [self.dataController objectAtIndex:indexPath.row];
     cell.textLabel.text = rider.name;
-    cell.textLabel.font = PELOTONIA_FONT(17);
+    cell.textLabel.font = PELOTONIA_FONT(19);
     cell.detailTextLabel.text = rider.amountRaised;
-    cell.detailTextLabel.font = PELOTONIA_FONT(17);
+    cell.detailTextLabel.font = PELOTONIA_FONT(19);
     cell.imageView.image = [UIImage imageNamed:@"profile_default_thumb.jpg"];
     [self loadImageAtIndexPath:indexPath];
 
