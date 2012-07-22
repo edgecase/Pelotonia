@@ -7,7 +7,6 @@
 //
 
 #import "ProfileViewController.h"
-#import "PledgeViewController.h"
 #import "ASIHTTPRequest.h"
 
 @interface ProfileViewController ()
@@ -148,17 +147,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-#pragma mark - Segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
-}
-
-- (void)showPledge:(PledgeViewController *)pledgeViewController
-{
-    pledgeViewController.rider = self.rider;
-}
 
 - (IBAction)supportRider:(id)sender {
     [self sendPledgeMail];
