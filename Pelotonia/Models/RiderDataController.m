@@ -41,6 +41,16 @@
     [_riderList removeObjectAtIndex:index];
 }
 
+- (void)removeObject:(Rider *)object
+{
+    for (NSInteger i = 0; i < [_riderList count]; i++) {
+        Rider *r = [_riderList objectAtIndex:i];
+        if ([r.riderId isEqualToString:object.riderId]) {
+            [_riderList removeObjectAtIndex:i];
+        }
+    }
+}
+
 - (void)addObject:(Rider *)object
 {
     [_riderList addObject:object];

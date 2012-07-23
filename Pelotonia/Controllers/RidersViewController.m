@@ -73,6 +73,9 @@
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
     self.tableView.opaque = NO;
     
+    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
+    self.searchDisplayController.searchResultsTableView.opaque = YES;
+    
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:1];
 }
@@ -155,6 +158,27 @@
     }
 }
 
+- (UIImage *)imageForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
+    
+    if ([[self.imagesCache allKeys] containsObject:rider.riderPhotoThumbUrl]) {
+            UIImage *riderPhotoThumb = [self.imagesCache valueForKey:rider.riderPhotoThumbUrl];
+            return riderPhotoThumb;
+    } else {
+        __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]];
+        [request setCompletionBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *riderPhotoThumb = [UIImage imageWithData:[request responseData]];
+                [self.imagesCache setValue:riderPhotoThumb forKey:rider.riderPhotoThumbUrl];
+            });
+        }];
+        [request startAsynchronous];
+        return [UIImage imageNamed:@"profile_default_thumb.jpg"];
+    }
+    
+}
+
 
 
 #pragma mark - Table view data source
@@ -189,14 +213,22 @@
     Rider *rider = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = rider.riderId;
+        cell.textLabel.text = rider.name;
+        cell.backgroundColor = PRIMARY_DARK_GRAY;
     }
     else {
         rider = [self.dataController objectAtIndex:indexPath.row];
+        cell.textLabel.text = rider.name;
+        if ([rider.pelotonGrandTotal length] > 0) {
+            cell.detailTextLabel.text = rider.pelotonGrandTotal;
+        }
+        else {
+            cell.detailTextLabel.text = rider.amountRaised;
+        }
     }
-    
-    cell.textLabel.text = rider.name;
+    cell.imageView.image = [self imageForRowAtIndexPath:indexPath];
     cell.textLabel.font = PELOTONIA_FONT(19);
-    cell.detailTextLabel.text = rider.amountRaised;
     cell.detailTextLabel.font = PELOTONIA_FONT(19);    
     return cell;
 }
@@ -256,8 +288,17 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
         // add the selected rider to the list of selected riders
-        Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-        [self.dataController addObject:rider];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell.accessoryType != UITableViewCellAccessoryCheckmark) {
+            Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+            [self.dataController addObject:rider];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else {
+            Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+            [self.dataController removeObject:rider];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
         
     }
     else {
@@ -274,8 +315,7 @@
 {
     /*
      Update the filtered array based on the search text and scope.
-     */
-    
+     */    
     [self.riderSearchResults removeAllObjects];
     
     /*
@@ -283,6 +323,7 @@
      */
     [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
         [self.riderSearchResults addObjectsFromArray:searchResults];
+        [self.searchDisplayController.searchResultsTableView reloadData];
     } onFailure:nil];
 
 }
@@ -293,8 +334,6 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-//    [self filterContentForSearchText:searchString scope:@""];
-    
     // Return YES to cause the search result table view to be reloaded.
     return NO;
 }
@@ -310,9 +349,12 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text]
-                               scope:@""];
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@""];
     [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
+    [self.tableView reloadData];
 }
 
 

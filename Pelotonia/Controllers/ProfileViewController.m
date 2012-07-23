@@ -77,7 +77,12 @@
     // set the name & ID appropriately
     self.nameLabel.text = self.rider.name;
     self.routeLabel.text = self.rider.route;
-    self.raisedLabel.text = self.rider.amountRaised;
+    if ([self.rider.pelotonGrandTotal length] > 0) {
+        self.raisedLabel.text = self.rider.pelotonGrandTotal;
+    }
+    else {
+        self.raisedLabel.text = self.rider.amountRaised;
+    }
     
     if (!self.riderImageView.image) {
         self.riderImageView.image = [UIImage imageNamed:@"profile_default.jpg"];
