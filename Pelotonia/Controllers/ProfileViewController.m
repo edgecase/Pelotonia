@@ -12,11 +12,13 @@
 @interface ProfileViewController ()
 - (void)configureView;
 - (void)sendPledgeMail;
+- (BOOL)validateForm;
 - (void)postAlert:(NSString *)msg;
 @end
 
 @implementation ProfileViewController
 
+@synthesize supportButton = _supportButton;
 @synthesize rider = _rider;
 @synthesize nameLabel = _nameLabel;
 @synthesize routeLabel = _routeLabel;
@@ -48,6 +50,7 @@
     [self setRaisedLabel:nil];
     [self setDonationField:nil];
     [self setDonorEmailField:nil];
+    [self setSupportButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -91,6 +94,12 @@
     [request startAsynchronous];
 }
 
+- (BOOL)validateForm
+{
+    return (([self.donorEmailField.text length] > 0) 
+    && ([self.donationField.text length] > 0));
+}
+
 - (void)postAlert:(NSString *)msg {
     // alert that they need to authorize first
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for your Pledge" 
@@ -125,11 +134,23 @@
 
 }
 
+#pragma mark -- text field delegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)tf
 {
     [tf resignFirstResponder];
     [self sendPledgeMail];
     return YES;
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self validateForm]) {
+        self.supportButton.enabled = YES;
+    }
+    else {
+        self.supportButton.enabled = NO;
+    }
 }
 
 
@@ -142,13 +163,15 @@
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);    
     }
     else {
-        [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.donationField.text, self.rider.name]];
+//        [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.donationField.text, self.rider.name]];
     }
     [self dismissModalViewControllerAnimated:YES];
 }
 
 
 - (IBAction)supportRider:(id)sender {
-    [self sendPledgeMail];
+    if ([self validateForm]) {
+        [self sendPledgeMail];
+    }
 }
 @end

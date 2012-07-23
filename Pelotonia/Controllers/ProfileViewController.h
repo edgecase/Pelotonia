@@ -13,10 +13,11 @@
 
 #import "Rider.h"
 
-@interface ProfileViewController : UIViewController <MFMailComposeViewControllerDelegate> {
+@interface ProfileViewController : UIViewController <MFMailComposeViewControllerDelegate, UITextFieldDelegate> {
     
 }
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *supportButton;
 @property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *routeLabel;

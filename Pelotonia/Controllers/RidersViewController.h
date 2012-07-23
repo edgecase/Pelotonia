@@ -10,11 +10,13 @@
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate> {
     RiderDataController *_dataController;
+    NSMutableArray *_riderSearchResults;
 }
 
 @property (strong, nonatomic) RiderDataController *dataController;
+@property (strong, nonatomic) NSMutableArray *riderSearchResults;
 @property (weak, nonatomic) IBOutlet UITableView *riderTableView;
 
 

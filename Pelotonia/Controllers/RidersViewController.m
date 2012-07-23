@@ -31,6 +31,8 @@
 @synthesize dataController = _dataController;
 @synthesize riderTableView = _riderTableView;
 @synthesize imagesCache = _imagesCache;
+@synthesize riderSearchResults = _riderSearchResults;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -49,7 +51,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.imagesCache = [NSMutableDictionary dictionary];
 
@@ -70,12 +72,16 @@
     
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
     self.tableView.opaque = NO;
+    
+    // set up the search results
+    self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:1];
 }
 
 - (void)viewDidUnload
 {
     self.riderTableView = nil;
     [self setRiderTableView:nil];
+    [self setRiderSearchResults:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -113,11 +119,6 @@
     [PelotoniaWeb profileForRider:rider onComplete:^(Rider *updatedRider) {
         profileViewController.rider = updatedRider;
     } onFailure:nil];
-}
-
-- (void)prepareSearch:(SearchViewController *)searchViewController
-{
-    
 }
 
 
@@ -166,36 +167,52 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [self.dataController count];
+    // return the number of riders in our data source or in the search results
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.riderSearchResults count];
+    }
+    else {
+        return [self.dataController count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"riderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
-    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
+    Rider *rider = nil;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+    }
+    else {
+        rider = [self.dataController objectAtIndex:indexPath.row];
+    }
+    
     cell.textLabel.text = rider.name;
     cell.textLabel.font = PELOTONIA_FONT(19);
     cell.detailTextLabel.text = rider.amountRaised;
-    cell.detailTextLabel.font = PELOTONIA_FONT(19);
-    cell.imageView.image = [UIImage imageNamed:@"profile_default_thumb.jpg"];
-    [self loadImageAtIndexPath:indexPath];
-
-    
+    cell.detailTextLabel.font = PELOTONIA_FONT(19);    
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
 }
-*/
 
 
 // Override to support editing the table view.
@@ -236,13 +253,67 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        // add the selected rider to the list of selected riders
+        Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+        [self.dataController addObject:rider];
+        
+    }
+    else {
+        // do nothing.
+    }
+    
 }
+
+
+#pragma mark -
+#pragma mark Content Filtering
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    /*
+     Update the filtered array based on the search text and scope.
+     */
+    
+    [self.riderSearchResults removeAllObjects];
+    
+    /*
+     search the web for all riders matching the searchText
+     */
+    [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
+        [self.riderSearchResults addObjectsFromArray:searchResults];
+    } onFailure:nil];
+
+}
+
+
+#pragma mark -
+#pragma mark UISearchDisplayController Delegate Methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+//    [self filterContentForSearchText:searchString scope:@""];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return NO;
+}
+
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@""];
+    
+    // Return YES to cause the search result table view to be reloaded.
+    return NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
+{
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text]
+                               scope:@""];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
 
 @end
