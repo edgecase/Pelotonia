@@ -226,8 +226,8 @@
         else {
             cell.detailTextLabel.text = rider.amountRaised;
         }
+        cell.imageView.image = [self imageForRowAtIndexPath:indexPath];
     }
-    cell.imageView.image = [self imageForRowAtIndexPath:indexPath];
     cell.textLabel.font = PELOTONIA_FONT(19);
     cell.detailTextLabel.font = PELOTONIA_FONT(19);    
     return cell;
