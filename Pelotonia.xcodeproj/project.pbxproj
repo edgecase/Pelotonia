@@ -25,8 +25,6 @@
 		BCE3B7C715AE49DA00205530 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7C615AE49DA00205530 /* AppDelegate.m */; };
 		BCE3B7CE15AE4A0C00205530 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */; };
 		BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7D415AE4E7200205530 /* RidersViewController.m */; };
-		BCE3B7D815AE4EE700205530 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7D715AE4EE700205530 /* SearchViewController.m */; };
-		BCE3B7DB15AE4FAB00205530 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7DA15AE4FAB00205530 /* SearchResultsViewController.m */; };
 		BCE3B7F215AE516500205530 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7DF15AE516500205530 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7F315AE516500205530 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7E215AE516500205530 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7F415AE516500205530 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7E415AE516500205530 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -75,10 +73,6 @@
 		BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		BCE3B7D315AE4E7200205530 /* RidersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidersViewController.h; path = Controllers/RidersViewController.h; sourceTree = "<group>"; };
 		BCE3B7D415AE4E7200205530 /* RidersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidersViewController.m; path = Controllers/RidersViewController.m; sourceTree = "<group>"; };
-		BCE3B7D615AE4EE700205530 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controllers/SearchViewController.h; sourceTree = "<group>"; };
-		BCE3B7D715AE4EE700205530 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controllers/SearchViewController.m; sourceTree = "<group>"; };
-		BCE3B7D915AE4FAB00205530 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultsViewController.h; path = Controllers/SearchResultsViewController.h; sourceTree = "<group>"; };
-		BCE3B7DA15AE4FAB00205530 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultsViewController.m; path = Controllers/SearchResultsViewController.m; sourceTree = "<group>"; };
 		BCE3B7DE15AE516500205530 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		BCE3B7DF15AE516500205530 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		BCE3B7E015AE516500205530 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -228,10 +222,6 @@
 			children = (
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
-				BCE3B7D615AE4EE700205530 /* SearchViewController.h */,
-				BCE3B7D715AE4EE700205530 /* SearchViewController.m */,
-				BCE3B7D915AE4FAB00205530 /* SearchResultsViewController.h */,
-				BCE3B7DA15AE4FAB00205530 /* SearchResultsViewController.m */,
 				BCE3B80B15AE53F900205530 /* ProfileViewController.h */,
 				BCE3B80C15AE53F900205530 /* ProfileViewController.m */,
 			);
@@ -382,8 +372,6 @@
 				BCE3B7C315AE49DA00205530 /* main.m in Sources */,
 				BCE3B7C715AE49DA00205530 /* AppDelegate.m in Sources */,
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
-				BCE3B7D815AE4EE700205530 /* SearchViewController.m in Sources */,
-				BCE3B7DB15AE4FAB00205530 /* SearchResultsViewController.m in Sources */,
 				BCE3B7F215AE516500205530 /* ASIAuthenticationDialog.m in Sources */,
 				BCE3B7F315AE516500205530 /* ASIDataCompressor.m in Sources */,
 				BCE3B7F415AE516500205530 /* ASIDataDecompressor.m in Sources */,
