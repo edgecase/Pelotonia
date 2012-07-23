@@ -50,7 +50,7 @@
                     <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hn4-96-3aC">
                             <connections>
-                                <segue destination="aqp-yB-Cdy" kind="push" identifier="prepareSearch:" id="UmH-RE-CW8"/>
+                                <segue destination="aqp-yB-Cdy" kind="push" identifier="prepareSearch:" id="GRH-P9-R5K"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -206,34 +206,6 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1271" y="250"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="Qw2-Wf-PJT">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bm6-gH-rlB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="YSH-Kg-pUl" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9al-PU-sbu">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="dB6-sW-uXc">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="YSH-Kg-pUl" id="q2k-PN-xR9"/>
-                            <outlet property="delegate" destination="YSH-Kg-pUl" id="oS3-q5-tpC"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="1278" y="874"/>
         </scene>
         <!--Search Results View Controller - Riders-->
         <scene sceneID="cV5-Vo-9rK">
