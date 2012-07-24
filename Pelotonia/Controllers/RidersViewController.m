@@ -12,16 +12,11 @@
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
-#import "ASIHTTPRequest.h"
-#import "ASIDownloadCache.h"
 
 
 @interface RidersViewController ()
-@property (nonatomic, strong) NSMutableDictionary *imagesCache;
 
 - (void)loadImagesForOnScreenRows;
-- (void)loadImageAtIndexPath:(NSIndexPath *)indexPath;
-
 
 @end
 
@@ -30,9 +25,17 @@
 
 @synthesize dataController = _dataController;
 @synthesize riderTableView = _riderTableView;
-@synthesize imagesCache = _imagesCache;
 @synthesize riderSearchResults = _riderSearchResults;
 
+
+// property overloads
+- (RiderDataController *)dataController {
+    if (_dataController == nil) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        _dataController = appDelegate.riderDataController;
+    }
+    return _dataController;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -53,8 +56,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    self.imagesCache = [NSMutableDictionary dictionary];
-
     // set the colors appropriately
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
     
@@ -70,11 +71,8 @@
     
     self.navigationItem.titleView = titleLabel;
     
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
-    self.tableView.opaque = NO;
-    
-    self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"one-goal-wallpaper.jpg"]];
-    self.searchDisplayController.searchResultsTableView.opaque = YES;
+    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
+    self.tableView.opaque = YES;
     
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:1];
@@ -86,8 +84,6 @@
     [self setRiderTableView:nil];
     [self setRiderSearchResults:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -101,13 +97,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (RiderDataController *)dataController {
-    if (_dataController == nil) {
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        _dataController = appDelegate.riderDataController;
-    }
-    return _dataController;
-}
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -117,11 +106,14 @@
 
 - (void)prepareProfile:(ProfileViewController *)profileViewController
 {
-    Rider *rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    Rider *rider = nil;
+    if ([self.searchDisplayController isActive]) {
+        rider = [self.riderSearchResults objectAtIndex:[self.searchDisplayController.searchResultsTableView indexPathForSelectedRow].row];
+    }
+    else {
+        rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    }
     profileViewController.rider = rider;
-    [PelotoniaWeb profileForRider:rider onComplete:^(Rider *updatedRider) {
-        profileViewController.rider = updatedRider;
-    } onFailure:nil];
 }
 
 
@@ -130,56 +122,11 @@
 {
     NSArray *visiblePaths = [self.riderTableView indexPathsForVisibleRows];
     for (NSIndexPath *indexPath in visiblePaths) {
-        [self loadImageAtIndexPath:indexPath];
+        UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
+        Rider *rider = [self.dataController objectAtIndex:indexPath.row];
+        cell.imageView.image = rider.riderPhotoThumb;
     }
 }
-
-- (void)loadImageAtIndexPath:(NSIndexPath *)indexPath
-{
-    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
-    
-    if ([[self.imagesCache allKeys] containsObject:rider.riderPhotoThumbUrl]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
-            UIImage *riderPhotoThumb = [self.imagesCache valueForKey:rider.riderPhotoThumbUrl];
-            cell.imageView.image = riderPhotoThumb;
-        });
-    } else {
-        __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]];
-        [request setCompletionBlock:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
-                UIImage *riderPhotoThumb = [UIImage imageWithData:[request responseData]];
-                cell.imageView.image = riderPhotoThumb;
-                [self.imagesCache setValue:riderPhotoThumb forKey:rider.riderPhotoThumbUrl];
-            });
-        }];
-        [request startAsynchronous];
-    }
-}
-
-- (UIImage *)imageForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Rider *rider = [self.dataController objectAtIndex:indexPath.row];
-    
-    if ([[self.imagesCache allKeys] containsObject:rider.riderPhotoThumbUrl]) {
-            UIImage *riderPhotoThumb = [self.imagesCache valueForKey:rider.riderPhotoThumbUrl];
-            return riderPhotoThumb;
-    } else {
-        __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]];
-        [request setCompletionBlock:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIImage *riderPhotoThumb = [UIImage imageWithData:[request responseData]];
-                [self.imagesCache setValue:riderPhotoThumb forKey:rider.riderPhotoThumbUrl];
-            });
-        }];
-        [request startAsynchronous];
-        return [UIImage imageNamed:@"profile_default_thumb.jpg"];
-    }
-    
-}
-
-
 
 #pragma mark - Table view data source
 
@@ -213,9 +160,12 @@
     Rider *rider = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = rider.riderId;
+        cell.detailTextLabel.text = rider.riderType;
         cell.textLabel.text = rider.name;
-        cell.backgroundColor = PRIMARY_DARK_GRAY;
+        cell.imageView.image = rider.riderPhotoThumb;
+        if ([self.dataController containsRider:rider]) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
     else {
         rider = [self.dataController objectAtIndex:indexPath.row];
@@ -226,7 +176,7 @@
         else {
             cell.detailTextLabel.text = rider.amountRaised;
         }
-        cell.imageView.image = [self imageForRowAtIndexPath:indexPath];
+        cell.imageView.image = rider.riderPhotoThumb;
     }
     cell.textLabel.font = PELOTONIA_FONT(19);
     cell.detailTextLabel.font = PELOTONIA_FONT(19);    
@@ -286,23 +236,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        
-        // add the selected rider to the list of selected riders
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell.accessoryType != UITableViewCellAccessoryCheckmark) {
-            Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-            [self.dataController addObject:rider];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        else {
-            Rider *rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-            [self.dataController removeObject:rider];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-        
+        // take us to the profile view
+        [self performSegueWithIdentifier:@"prepareProfile:" sender:self];
     }
     else {
-        // do nothing.
+        // do nothing, this is handled by our segue in the storyboard
     }
     
 }
@@ -321,11 +259,18 @@
     /*
      search the web for all riders matching the searchText
      */
-    [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
-        [self.riderSearchResults addObjectsFromArray:searchResults];
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    } onFailure:nil];
-
+    if ([scope isEqualToString:@"ID"]) {
+        [PelotoniaWeb searchForRiderWithLastName:@"" riderId:searchText onComplete:^(NSArray *searchResults) {
+            [self.riderSearchResults addObjectsFromArray:searchResults];
+            [self.searchDisplayController.searchResultsTableView reloadData];
+        } onFailure:nil];
+    }
+    else {
+        [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
+            [self.riderSearchResults addObjectsFromArray:searchResults];
+            [self.searchDisplayController.searchResultsTableView reloadData];
+        } onFailure:nil];
+    }
 }
 
 
@@ -341,19 +286,18 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@""];
-    
     // Return YES to cause the search result table view to be reloaded.
     return NO;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:@""];
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView {
+- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView 
+{
     [self.tableView reloadData];
 }
 

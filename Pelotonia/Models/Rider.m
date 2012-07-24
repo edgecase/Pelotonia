@@ -7,17 +7,28 @@
 //
 
 #import "Rider.h"
+#import "ImageCache.h"
+#import "ASIHTTPRequest.h"
+#import "ASIDownloadCache.h"
+
+@interface Rider ()
+
+- (void)asynchronousGetImageAtUrl:(NSString *)url;
+
+@end
 
 @implementation Rider
 @synthesize name = _name;
 @synthesize riderId = _riderId;
 @synthesize riderPhotoThumbUrl = _riderPhotoThumbUrl;
+@synthesize riderPhotoThumb = _riderPhotoThumb;
 @synthesize donateUrl = _donateUrl;
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
 @synthesize route = _route;
 
 @synthesize riderPhotoUrl = _riderPhotoUrl;
+@synthesize riderPhoto = _riderPhoto;
 @synthesize amountRaised = _amountRaised;
 @synthesize myPeloton = _myPeloton;
 @synthesize pelotonFundsRaised = _pelotonFundsRaised;
@@ -40,6 +51,59 @@
         _riderId = riderId;
     }
     return self;
+}
+
+
+- (void)asynchronousGetImageAtUrl:(NSString *)url
+{
+    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+    [request setCompletionBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:[request responseData]];
+            if (image != nil) {
+                [[ImageCache sharedStore] setImage:image forKey:url];
+            }
+        });
+    }];
+    [request startAsynchronous];
+}
+
+- (UIImage *)riderPhoto
+{
+    UIImage *photo = nil;
+    if (self.riderPhotoUrl) {
+        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
+        if (nil == photo) {
+            // return default photo now
+            NSLog(@"riderPhoto: unable to find photo %@ in the cache", self.riderPhotoUrl);
+            photo = [UIImage imageNamed:@"profile_default.jpg"];
+
+            // put the image into the cache for later
+            [self asynchronousGetImageAtUrl:self.riderPhotoUrl];
+        }
+    }
+    return photo;
+}
+
+
+- (UIImage *)riderPhotoThumb
+{
+    UIImage *photo = nil;
+    
+    if (self.riderPhotoThumbUrl != nil) {
+        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
+        if (nil == photo) {
+            // return the default for now, but get the real photo for later
+            NSLog(@"riderPhotoThumb: unable to find photo %@ in the cache", self.riderPhotoThumbUrl);
+            photo = [UIImage imageNamed:@"profile_default_thumb.jpg"];
+
+            // go to the web to get the real photo
+            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl];    
+        }
+            
+    }
+
+    return photo;
 }
 
 // NSCoding

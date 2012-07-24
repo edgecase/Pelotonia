@@ -10,7 +10,7 @@
 
 @implementation RiderDataController
 
-- (void)initializeDefaultGameList {
+- (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
     _riderList = defaultList;
 }
@@ -19,7 +19,7 @@
 - (id)init 
 {
     if (self = [super init]) {
-        [self initializeDefaultGameList];
+        [self initializeDefaultList];
         return self;
     }
     return nil;
@@ -43,12 +43,15 @@
 
 - (void)removeObject:(Rider *)object
 {
-    for (NSInteger i = 0; i < [_riderList count]; i++) {
-        Rider *r = [_riderList objectAtIndex:i];
-        if ([r.riderId isEqualToString:object.riderId]) {
-            [_riderList removeObjectAtIndex:i];
-        }
+    if ([object.riderId length] > 0) {
+        [_riderList filterUsingPredicate:[NSPredicate predicateWithFormat:@"not riderId like %@", object.riderId]];
     }
+}
+
+- (BOOL)containsRider:(Rider *)object
+{
+    NSArray *filtered = [_riderList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"riderId like %@", object.riderId]];
+    return [filtered count] > 0;
 }
 
 - (void)addObject:(Rider *)object

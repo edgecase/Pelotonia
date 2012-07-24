@@ -11,25 +11,30 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="juW-zQ-p1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="uvz-tz-iUZ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.76078432799999995" green="0.81960785390000002" blue="0.83137255909999996" alpha="1" colorSpace="deviceRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Add by Last Name" id="2DY-1a-ipm">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" prompt="Add Riders" placeholder="Search" showsScopeBar="YES" id="2DY-1a-ipm">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            <scopeButtonTitles>
+                                <string>Last Name</string>
+                                <string>ID</string>
+                            </scopeButtonTitles>
                             <connections>
                                 <outlet property="delegate" destination="puZ-qr-IB2" id="Uka-Vz-Dup"/>
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" style="IBUITableViewCellStyleValue1" id="fvi-sS-Las">
-                                <rect key="frame" x="0.0" y="80" width="320" height="46"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" style="IBUITableViewCellStyleValue1" id="fvi-sS-Las">
+                                <rect key="frame" x="0.0" y="141" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xaU-yn-x1J">
@@ -40,7 +45,7 @@
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dli-ow-PwI">
-                                            <rect key="frame" x="213" y="11" width="57" height="21"/>
+                                            <rect key="frame" x="233" y="11" width="57" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.75686275959014893" green="0.84705883264541626" blue="0.18431372940540314" alpha="1" colorSpace="deviceRGB"/>
@@ -88,17 +93,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="IB8-Zg-mvb">
-                                <rect key="frame" x="14" y="0.0" width="292" height="177"/>
+                                <rect key="frame" x="14" y="0.0" width="292" height="246"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Donation" minimumFontSize="17" id="HZf-1f-Aer">
-                                        <rect key="frame" x="109" y="93" width="163" height="31"/>
+                                        <rect key="frame" x="20" y="122" width="163" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email Address" minimumFontSize="17" id="jxL-SA-YQm">
-                                        <rect key="frame" x="20" y="132" width="252" height="31"/>
+                                        <rect key="frame" x="20" y="161" width="252" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -107,20 +112,35 @@
                                             <outlet property="delegate" destination="NtZ-xl-A08" id="iLb-zd-0b2"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dhB-Rp-ZyL">
-                                        <rect key="frame" x="109" y="37" width="176" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dhB-Rp-ZyL">
+                                        <rect key="frame" x="109" y="37" width="176" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Raised" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="SQN-HG-hKt">
-                                        <rect key="frame" x="109" y="64" width="176" height="21"/>
+                                        <rect key="frame" x="109" y="84" width="176" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sjL-tf-YsO">
+                                        <rect key="frame" x="64" y="200" width="157" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Follow">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="followRider:" destination="NtZ-xl-A08" eventType="touchUpInside" id="5ke-cB-nsg"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="deviceRGB"/>
                             </view>
@@ -148,6 +168,7 @@
                     <connections>
                         <outlet property="donationField" destination="HZf-1f-Aer" id="QXk-wT-zgu"/>
                         <outlet property="donorEmailField" destination="jxL-SA-YQm" id="LkB-Fi-4Ng"/>
+                        <outlet property="followButton" destination="sjL-tf-YsO" id="LGg-ST-rjX"/>
                         <outlet property="nameLabel" destination="oPX-Yb-lgA" id="W0m-We-F8k"/>
                         <outlet property="raisedLabel" destination="SQN-HG-hKt" id="kAa-9m-Vay"/>
                         <outlet property="riderImageView" destination="r2C-34-fiD" id="DzZ-CQ-l3z"/>
@@ -177,27 +198,6 @@
     <resources>
         <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
     </resources>
-    <classes>
-        <class className="ProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="supportRider:"/>
-                <relationship kind="outlet" name="donationField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="donorEmailField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="raisedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="riderImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="routeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="supportButton" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="RidersViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

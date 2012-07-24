@@ -7,7 +7,9 @@
 //
 
 #import "ProfileViewController.h"
-#import "ASIHTTPRequest.h"
+#import "AppDelegate.h"
+#import "RiderDataController.h"
+#import "PelotoniaWeb.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -25,7 +27,9 @@
 @synthesize raisedLabel = _raisedLabel;
 @synthesize riderImageView = _riderImageView;
 @synthesize donationField = _donationField;
+@synthesize followButton = _followButton;
 @synthesize donorEmailField = _donorEmailField;
+@synthesize following = _following;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +55,7 @@
     [self setDonationField:nil];
     [self setDonorEmailField:nil];
     [self setSupportButton:nil];
+    [self setFollowButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -63,6 +68,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
+        self.rider = updatedRider;
+        [self configureView];
+    } onFailure:^(NSString *error) {
+        NSLog(@"Unable to get profile for rider. Error: %@", error);
+    }];
+
     [self configureView];
 }
 
@@ -70,6 +82,15 @@
 {
     _rider = rider;
     [self configureView];
+}
+
+- (BOOL)following
+{
+    // return true if current rider is in the dataController
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    RiderDataController *dataController = appDelegate.riderDataController;
+
+    return [dataController containsRider:self.rider];
 }
 
 - (void)configureView
@@ -84,19 +105,14 @@
         self.raisedLabel.text = self.rider.amountRaised;
     }
     
-    if (!self.riderImageView.image) {
-        self.riderImageView.image = [UIImage imageNamed:@"profile_default.jpg"];
-    }
+    self.riderImageView.image = self.rider.riderPhoto;
     
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]];
-    [request setCompletionBlock:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *riderPhoto = [UIImage imageWithData:[request responseData]];
-            self.riderImageView.image = riderPhoto;
-            [self.view setNeedsDisplay];
-        });
-    }];
-    [request startAsynchronous];
+    if (self.following) {
+        [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+    }
+    else {
+        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    }
 }
 
 - (BOOL)validateForm
@@ -178,5 +194,19 @@
     if ([self validateForm]) {
         [self sendPledgeMail];
     }
+}
+
+- (IBAction)followRider:(id)sender {
+    // add the current rider to the main list of riders 
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    RiderDataController *dataController = appDelegate.riderDataController;
+    
+    if (!self.following) {
+        [dataController addObject:self.rider];
+    }
+    else {
+        [dataController removeObject:self.rider];
+    }
+    [self configureView];
 }
 @end

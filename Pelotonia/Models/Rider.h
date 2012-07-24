@@ -12,12 +12,14 @@
     NSString *_name;
     NSString *_riderId;
     NSString *_riderPhotoThumbUrl;
+    UIImage *_riderPhotoThumb;
     NSString *_donateUrl;
     NSString *_profileUrl;
     NSString *_riderType;
     NSString *_route;
     
     NSString *_riderPhotoUrl;
+    UIImage *_riderPhoto;
     NSString *_amountRaised;
     NSString *_myPeloton;
     NSString *_pelotonFundsRaised;
@@ -29,12 +31,14 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *riderId;
 @property (nonatomic, strong) NSString *riderPhotoThumbUrl;
+@property (nonatomic, strong, readonly) UIImage  *riderPhotoThumb;
 @property (nonatomic, strong) NSString *donateUrl;
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
 @property (nonatomic, strong) NSString *route;
 
 @property (nonatomic, strong) NSString *riderPhotoUrl;
+@property (nonatomic, strong, readonly) UIImage  *riderPhoto;
 @property (nonatomic, strong) NSString *amountRaised;
 @property (nonatomic, strong) NSString *myPeloton;
 @property (nonatomic, strong) NSString *pelotonFundsRaised;

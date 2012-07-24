@@ -19,6 +19,7 @@
 - (void)addObject:(Rider *)object;
 - (void)insertObject:(Rider *)object atIndex:(NSUInteger)index;
 - (void)removeObject:(Rider *)object;
+- (BOOL)containsRider:(Rider *)object;
 
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder;

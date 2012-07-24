@@ -14,7 +14,7 @@
 #import "Rider.h"
 
 @interface ProfileViewController : UIViewController <MFMailComposeViewControllerDelegate, UITextFieldDelegate> {
-    
+    BOOL _following;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *supportButton;
@@ -24,8 +24,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *riderImageView;
 @property (weak, nonatomic) IBOutlet UITextField *donationField;
+@property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UITextField *donorEmailField;
+@property (assign, nonatomic, readonly) BOOL following;
 - (IBAction)supportRider:(id)sender;
+- (IBAction)followRider:(id)sender;
 
 @end
 
