@@ -143,11 +143,20 @@
     [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
     [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
     
+    NSString *amountFormat;
+    if ([self.donationField.text length] > 0) {
+        amountFormat = @"$%@";
+    }
+    else {
+        amountFormat = @"%@";
+    }
+    NSString *amount = [NSString stringWithFormat:amountFormat, self.donationField.text];
+    
     NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Hello %@,<br/><br/> \
                      You have pledged to donate %@ to %@'s Pelotonia fund.  Please use \
                      the following link to complete your pledge: <a href=\"%@\">Rider Profile</a>. <br/><br/> \
                      Thanks! <br/><br/>\
-                     %@ and Pelotonia 12</BODY></HTML>", self.donorEmailField.text, self.donationField.text, self.rider.name, self.rider.donateUrl, self.rider.name];
+                     %@ and Pelotonia 12</BODY></HTML>", self.donorEmailField.text, amount, self.rider.name, self.rider.donateUrl, self.rider.name];
     
     NSLog(@"msgBody: %@", msg);
     [mailComposer setMessageBody:msg isHTML:YES];
