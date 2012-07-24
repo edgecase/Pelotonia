@@ -1,9 +1,9 @@
 //
-//  BNRImageStore.h
-//  Homepwner
+//  ImageCache.h
+//  Pelotonia
 //
-//  Created by joeconway on 9/8/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Mark Harris on 7/13/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
