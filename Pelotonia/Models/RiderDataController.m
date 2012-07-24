@@ -46,11 +46,22 @@
     if ([object.riderId length] > 0) {
         [_riderList filterUsingPredicate:[NSPredicate predicateWithFormat:@"not riderId like %@", object.riderId]];
     }
+    else {
+        // it's a peloton, and they don't have riderId's, so we have to use the name
+        [_riderList filterUsingPredicate:[NSPredicate predicateWithFormat:@"not name like %@", object.name]];
+    }
 }
 
 - (BOOL)containsRider:(Rider *)object
 {
-    NSArray *filtered = [_riderList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"riderId like %@", object.riderId]];
+    NSArray *filtered = nil;
+    if ([object.riderId length] > 0) {
+        filtered = [_riderList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"riderId like %@", object.riderId]];
+    }
+    else {
+        // it's a peloton, and they don't have riderId's, so we have to use the name
+        filtered = [_riderList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name like %@", object.name]];
+    }
     return [filtered count] > 0;
 }
 

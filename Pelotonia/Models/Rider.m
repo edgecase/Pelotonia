@@ -26,6 +26,8 @@
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
 @synthesize route = _route;
+@synthesize totalRaised = _totalRaised;
+@synthesize totalCommit = _totalCommit;
 
 @synthesize riderPhotoUrl = _riderPhotoUrl;
 @synthesize riderPhoto = _riderPhoto;
@@ -68,6 +70,7 @@
     [request startAsynchronous];
 }
 
+#pragma mark -- Properties
 - (UIImage *)riderPhoto
 {
     UIImage *photo = nil;
@@ -104,6 +107,52 @@
     }
 
     return photo;
+}
+
+- (NSString *)totalCommit 
+{
+    NSString *value = @"0";
+    
+    if ([self.pelotonGrandTotal length] > 0) {
+        value = @"0";
+    }
+    
+    if ([self.riderType isEqualToString:@"Rider"]) {
+        if ([self.route length] == 0) {
+            value = @"0";
+        }
+        if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
+            value = @"2,200";
+        }
+        if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
+            value = @"2,200";
+        }
+        if ([self.route isEqualToString:@"Columbus to Gambier"]) {
+            value = @"1,800";
+        }
+        if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
+            value = @"1,800";
+        }
+        if ([self.route isEqualToString:@"Columbus to New Albany"]) {
+            value = @"1,250";
+        }
+        if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
+            value = @"1,200";
+        }
+    }
+    
+    return [NSString stringWithFormat:@"$%@.00", value];
+}
+
+
+- (NSString *)totalRaised
+{
+    if ([self.pelotonGrandTotal length] > 0) {
+        return self.pelotonGrandTotal;
+    }
+    else {
+        return self.amountRaised;
+    }    
 }
 
 // NSCoding

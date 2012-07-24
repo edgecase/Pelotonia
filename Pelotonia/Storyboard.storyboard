@@ -93,17 +93,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="IB8-Zg-mvb">
-                                <rect key="frame" x="14" y="0.0" width="292" height="246"/>
+                                <rect key="frame" x="14" y="0.0" width="292" height="257"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Donation" minimumFontSize="17" id="HZf-1f-Aer">
-                                        <rect key="frame" x="20" y="122" width="163" height="31"/>
+                                        <rect key="frame" x="20" y="130" width="163" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email Address" minimumFontSize="17" id="jxL-SA-YQm">
-                                        <rect key="frame" x="20" y="161" width="252" height="31"/>
+                                        <rect key="frame" x="20" y="165" width="252" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -113,67 +113,82 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="dhB-Rp-ZyL">
-                                        <rect key="frame" x="109" y="37" width="176" height="39"/>
+                                        <rect key="frame" x="109" y="20" width="176" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Raised" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="SQN-HG-hKt">
-                                        <rect key="frame" x="109" y="84" width="176" height="21"/>
+                                        <rect key="frame" x="109" y="76" width="82" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sjL-tf-YsO">
-                                        <rect key="frame" x="64" y="200" width="157" height="37"/>
+                                        <rect key="frame" x="64" y="203" width="157" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="Follow">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Pledge!">
+                                            <color key="titleColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="followRider:" destination="NtZ-xl-A08" eventType="touchUpInside" id="5ke-cB-nsg"/>
+                                            <action selector="supportRider:" destination="NtZ-xl-A08" eventType="touchUpInside" id="rMk-WX-Gjw"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="/" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="SRm-5J-lpp">
+                                        <rect key="frame" x="181" y="76" width="22" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Commit" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="aab-QJ-YdP">
+                                        <rect key="frame" x="201" y="76" width="76" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="r2C-34-fiD">
+                                        <rect key="frame" x="1" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oPX-Yb-lgA">
+                                        <rect key="frame" x="109" y="0.0" width="168" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="deviceRGB"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oPX-Yb-lgA">
-                                <rect key="frame" x="124" y="8" width="176" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="r2C-34-fiD">
-                                <rect key="frame" x="20" y="8" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="LCg-oQ-vCc">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Support" id="csg-Py-UPS">
+                        <barButtonItem key="rightBarButtonItem" title="Follow" id="csg-Py-UPS">
                             <connections>
-                                <action selector="supportRider:" destination="NtZ-xl-A08" id="d6e-pU-QGE"/>
+                                <action selector="followRider:" destination="NtZ-xl-A08" id="9qv-FT-sez"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="commitLabel" destination="aab-QJ-YdP" id="PZB-Ce-NGO"/>
                         <outlet property="donationField" destination="HZf-1f-Aer" id="QXk-wT-zgu"/>
                         <outlet property="donorEmailField" destination="jxL-SA-YQm" id="LkB-Fi-4Ng"/>
-                        <outlet property="followButton" destination="sjL-tf-YsO" id="LGg-ST-rjX"/>
+                        <outlet property="followButton" destination="csg-Py-UPS" id="5Rg-l6-brN"/>
                         <outlet property="nameLabel" destination="oPX-Yb-lgA" id="W0m-We-F8k"/>
                         <outlet property="raisedLabel" destination="SQN-HG-hKt" id="kAa-9m-Vay"/>
                         <outlet property="riderImageView" destination="r2C-34-fiD" id="DzZ-CQ-l3z"/>
                         <outlet property="routeLabel" destination="dhB-Rp-ZyL" id="9h4-z8-XhO"/>
-                        <outlet property="supportButton" destination="csg-Py-UPS" id="cR3-DJ-ctu"/>
+                        <outlet property="supportButton" destination="sjL-tf-YsO" id="4dc-dg-I2g"/>
                     </connections>
                 </viewController>
             </objects>
@@ -198,6 +213,30 @@
     <resources>
         <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
     </resources>
+    <classes>
+        <class className="ProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="followRider:"/>
+                <relationship kind="action" name="supportRider:"/>
+                <relationship kind="outlet" name="commitLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="donationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="donorEmailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="raisedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="riderImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="routeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="supportButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="RidersViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

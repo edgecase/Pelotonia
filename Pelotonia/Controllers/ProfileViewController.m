@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "RiderDataController.h"
 #import "PelotoniaWeb.h"
+#import "Pelotonia-Colors.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -25,6 +26,7 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize routeLabel = _routeLabel;
 @synthesize raisedLabel = _raisedLabel;
+@synthesize commitLabel = _commitLabel;
 @synthesize riderImageView = _riderImageView;
 @synthesize donationField = _donationField;
 @synthesize followButton = _followButton;
@@ -56,6 +58,7 @@
     [self setDonorEmailField:nil];
     [self setSupportButton:nil];
     [self setFollowButton:nil];
+    [self setCommitLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -98,21 +101,18 @@
     // set the name & ID appropriately
     self.nameLabel.text = self.rider.name;
     self.routeLabel.text = self.rider.route;
-    if ([self.rider.pelotonGrandTotal length] > 0) {
-        self.raisedLabel.text = self.rider.pelotonGrandTotal;
-    }
-    else {
-        self.raisedLabel.text = self.rider.amountRaised;
-    }
-    
+    self.raisedLabel.text = self.rider.totalRaised;
+    self.commitLabel.text = self.rider.totalCommit;
     self.riderImageView.image = self.rider.riderPhoto;
     
     if (self.following) {
-        [self.followButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+        [self.followButton setTitle:@"Unfollow"];
     }
     else {
-        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+        [self.followButton setTitle:@"Follow"];
     }
+
+    [self.supportButton setTintColor:PRIMARY_GREEN];
 }
 
 - (BOOL)validateForm

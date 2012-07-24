@@ -36,6 +36,8 @@
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
 @property (nonatomic, strong) NSString *route;
+@property (nonatomic, readonly) NSString *totalCommit;
+@property (nonatomic, readonly) NSString *totalRaised;
 
 @property (nonatomic, strong) NSString *riderPhotoUrl;
 @property (nonatomic, strong, readonly) UIImage  *riderPhoto;
