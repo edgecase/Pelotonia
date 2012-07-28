@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshView.h"
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate> {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, PullToRefreshViewDelegate> {
     RiderDataController *_dataController;
     NSMutableArray *_riderSearchResults;
+    PullToRefreshView *_pull;
 }
 
 @property (strong, nonatomic) RiderDataController *dataController;

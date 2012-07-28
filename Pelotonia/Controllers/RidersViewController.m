@@ -12,11 +12,13 @@
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
+#import "PullToRefreshView.h"
 
 
 @interface RidersViewController ()
 
 - (void)loadImagesForOnScreenRows;
+- (void)reloadTableData;
 
 @end
 
@@ -26,7 +28,6 @@
 @synthesize dataController = _dataController;
 @synthesize riderTableView = _riderTableView;
 @synthesize riderSearchResults = _riderSearchResults;
-
 
 // property overloads
 - (RiderDataController *)dataController {
@@ -76,6 +77,20 @@
     
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    // logo in title bar
+    UIImage *image = [UIImage imageNamed: @"Pelotonia_logo_22x216.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    self.navigationItem.titleView = imageView;
+    
+    // pull to refresh view
+    _pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [_pull setDelegate:self];
+    [self.tableView addSubview:_pull];
+    
+    // scroll to hide the search buttons
+    
+
 }
 
 - (void)viewDidUnload
@@ -89,7 +104,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    [self reloadTableData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -97,6 +112,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark -- pull to refresh view
+- (void)reloadTableData
+{
+//    NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+//    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
+    [self.dataController refreshRiders];
+    [self.tableView reloadData];
+    [self.tableView setNeedsDisplay];
+}
+
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self reloadTableData];
+    [_pull finishedLoading];
+}
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -160,26 +190,28 @@
     Rider *rider = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = rider.riderType;
-        cell.textLabel.text = rider.name;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",rider.riderType, rider.totalRaised];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
         cell.imageView.image = rider.riderPhotoThumb;
-        if ([self.dataController containsRider:rider]) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
         rider = [self.dataController objectAtIndex:indexPath.row];
         cell.textLabel.text = rider.name;
+        NSString *amount;
         if ([rider.pelotonGrandTotal length] > 0) {
-            cell.detailTextLabel.text = rider.pelotonGrandTotal;
+            amount = rider.pelotonGrandTotal;
         }
         else {
-            cell.detailTextLabel.text = rider.amountRaised;
+            amount = rider.amountRaised;
         }
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", rider.route, amount];
         cell.imageView.image = rider.riderPhotoThumb;
     }
-    cell.textLabel.font = PELOTONIA_FONT(19);
-    cell.detailTextLabel.font = PELOTONIA_FONT(19);    
+    cell.textLabel.font = PELOTONIA_FONT(21);
+    cell.detailTextLabel.font = PELOTONIA_FONT(12);   
+    cell.textLabel.textColor = PRIMARY_GREEN;
+    cell.detailTextLabel.textColor = SECONDARY_GREEN;
     return cell;
 }
 

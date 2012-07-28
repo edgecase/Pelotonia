@@ -32,6 +32,7 @@
 @synthesize followButton = _followButton;
 @synthesize donorEmailField = _donorEmailField;
 @synthesize following = _following;
+@synthesize donationProgress = _donationProgress;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +47,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
+        self.rider = updatedRider;
+    } onFailure:^(NSString *error) {
+        NSLog(@"Unable to get profile for rider. Error: %@", error);
+    }];
+
 }
 
 - (void)viewDidUnload
@@ -59,6 +66,7 @@
     [self setSupportButton:nil];
     [self setFollowButton:nil];
     [self setCommitLabel:nil];
+    [self setDonationProgress:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -71,13 +79,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
-        self.rider = updatedRider;
-        [self configureView];
-    } onFailure:^(NSString *error) {
-        NSLog(@"Unable to get profile for rider. Error: %@", error);
-    }];
-
     [self configureView];
 }
 
@@ -104,6 +105,20 @@
     self.raisedLabel.text = self.rider.totalRaised;
     self.commitLabel.text = self.rider.totalCommit;
     self.riderImageView.image = self.rider.riderPhoto;
+
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [formatter setLenient:YES];
+    
+    NSNumber *totalRaised = [formatter numberFromString:self.rider.totalRaised];
+    NSNumber *totalCommit = [formatter numberFromString:self.rider.totalCommit];
+
+    float raised = totalRaised.floatValue;
+    float commit = totalCommit.floatValue;
+    if (commit == 0.0) {
+        commit = 1;
+    }
+    self.donationProgress.progress = (raised/commit);
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
@@ -191,9 +206,6 @@
 { 
     if(error) {
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);    
-    }
-    else {
-//        [self postAlert:[NSString stringWithFormat:@"An email has been sent to remind you to complete your pledge of $%@ for %@.", self.donationField.text, self.rider.name]];
     }
     [self dismissModalViewControllerAnimated:YES];
 }

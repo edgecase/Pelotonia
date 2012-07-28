@@ -8,6 +8,39 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>pelotonia-icon.png</string>
+		<string>pelotonia-icon@2x.png</string>
+		<string>Default.png</string>
+		<string>Default@2x.png</string>
+	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>pelotonia-icon.png</string>
+				<string>pelotonia-icon@2x.png</string>
+				<string>Default.png</string>
+				<string>Default@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>UINewsstandIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UINewsstandBindingEdge</key>
+			<string>UINewsstandBindingEdgeLeft</string>
+			<key>UINewsstandBindingType</key>
+			<string>UINewsstandBindingTypeMagazine</string>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>Pelotonia.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -24,6 +57,15 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BaksheeshBold.otf</string>
+		<string>BaksheeshRegular</string>
+		<string>BaksheeshRegularExpert.otf</string>
+		<string>PFDinTextPro-Regular.otf</string>
+		<string>PFDinTextPro-Bold.otf</string>
+		<string>PFDinTextPro-Medium.otf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Storyboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -35,10 +77,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Baksheesh.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -12,9 +12,11 @@
 #import <AddressBookUI/AddressBookUI.h>
 
 #import "Rider.h"
+#import "PullToRefreshView.h"
 
 @interface ProfileViewController : UIViewController <MFMailComposeViewControllerDelegate, UITextFieldDelegate> {
     BOOL _following;
+    PullToRefreshView *_pull;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *supportButton;
@@ -28,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *followButton;
 @property (weak, nonatomic) IBOutlet UITextField *donorEmailField;
 @property (assign, nonatomic, readonly) BOOL following;
+@property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
 
