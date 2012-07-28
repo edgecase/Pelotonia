@@ -56,6 +56,7 @@
 		4D465A2515C2381300C7C506 /* one-goal-wallpaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */; };
 		4D465A2715C2382600C7C506 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2615C2382600C7C506 /* Default.png */; };
 		4D465A2915C2382F00C7C506 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2815C2382F00C7C506 /* Default@2x.png */; };
+		4DB648E915C473CB00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB648E815C473CB00980FCB /* TPKeyboardAvoidingScrollView.m */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
 		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
@@ -143,6 +144,8 @@
 		4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "one-goal-wallpaper@2x.png"; sourceTree = "<group>"; };
 		4D465A2615C2382600C7C506 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4D465A2815C2382F00C7C506 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		4DB648E715C473CB00980FCB /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		4DB648E815C473CB00980FCB /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = ../Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
 		4DD7F53915B5108300B1DF42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -292,6 +295,15 @@
 			path = Vendor/PullToRefresh;
 			sourceTree = "<group>";
 		};
+		4DB648E515C473A900980FCB /* TPKeyboardAvoidingScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				4DB648E715C473CB00980FCB /* TPKeyboardAvoidingScrollView.h */,
+				4DB648E815C473CB00980FCB /* TPKeyboardAvoidingScrollView.m */,
+			);
+			name = TPKeyboardAvoidingScrollView;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +383,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				4DB648E515C473A900980FCB /* TPKeyboardAvoidingScrollView */,
 				4D465A1215C229D400C7C506 /* PullToRefresh */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 				BCE3B80F15AE573F00205530 /* hpple */,
@@ -573,6 +586,7 @@
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 				4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */,
+				4DB648E915C473CB00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
