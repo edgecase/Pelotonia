@@ -92,29 +92,32 @@
         
         for (TFHppleElement *metaDataElement in metaDataFields) {
             NSString *header = [[[metaDataElement firstChild] firstChild] content];
-            TFHppleElement *content = [[[metaDataElement children] objectAtIndex:2] firstChild];
             
-            if ([header isEqualToString:@"I've Raised:"]) { // volunteer/rider/virtual rider
-                NSString *amountRaised = [content content];
-                rider.amountRaised = amountRaised;
-            } else if ([header isEqualToString:@"My Peloton:"]) { // rider/virtual rider
-                NSString *myPeloton = [[content firstChild] content];
-                rider.myPeloton = myPeloton;
-            } else if ([header isEqualToString:@"Route I'm Riding:"]) { // rider
-                NSString *route = [self stripWhitespace:[content content]];
-                rider.route = route;
-            } else if ([header isEqualToString:@"Peloton Funds Raised:"]) { // peloton
-                NSString *pelotonFundsRaised = [content content];
-                rider.pelotonFundsRaised = pelotonFundsRaised;
-            } else if ([header isEqualToString:@"Total of All Members:"]) { // peloton
-                NSString *pelotonTotalOfAllMembers = [content content];
-                rider.pelotonTotalOfAllMembers = pelotonTotalOfAllMembers;
-            } else if ([header isEqualToString:@"Grand Total Raised:"]) { // peloton
-                NSString *pelotonGrandTotal = [content content];
-                rider.pelotonGrandTotal = pelotonGrandTotal;
-            } else if ([header isEqualToString:@"Peloton Captain:"]) { // peloton
-                NSString *pelotonCaptain = [self stripWhitespace:[[[[[[metaDataElement children] objectAtIndex:2] children] objectAtIndex:1] firstChild] content]];
-                rider.pelotonCaptain = pelotonCaptain;
+            if (header) {
+                TFHppleElement *content = [[[metaDataElement children] objectAtIndex:2] firstChild];
+                
+                if ([header isEqualToString:@"I've Raised:"]) { // volunteer/rider/virtual rider
+                    NSString *amountRaised = [content content];
+                    rider.amountRaised = amountRaised;
+                } else if ([header isEqualToString:@"My Peloton:"]) { // rider/virtual rider
+                    NSString *myPeloton = [[content firstChild] content];
+                    rider.myPeloton = myPeloton;
+                } else if ([header isEqualToString:@"Route I'm Riding:"]) { // rider
+                    NSString *route = [self stripWhitespace:[content content]];
+                    rider.route = route;
+                } else if ([header isEqualToString:@"Peloton Funds Raised:"]) { // peloton
+                    NSString *pelotonFundsRaised = [content content];
+                    rider.pelotonFundsRaised = pelotonFundsRaised;
+                } else if ([header isEqualToString:@"Total of All Members:"]) { // peloton
+                    NSString *pelotonTotalOfAllMembers = [content content];
+                    rider.pelotonTotalOfAllMembers = pelotonTotalOfAllMembers;
+                } else if ([header isEqualToString:@"Grand Total Raised:"]) { // peloton
+                    NSString *pelotonGrandTotal = [content content];
+                    rider.pelotonGrandTotal = pelotonGrandTotal;
+                } else if ([header isEqualToString:@"Peloton Captain:"]) { // peloton
+                    NSString *pelotonCaptain = [self stripWhitespace:[[[[[[metaDataElement children] objectAtIndex:2] children] objectAtIndex:1] firstChild] content]];
+                    rider.pelotonCaptain = pelotonCaptain;
+                }
             }
         }
 
