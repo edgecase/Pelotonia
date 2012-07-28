@@ -20,6 +20,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *supportButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *routeLabel;

@@ -22,6 +22,7 @@
 @implementation ProfileViewController
 
 @synthesize supportButton = _supportButton;
+@synthesize scrollView = _scrollView;
 @synthesize rider = _rider;
 @synthesize nameLabel = _nameLabel;
 @synthesize routeLabel = _routeLabel;
@@ -46,13 +47,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
+    // set up the scroll view
+    self.scrollView.contentSize=CGSizeMake(320, 960);
+    self.scrollView.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+    
     [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
         self.rider = updatedRider;
     } onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
     }];
-
 }
 
 - (void)viewDidUnload
@@ -67,6 +72,7 @@
     [self setFollowButton:nil];
     [self setCommitLabel:nil];
     [self setDonationProgress:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
