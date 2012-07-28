@@ -1,0 +1,3 @@
+[submodule "Pelotonia/Vendor/PullToRefresh"]
+	path = Pelotonia/Vendor/PullToRefresh
+	url = git://github.com/sonnyparlin/PullToRefresh.git
