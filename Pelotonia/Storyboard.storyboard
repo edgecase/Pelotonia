@@ -61,7 +61,13 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN"/>
+                    <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="8fA-ZK-rv5">
+                            <connections>
+                                <segue destination="0zh-QP-OQs" kind="modal" identifier="showAbout:" modalTransitionStyle="flipHorizontal" id="6zZ-Pp-1Sc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="riderTableView" destination="uvz-tz-iUZ" id="04h-A9-gGV"/>
                         <outlet property="searchDisplayController" destination="98K-l2-sFA" id="6VD-Ej-iUr"/>
@@ -78,6 +84,85 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="804" y="254"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="YJf-2Q-0Bm">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vKq-rl-jLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="0zh-QP-OQs" customClass="AboutViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f2G-8j-jhA">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="one-goal-wallpaper.jpg" id="W8p-be-6vv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" id="Uvk-3b-FgS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                                <items>
+                                    <navigationItem title="About" id="9j4-Of-HcH">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="o4t-br-Yz0">
+                                            <color key="tintColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <connections>
+                                                <action selector="done:" destination="0zh-QP-OQs" id="wt2-Pt-8jn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" id="wtG-CV-6dx">
+                                <rect key="frame" x="20" y="67" width="280" height="373"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="E81-3A-9gN">
+                                        <rect key="frame" x="20" y="50" width="240" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Pelotonia_logo.png" id="Ozz-te-45c">
+                                        <rect key="frame" x="32" y="20" width="216" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Prepared for Pelotonia by:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="eG1-Ky-dKF">
+                                        <rect key="frame" x="41" y="99" width="199" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sandlot-logo.png" id="1Wd-a3-XaS">
+                                        <rect key="frame" x="58" y="137" width="164" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="edgecase_logo_big.png" id="bkc-h4-hN4">
+                                        <rect key="frame" x="46" y="213" width="189" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="and" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="g3H-6H-v4S">
+                                        <rect key="frame" x="119" y="184" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="versionLabel" destination="E81-3A-9gN" id="vJs-Ma-VNW"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1434" y="-332"/>
         </scene>
         <!--Profile View Controller - Profile-->
         <scene sceneID="4Yb-op-oK8">
@@ -216,9 +301,19 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Pelotonia_logo.png" width="530" height="54"/>
+        <image name="edgecase_logo_big.png" width="189" height="52"/>
         <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
+        <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
     <classes>
+        <class className="AboutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
         <class className="ProfileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
             <relationships>

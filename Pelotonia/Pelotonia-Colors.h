@@ -19,7 +19,7 @@
 #define SECONDARY_LIGHT_GRAY RGB_COLOR(194,209,212)
 #define SECONDARY_GREEN RGB_COLOR(193,216,47)
 
-#define PELOTONIA_FONT(s) [UIFont fontWithName:@"BaksheeshRegular" size:s]
-#define PELOTONIA_SECONDARY_FONT(s) [UIFont fontWithName:@"PFDinTextPro-Regular.otf" size:s]
+#define PELOTONIA_FONT(s) [UIFont fontWithName:@"Baksheesh-Regular" size:s]
+#define PELOTONIA_SECONDARY_FONT(s) [UIFont fontWithName:@"PFDinTextPro-Regular" size:s]
 
 #endif

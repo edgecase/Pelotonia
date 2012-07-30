@@ -9,6 +9,7 @@
 #import "RidersViewController.h"
 #import "RiderDataController.h"
 #import "ProfileViewController.h"
+#import "AboutViewController.h"
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
@@ -88,9 +89,6 @@
     [_pull setDelegate:self];
     [self.tableView addSubview:_pull];
     
-    // scroll to hide the search buttons
-    
-
 }
 
 - (void)viewDidUnload
@@ -104,7 +102,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self reloadTableData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -144,6 +141,11 @@
         rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
     profileViewController.rider = rider;
+}
+
+- (void)showAbout:(AboutViewController *)aboutViewController
+{
+    // do nothing
 }
 
 

@@ -12,12 +12,14 @@
 #import "PelotoniaWeb.h"
 #import "Pelotonia-Colors.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "SHKActivityIndicator.h"
 
 @interface ProfileViewController ()
 - (void)configureView;
 - (void)sendPledgeMail;
 - (BOOL)validateForm;
 - (void)postAlert:(NSString *)msg;
+- (void)refreshRider;
 @end
 
 @implementation ProfileViewController
@@ -53,13 +55,7 @@
     // set up the scroll view
     self.scrollView.contentSize=CGSizeMake(320, 960);
     self.scrollView.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
-    
-    // start an asynchronous web request to update the rider information
-    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
-        self.rider = updatedRider;
-    } onFailure:^(NSString *error) {
-        NSLog(@"Unable to get profile for rider. Error: %@", error);
-    }];
+    [self refreshRider];
     
 }
 
@@ -91,12 +87,25 @@
     [self configureView];
 }
 
-- (void)setRider:(Rider *)rider
-{
-    _rider = rider;
-    [self configureView];
-}
+//- (void)setRider:(Rider *)rider
+//{
+//    _rider = rider;
+//    [self configureView];
+//}
 
+- (void)refreshRider
+{
+    [[SHKActivityIndicator currentIndicator] displayActivity:@"Refreshing..."];
+    // start an asynchronous web request to update the rider information
+    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
+        self.rider = updatedRider;
+        [self configureView];
+        [[SHKActivityIndicator currentIndicator] hide];
+    } onFailure:^(NSString *error) {
+        NSLog(@"Unable to get profile for rider. Error: %@", error);
+        [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
+    }];
+}
 
 - (BOOL)following
 {

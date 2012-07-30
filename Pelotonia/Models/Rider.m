@@ -155,6 +155,8 @@
     }    
 }
 
+#pragma mark -- NSCoding
+
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:_name forKey:@"name"];
@@ -194,6 +196,11 @@
     }
     return self;
 }
+
+
+#pragma mark -- NSCopying
+// NSCopying
+
 
 
 @end

@@ -9,16 +9,22 @@
 #import "AppDelegate.h"
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize riderDataController = _riderDataController;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
+
+    // call the Appirater class
+    [Appirater appLaunched];return YES;
+
     return YES;
 }
 
@@ -38,6 +44,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [Appirater appEnteredForeground:YES];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

@@ -59,12 +59,12 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>BaksheeshBold.otf</string>
-		<string>BaksheeshRegular</string>
-		<string>BaksheeshRegularExpert.otf</string>
-		<string>PFDinTextPro-Regular.otf</string>
-		<string>PFDinTextPro-Bold.otf</string>
-		<string>PFDinTextPro-Medium.otf</string>
+		<string>Baksheesh-Bold.ttf</string>
+		<string>Baksheesh-Regular.ttf</string>
+		<string>Baksheesh-RegularExpert.ttf</string>
+		<string>PFDinTextPro-Regular.ttf</string>
+		<string>PFDinTextPro-Bold.ttf</string>
+		<string>PFDinTextPro-Medium.ttf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Storyboard</string>
@@ -75,8 +75,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
