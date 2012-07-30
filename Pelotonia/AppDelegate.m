@@ -23,7 +23,7 @@
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
 
     // call the Appirater class
-    [Appirater appLaunched];return YES;
+    [Appirater appLaunched:YES];
 
     return YES;
 }
