@@ -114,7 +114,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" id="wtG-CV-6dx">
-                                <rect key="frame" x="20" y="67" width="280" height="373"/>
+                                <rect key="frame" x="20" y="67" width="280" height="292"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="E81-3A-9gN">
@@ -307,43 +307,6 @@
         <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
-    <classes>
-        <class className="AboutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProfileViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="followRider:"/>
-                <relationship kind="action" name="supportRider:"/>
-                <relationship kind="outlet" name="commitLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="donationField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="donorEmailField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="raisedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="riderImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="routeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="supportButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="supportLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RidersViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

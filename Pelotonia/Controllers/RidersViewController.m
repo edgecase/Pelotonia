@@ -112,9 +112,9 @@
 #pragma mark -- pull to refresh view
 - (void)reloadTableData
 {
-//    NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-//    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
-    [self.dataController refreshRiders];
+    NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
+//    [self.dataController refreshRiders];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
 }
