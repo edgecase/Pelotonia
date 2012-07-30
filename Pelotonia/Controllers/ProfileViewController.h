@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *routeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commitLabel;
+@property (weak, nonatomic) IBOutlet UILabel *supportLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *riderImageView;
 @property (weak, nonatomic) IBOutlet UITextField *donationField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *followButton;

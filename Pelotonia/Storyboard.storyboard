@@ -234,7 +234,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="oPX-Yb-lgA">
-                                                <rect key="frame" x="109" y="9" width="168" height="21"/>
+                                                <rect key="frame" x="109" y="9" width="168" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
                                                 <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
@@ -279,6 +279,7 @@
                         <outlet property="riderImageView" destination="r2C-34-fiD" id="DzZ-CQ-l3z"/>
                         <outlet property="routeLabel" destination="dhB-Rp-ZyL" id="9h4-z8-XhO"/>
                         <outlet property="scrollView" destination="PzP-G9-JBs" id="dbf-pI-uDX"/>
+                        <outlet property="supportLabel" destination="d6S-3c-2GR" id="72D-7D-bin"/>
                     </connections>
                 </viewController>
             </objects>
@@ -330,6 +331,7 @@
                 <relationship kind="outlet" name="routeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="supportButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="supportLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="RidersViewController" superclassName="UITableViewController">

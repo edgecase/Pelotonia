@@ -31,6 +31,7 @@
 @synthesize routeLabel = _routeLabel;
 @synthesize raisedLabel = _raisedLabel;
 @synthesize commitLabel = _commitLabel;
+@synthesize supportLabel = _supportLabel;
 @synthesize riderImageView = _riderImageView;
 @synthesize donationField = _donationField;
 @synthesize followButton = _followButton;
@@ -72,6 +73,7 @@
     [self setCommitLabel:nil];
     [self setDonationProgress:nil];
     [self setScrollView:nil];
+    [self setSupportLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -125,6 +127,13 @@
     self.commitLabel.text = self.rider.totalCommit;
     self.riderImageView.image = self.rider.riderPhoto;
 
+    self.nameLabel.font = PELOTONIA_SECONDARY_FONT(21);
+    self.routeLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.raisedLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.commitLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.supportLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    
+    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [formatter setLenient:YES];
