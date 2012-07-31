@@ -125,7 +125,10 @@
     self.routeLabel.text = self.rider.route;
     self.raisedLabel.text = self.rider.totalRaised;
     self.commitLabel.text = self.rider.totalCommit;
-    self.riderImageView.image = self.rider.riderPhoto;
+    
+    [self.rider getRiderPhotoOnComplete:^(UIImage *image) {
+        self.riderImageView.image = image;
+    }];
 
     self.nameLabel.font = PELOTONIA_SECONDARY_FONT(21);
     self.routeLabel.font = PELOTONIA_SECONDARY_FONT(17);

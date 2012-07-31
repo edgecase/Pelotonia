@@ -55,6 +55,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
+- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete;
+- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
+
 @end
 
 

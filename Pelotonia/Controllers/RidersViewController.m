@@ -156,7 +156,9 @@
     for (NSIndexPath *indexPath in visiblePaths) {
         UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
         Rider *rider = [self.dataController objectAtIndex:indexPath.row];
-        cell.imageView.image = rider.riderPhotoThumb;
+        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
+            cell.imageView.image = image;
+        }];
     }
 }
 
@@ -194,7 +196,9 @@
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",rider.riderType, rider.totalRaised];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-        cell.imageView.image = rider.riderPhotoThumb;
+        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
+            cell.imageView.image = image;
+        }];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -208,7 +212,9 @@
             amount = rider.amountRaised;
         }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", rider.route, amount];
-        cell.imageView.image = rider.riderPhotoThumb;
+        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
+            cell.imageView.image = image;
+        }];
     }
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   

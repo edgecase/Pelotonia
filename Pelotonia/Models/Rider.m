@@ -13,7 +13,7 @@
 
 @interface Rider ()
 
-- (void)asynchronousGetImageAtUrl:(NSString *)url;
+- (void)asynchronousGetImageAtUrl:(NSString *)url onComplete:(void(^)(UIImage *image))complete;
 
 @end
 
@@ -56,7 +56,7 @@
 }
 
 
-- (void)asynchronousGetImageAtUrl:(NSString *)url
+- (void)asynchronousGetImageAtUrl:(NSString *)url onComplete:(void(^)(UIImage *image))complete
 {
     __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
     [request setCompletionBlock:^{
@@ -65,49 +65,16 @@
             if (image != nil) {
                 [[ImageCache sharedStore] setImage:image forKey:url];
             }
+            
+            if (complete) {
+                complete(image);
+            }
         });
     }];
     [request startAsynchronous];
 }
 
 #pragma mark -- Properties
-- (UIImage *)riderPhoto
-{
-    UIImage *photo = nil;
-    if (self.riderPhotoUrl) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
-        if (nil == photo) {
-            // return default photo now
-            NSLog(@"riderPhoto: unable to find photo %@ in the cache", self.riderPhotoUrl);
-            photo = [UIImage imageNamed:@"profile_default.jpg"];
-
-            // put the image into the cache for later
-            [self asynchronousGetImageAtUrl:self.riderPhotoUrl];
-        }
-    }
-    return photo;
-}
-
-
-- (UIImage *)riderPhotoThumb
-{
-    UIImage *photo = nil;
-    
-    if (self.riderPhotoThumbUrl != nil) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
-        if (nil == photo) {
-            // return the default for now, but get the real photo for later
-            NSLog(@"riderPhotoThumb: unable to find photo %@ in the cache", self.riderPhotoThumbUrl);
-            photo = [UIImage imageNamed:@"profile_default_thumb.jpg"];
-
-            // go to the web to get the real photo
-            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl];    
-        }
-            
-    }
-
-    return photo;
-}
 
 - (NSString *)totalCommit 
 {
@@ -195,6 +162,59 @@
         _pelotonCaptain = [aDecoder decodeObjectForKey:@"pelotonCaptain"];
     }
     return self;
+}
+
+
+- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
+{
+    UIImage *photo = nil;
+    if (self.riderPhotoUrl) {
+        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
+        if (nil == photo) {
+            // return default photo now
+            NSLog(@"riderPhoto: unable to find photo %@ in the cache", self.riderPhotoUrl);
+            photo = [UIImage imageNamed:@"profile_default.jpg"];
+            
+            // put the image into the cache for later
+            [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
+                _riderPhoto = image;
+                if (complete) {
+                    complete(image);
+                }
+            }];
+        }
+        
+        if (complete) {
+            complete(photo);
+        }
+    }
+}
+
+
+- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete
+{
+    UIImage *photo = nil;
+    
+    if (self.riderPhotoThumbUrl != nil) {
+        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
+        if (nil == photo) {
+            // return the default for now, but get the real photo for later
+            NSLog(@"riderPhotoThumb: unable to find photo %@ in the cache", self.riderPhotoThumbUrl);
+            photo = [UIImage imageNamed:@"profile_default_thumb.jpg"];
+            
+            // go to the web to get the real photo
+            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
+                _riderPhotoThumb = image;
+                if (complete) {
+                    complete(image);
+                }
+            }];
+        }
+        
+        if (complete) {
+            complete(photo);
+        }
+    }
 }
 
 
