@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052144AB15C9A0FC00E8B090 /* new context.png in Resources */ = {isa = PBXBuildFile; fileRef = 052144AA15C9A0FC00E8B090 /* new context.png */; };
 		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
 		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
@@ -62,7 +63,6 @@
 		4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495315C6146400980FCB /* SHKActivityIndicator.m */; };
 		4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495615C619AC00980FCB /* AboutViewController.m */; };
 		4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6495815C61B5600980FCB /* sandlot-logo.png */; };
-		4DB6495B15C61C1D00980FCB /* edgecase_logo_big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6495A15C61C1D00980FCB /* edgecase_logo_big.png */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
 		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
@@ -97,6 +97,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		052144AA15C9A0FC00E8B090 /* new context.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new context.png"; sourceTree = "<group>"; };
 		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
 		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
 		0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default_thumb.jpg; sourceTree = "<group>"; };
@@ -172,7 +173,6 @@
 		4DB6495515C619AC00980FCB /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Controllers/AboutViewController.h; sourceTree = "<group>"; };
 		4DB6495615C619AC00980FCB /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Controllers/AboutViewController.m; sourceTree = "<group>"; };
 		4DB6495815C61B5600980FCB /* sandlot-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandlot-logo.png"; sourceTree = "<group>"; };
-		4DB6495A15C61C1D00980FCB /* edgecase_logo_big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edgecase_logo_big.png; sourceTree = "<group>"; };
 		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = ../Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
 		4DD7F53915B5108300B1DF42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -265,7 +265,7 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				4DB6495A15C61C1D00980FCB /* edgecase_logo_big.png */,
+				052144AA15C9A0FC00E8B090 /* new context.png */,
 				4DB6493815C60FA300980FCB /* Baksheesh */,
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
 				4D465A2215C2381300C7C506 /* one-goal-wallpaper.png */,
@@ -640,7 +640,7 @@
 				4DB6494F15C6100400980FCB /* Baksheesh-ThinItalic.ttf in Resources */,
 				4DB6495015C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf in Resources */,
 				4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */,
-				4DB6495B15C61C1D00980FCB /* edgecase_logo_big.png in Resources */,
+				052144AB15C9A0FC00E8B090 /* new context.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
