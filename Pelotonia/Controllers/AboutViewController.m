@@ -48,4 +48,20 @@
 - (IBAction)done:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+- (IBAction)sandlotPressed:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://www.isandlot.com"];
+    
+    if (![[UIApplication sharedApplication] openURL:url])
+        
+    NSLog(@"%@%@",@"Failed to open url:",[url description]);
+}
+
+- (IBAction)newContextPressed:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"http://www.newcontext.com"];
+    
+    if (![[UIApplication sharedApplication] openURL:url])
+        
+    NSLog(@"%@%@",@"Failed to open url:",[url description]);
+}
 @end

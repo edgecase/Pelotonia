@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 - (IBAction)done:(id)sender;
+- (IBAction)sandlotPressed:(id)sender;
+- (IBAction)newContextPressed:(id)sender;
 
 @end
