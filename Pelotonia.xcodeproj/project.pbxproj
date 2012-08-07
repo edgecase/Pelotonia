@@ -780,7 +780,7 @@
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DE136DCB-047C-47D4-B60D-5064861BA027";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
