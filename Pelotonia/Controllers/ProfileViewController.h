@@ -13,6 +13,7 @@
 
 #import "Rider.h"
 #import "PullToRefreshView.h"
+#import "PelotoniaWeb.h"
 
 @interface ProfileViewController : UIViewController <MFMailComposeViewControllerDelegate, UITextFieldDelegate> {
     BOOL _following;

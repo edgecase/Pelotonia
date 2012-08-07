@@ -20,7 +20,6 @@
 - (void)insertObject:(Rider *)object atIndex:(NSUInteger)index;
 - (void)removeObject:(Rider *)object;
 - (BOOL)containsRider:(Rider *)object;
-- (void)refreshRiders;
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors;
 
 // NSCoding

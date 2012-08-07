@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PullToRefreshView.h"
+#import "PelotoniaWeb.h"
 
 @class RiderDataController;
 
@@ -20,6 +21,5 @@
 @property (strong, nonatomic) RiderDataController *dataController;
 @property (strong, nonatomic) NSMutableArray *riderSearchResults;
 @property (weak, nonatomic) IBOutlet UITableView *riderTableView;
-
 
 @end

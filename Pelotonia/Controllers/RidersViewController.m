@@ -39,6 +39,7 @@
     return _dataController;
 }
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -84,6 +85,9 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     self.navigationItem.titleView = imageView;
     
+    NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
+
     // pull to refresh view
     _pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [_pull setDelegate:self];
@@ -114,7 +118,6 @@
 {
     NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
-//    [self.dataController refreshRiders];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
 }
@@ -291,6 +294,7 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
+    NSLog(@"Searching for content %@", searchText);
     /*
      Update the filtered array based on the search text and scope.
      */    
@@ -300,16 +304,23 @@
      search the web for all riders matching the searchText
      */
     if ([scope isEqualToString:@"ID"]) {
+        NSLog(@"Searching for %@ by ID", searchText);
         [PelotoniaWeb searchForRiderWithLastName:@"" riderId:searchText onComplete:^(NSArray *searchResults) {
             [self.riderSearchResults addObjectsFromArray:searchResults];
             [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:nil];
+        } onFailure:^(NSString *errorMessage) {
+            NSLog(@"%@", errorMessage);
+        }];
+        
     }
     else {
+        NSLog(@"Searching for %@ by Name", searchText);
         [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
             [self.riderSearchResults addObjectsFromArray:searchResults];
             [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:nil];
+        } onFailure:^(NSString *errorMessage) {
+            NSLog(@"%@", errorMessage);
+        }];
     }
 }
 
@@ -332,8 +343,9 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
+    NSLog(@"Pelotonia: searchBarSearchButtonClicked %@", searchBar);
     [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-    [self.searchDisplayController.searchResultsTableView reloadData];
+//    [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView 

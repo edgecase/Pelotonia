@@ -77,19 +77,6 @@
     [_riderList insertObject:object atIndex:index];
 }
 
-- (void)refreshRiders
-{
-    for (NSInteger i = 0; i < [_riderList count]; i++) {
-        Rider *rider = [_riderList objectAtIndex:i];
-        [PelotoniaWeb profileForRider:rider onComplete:^(Rider *updatedRider) {
-            [_riderList removeObject:rider];
-            [_riderList insertObject:updatedRider atIndex:i];
-        } onFailure:^(NSString *error) {
-            NSLog(@"Unable to get profile for rider. Error: %@", error);
-        }];
-    }
-}
-
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors
 {
     [_riderList sortUsingDescriptors:descriptors];

@@ -19,9 +19,12 @@
 + (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId]];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    __unsafe_unretained __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    
+    NSLog(@"searchForRiderWithLastName: finding %@ (%@)", lastName, riderId);
     
     [request setCompletionBlock:^{
+        NSLog(@"completing network call");
         TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
         NSString *xPath = @"//table[@id='search-results']/tr";
         NSArray *riderTableRows = [parser searchWithXPathQuery:xPath];
@@ -53,10 +56,12 @@
             }
             
             if (rider.name) {
+                NSLog(@"Adding rider %@", rider.name);
                 [riders addObject:rider];
             }
         }
         
+        NSLog(@"calling completeblock");
         if (completeBlock) {
             completeBlock(riders);
         }
@@ -64,9 +69,11 @@
     
     [request setFailedBlock:^{
         NSError *error = [request error];
-        NSLog(@"%@", error);
+        NSLog(@"%@: %@", error.localizedDescription, error.localizedFailureReason);
+        
         if (failureBlock) {
-            failureBlock(@"Network error");
+            NSString *errstr = [NSString stringWithFormat:@"Network error: %@", error.localizedDescription];
+            failureBlock(errstr);
         }
     }];
     
@@ -77,9 +84,11 @@
 + (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSURL *url = [NSURL URLWithString:rider.profileUrl];
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    __unsafe_unretained __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    NSLog(@"looking for rider profile %@", rider.name);
     
     [request setCompletionBlock:^{
+        NSLog(@"Found rider %@", rider.name);
         TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
         NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[@class='public-profile-photo']/img";
         NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
@@ -124,6 +133,7 @@
         if (completeBlock) {
             completeBlock(rider);
         }
+        NSLog(@"Returning profile for rider %@", rider.name);
     }];
     
     [request setFailedBlock:^{

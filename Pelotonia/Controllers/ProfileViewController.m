@@ -89,11 +89,7 @@
     [self configureView];
 }
 
-//- (void)setRider:(Rider *)rider
-//{
-//    _rider = rider;
-//    [self configureView];
-//}
+
 
 - (void)refreshRider
 {
