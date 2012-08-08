@@ -10,6 +10,10 @@
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
+#import "SHK.h"
+#import "SHKConfiguration.h"
+#import "SHKFacebook.h"
+#import "PelotoniaSHKConfigurator.h"
 
 @implementation AppDelegate
 
@@ -22,6 +26,12 @@
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
 
+    DefaultSHKConfigurator *configurator = [[PelotoniaSHKConfigurator alloc] init];
+    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
+
+    // send any cached messages
+    [SHK flushOfflineQueue];
+    
     // call the Appirater class
     [Appirater appLaunched:YES];
 
@@ -75,6 +85,25 @@
 - (NSString *)riderFilePath 
 {
     return [self PelotoniaFiles:@"Riders"];
+}
+
+- (BOOL)handleOpenURL:(NSURL*)url
+{
+    NSString* scheme = [url scheme];
+    NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
+    if ([scheme hasPrefix:prefix])
+        return [SHKFacebook handleOpenURL:url];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [self handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [self handleOpenURL:url];
 }
 
 - (RiderDataController *)riderDataController {

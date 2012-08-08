@@ -13,6 +13,10 @@
 #import "Pelotonia-Colors.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "SHKActivityIndicator.h"
+#import "SHK.h"
+#import "SHKFacebook.h"
+#import "SHKTwitter.h"
+
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -135,9 +139,12 @@
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
+        // show the toolbar
+        
     }
     else {
         [self.followButton setTitle:@"Follow"];
+        // hide the toolbar
     }
 
     [self.supportButton setTintColor:PRIMARY_GREEN];
@@ -244,5 +251,28 @@
         [dataController removeObject:self.rider];
     }
     [self configureView];
+}
+
+- (IBAction)shareOnTwitter:(id)sender {
+    SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"Visit %@'s Pelotonia Profile and help stop cancer", self.rider.name]];
+    item.URL = [NSURL URLWithString:self.rider.profileUrl];
+
+    [SHKTwitter shareItem:item];
+}
+
+- (IBAction)shareOnFacebook:(id)sender {
+    // Create the item to share (in this example, a url)
+    NSURL *url = [NSURL URLWithString:self.rider.profileUrl];
+    SHKItem *item = [SHKItem URL:url title:[NSString stringWithFormat:@"Visit %@'s Pelotonia Profile", self.rider.name] contentType:SHKURLContentTypeWebpage];
+    
+    
+    
+    item.facebookURLShareDescription = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
+    
+    item.facebookURLSharePictureURI = SHKEncode(@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png");
+    
+    // Share the item to facebook
+    [SHKFacebook shareItem:item];
+    
 }
 @end

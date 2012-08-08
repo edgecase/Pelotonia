@@ -36,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
+- (IBAction)shareOnTwitter:(id)sender;
+- (IBAction)shareOnFacebook:(id)sender;
 
 @end
 

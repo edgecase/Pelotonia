@@ -29,11 +29,13 @@
 		4D465A2515C2381300C7C506 /* one-goal-wallpaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */; };
 		4D465A2715C2382600C7C506 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2615C2382600C7C506 /* Default.png */; };
 		4D465A2915C2382F00C7C506 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2815C2382F00C7C506 /* Default@2x.png */; };
+		4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */; };
 		4DB3347715D229430056E794 /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3346D15D2290E0056E794 /* libShareKit.a */; };
 		4DB3347815D229650056E794 /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4DB3346F15D2290E0056E794 /* ShareKit.bundle */; };
 		4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347915D229C40056E794 /* Twitter.framework */; };
 		4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347B15D229DC0056E794 /* Security.framework */; };
 		4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347D15D229F70056E794 /* CoreFoundation.framework */; };
+		4DB3348115D22ED80056E794 /* PelotoniaSHKConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3348015D22ED80056E794 /* PelotoniaSHKConfigurator.m */; };
 		4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */; };
 		4DB6491615C60D4F00980FCB /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490615C60D4F00980FCB /* Appirater.m */; };
 		4DB6491715C60D4F00980FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6490715C60D4F00980FCB /* Localizable.strings */; };
@@ -65,7 +67,6 @@
 		4DB6494E15C6100400980FCB /* Baksheesh-ThinExpert.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6494215C6100400980FCB /* Baksheesh-ThinExpert.ttf */; };
 		4DB6494F15C6100400980FCB /* Baksheesh-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6494315C6100400980FCB /* Baksheesh-ThinItalic.ttf */; };
 		4DB6495015C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6494415C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf */; };
-		4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495315C6146400980FCB /* SHKActivityIndicator.m */; };
 		4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495615C619AC00980FCB /* AboutViewController.m */; };
 		4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6495815C61B5600980FCB /* sandlot-logo.png */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
@@ -173,10 +174,13 @@
 		4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "one-goal-wallpaper@2x.png"; sourceTree = "<group>"; };
 		4D465A2615C2382600C7C506 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4D465A2815C2382F00C7C506 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = Pelotonia/Vendor/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
 		4DB3347915D229C40056E794 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		4DB3347B15D229DC0056E794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4DB3347D15D229F70056E794 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		4DB3347F15D22ED80056E794 /* PelotoniaSHKConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaSHKConfigurator.h; path = Models/PelotoniaSHKConfigurator.h; sourceTree = "<group>"; };
+		4DB3348015D22ED80056E794 /* PelotoniaSHKConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaSHKConfigurator.m; path = Models/PelotoniaSHKConfigurator.m; sourceTree = "<group>"; };
 		4DB6490115C60D1A00980FCB /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		4DB6490515C60D4F00980FCB /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -222,8 +226,6 @@
 		4DB6494215C6100400980FCB /* Baksheesh-ThinExpert.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baksheesh-ThinExpert.ttf"; sourceTree = "<group>"; };
 		4DB6494315C6100400980FCB /* Baksheesh-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baksheesh-ThinItalic.ttf"; sourceTree = "<group>"; };
 		4DB6494415C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baksheesh-ThinItalicExpert.ttf"; sourceTree = "<group>"; };
-		4DB6495215C6146400980FCB /* SHKActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKActivityIndicator.h; sourceTree = "<group>"; };
-		4DB6495315C6146400980FCB /* SHKActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHKActivityIndicator.m; sourceTree = "<group>"; };
 		4DB6495515C619AC00980FCB /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Controllers/AboutViewController.h; sourceTree = "<group>"; };
 		4DB6495615C619AC00980FCB /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Controllers/AboutViewController.m; sourceTree = "<group>"; };
 		4DB6495815C61B5600980FCB /* sandlot-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandlot-logo.png"; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */,
 				4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */,
 				BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */,
 				4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */,
@@ -430,16 +433,6 @@
 			name = Baksheesh;
 			sourceTree = "<group>";
 		};
-		4DB6495115C6146400980FCB /* SHKActivityIndicator */ = {
-			isa = PBXGroup;
-			children = (
-				4DB6495215C6146400980FCB /* SHKActivityIndicator.h */,
-				4DB6495315C6146400980FCB /* SHKActivityIndicator.m */,
-			);
-			name = SHKActivityIndicator;
-			path = Vendor/SHKActivityIndicator;
-			sourceTree = "<group>";
-		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -463,6 +456,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */,
 				4DB3347D15D229F70056E794 /* CoreFoundation.framework */,
 				4DB3347B15D229DC0056E794 /* Security.framework */,
 				4DB3347915D229C40056E794 /* Twitter.framework */,
@@ -525,7 +519,6 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				4DB6495115C6146400980FCB /* SHKActivityIndicator */,
 				4DB6490415C60D4F00980FCB /* Appirater */,
 				4DB6490015C60D1A00980FCB /* TPKeyboardAvoidingScrollView */,
 				4D465A1215C229D400C7C506 /* PullToRefresh */,
@@ -598,6 +591,8 @@
 				BCE3B81D15AE5B6F00205530 /* Rider.m */,
 				4D35C72715B116E5006E5D5D /* RiderDataController.h */,
 				4D35C72815B116E5006E5D5D /* RiderDataController.m */,
+				4DB3347F15D22ED80056E794 /* PelotoniaSHKConfigurator.h */,
+				4DB3348015D22ED80056E794 /* PelotoniaSHKConfigurator.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -787,8 +782,8 @@
 				4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */,
 				4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */,
 				4DB6491615C60D4F00980FCB /* Appirater.m in Sources */,
-				4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */,
 				4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */,
+				4DB3348115D22ED80056E794 /* PelotoniaSHKConfigurator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,10 +865,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E6E3DCA6-C234-4F2C-A4F9-7BBA8FF3E828";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "Vendor/**";
+				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
@@ -934,8 +934,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "Vendor/**";
+				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
@@ -950,10 +955,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
-				USER_HEADER_SEARCH_PATHS = "Vendor/**";
+				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
