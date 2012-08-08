@@ -1,3 +1,6 @@
 [submodule "Pelotonia/Vendor/PullToRefresh"]
 	path = Pelotonia/Vendor/PullToRefresh
 	url = git://github.com/sonnyparlin/PullToRefresh.git
+[submodule "Pelotonia/Vendor/ShareKit"]
+	path = Pelotonia/Vendor/ShareKit
+	url = git://github.com/ShareKit/ShareKit.git
