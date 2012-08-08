@@ -11,6 +11,7 @@
 		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
 		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
+		4D2BA63115D23CB7005B1A7D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7FC15AE518800205530 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3CBA2915BE7F97006CB6C3 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */; };
 		4D3CBA2A15BE7FFE006CB6C3 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */; };
@@ -89,7 +90,6 @@
 		BCE3B7F715AE516500205530 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7EA15AE516500205530 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -O0"; }; };
 		BCE3B7F815AE516500205530 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7EE15AE516500205530 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7F915AE516500205530 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7F015AE516500205530 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		BCE3B7FD15AE518800205530 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7FC15AE518800205530 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7FE15AE519800205530 /* CFNetwork.framework */; };
 		BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80015AE51A000205530 /* SystemConfiguration.framework */; };
 		BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80215AE51A800205530 /* MobileCoreServices.framework */; };
@@ -771,7 +771,7 @@
 				BCE3B7F715AE516500205530 /* ASIHTTPRequest.m in Sources */,
 				BCE3B7F815AE516500205530 /* ASIInputStream.m in Sources */,
 				BCE3B7F915AE516500205530 /* ASINetworkQueue.m in Sources */,
-				BCE3B7FD15AE518800205530 /* Reachability.m in Sources */,
+				4D2BA63115D23CB7005B1A7D /* Reachability.m in Sources */,
 				BCE3B80D15AE53F900205530 /* ProfileViewController.m in Sources */,
 				BCE3B81615AE573F00205530 /* TFHpple.m in Sources */,
 				BCE3B81715AE573F00205530 /* TFHppleElement.m in Sources */,
