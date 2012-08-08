@@ -29,6 +29,11 @@
 		4D465A2515C2381300C7C506 /* one-goal-wallpaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */; };
 		4D465A2715C2382600C7C506 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2615C2382600C7C506 /* Default.png */; };
 		4D465A2915C2382F00C7C506 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2815C2382F00C7C506 /* Default@2x.png */; };
+		4DB3347715D229430056E794 /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3346D15D2290E0056E794 /* libShareKit.a */; };
+		4DB3347815D229650056E794 /* ShareKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4DB3346F15D2290E0056E794 /* ShareKit.bundle */; };
+		4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347915D229C40056E794 /* Twitter.framework */; };
+		4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347B15D229DC0056E794 /* Security.framework */; };
+		4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347D15D229F70056E794 /* CoreFoundation.framework */; };
 		4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */; };
 		4DB6491615C60D4F00980FCB /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490615C60D4F00980FCB /* Appirater.m */; };
 		4DB6491715C60D4F00980FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6490715C60D4F00980FCB /* Localizable.strings */; };
@@ -96,6 +101,51 @@
 		BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81D15AE5B6F00205530 /* Rider.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4DB3346A15D2290E0056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D6058910D05DD3D006BFB54;
+			remoteInfo = "Demo App";
+		};
+		4DB3346C15D2290E0056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7AB5342E1552AADD00171BCE;
+			remoteInfo = "Static Library";
+		};
+		4DB3346E15D2290E0056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7AB5360F1552E26800171BCE;
+			remoteInfo = "Resource Bundle";
+		};
+		4DB3347015D2290E0056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A0F9246156BA2A0009CB40A;
+			remoteInfo = "Static Library No Submodules";
+		};
+		4DB3347315D229320056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AB5342D1552AADD00171BCE;
+			remoteInfo = "Static Library";
+		};
+		4DB3347515D229320056E794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AB5360E1552E26800171BCE;
+			remoteInfo = "Resource Bundle";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		052144AA15C9A0FC00E8B090 /* new context.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new context.png"; sourceTree = "<group>"; };
 		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
@@ -123,6 +173,10 @@
 		4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "one-goal-wallpaper@2x.png"; sourceTree = "<group>"; };
 		4D465A2615C2382600C7C506 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4D465A2815C2382F00C7C506 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = Pelotonia/Vendor/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
+		4DB3347915D229C40056E794 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		4DB3347B15D229DC0056E794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4DB3347D15D229F70056E794 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4DB6490115C60D1A00980FCB /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		4DB6490515C60D4F00980FCB /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -235,6 +289,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */,
+				BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */,
+				4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */,
+				BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */,
+				4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */,
+				4DB3347715D229430056E794 /* libShareKit.a in Frameworks */,
 				4D465A1D15C22AB500C7C506 /* QuartzCore.framework in Frameworks */,
 				4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */,
 				4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */,
@@ -242,8 +302,6 @@
 				BCE3B81A15AE586800205530 /* libxml2.dylib in Frameworks */,
 				BCE3B80515AE51BC00205530 /* libz.dylib in Frameworks */,
 				BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */,
-				BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */,
-				BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */,
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
 				BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */,
@@ -295,6 +353,17 @@
 			);
 			name = PullToRefresh;
 			path = Vendor/PullToRefresh;
+			sourceTree = "<group>";
+		};
+		4DB3346015D2290D0056E794 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DB3346B15D2290E0056E794 /* ShareKitDemo.app */,
+				4DB3346D15D2290E0056E794 /* libShareKit.a */,
+				4DB3346F15D2290E0056E794 /* ShareKit.bundle */,
+				4DB3347115D2290E0056E794 /* libShareKitNoSubmodules.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4DB6490015C60D1A00980FCB /* TPKeyboardAvoidingScrollView */ = {
@@ -374,6 +443,7 @@
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
+				4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */,
 				4D465A2815C2382F00C7C506 /* Default@2x.png */,
 				4D465A2615C2382600C7C506 /* Default.png */,
 				BCE3B7BC15AE49DA00205530 /* Pelotonia */,
@@ -393,6 +463,9 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DB3347D15D229F70056E794 /* CoreFoundation.framework */,
+				4DB3347B15D229DC0056E794 /* Security.framework */,
+				4DB3347915D229C40056E794 /* Twitter.framework */,
 				4D465A1C15C22AB500C7C506 /* QuartzCore.framework */,
 				4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */,
 				4DD7F53915B5108300B1DF42 /* AddressBook.framework */,
@@ -543,6 +616,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				4DB3347415D229320056E794 /* PBXTargetDependency */,
+				4DB3347615D229320056E794 /* PBXTargetDependency */,
 			);
 			name = Pelotonia;
 			productName = Pelotonia;
@@ -579,12 +654,49 @@
 			mainGroup = BCE3B7A715AE49DA00205530;
 			productRefGroup = BCE3B7B315AE49DA00205530 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4DB3346015D2290D0056E794 /* Products */;
+					ProjectRef = 4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BCE3B7B115AE49DA00205530 /* Pelotonia */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4DB3346B15D2290E0056E794 /* ShareKitDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ShareKitDemo.app;
+			remoteRef = 4DB3346A15D2290E0056E794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4DB3346D15D2290E0056E794 /* libShareKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libShareKit.a;
+			remoteRef = 4DB3346C15D2290E0056E794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4DB3346F15D2290E0056E794 /* ShareKit.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ShareKit.bundle;
+			remoteRef = 4DB3346E15D2290E0056E794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4DB3347115D2290E0056E794 /* libShareKitNoSubmodules.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libShareKitNoSubmodules.a;
+			remoteRef = 4DB3347015D2290E0056E794 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BCE3B7B015AE49DA00205530 /* Resources */ = {
@@ -641,6 +753,7 @@
 				4DB6495015C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf in Resources */,
 				4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */,
 				052144AB15C9A0FC00E8B090 /* new context.png in Resources */,
+				4DB3347815D229650056E794 /* ShareKit.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,6 +793,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4DB3347415D229320056E794 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Static Library";
+			targetProxy = 4DB3347315D229320056E794 /* PBXContainerItemProxy */;
+		};
+		4DB3347615D229320056E794 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Resource Bundle";
+			targetProxy = 4DB3347515D229320056E794 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4DB6490715C60D4F00980FCB /* Localizable.strings */ = {
@@ -747,6 +873,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E6E3DCA6-C234-4F2C-A4F9-7BBA8FF3E828";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				USER_HEADER_SEARCH_PATHS = "Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
@@ -808,6 +935,7 @@
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
@@ -825,6 +953,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
+				USER_HEADER_SEARCH_PATHS = "Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};

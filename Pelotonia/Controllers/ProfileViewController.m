@@ -131,21 +131,7 @@
     self.raisedLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.commitLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.supportLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    
-    
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [formatter setLenient:YES];
-    
-    NSNumber *totalRaised = [formatter numberFromString:self.rider.totalRaised];
-    NSNumber *totalCommit = [formatter numberFromString:self.rider.totalCommit];
-
-    float raised = totalRaised.floatValue;
-    float commit = totalCommit.floatValue;
-    if (commit == 0.0) {
-        commit = 1;
-    }
-    self.donationProgress.progress = (raised/commit);
+    self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];

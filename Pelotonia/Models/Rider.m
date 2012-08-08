@@ -28,6 +28,7 @@
 @synthesize route = _route;
 @synthesize totalRaised = _totalRaised;
 @synthesize totalCommit = _totalCommit;
+@synthesize pctRaised = _pctRaised;
 
 @synthesize riderPhotoUrl = _riderPhotoUrl;
 @synthesize riderPhoto = _riderPhoto;
@@ -120,6 +121,24 @@
     else {
         return self.amountRaised;
     }    
+}
+
+- (NSNumber *)pctRaised
+{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [formatter setLenient:YES];
+    
+    NSNumber *totalRaised = [formatter numberFromString:self.totalRaised];
+    NSNumber *totalCommit = [formatter numberFromString:self.totalCommit];
+    
+    float raised = totalRaised.floatValue;
+    float commit = totalCommit.floatValue;
+    if (commit <= 0.0) {
+        commit = 1;
+    }
+    
+    return [NSNumber numberWithFloat:(raised/commit)*100];
 }
 
 #pragma mark -- NSCoding
