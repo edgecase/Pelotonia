@@ -147,18 +147,17 @@
             self.entity = [SZEntity entityWithKey:self.rider.riderId name:self.rider.name];
             self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
             
-            UIButton *fbButton = [[UIButton alloc] initWithFrame:CGRectZero];
-            [fbButton setImage:[UIImage imageNamed:@"f_logo.png"] forState:UIControlStateNormal];
+            UIButton *fbButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            [fbButton setImage:[UIImage imageNamed:@"socialize-authorize-facebook-enabled-icon.png"] forState:UIControlStateNormal];
             [fbButton sizeToFit];
             [fbButton addTarget:self action:@selector(customizeFacebook:) forControlEvents:UIControlEventTouchUpInside];
             
-            self.actionBar.itemsRight = [NSArray arrayWithObjects:fbButton, [SZActionButton commentButton], nil];
             
-            UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectZero];
-            [twitterButton setImage:[UIImage imageNamed:@"twitterbird.png"] forState:UIControlStateNormal];
+            UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            [twitterButton setImage:[UIImage imageNamed:@"socialize-authorize-twitter-enabled-icon.png"] forState:UIControlStateNormal];
             [twitterButton sizeToFit];
             [twitterButton addTarget:self action:@selector(customizeTwitter:) forControlEvents:UIControlEventTouchUpInside];
-            self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], twitterButton, nil];
+            self.actionBar.itemsRight = [NSArray arrayWithObjects:twitterButton, fbButton, nil];
             
             [self.view addSubview:self.actionBar];
         }

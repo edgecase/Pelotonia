@@ -249,10 +249,6 @@
 		4D4A5B7115D20060000174CE /* Socialize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5A9715D20060000174CE /* Socialize.framework */; };
 		4D4A5B7415D2008C000174CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7315D2008C000174CE /* CoreLocation.framework */; };
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
-		4D5EC39615D22069001E328B /* f_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5EC39415D22069001E328B /* f_logo.png */; };
-		4D5EC39715D22069001E328B /* f_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5EC39515D22069001E328B /* f_logo@2x.png */; };
-		4D5EC39A15D2214F001E328B /* twitterbird.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5EC39815D2214F001E328B /* twitterbird.png */; };
-		4D5EC39B15D2214F001E328B /* twitterbird@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5EC39915D2214F001E328B /* twitterbird@2x.png */; };
 		4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */; };
 		4DB6491615C60D4F00980FCB /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490615C60D4F00980FCB /* Appirater.m */; };
 		4DB6491715C60D4F00980FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6490715C60D4F00980FCB /* Localizable.strings */; };
@@ -567,10 +563,6 @@
 		4D4A5A9715D20060000174CE /* Socialize.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Socialize.framework; sourceTree = "<group>"; };
 		4D4A5B7315D2008C000174CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D4A5B7515D2009B000174CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		4D5EC39415D22069001E328B /* f_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f_logo.png; sourceTree = "<group>"; };
-		4D5EC39515D22069001E328B /* f_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "f_logo@2x.png"; sourceTree = "<group>"; };
-		4D5EC39815D2214F001E328B /* twitterbird.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitterbird.png; sourceTree = "<group>"; };
-		4D5EC39915D2214F001E328B /* twitterbird@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterbird@2x.png"; sourceTree = "<group>"; };
 		4DB6490115C60D1A00980FCB /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		4DB6490515C60D4F00980FCB /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -716,10 +708,6 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				4D5EC39815D2214F001E328B /* twitterbird.png */,
-				4D5EC39915D2214F001E328B /* twitterbird@2x.png */,
-				4D5EC39415D22069001E328B /* f_logo.png */,
-				4D5EC39515D22069001E328B /* f_logo@2x.png */,
 				052144AA15C9A0FC00E8B090 /* new context.png */,
 				4DB6493815C60FA300980FCB /* Baksheesh */,
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
@@ -1549,10 +1537,6 @@
 				4D4A5B6E15D20060000174CE /* SocializeRichPushNotificationViewController.xib in Resources */,
 				4D4A5B6F15D20060000174CE /* SocializeTableViewController.xib in Resources */,
 				4D4A5B7015D20060000174CE /* SZBaseShareViewController.xib in Resources */,
-				4D5EC39615D22069001E328B /* f_logo.png in Resources */,
-				4D5EC39715D22069001E328B /* f_logo@2x.png in Resources */,
-				4D5EC39A15D2214F001E328B /* twitterbird.png in Resources */,
-				4D5EC39B15D2214F001E328B /* twitterbird@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
