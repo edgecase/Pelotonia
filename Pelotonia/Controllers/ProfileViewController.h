@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <Socialize/Socialize.h>
 
 #import "Rider.h"
 #import "PullToRefreshView.h"
@@ -20,6 +21,8 @@
     PullToRefreshView *_pull;
 }
 
+@property (nonatomic, retain) SZActionBar *actionBar;
+@property (nonatomic, retain) id<SZEntity> entity;
 @property (weak, nonatomic) IBOutlet UIButton *supportButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) Rider *rider;

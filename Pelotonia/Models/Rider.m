@@ -122,6 +122,29 @@
     }    
 }
 
+- (NSNumber *)pctRaised
+{
+    if (self.totalCommit == 0) {
+        return [NSNumber numberWithFloat:100.0];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [formatter setLenient:YES];
+        
+        NSNumber *totalRaised = [formatter numberFromString:self.totalRaised];
+        NSNumber *totalCommit = [formatter numberFromString:self.totalCommit];
+        
+        float raised = totalRaised.floatValue;
+        float commit = totalCommit.floatValue;
+        if (commit == 0.0) {
+            commit = 1;
+        }
+        return [NSNumber numberWithFloat:(raised/commit)*100];
+    }
+}
+
 #pragma mark -- NSCoding
 
 // NSCoding

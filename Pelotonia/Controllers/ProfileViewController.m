@@ -13,6 +13,7 @@
 #import "Pelotonia-Colors.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "SHKActivityIndicator.h"
+#import <Socialize/Socialize.h>
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -20,6 +21,8 @@
 - (BOOL)validateForm;
 - (void)postAlert:(NSString *)msg;
 - (void)refreshRider;
+- (void)customizeFacebook:(id)sender;
+- (void)customizeTwitter:(id)sender;
 @end
 
 @implementation ProfileViewController
@@ -38,6 +41,8 @@
 @synthesize donorEmailField = _donorEmailField;
 @synthesize following = _following;
 @synthesize donationProgress = _donationProgress;
+@synthesize entity = _entity;
+@synthesize actionBar = _actionBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -132,29 +137,39 @@
     self.commitLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.supportLabel.font = PELOTONIA_SECONDARY_FONT(17);
     
-    
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [formatter setLenient:YES];
-    
-    NSNumber *totalRaised = [formatter numberFromString:self.rider.totalRaised];
-    NSNumber *totalCommit = [formatter numberFromString:self.rider.totalCommit];
-
-    float raised = totalRaised.floatValue;
-    float commit = totalCommit.floatValue;
-    if (commit == 0.0) {
-        commit = 1;
-    }
-    self.donationProgress.progress = (raised/commit);
+    self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
+
+        // configure the action bar
+        if (self.actionBar == nil) {
+            self.entity = [SZEntity entityWithKey:self.rider.riderId name:self.rider.name];
+            self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
+            
+            UIButton *fbButton = [[UIButton alloc] initWithFrame:CGRectZero];
+            [fbButton setImage:[UIImage imageNamed:@"f_logo.png"] forState:UIControlStateNormal];
+            [fbButton sizeToFit];
+            [fbButton addTarget:self action:@selector(customizeFacebook:) forControlEvents:UIControlEventTouchUpInside];
+            
+            self.actionBar.itemsRight = [NSArray arrayWithObjects:fbButton, [SZActionButton commentButton], nil];
+            
+            UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectZero];
+            [twitterButton setImage:[UIImage imageNamed:@"twitterbird.png"] forState:UIControlStateNormal];
+            [twitterButton sizeToFit];
+            [twitterButton addTarget:self action:@selector(customizeTwitter:) forControlEvents:UIControlEventTouchUpInside];
+            self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], twitterButton, nil];
+            
+            [self.view addSubview:self.actionBar];
+        }
+    
     }
     else {
         [self.followButton setTitle:@"Follow"];
     }
 
     [self.supportButton setTintColor:PRIMARY_GREEN];
+    
 }
 
 - (BOOL)validateForm
@@ -259,4 +274,35 @@
     }
     [self configureView];
 }
+
+- (void)customizeFacebook:(id)sender {
+    
+    NSMutableDictionary *postData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                     [NSString stringWithFormat:@"Please help %@ reach their %@ goal for Pelotonia!", self.rider.name, self.rider.totalCommit], @"message",
+                                     [NSString stringWithFormat:@"%@", self.rider.profileUrl], @"link",
+                                     @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.", @"description",
+                                     @"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png", @"picture",
+                                     @"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png", @"icon",
+                                     nil];
+    
+    [SZFacebookUtils postWithGraphPath:@"me/feed" params:postData success:^(id post) {
+        NSLog(@"Posted %@!", post);
+    } failure:^(NSError *error) {
+        NSLog(@"Facebook post failed: %@, %@", [error localizedDescription], [error userInfo]);
+    }];
+}
+
+- (void)customizeTwitter:(id)sender {
+    
+    NSString *text = [NSString stringWithFormat:@"%3.1f%% of goal! Support %@'s Pelotonia Ride:%@",
+                      [self.rider.pctRaised doubleValue] , self.rider.name, self.rider.profileUrl];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:text forKey:@"status"];
+    
+    [SZTwitterUtils postWithPath:@"/1/statuses/update.json" params:params success:^(id result) {
+        NSLog(@"Posted to Twitter feed: %@", result);
+    } failure:^(NSError *error) {
+        NSLog(@"Failed to post to Twitter feed: %@ / %@", [error localizedDescription], [error userInfo]);
+    }];
+}
+
 @end

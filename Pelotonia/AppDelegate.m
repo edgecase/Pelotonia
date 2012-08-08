@@ -10,6 +10,7 @@
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
+#import <Socialize/Socialize.h>
 
 @implementation AppDelegate
 
@@ -25,7 +26,19 @@
     // call the Appirater class
     [Appirater appLaunched:YES];
 
+    
+    // set up socialize
+    // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
+    [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
+    [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
+    [SZFacebookUtils setAppId:@"269799726466566"];
+    [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
+    
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [Socialize handleOpenURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
