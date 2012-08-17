@@ -254,7 +254,7 @@
 }
 
 - (IBAction)shareOnTwitter:(id)sender {
-    SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"Visit %@'s Pelotonia Profile and help stop cancer", self.rider.name]];
+    SHKItem *item = [SHKItem text:[NSString stringWithFormat:@"Pelotonia is a grassroots bike tour with one goal: End Cancer. Visit %@'s Pelotonia Profile and help.", self.rider.name]];
     item.URL = [NSURL URLWithString:self.rider.profileUrl];
 
     [SHKTwitter shareItem:item];

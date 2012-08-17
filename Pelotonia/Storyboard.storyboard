@@ -281,14 +281,12 @@
                                         <rect key="frame" x="0.0" y="373" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <items>
-                                            <barButtonItem title="Facebook" id="hy4-BI-yB4">
-                                                <color key="tintColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
+                                            <barButtonItem image="208-facebook.png" style="plain" id="hy4-BI-yB4">
                                                 <connections>
                                                     <action selector="shareOnFacebook:" destination="NtZ-xl-A08" id="RPb-Dg-VXO"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Twitter" id="4sq-ng-Pxd">
-                                                <color key="tintColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <barButtonItem image="209-twitter.png" style="plain" id="4sq-ng-Pxd">
                                                 <connections>
                                                     <action selector="shareOnTwitter:" destination="NtZ-xl-A08" id="bhb-hE-Nm7"/>
                                                 </connections>
@@ -342,11 +340,54 @@
         </scene>
     </scenes>
     <resources>
+        <image name="208-facebook.png" width="22" height="22"/>
+        <image name="209-twitter.png" width="22" height="22"/>
         <image name="Pelotonia_logo.png" width="530" height="54"/>
         <image name="new context.png" width="511" height="81"/>
         <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
+    <classes>
+        <class className="AboutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="action" name="newContextPressed:"/>
+                <relationship kind="action" name="sandlotPressed:"/>
+                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProfileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="followRider:"/>
+                <relationship kind="action" name="shareOnFacebook:"/>
+                <relationship kind="action" name="shareOnTwitter:"/>
+                <relationship kind="action" name="supportRider:"/>
+                <relationship kind="outlet" name="commitLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="donationField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="donorEmailField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="raisedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="riderImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="routeLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="supportButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="supportLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RidersViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="TPKeyboardAvoidingScrollView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPKeyboardAvoidingScrollView.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
