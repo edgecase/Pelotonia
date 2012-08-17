@@ -13,7 +13,6 @@
 #import "Pelotonia-Colors.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "SHKActivityIndicator.h"
-#import <Socialize/Socialize.h>
 
 @interface ProfileViewController ()
 - (void)configureView;
@@ -21,8 +20,6 @@
 - (BOOL)validateForm;
 - (void)postAlert:(NSString *)msg;
 - (void)refreshRider;
-- (void)customizeFacebook:(id)sender;
-- (void)customizeTwitter:(id)sender;
 @end
 
 @implementation ProfileViewController
@@ -41,8 +38,6 @@
 @synthesize donorEmailField = _donorEmailField;
 @synthesize following = _following;
 @synthesize donationProgress = _donationProgress;
-@synthesize entity = _entity;
-@synthesize actionBar = _actionBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -141,27 +136,6 @@
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
-
-        // configure the action bar
-        if (self.actionBar == nil) {
-            self.entity = [SZEntity entityWithKey:self.rider.riderId name:self.rider.name];
-            self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
-            
-            UIButton *fbButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-            [fbButton setImage:[UIImage imageNamed:@"socialize-authorize-facebook-enabled-icon.png"] forState:UIControlStateNormal];
-            [fbButton sizeToFit];
-            [fbButton addTarget:self action:@selector(customizeFacebook:) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            UIButton *twitterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-            [twitterButton setImage:[UIImage imageNamed:@"socialize-authorize-twitter-enabled-icon.png"] forState:UIControlStateNormal];
-            [twitterButton sizeToFit];
-            [twitterButton addTarget:self action:@selector(customizeTwitter:) forControlEvents:UIControlEventTouchUpInside];
-            self.actionBar.itemsRight = [NSArray arrayWithObjects:twitterButton, fbButton, nil];
-            
-            [self.view addSubview:self.actionBar];
-        }
-    
     }
     else {
         [self.followButton setTitle:@"Follow"];
@@ -274,34 +248,5 @@
     [self configureView];
 }
 
-- (void)customizeFacebook:(id)sender {
-    
-    NSMutableDictionary *postData = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                     [NSString stringWithFormat:@"Please help %@ reach their %@ goal for Pelotonia!", self.rider.name, self.rider.totalCommit], @"message",
-                                     [NSString stringWithFormat:@"%@", self.rider.profileUrl], @"link",
-                                     @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.", @"description",
-                                     @"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png", @"picture",
-                                     @"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png", @"icon",
-                                     nil];
-    
-    [SZFacebookUtils postWithGraphPath:@"me/feed" params:postData success:^(id post) {
-        NSLog(@"Posted %@!", post);
-    } failure:^(NSError *error) {
-        NSLog(@"Facebook post failed: %@, %@", [error localizedDescription], [error userInfo]);
-    }];
-}
-
-- (void)customizeTwitter:(id)sender {
-    
-    NSString *text = [NSString stringWithFormat:@"%3.1f%% of goal! Support %@'s Pelotonia Ride:%@",
-                      [self.rider.pctRaised doubleValue] , self.rider.name, self.rider.profileUrl];
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:text forKey:@"status"];
-    
-    [SZTwitterUtils postWithPath:@"/1/statuses/update.json" params:params success:^(id result) {
-        NSLog(@"Posted to Twitter feed: %@", result);
-    } failure:^(NSError *error) {
-        NSLog(@"Failed to post to Twitter feed: %@ / %@", [error localizedDescription], [error userInfo]);
-    }];
-}
 
 @end
