@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *donorEmailField;
 @property (assign, nonatomic, readonly) BOOL following;
 @property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
+@property (weak, nonatomic) IBOutlet UITextView *storyTextView;
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
 

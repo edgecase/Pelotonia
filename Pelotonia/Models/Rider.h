@@ -17,6 +17,7 @@
     NSString *_profileUrl;
     NSString *_riderType;
     NSString *_route;
+    NSString *_story;
     BOOL highRoller;
     
     NSString *_riderPhotoUrl;
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
 @property (nonatomic, strong) NSString *route;
+@property (nonatomic, strong) NSString *story;
 @property (nonatomic, assign) BOOL highRoller;
 @property (nonatomic, readonly) NSString *totalCommit;
 @property (nonatomic, readonly) NSString *totalRaised;

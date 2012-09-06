@@ -27,6 +27,7 @@
 @synthesize riderType = _riderType;
 @synthesize route = _route;
 @synthesize highRoller = _highRoller;
+@synthesize story = _story;
 @synthesize totalRaised = _totalRaised;
 @synthesize totalCommit = _totalCommit;
 

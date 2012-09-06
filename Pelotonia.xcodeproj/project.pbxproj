@@ -69,6 +69,7 @@
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
 		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
 		4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
+		4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
 		BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7BA15AE49DA00205530 /* CoreGraphics.framework */; };
@@ -182,6 +183,8 @@
 		4DD7F53915B5108300B1DF42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = Controllers/ProfileTableViewController.h; sourceTree = "<group>"; };
+		4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileTableViewController.m; path = Controllers/ProfileTableViewController.m; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -447,6 +450,8 @@
 		BCE3B7CF15AE4DE000205530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */,
+				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
 				BCE3B80B15AE53F900205530 /* ProfileViewController.h */,
@@ -684,6 +689,7 @@
 				4DB6491615C60D4F00980FCB /* Appirater.m in Sources */,
 				4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */,
 				4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */,
+				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

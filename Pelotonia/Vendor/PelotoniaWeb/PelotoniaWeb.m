@@ -103,6 +103,17 @@
         NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
         NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
         
+        // get the rider's story
+        NSString *riderStoryXPath = @"//*[@id='article']/div[3]/div[1]/text()";
+        NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
+        NSLog(@"story size %d", [storyRows count]);
+        rider.story = @"";
+        for (TFHppleElement *element in storyRows) {
+            NSLog(@"content = %@", [element content]);
+            rider.story = [rider.story stringByAppendingString:[element content]];
+        }
+        NSLog(@"story (pw) = %@", rider.story);
+        
         rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
         
         NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";

@@ -37,6 +37,7 @@
 @synthesize donorEmailField = _donorEmailField;
 @synthesize following = _following;
 @synthesize donationProgress = _donationProgress;
+@synthesize storyTextView = _storyTextView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,6 +73,7 @@
     [self setDonationProgress:nil];
     [self setScrollView:nil];
     [self setSupportLabel:nil];
+    [self setStoryTextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -130,6 +132,8 @@
         self.raisedLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
         self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     }
+    NSLog(@"story = %@", self.rider.story);
+    self.storyTextView.text = self.rider.story;
     
     [self.rider getRiderPhotoOnComplete:^(UIImage *image) {
         self.riderImageView.image = image;
@@ -139,6 +143,7 @@
     self.routeLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.raisedLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.supportLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
     
     
     if (self.following) {
