@@ -22,7 +22,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *supportButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) Rider *rider;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *routeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
@@ -34,6 +33,7 @@
 @property (assign, nonatomic, readonly) BOOL following;
 @property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;
+@property (strong, nonatomic) Rider *rider;
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
 

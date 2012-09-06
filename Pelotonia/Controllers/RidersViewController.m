@@ -8,7 +8,7 @@
 #import "AppDelegate.h"
 #import "RidersViewController.h"
 #import "RiderDataController.h"
-#import "ProfileViewController.h"
+#import "ProfileTableViewController.h"
 #import "AboutViewController.h"
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
@@ -134,7 +134,7 @@
     [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
 }
 
-- (void)prepareProfile:(ProfileViewController *)profileViewController
+- (void)prepareProfile:(ProfileTableViewController *)profileTableViewController
 {
     Rider *rider = nil;
     if ([self.searchDisplayController isActive]) {
@@ -143,7 +143,7 @@
     else {
         rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
     }
-    profileViewController.rider = rider;
+    profileTableViewController.rider = rider;
 }
 
 - (void)showAbout:(AboutViewController *)aboutViewController

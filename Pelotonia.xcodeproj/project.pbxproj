@@ -91,7 +91,6 @@
 		BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80015AE51A000205530 /* SystemConfiguration.framework */; };
 		BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80215AE51A800205530 /* MobileCoreServices.framework */; };
 		BCE3B80515AE51BC00205530 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80415AE51BC00205530 /* libz.dylib */; };
-		BCE3B80D15AE53F900205530 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B80C15AE53F900205530 /* ProfileViewController.m */; };
 		BCE3B81615AE573F00205530 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81115AE573F00205530 /* TFHpple.m */; };
 		BCE3B81715AE573F00205530 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81315AE573F00205530 /* TFHppleElement.m */; };
 		BCE3B81815AE573F00205530 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81515AE573F00205530 /* XPathQuery.m */; };
@@ -224,8 +223,6 @@
 		BCE3B80015AE51A000205530 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BCE3B80215AE51A800205530 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BCE3B80415AE51BC00205530 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		BCE3B80B15AE53F900205530 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Controllers/ProfileViewController.h; sourceTree = "<group>"; };
-		BCE3B80C15AE53F900205530 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Controllers/ProfileViewController.m; sourceTree = "<group>"; };
 		BCE3B81015AE573F00205530 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
 		BCE3B81115AE573F00205530 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
 		BCE3B81215AE573F00205530 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
@@ -454,8 +451,6 @@
 				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
-				BCE3B80B15AE53F900205530 /* ProfileViewController.h */,
-				BCE3B80C15AE53F900205530 /* ProfileViewController.m */,
 				4DB6495515C619AC00980FCB /* AboutViewController.h */,
 				4DB6495615C619AC00980FCB /* AboutViewController.m */,
 			);
@@ -677,7 +672,6 @@
 				BCE3B7F815AE516500205530 /* ASIInputStream.m in Sources */,
 				BCE3B7F915AE516500205530 /* ASINetworkQueue.m in Sources */,
 				BCE3B7FD15AE518800205530 /* Reachability.m in Sources */,
-				BCE3B80D15AE53F900205530 /* ProfileViewController.m in Sources */,
 				BCE3B81615AE573F00205530 /* TFHpple.m in Sources */,
 				BCE3B81715AE573F00205530 /* TFHppleElement.m in Sources */,
 				BCE3B81815AE573F00205530 /* XPathQuery.m in Sources */,

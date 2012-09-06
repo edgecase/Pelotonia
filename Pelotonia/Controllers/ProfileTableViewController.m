@@ -7,6 +7,11 @@
 //
 
 #import "ProfileTableViewController.h"
+#import "AppDelegate.h"
+#import "RiderDataController.h"
+#import "SHKActivityIndicator.h"
+#import "Pelotonia-Colors.h"
+
 
 @interface ProfileTableViewController ()
 
@@ -15,6 +20,12 @@
 @implementation ProfileTableViewController
 @synthesize pledgeAmountTextField;
 @synthesize donorEmailTextField;
+@synthesize donationProgress;
+@synthesize storyTextView;
+@synthesize followButton;
+@synthesize nameAndRouteCell;
+@synthesize raisedAmountCell;
+@synthesize supportRiderButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,12 +45,20 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self refreshRider];
 }
 
 - (void)viewDidUnload
 {
     [self setPledgeAmountTextField:nil];
     [self setDonorEmailTextField:nil];
+    [self setDonationProgress:nil];
+    [self setStoryTextView:nil];
+    [self setFollowButton:nil];
+    [self setNameAndRouteCell:nil];
+    [self setRaisedAmountCell:nil];
+    [self setSupportRiderButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -66,5 +85,188 @@
         }
     }
 }
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 18)];
+    label.textColor = PRIMARY_GREEN;
+    label.font = PELOTONIA_FONT(21);
+    label.backgroundColor = [UIColor clearColor];
+    if (section == 1)
+    {
+        label.text = [NSString stringWithFormat:@"Support %@", self.rider.name];
+    }
+    else if (section == 2)
+    {
+        label.text = @"My Story";
+    }
+    [headerView addSubview:label];
+    return headerView;
+}
+
+#pragma mark -- view configuration
+
+- (void)refreshRider
+{
+    [[SHKActivityIndicator currentIndicator] displayActivity:@"Refreshing..."];
+    // start an asynchronous web request to update the rider information
+    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
+        self.rider = updatedRider;
+        [self configureView];
+        [[SHKActivityIndicator currentIndicator] hide];
+    } onFailure:^(NSString *error) {
+        NSLog(@"Unable to get profile for rider. Error: %@", error);
+        [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
+    }];
+}
+
+
+- (BOOL)following
+{
+    // return true if current rider is in the dataController
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    RiderDataController *dataController = appDelegate.riderDataController;
+    
+    return [dataController containsRider:self.rider];
+}
+
+
+- (void)configureView
+{
+    // set the name & ID appropriately
+    self.nameAndRouteCell.textLabel.text = self.rider.name;
+    if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
+        [self.rider.riderType isEqualToString:@"Volunteer"] ||
+        [self.rider.riderType isEqualToString:@"Peloton"]) {
+        self.nameAndRouteCell.detailTextLabel.text = self.rider.riderType;
+        self.raisedAmountCell.detailTextLabel.text = self.rider.totalRaised;
+        self.donationProgress.hidden = YES;
+    }
+    else
+    {
+        // Riders and Pelotons are the only ones who get progress
+        self.nameAndRouteCell.detailTextLabel.text = self.rider.route;
+        self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
+        self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
+    }
+    NSLog(@"story = %@", self.rider.story);
+    self.storyTextView.text = self.rider.story;
+    
+    self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);
+    self.nameAndRouteCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.raisedAmountCell.textLabel.font = PELOTONIA_FONT(21);
+    self.raisedAmountCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
+    
+    if (self.following) {
+        [self.followButton setTitle:@"Unfollow"];
+    }
+    else {
+        [self.followButton setTitle:@"Follow"];
+    }
+    
+    
+    [self.rider getRiderPhotoOnComplete:^(UIImage *image) {
+        self.nameAndRouteCell.imageView.image = image;
+    }];
+
+}
+
+- (BOOL)validateForm
+{
+    return (([self.donorEmailTextField.text length] > 0)
+            && ([self.pledgeAmountTextField.text length] > 0));
+}
+
+- (void)postAlert:(NSString *)msg {
+    // alert that they need to authorize first
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for your Pledge"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)sendPledgeMail
+{
+    NSLog(@"Email sent to: %@", self.donorEmailTextField.text);
+    NSLog(@"You have decided to sponsor %@ the amount %@", self.rider.name, self.donorEmailTextField.text);
+    
+    MFMailComposeViewController *mailComposer;
+    mailComposer  = [[MFMailComposeViewController alloc] init];
+    mailComposer.mailComposeDelegate = self;
+    [mailComposer setToRecipients:[NSArray arrayWithObject:self.donorEmailTextField.text]];
+    [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
+    [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
+    
+    NSString *amountFormat;
+    if ([self.pledgeAmountTextField.text length] > 0) {
+        amountFormat = @"$%@";
+    }
+    else {
+        amountFormat = @"%@";
+    }
+    NSString *amount = [NSString stringWithFormat:amountFormat, self.pledgeAmountTextField.text];
+    
+    NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Hello %@,<br/><br/> \
+                     You have pledged to donate %@ to %@'s Pelotonia fund.  Please use \
+                     the following link to complete your pledge: <a href=\"%@\">Rider Profile</a>. <br/><br/> \
+                     Thanks! <br/><br/>\
+                     %@ and Pelotonia 12</BODY></HTML>", self.donorEmailTextField.text, amount, self.rider.name, self.rider.donateUrl, self.rider.name];
+    
+    NSLog(@"msgBody: %@", msg);
+    [mailComposer setMessageBody:msg isHTML:YES];
+    [self presentModalViewController:mailComposer animated:YES];
+    
+}
+
+
+
+#pragma mark -- text field delegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)tf
+{
+    [tf resignFirstResponder];
+    if (tf == self.donorEmailTextField) {
+        [self sendPledgeMail];
+    }
+    return YES;
+}
+
+
+#pragma mark - MFMailComposeViewDelegate methods
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    if(error) {
+        NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+- (IBAction)supportRider:(id)sender {
+    if ([self validateForm]) {
+        [self sendPledgeMail];
+    }
+}
+
+- (IBAction)followRider:(id)sender {
+    // add the current rider to the main list of riders
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    RiderDataController *dataController = appDelegate.riderDataController;
+    
+    if (!self.following) {
+        [dataController addObject:self.rider];
+    }
+    else {
+        [dataController removeObject:self.rider];
+    }
+    [self configureView];
+}
+
+
 
 @end
