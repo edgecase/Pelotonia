@@ -93,6 +93,8 @@
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = SECONDARY_GREEN;
+    
     if (section == 1)
     {
         label.text = [NSString stringWithFormat:@"Support %@", self.rider.name];
