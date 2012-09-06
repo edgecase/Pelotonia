@@ -26,6 +26,7 @@
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
 @synthesize route = _route;
+@synthesize highRoller = _highRoller;
 @synthesize totalRaised = _totalRaised;
 @synthesize totalCommit = _totalCommit;
 
@@ -79,35 +80,40 @@
 - (NSString *)totalCommit 
 {
     NSString *value = @"0";
-    
-    if ([self.pelotonGrandTotal length] > 0) {
-        value = @"0";
+
+    if (self.highRoller == YES) {
+        value = @"4000";
     }
-    
-    if ([self.riderType isEqualToString:@"Rider"]) {
-        if ([self.route length] == 0) {
+    else
+    {
+        if ([self.riderType isEqualToString:@"Rider"]) {
+            if ([self.route length] == 0) {
+                value = @"0";
+            }
+            if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
+                value = @"2,200";
+            }
+            if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
+                value = @"2,200";
+            }
+            if ([self.route isEqualToString:@"Columbus to Gambier"]) {
+                value = @"1,800";
+            }
+            if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
+                value = @"1,800";
+            }
+            if ([self.route isEqualToString:@"Columbus to New Albany"]) {
+                value = @"1,250";
+            }
+            if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
+                value = @"1,200";
+            }
+        }
+        else
+        {
             value = @"0";
         }
-        if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
-            value = @"2,200";
-        }
-        if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
-            value = @"2,200";
-        }
-        if ([self.route isEqualToString:@"Columbus to Gambier"]) {
-            value = @"1,800";
-        }
-        if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
-            value = @"1,800";
-        }
-        if ([self.route isEqualToString:@"Columbus to New Albany"]) {
-            value = @"1,250";
-        }
-        if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
-            value = @"1,200";
-        }
     }
-    
     return [NSString stringWithFormat:@"$%@.00", value];
 }
 
@@ -143,6 +149,17 @@
         }
         return [NSNumber numberWithFloat:(raised/commit)*100];
     }
+}
+
+- (NSString *)route
+{
+    NSString *routeString = _route;
+    
+    if (![self.riderType isEqualToString:@"Rider"]) {
+        routeString = self.riderType;
+    }
+    
+    return routeString;
 }
 
 #pragma mark -- NSCoding
