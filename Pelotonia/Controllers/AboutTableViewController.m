@@ -16,6 +16,7 @@
 @implementation AboutTableViewController
 @synthesize versionLabel;
 @synthesize storyLabel;
+@synthesize doneButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,12 +37,14 @@
     
     self.versionLabel.font = PELOTONIA_FONT(17);
     self.storyLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    
 }
 
 - (void)viewDidUnload
 {
     [self setVersionLabel:nil];
     [self setStoryLabel:nil];
+    [self setDoneButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

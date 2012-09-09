@@ -9,7 +9,7 @@
 #import "RidersViewController.h"
 #import "RiderDataController.h"
 #import "ProfileTableViewController.h"
-#import "AboutViewController.h"
+#import "AboutTableViewController.h"
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
@@ -63,16 +63,16 @@
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
     
     // set the text in the navbar to use the Baksheesh font
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
-    titleLabel.textColor = PRIMARY_GREEN;
-    titleLabel.font = PELOTONIA_FONT(24);
-    titleLabel.text = [NSString stringWithFormat:@"%@", @"Pelotonia 2012"];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textAlignment = UITextAlignmentCenter; 
-    [titleLabel setShadowColor: PRIMARY_DARK_GRAY];
-    [titleLabel setShadowOffset:CGSizeMake(0, -0.5)];
-    
-    self.navigationItem.titleView = titleLabel;
+//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+//    titleLabel.textColor = PRIMARY_GREEN;
+//    titleLabel.font = PELOTONIA_FONT(24);
+//    titleLabel.text = [NSString stringWithFormat:@"%@", @"Pelotonia 2012"];
+//    titleLabel.backgroundColor = [UIColor clearColor];
+//    titleLabel.textAlignment = UITextAlignmentCenter; 
+//    [titleLabel setShadowColor: PRIMARY_DARK_GRAY];
+//    [titleLabel setShadowOffset:CGSizeMake(0, -0.5)];
+//    
+//    self.navigationItem.titleView = titleLabel;
     
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
@@ -146,7 +146,7 @@
     profileTableViewController.rider = rider;
 }
 
-- (void)showAbout:(AboutViewController *)aboutViewController
+- (void)showAbout:(AboutTableViewController *)aboutViewController
 {
     // do nothing
 }

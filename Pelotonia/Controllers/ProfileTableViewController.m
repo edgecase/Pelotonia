@@ -133,7 +133,6 @@
     return [dataController containsRider:self.rider];
 }
 
-
 - (void)configureView
 {
     // set the name & ID appropriately
