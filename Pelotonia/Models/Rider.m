@@ -3,7 +3,7 @@
 //  Pelotonia
 //
 //  Created by Adam McCrea on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
 #import "Rider.h"
@@ -209,6 +209,44 @@
     return self;
 }
 
+- (UIImage *)riderPhoto
+{
+    if (_riderPhoto == nil) {
+        // look in the cache
+        _riderPhoto = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
+        
+        // use default image for now
+        if (_riderPhoto == nil) {
+            _riderPhoto = [UIImage imageNamed:@"profile_default.jpg"];
+
+            // get the photo from the web
+            [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
+                _riderPhoto = image;
+            }];
+        }
+        
+    }
+    return _riderPhoto;
+}
+
+- (UIImage *)riderPhotoThumb
+{
+    if (_riderPhotoThumb == nil) {
+        // first look in cache
+        _riderPhotoThumb = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
+        
+        if (_riderPhotoThumb == nil) {
+            // use default thumb
+            _riderPhotoThumb = [UIImage imageNamed:@"profile_default_thumb.jpg"];
+            
+            // get the photo from the web
+            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
+                _riderPhotoThumb = image;
+            }];
+        }
+    }
+    return _riderPhotoThumb;
+}
 
 - (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
 {

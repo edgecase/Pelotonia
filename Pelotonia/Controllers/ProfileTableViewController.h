@@ -37,4 +37,8 @@
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
 
+- (void)refreshRider;
+- (void)manualRefresh:(NSNotification *)notification;
+
+
 @end

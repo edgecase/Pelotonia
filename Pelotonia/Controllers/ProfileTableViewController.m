@@ -174,10 +174,7 @@
         [self.followButton setTitle:@"Follow"];
     }
     
-    
-    [self.rider getRiderPhotoOnComplete:^(UIImage *image) {
-        self.nameAndRouteCell.imageView.image = image;
-    }];
+    self.nameAndRouteCell.imageView.image = self.rider.riderPhoto;
 
 }
 
@@ -274,9 +271,14 @@
 #pragma mark -- PullToRefreshDelegate
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
 {
-    [self refreshRider];
+    [self performSelectorInBackground:@selector(refreshRider) withObject:nil];
 }
 
-
+-(void)manualRefresh:(NSNotification *)notification
+{
+    self.tableView.contentOffset = CGPointMake(0, -65);
+    [pull setState:PullToRefreshViewStateLoading];
+    [self performSelectorInBackground:@selector(refreshRider) withObject:nil];
+}
 
 @end

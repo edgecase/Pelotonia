@@ -3,7 +3,7 @@
 //  Pelotonia
 //
 //  Created by Adam McCrea on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 #import "AppDelegate.h"
 #import "RidersViewController.h"
@@ -115,11 +115,13 @@
     Rider *rider = nil;
     if ([self.searchDisplayController isActive]) {
         rider = [self.riderSearchResults objectAtIndex:[self.searchDisplayController.searchResultsTableView indexPathForSelectedRow].row];
+        profileTableViewController.rider = rider;
+        [profileTableViewController manualRefresh:nil];
     }
     else {
         rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        profileTableViewController.rider = rider;
     }
-    profileTableViewController.rider = rider;
 }
 
 - (void)showAbout:(AboutTableViewController *)aboutViewController
@@ -135,9 +137,7 @@
     for (NSIndexPath *indexPath in visiblePaths) {
         UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
         Rider *rider = [self.dataController objectAtIndex:indexPath.row];
-        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
-            cell.imageView.image = image;
-        }];
+        cell.imageView.image = rider.riderPhotoThumb;
     }
 }
 
@@ -175,9 +175,7 @@
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
-            cell.imageView.image = image;
-        }];
+        cell.imageView.image = rider.riderPhotoThumb;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -191,9 +189,7 @@
             amount = rider.amountRaised;
         }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
-        [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
-            cell.imageView.image = image;
-        }];
+        cell.imageView.image = rider.riderPhotoThumb;
     }
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   
@@ -325,13 +321,11 @@
 {
     NSLog(@"Pelotonia: searchBarSearchButtonClicked %@", searchBar);
     [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-//    [self.searchDisplayController.searchResultsTableView reloadData];
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView 
 {
     [self reloadTableData];
-//    [self.tableView reloadData];
 }
 
 
