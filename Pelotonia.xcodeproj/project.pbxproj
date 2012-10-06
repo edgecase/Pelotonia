@@ -11,6 +11,7 @@
 		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
 		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
+		4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3CBA2915BE7F97006CB6C3 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */; };
 		4D3CBA2A15BE7FFE006CB6C3 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */; };
@@ -31,6 +32,8 @@
 		4D465A2915C2382F00C7C506 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2815C2382F00C7C506 /* Default@2x.png */; };
 		4D4A5B7415D2008C000174CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7315D2008C000174CE /* CoreLocation.framework */; };
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
+		4D57C4E716171D1300ED7660 /* one-goal-wallpaper-586h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */; };
+		4D57C4EA16171D3200ED7660 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E916171D3200ED7660 /* Default-568h@2x.png */; };
 		4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */; };
 		4DB6491615C60D4F00980FCB /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6490615C60D4F00980FCB /* Appirater.m */; };
 		4DB6491715C60D4F00980FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6490715C60D4F00980FCB /* Localizable.strings */; };
@@ -63,7 +66,6 @@
 		4DB6494F15C6100400980FCB /* Baksheesh-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6494315C6100400980FCB /* Baksheesh-ThinItalic.ttf */; };
 		4DB6495015C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6494415C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf */; };
 		4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495315C6146400980FCB /* SHKActivityIndicator.m */; };
-		4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6495615C619AC00980FCB /* AboutViewController.m */; };
 		4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6495815C61B5600980FCB /* sandlot-logo.png */; };
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
@@ -104,6 +106,8 @@
 		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
 		0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default_thumb.jpg; sourceTree = "<group>"; };
 		0531B94115B3206D0015A003 /* profile_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default.jpg; sourceTree = "<group>"; };
+		4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutTableViewController.h; path = Controllers/AboutTableViewController.h; sourceTree = "<group>"; };
+		4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutTableViewController.m; path = Controllers/AboutTableViewController.m; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
 		4D3CBA2615BE7F50006CB6C3 /* ImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageCache.h; path = Models/ImageCache.h; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 		4D465A2815C2382F00C7C506 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4D4A5B7315D2008C000174CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D4A5B7515D2009B000174CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "one-goal-wallpaper-586h@2x.png"; sourceTree = "<group>"; };
+		4D57C4E916171D3200ED7660 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4DB6490115C60D1A00980FCB /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		4DB6490215C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		4DB6490515C60D4F00980FCB /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
@@ -174,8 +180,6 @@
 		4DB6494415C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baksheesh-ThinItalicExpert.ttf"; sourceTree = "<group>"; };
 		4DB6495215C6146400980FCB /* SHKActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHKActivityIndicator.h; sourceTree = "<group>"; };
 		4DB6495315C6146400980FCB /* SHKActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHKActivityIndicator.m; sourceTree = "<group>"; };
-		4DB6495515C619AC00980FCB /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = Controllers/AboutViewController.h; sourceTree = "<group>"; };
-		4DB6495615C619AC00980FCB /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = Controllers/AboutViewController.m; sourceTree = "<group>"; };
 		4DB6495815C61B5600980FCB /* sandlot-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandlot-logo.png"; sourceTree = "<group>"; };
 		4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.1_LOGOTYPE_RGB_GRN.png; path = ../Resources/1.1_LOGOTYPE_RGB_GRN.png; sourceTree = "<group>"; };
 		4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Colors.h"; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
 				4D465A2215C2381300C7C506 /* one-goal-wallpaper.png */,
 				4DB6495815C61B5600980FCB /* sandlot-logo.png */,
+				4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */,
 				4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */,
 				4D465A1E15C233FE00C7C506 /* pelotonia-icon.png */,
 				4D465A1F15C233FE00C7C506 /* pelotonia-icon@2x.png */,
@@ -380,6 +385,7 @@
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
+				4D57C4E916171D3200ED7660 /* Default-568h@2x.png */,
 				4D465A2815C2382F00C7C506 /* Default@2x.png */,
 				4D465A2615C2382600C7C506 /* Default.png */,
 				BCE3B7BC15AE49DA00205530 /* Pelotonia */,
@@ -451,8 +457,8 @@
 				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
-				4DB6495515C619AC00980FCB /* AboutViewController.h */,
-				4DB6495615C619AC00980FCB /* AboutViewController.m */,
+				4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */,
+				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -649,6 +655,8 @@
 				4DB6495015C6100400980FCB /* Baksheesh-ThinItalicExpert.ttf in Resources */,
 				4DB6495915C61B5600980FCB /* sandlot-logo.png in Resources */,
 				052144AB15C9A0FC00E8B090 /* new context.png in Resources */,
+				4D57C4E716171D1300ED7660 /* one-goal-wallpaper-586h@2x.png in Resources */,
+				4D57C4EA16171D3200ED7660 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,8 +690,8 @@
 				4DB6490315C60D1A00980FCB /* TPKeyboardAvoidingScrollView.m in Sources */,
 				4DB6491615C60D4F00980FCB /* Appirater.m in Sources */,
 				4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */,
-				4DB6495715C619AC00980FCB /* AboutViewController.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
+				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,7 +756,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Susan Pattison";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
@@ -819,7 +827,7 @@
 		BCE3B7CB15AE49DA00205530 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
@@ -842,7 +850,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Susan Pattison";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Susan Pattison";
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",

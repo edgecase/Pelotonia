@@ -197,7 +197,7 @@
     Rider *rider = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",rider.riderType, rider.totalRaised];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
         cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
         [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
             cell.imageView.image = image;
@@ -214,7 +214,7 @@
         else {
             amount = rider.amountRaised;
         }
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", rider.route, amount];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
         [rider getRiderPhotoThumbOnComplete:^(UIImage *image) {
             cell.imageView.image = image;
         }];

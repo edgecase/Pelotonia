@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZpJ-uT-0fb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ZpJ-uT-0fb">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--Riders View Controller - Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="juW-zQ-p1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -73,6 +72,7 @@
                         <outlet property="searchDisplayController" destination="98K-l2-sFA" id="6VD-Ej-iUr"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="juW-zQ-p1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="98K-l2-sFA">
                     <connections>
                         <outlet property="delegate" destination="puZ-qr-IB2" id="4T3-Mx-N7F"/>
@@ -88,7 +88,6 @@
         <!--About Table View Controller - About-->
         <scene sceneID="IN3-sS-WWU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="About" modalTransitionStyle="flipHorizontal" id="KrS-bT-Crh" customClass="AboutTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="SEf-tL-Ilh">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -237,13 +236,13 @@
                         <outlet property="versionLabel" destination="E81-3A-9gN" id="LRh-mw-ecC"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1592" y="-326"/>
         </scene>
         <!--Profile Table View Controller - Profile-->
         <scene sceneID="sul-NI-wcg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="sKZ-lE-nf9" customClass="ProfileTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fKg-kB-rNU">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -443,13 +442,13 @@
                         <outlet property="supportRiderButton" destination="Jq1-HB-VuN" id="KkY-Tr-r4s"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1434" y="847"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0LU-A0-9lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController title="Pelotonia" definesPresentationContext="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1Sn-hP-BGB">
                         <autoresizingMask key="autoresizingMask"/>
@@ -458,6 +457,7 @@
                         <segue destination="puZ-qr-IB2" kind="relationship" relationship="rootViewController" id="NB3-16-6CG"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0LU-A0-9lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="270" y="254"/>
         </scene>

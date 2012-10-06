@@ -17,7 +17,9 @@
 
 @end
 
-@implementation ProfileTableViewController
+@implementation ProfileTableViewController {
+    PullToRefreshView *pull;
+}
 @synthesize pledgeAmountTextField;
 @synthesize donorEmailTextField;
 @synthesize donationProgress;
@@ -46,7 +48,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self refreshRider];
+    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [pull setDelegate:self];
+    [self.tableView addSubview:pull];
 }
 
 - (void)viewDidUnload
@@ -62,6 +66,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self configureView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -111,15 +120,15 @@
 
 - (void)refreshRider
 {
-    [[SHKActivityIndicator currentIndicator] displayActivity:@"Refreshing..."];
     // start an asynchronous web request to update the rider information
     [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
         self.rider = updatedRider;
         [self configureView];
-        [[SHKActivityIndicator currentIndicator] hide];
+        [pull finishedLoading];
     } onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
         [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
+        [pull finishedLoading];
     }];
 }
 
@@ -262,6 +271,12 @@
         [dataController removeObject:self.rider];
     }
     [self configureView];
+}
+
+#pragma mark -- PullToRefreshDelegate
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self refreshRider];
 }
 
 
