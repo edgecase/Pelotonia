@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PullToRefreshView.h"
 #import "PelotoniaWeb.h"
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, PullToRefreshViewDelegate> {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate> {
     RiderDataController *_dataController;
     NSMutableArray *_riderSearchResults;
-    PullToRefreshView *_pull;
 }
 
 @property (strong, nonatomic) RiderDataController *dataController;

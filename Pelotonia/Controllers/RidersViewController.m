@@ -13,7 +13,6 @@
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
-#import "PullToRefreshView.h"
 
 
 @interface RidersViewController ()
@@ -61,19 +60,6 @@
     
     // set the colors appropriately
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
-    
-    // set the text in the navbar to use the Baksheesh font
-//    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
-//    titleLabel.textColor = PRIMARY_GREEN;
-//    titleLabel.font = PELOTONIA_FONT(24);
-//    titleLabel.text = [NSString stringWithFormat:@"%@", @"Pelotonia 2012"];
-//    titleLabel.backgroundColor = [UIColor clearColor];
-//    titleLabel.textAlignment = UITextAlignmentCenter; 
-//    [titleLabel setShadowColor: PRIMARY_DARK_GRAY];
-//    [titleLabel setShadowOffset:CGSizeMake(0, -0.5)];
-//    
-//    self.navigationItem.titleView = titleLabel;
-    
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
     
@@ -88,11 +74,6 @@
     NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
 
-    // pull to refresh view
-    _pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
-    [_pull setDelegate:self];
-    [self.tableView addSubview:_pull];
-    
 }
 
 - (void)viewDidUnload
@@ -106,6 +87,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self reloadTableData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -120,12 +102,6 @@
     [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
-}
-
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    [self reloadTableData];
-    [_pull finishedLoading];
 }
 
 #pragma mark - Segue
@@ -299,7 +275,7 @@
      Update the filtered array based on the search text and scope.
      */    
     [self.riderSearchResults removeAllObjects];
-    
+
     /*
      search the web for all riders matching the searchText
      */
@@ -327,18 +303,22 @@
 
 #pragma mark -
 #pragma mark UISearchDisplayController Delegate Methods
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
+{
+    tableView.backgroundColor = self.tableView.backgroundColor;
+}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     // Return YES to cause the search result table view to be reloaded.
-    return NO;
+    return YES;
 }
 
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     // Return YES to cause the search result table view to be reloaded.
-    return NO;
+    return YES;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
@@ -350,7 +330,8 @@
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView 
 {
-    [self.tableView reloadData];
+    [self reloadTableData];
+//    [self.tableView reloadData];
 }
 
 

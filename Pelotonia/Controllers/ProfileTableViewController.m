@@ -17,9 +17,7 @@
 
 @end
 
-@implementation ProfileTableViewController {
-    PullToRefreshView *pull;
-}
+@implementation ProfileTableViewController 
 @synthesize pledgeAmountTextField;
 @synthesize donorEmailTextField;
 @synthesize donationProgress;

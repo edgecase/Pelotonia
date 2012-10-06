@@ -182,6 +182,8 @@
     [aCoder encodeObject:_pelotonTotalOfAllMembers forKey:@"pelotonTotalOfAllMembers"];
     [aCoder encodeObject:_pelotonGrandTotal forKey:@"pelotonGrandTotal"];
     [aCoder encodeObject:_pelotonCaptain forKey:@"pelotonCaptain"];
+    [aCoder encodeObject:_story forKey:@"story"];
+    [aCoder encodeBool:highRoller forKey:@"highRoller"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -201,6 +203,8 @@
         _pelotonTotalOfAllMembers = [aDecoder decodeObjectForKey:@"pelotonTotalOfAllMembers"];
         _pelotonGrandTotal = [aDecoder decodeObjectForKey:@"pelotonGrandTotal"];
         _pelotonCaptain = [aDecoder decodeObjectForKey:@"pelotonCaptain"];
+        _story = [aDecoder decodeObjectForKey:@"story"];
+        highRoller = [aDecoder decodeBoolForKey:@"highRoller"];
     }
     return self;
 }

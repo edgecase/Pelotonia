@@ -16,6 +16,7 @@
 #import "PullToRefreshView.h"
 
 @interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate> {
+    PullToRefreshView *pull;
     BOOL _following;
 }
 
