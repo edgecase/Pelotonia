@@ -18,6 +18,7 @@
 @end
 
 @implementation Rider
+@synthesize delegate = _delegate;
 @synthesize name = _name;
 @synthesize riderId = _riderId;
 @synthesize riderPhotoThumbUrl = _riderPhotoThumbUrl;
@@ -64,9 +65,9 @@
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *image = [UIImage imageWithData:[request responseData]];
-            if (image != nil) {
-                [[ImageCache sharedStore] setImage:image forKey:url];
-            }
+//            if (image != nil) {
+//                [[ImageCache sharedStore] setImage:image forKey:url];
+//            }
             
             if (complete) {
                 complete(image);
@@ -217,12 +218,12 @@
         
         // use default image for now
         if (_riderPhoto == nil) {
-            _riderPhoto = [UIImage imageNamed:@"profile_default.jpg"];
 
             // get the photo from the web
             [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
-                _riderPhoto = image;
+                self.riderPhoto = image;
             }];
+            return [UIImage imageNamed:@"profile_default.jpg"];
         }
         
     }
@@ -236,67 +237,33 @@
         _riderPhotoThumb = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
         
         if (_riderPhotoThumb == nil) {
-            // use default thumb
-            _riderPhotoThumb = [UIImage imageNamed:@"profile_default_thumb.jpg"];
-            
             // get the photo from the web
             [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
-                _riderPhotoThumb = image;
+                self.riderPhotoThumb = image;
             }];
+            
+            // use default thumb
+            return [UIImage imageNamed:@"profile_default_thumb.jpg"];
         }
     }
     return _riderPhotoThumb;
 }
 
-- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
+- (void)setRiderPhoto:(UIImage *)riderPhoto
 {
-    UIImage *photo = nil;
-    if (self.riderPhotoUrl) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
-        if (nil == photo) {
-            // return default photo now
-            NSLog(@"riderPhoto: unable to find photo %@ in the cache", self.riderPhotoUrl);
-            photo = [UIImage imageNamed:@"profile_default.jpg"];
-            
-            // put the image into the cache for later
-            [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
-                _riderPhoto = image;
-                if (complete) {
-                    complete(image);
-                }
-            }];
-        }
-        
-        if (complete) {
-            complete(photo);
-        }
+    _riderPhoto = riderPhoto;
+    if (self.riderPhotoUrl && riderPhoto) {
+        [[ImageCache sharedStore] setImage:riderPhoto forKey:self.riderPhotoUrl];
+        [self.delegate riderPhotoDidUpdate:riderPhoto];
     }
 }
 
-
-- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete
+- (void)setRiderPhotoThumb:(UIImage *)riderPhotoThumb
 {
-    UIImage *photo = nil;
-    
-    if (self.riderPhotoThumbUrl != nil) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
-        if (nil == photo) {
-            // return the default for now, but get the real photo for later
-            NSLog(@"riderPhotoThumb: unable to find photo %@ in the cache", self.riderPhotoThumbUrl);
-            photo = [UIImage imageNamed:@"profile_default_thumb.jpg"];
-            
-            // go to the web to get the real photo
-            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
-                _riderPhotoThumb = image;
-                if (complete) {
-                    complete(image);
-                }
-            }];
-        }
-        
-        if (complete) {
-            complete(photo);
-        }
+    _riderPhotoThumb = riderPhotoThumb;
+    if (self.riderPhotoThumbUrl && riderPhotoThumb) {
+        [[ImageCache sharedStore] setImage:riderPhotoThumb forKey:self.riderPhotoThumbUrl];
+        [self.delegate riderPhotoThumbDidUpdate:riderPhotoThumb];
     }
 }
 

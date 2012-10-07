@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol PhotoUpdateDelegate;
 
 @interface Rider : NSObject <NSCoding> {
     NSString *_name;
@@ -29,6 +30,8 @@
     NSString *_pelotonGrandTotal;
     NSString *_pelotonCaptain;
 }
+
+@property (retain, nonatomic) id <PhotoUpdateDelegate> delegate;
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *riderId;
@@ -60,9 +63,12 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
-- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete;
-- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
-
 @end
+
+@protocol PhotoUpdateDelegate <NSObject>
+- (void)riderPhotoDidUpdate:(UIImage *)image;
+- (void)riderPhotoThumbDidUpdate:(UIImage *)image;
+@end
+
 
 

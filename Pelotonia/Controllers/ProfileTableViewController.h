@@ -15,7 +15,7 @@
 #import "PelotoniaWeb.h"
 #import "PullToRefreshView.h"
 
-@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate> {
+@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, PhotoUpdateDelegate> {
     PullToRefreshView *pull;
     BOOL _following;
 }

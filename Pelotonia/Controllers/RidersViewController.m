@@ -18,7 +18,7 @@
 
 @interface RidersViewController ()
 
-- (void)loadImagesForOnScreenRows;
+//- (void)loadImagesForOnScreenRows;
 - (void)reloadTableData;
 
 @end
@@ -53,12 +53,6 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
     // set the colors appropriately
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
@@ -71,10 +65,6 @@
     UIImage *image = [UIImage imageNamed: @"Pelotonia_logo_22x216.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     self.navigationItem.titleView = imageView;
-    
-    NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
-
 }
 
 - (void)viewDidUnload
@@ -131,17 +121,6 @@
 }
 
 
-#pragma mark - Image handling
-- (void)loadImagesForOnScreenRows
-{
-    NSArray *visiblePaths = [self.riderTableView indexPathsForVisibleRows];
-    for (NSIndexPath *indexPath in visiblePaths) {
-        UITableViewCell *cell = [self.riderTableView cellForRowAtIndexPath:indexPath];
-        Rider *rider = [self.dataController objectAtIndex:indexPath.row];
-        cell.imageView.image = rider.riderPhotoThumb;
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -183,7 +162,7 @@
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-    cell.imageView.image = [rider.riderPhotoThumb thumbnailImage:cell.bounds.size.height transparentBorder:1 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+    cell.imageView.image = rider.riderPhotoThumb;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     cell.textLabel.font = PELOTONIA_FONT(21);
@@ -323,5 +302,21 @@
     [self reloadTableData];
 }
 
+
+#pragma mark -- RiderPhotoUpdate delegates
+- (void)riderPhotoThumbDidUpdate:(UIImage *)image
+{
+    if ([self.searchDisplayController isActive]) {
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+    else {
+        [self reloadTableData];
+    }
+}
+
+- (void)riderPhotoDidUpdate:(UIImage *)image
+{
+    // do nothing
+}
 
 @end

@@ -11,6 +11,7 @@
 #import "RiderDataController.h"
 #import "SHKActivityIndicator.h"
 #import "Pelotonia-Colors.h"
+#import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
 
 
@@ -77,6 +78,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)setRider:(Rider *)rider
+{
+    _rider = rider;
+    rider.delegate = self;
+}
 
 #pragma mark - Table view delegate
 
@@ -122,6 +128,7 @@
     // start an asynchronous web request to update the rider information
     [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
         self.rider = updatedRider;
+        self.rider.delegate = self;
         [self configureView];
         [pull finishedLoading];
     } onFailure:^(NSString *error) {
@@ -175,10 +182,15 @@
         [self.followButton setTitle:@"Follow"];
     }
     
+    // this masks the photo to the tableviewcell
     self.nameAndRouteCell.imageView.layer.masksToBounds = YES;
     self.nameAndRouteCell.imageView.layer.cornerRadius = 5.0;
-    self.nameAndRouteCell.imageView.image = self.rider.riderPhoto;
-
+    
+    // now we resize the photo and the cell so that the photo looks right
+    self.nameAndRouteCell.imageView.image = [self.rider.riderPhoto resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(110, self.nameAndRouteCell.bounds.size.height) interpolationQuality:kCGInterpolationDefault];
+    
+    // re-layout subviews so that the image auto-adjusts
+    [self.nameAndRouteCell layoutSubviews];
 }
 
 - (BOOL)validateForm
@@ -283,5 +295,17 @@
     [pull setState:PullToRefreshViewStateLoading];
     [self performSelectorInBackground:@selector(refreshRider) withObject:nil];
 }
+
+#pragma mark -- PhotoUpdateDelegate
+- (void)riderPhotoDidUpdate:(UIImage *)image
+{
+    [self configureView];
+}
+
+- (void)riderPhotoThumbDidUpdate:(UIImage *)image
+{
+    [self configureView];
+}
+
 
 @end
