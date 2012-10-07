@@ -27,6 +27,11 @@
 }
 
 
+- (NSArray *)allRiders
+{
+    return _riderList;
+}
+
 - (unsigned)count
 {
     return [_riderList count];

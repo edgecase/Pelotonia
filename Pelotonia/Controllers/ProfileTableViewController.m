@@ -81,6 +81,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc
+{
+    [self.tableView removeObserver:pull forKeyPath:@"contentOffset"];
+}
+
+
 - (void)setRider:(Rider *)rider
 {
     _rider = rider;
@@ -128,15 +134,14 @@
 
 - (void)refreshRider
 {
-    // start an asynchronous web request to update the rider information
-    [PelotoniaWeb profileForRider:self.rider onComplete:^(Rider *updatedRider) {
-        self.rider = updatedRider;
+    [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
         self.rider.delegate = self;
         [self configureView];
         [pull finishedLoading];
     } onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
         [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
+        [self configureView];
         [pull finishedLoading];
     }];
 }
@@ -170,7 +175,6 @@
         self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
         self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     }
-    NSLog(@"story = %@", self.rider.story);
     self.storyTextView.text = [NSString stringWithFormat:@"%@", self.rider.story];
     
     self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);

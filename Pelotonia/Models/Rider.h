@@ -63,6 +63,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
+// implementation
+- (void)refreshFromWebOnComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
+
 @end
 
 @protocol PhotoUpdateDelegate <NSObject>

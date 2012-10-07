@@ -65,6 +65,11 @@
     UIImage *image = [UIImage imageNamed: @"Pelotonia_logo_22x216.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     self.navigationItem.titleView = imageView;
+    
+    // update all riders in the list
+    for (Rider *rider in [self.dataController allRiders]) {
+        [rider refreshFromWebOnComplete:nil onFailure:nil];
+    }
 }
 
 - (void)viewDidUnload
@@ -140,16 +145,6 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.row == 0) {
-//        return 101.0;
-//    }
-//    else {
-//        return 62.0;
-//    }
-//}
-//
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

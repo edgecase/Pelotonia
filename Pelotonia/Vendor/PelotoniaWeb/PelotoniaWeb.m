@@ -137,10 +137,8 @@
             NSLog(@"story size %d", [storyRows count]);
             rider.story = @"";
             for (TFHppleElement *element in storyRows) {
-                NSLog(@"content = %@", [element content]);
                 rider.story = [rider.story stringByAppendingString:[element content]];
             }
-            NSLog(@"story (pw) = %@", rider.story);
         }
         @catch (NSException *exception) {
             NSLog(@"trouble parsing %@'s profile story", rider.name);

@@ -10,6 +10,7 @@
 #import "ImageCache.h"
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"
+#import "PelotoniaWeb.h"
 
 @interface Rider ()
 
@@ -207,6 +208,8 @@
     return self;
 }
 
+#pragma mark -- property overrides
+
 - (UIImage *)riderPhoto
 {
     if (_riderPhoto == nil) {
@@ -265,9 +268,39 @@
 }
 
 
-#pragma mark -- NSCopying
-// NSCopying
-
+#pragma mark -- implementation
+- (void)refreshFromWebOnComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
+{
+    [PelotoniaWeb profileForRider:self onComplete:^(Rider *updatedRider) {
+        self.name = updatedRider.name;
+        self.riderId = updatedRider.riderId;
+        self.riderPhotoThumbUrl = updatedRider.riderPhotoThumbUrl;
+        self.donateUrl = updatedRider.donateUrl;
+        self.profileUrl = updatedRider.profileUrl;
+        self.riderType = updatedRider.riderType;
+        self.route = updatedRider.route;
+        self.story = updatedRider.story;
+        self.highRoller = updatedRider.highRoller;
+        self.riderPhotoUrl = updatedRider.riderPhotoUrl;
+        self.amountRaised = updatedRider.amountRaised;
+        self.myPeloton = updatedRider.myPeloton;
+        self.pelotonFundsRaised = updatedRider.pelotonFundsRaised;
+        self.pelotonTotalOfAllMembers = updatedRider.pelotonTotalOfAllMembers;
+        self.pelotonGrandTotal = updatedRider.pelotonGrandTotal;
+        self.pelotonCaptain = updatedRider.pelotonCaptain;
+        self.riderPhoto = updatedRider.riderPhoto;
+        self.riderPhotoThumb = updatedRider.riderPhotoThumb;
+        if (completeBlock) {
+            completeBlock(self);
+        }
+        
+    } onFailure:^(NSString *error) {
+        NSLog(@"refreshFromWeb: Unable to get profile for rider. Error: %@", error);
+        if (failureBlock) {
+            failureBlock(@"unable to get profile for rider");
+        }
+    }];
+}
 
 
 @end
