@@ -3,10 +3,11 @@
 //  Pelotonia
 //
 //  Created by Adam McCrea on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+@protocol PhotoUpdateDelegate;
 
 @interface Rider : NSObject <NSCoding> {
     NSString *_name;
@@ -17,6 +18,8 @@
     NSString *_profileUrl;
     NSString *_riderType;
     NSString *_route;
+    NSString *_story;
+    BOOL highRoller;
     
     NSString *_riderPhotoUrl;
     UIImage *_riderPhoto;
@@ -28,6 +31,8 @@
     NSString *_pelotonCaptain;
 }
 
+@property (retain, nonatomic) id <PhotoUpdateDelegate> delegate;
+
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *riderId;
 @property (nonatomic, strong) NSString *riderPhotoThumbUrl;
@@ -36,6 +41,8 @@
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
 @property (nonatomic, strong) NSString *route;
+@property (nonatomic, strong) NSString *story;
+@property (nonatomic, assign) BOOL highRoller;
 @property (nonatomic, readonly) NSString *totalCommit;
 @property (nonatomic, readonly) NSString *totalRaised;
 @property (nonatomic, readonly) NSNumber *pctRaised;
@@ -56,9 +63,12 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
-- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete;
-- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
-
 @end
+
+@protocol PhotoUpdateDelegate <NSObject>
+- (void)riderPhotoDidUpdate:(UIImage *)image;
+- (void)riderPhotoThumbDidUpdate:(UIImage *)image;
+@end
+
 
 

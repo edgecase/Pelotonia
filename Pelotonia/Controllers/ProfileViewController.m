@@ -34,7 +34,6 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize routeLabel = _routeLabel;
 @synthesize raisedLabel = _raisedLabel;
-@synthesize commitLabel = _commitLabel;
 @synthesize supportLabel = _supportLabel;
 @synthesize riderImageView = _riderImageView;
 @synthesize donationField = _donationField;
@@ -42,6 +41,7 @@
 @synthesize donorEmailField = _donorEmailField;
 @synthesize following = _following;
 @synthesize donationProgress = _donationProgress;
+@synthesize storyTextView = _storyTextView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,10 +74,10 @@
     [self setDonorEmailField:nil];
     [self setSupportButton:nil];
     [self setFollowButton:nil];
-    [self setCommitLabel:nil];
     [self setDonationProgress:nil];
     [self setScrollView:nil];
     [self setSupportLabel:nil];
+    [self setStoryTextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -122,9 +122,22 @@
 {
     // set the name & ID appropriately
     self.nameLabel.text = self.rider.name;
-    self.routeLabel.text = self.rider.route;
-    self.raisedLabel.text = self.rider.totalRaised;
-    self.commitLabel.text = self.rider.totalCommit;
+    if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
+        [self.rider.riderType isEqualToString:@"Volunteer"] ||
+        [self.rider.riderType isEqualToString:@"Peloton"]) {
+        self.routeLabel.text = self.rider.riderType;
+        self.raisedLabel.text = self.rider.totalRaised;
+        self.donationProgress.hidden = YES;
+    }
+    else
+    {
+        // Riders and Pelotons are the only ones who get progress
+        self.routeLabel.text = self.rider.route;
+        self.raisedLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
+        self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
+    }
+    NSLog(@"story = %@", self.rider.story);
+    self.storyTextView.text = self.rider.story;
     
     [self.rider getRiderPhotoOnComplete:^(UIImage *image) {
         self.riderImageView.image = image;
@@ -133,21 +146,19 @@
     self.nameLabel.font = PELOTONIA_SECONDARY_FONT(21);
     self.routeLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.raisedLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    self.commitLabel.font = PELOTONIA_SECONDARY_FONT(17);
     self.supportLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
+    self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
+    
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
-        // show the toolbar
-        
     }
     else {
         [self.followButton setTitle:@"Follow"];
-        // hide the toolbar
     }
 
     [self.supportButton setTintColor:PRIMARY_GREEN];
+    
 }
 
 - (BOOL)validateForm

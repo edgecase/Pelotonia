@@ -3,19 +3,18 @@
 //  Pelotonia
 //
 //  Created by Adam McCrea on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "PullToRefreshView.h"
 #import "PelotoniaWeb.h"
+#import "Rider.h"
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, PullToRefreshViewDelegate> {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, PhotoUpdateDelegate> {
     RiderDataController *_dataController;
     NSMutableArray *_riderSearchResults;
-    PullToRefreshView *_pull;
 }
 
 @property (strong, nonatomic) RiderDataController *dataController;

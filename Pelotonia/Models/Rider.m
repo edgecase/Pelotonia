@@ -3,7 +3,7 @@
 //  Pelotonia
 //
 //  Created by Adam McCrea on 7/11/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
 #import "Rider.h"
@@ -18,6 +18,7 @@
 @end
 
 @implementation Rider
+@synthesize delegate = _delegate;
 @synthesize name = _name;
 @synthesize riderId = _riderId;
 @synthesize riderPhotoThumbUrl = _riderPhotoThumbUrl;
@@ -26,9 +27,10 @@
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
 @synthesize route = _route;
+@synthesize highRoller = _highRoller;
+@synthesize story = _story;
 @synthesize totalRaised = _totalRaised;
 @synthesize totalCommit = _totalCommit;
-@synthesize pctRaised = _pctRaised;
 
 @synthesize riderPhotoUrl = _riderPhotoUrl;
 @synthesize riderPhoto = _riderPhoto;
@@ -63,9 +65,9 @@
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *image = [UIImage imageWithData:[request responseData]];
-            if (image != nil) {
-                [[ImageCache sharedStore] setImage:image forKey:url];
-            }
+//            if (image != nil) {
+//                [[ImageCache sharedStore] setImage:image forKey:url];
+//            }
             
             if (complete) {
                 complete(image);
@@ -80,35 +82,40 @@
 - (NSString *)totalCommit 
 {
     NSString *value = @"0";
-    
-    if ([self.pelotonGrandTotal length] > 0) {
-        value = @"0";
+
+    if (self.highRoller == YES) {
+        value = @"4000";
     }
-    
-    if ([self.riderType isEqualToString:@"Rider"]) {
-        if ([self.route length] == 0) {
+    else
+    {
+        if ([self.riderType isEqualToString:@"Rider"]) {
+            if ([self.route length] == 0) {
+                value = @"0";
+            }
+            if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
+                value = @"2,200";
+            }
+            if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
+                value = @"2,200";
+            }
+            if ([self.route isEqualToString:@"Columbus to Gambier"]) {
+                value = @"1,800";
+            }
+            if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
+                value = @"1,800";
+            }
+            if ([self.route isEqualToString:@"Columbus to New Albany"]) {
+                value = @"1,250";
+            }
+            if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
+                value = @"1,200";
+            }
+        }
+        else
+        {
             value = @"0";
         }
-        if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
-            value = @"2,200";
-        }
-        if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
-            value = @"2,200";
-        }
-        if ([self.route isEqualToString:@"Columbus to Gambier"]) {
-            value = @"1,800";
-        }
-        if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
-            value = @"1,800";
-        }
-        if ([self.route isEqualToString:@"Columbus to New Albany"]) {
-            value = @"1,250";
-        }
-        if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
-            value = @"1,200";
-        }
     }
-    
     return [NSString stringWithFormat:@"$%@.00", value];
 }
 
@@ -125,20 +132,36 @@
 
 - (NSNumber *)pctRaised
 {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [formatter setLenient:YES];
+    if (self.totalCommit == 0) {
+        return [NSNumber numberWithFloat:100.0];
+    }
+    else
+    {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [formatter setLenient:YES];
+        
+        NSNumber *totalRaised = [formatter numberFromString:self.totalRaised];
+        NSNumber *totalCommit = [formatter numberFromString:self.totalCommit];
+        
+        float raised = totalRaised.floatValue;
+        float commit = totalCommit.floatValue;
+        if (commit == 0.0) {
+            commit = 1;
+        }
+        return [NSNumber numberWithFloat:(raised/commit)*100];
+    }
+}
+
+- (NSString *)route
+{
+    NSString *routeString = _route;
     
-    NSNumber *totalRaised = [formatter numberFromString:self.totalRaised];
-    NSNumber *totalCommit = [formatter numberFromString:self.totalCommit];
-    
-    float raised = totalRaised.floatValue;
-    float commit = totalCommit.floatValue;
-    if (commit <= 0.0) {
-        commit = 1;
+    if (![self.riderType isEqualToString:@"Rider"]) {
+        routeString = self.riderType;
     }
     
-    return [NSNumber numberWithFloat:(raised/commit)*100];
+    return routeString;
 }
 
 #pragma mark -- NSCoding
@@ -160,6 +183,8 @@
     [aCoder encodeObject:_pelotonTotalOfAllMembers forKey:@"pelotonTotalOfAllMembers"];
     [aCoder encodeObject:_pelotonGrandTotal forKey:@"pelotonGrandTotal"];
     [aCoder encodeObject:_pelotonCaptain forKey:@"pelotonCaptain"];
+    [aCoder encodeObject:_story forKey:@"story"];
+    [aCoder encodeBool:highRoller forKey:@"highRoller"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -179,60 +204,66 @@
         _pelotonTotalOfAllMembers = [aDecoder decodeObjectForKey:@"pelotonTotalOfAllMembers"];
         _pelotonGrandTotal = [aDecoder decodeObjectForKey:@"pelotonGrandTotal"];
         _pelotonCaptain = [aDecoder decodeObjectForKey:@"pelotonCaptain"];
+        _story = [aDecoder decodeObjectForKey:@"story"];
+        highRoller = [aDecoder decodeBoolForKey:@"highRoller"];
     }
     return self;
 }
 
-
-- (void)getRiderPhotoOnComplete:(void(^)(UIImage *image))complete;
+- (UIImage *)riderPhoto
 {
-    UIImage *photo = nil;
-    if (self.riderPhotoUrl) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
-        if (nil == photo) {
-            // return default photo now
-            NSLog(@"riderPhoto: unable to find photo %@ in the cache", self.riderPhotoUrl);
-            photo = [UIImage imageNamed:@"profile_default.jpg"];
-            
-            // put the image into the cache for later
+    if (_riderPhoto == nil) {
+        // look in the cache
+        _riderPhoto = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
+        
+        // use default image for now
+        if (_riderPhoto == nil) {
+
+            // get the photo from the web
             [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
-                _riderPhoto = image;
-                if (complete) {
-                    complete(image);
-                }
+                self.riderPhoto = image;
             }];
+            return [UIImage imageNamed:@"profile_default.jpg"];
         }
         
-        if (complete) {
-            complete(photo);
+    }
+    return _riderPhoto;
+}
+
+- (UIImage *)riderPhotoThumb
+{
+    if (_riderPhotoThumb == nil) {
+        // first look in cache
+        _riderPhotoThumb = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
+        
+        if (_riderPhotoThumb == nil) {
+            // get the photo from the web
+            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
+                self.riderPhotoThumb = image;
+            }];
+            
+            // use default thumb
+            return [UIImage imageNamed:@"profile_default_thumb.jpg"];
         }
+    }
+    return _riderPhotoThumb;
+}
+
+- (void)setRiderPhoto:(UIImage *)riderPhoto
+{
+    _riderPhoto = riderPhoto;
+    if (self.riderPhotoUrl && riderPhoto) {
+        [[ImageCache sharedStore] setImage:riderPhoto forKey:self.riderPhotoUrl];
+        [self.delegate riderPhotoDidUpdate:riderPhoto];
     }
 }
 
-
-- (void)getRiderPhotoThumbOnComplete:(void(^)(UIImage *image))complete
+- (void)setRiderPhotoThumb:(UIImage *)riderPhotoThumb
 {
-    UIImage *photo = nil;
-    
-    if (self.riderPhotoThumbUrl != nil) {
-        photo = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
-        if (nil == photo) {
-            // return the default for now, but get the real photo for later
-            NSLog(@"riderPhotoThumb: unable to find photo %@ in the cache", self.riderPhotoThumbUrl);
-            photo = [UIImage imageNamed:@"profile_default_thumb.jpg"];
-            
-            // go to the web to get the real photo
-            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
-                _riderPhotoThumb = image;
-                if (complete) {
-                    complete(image);
-                }
-            }];
-        }
-        
-        if (complete) {
-            complete(photo);
-        }
+    _riderPhotoThumb = riderPhotoThumb;
+    if (self.riderPhotoThumbUrl && riderPhotoThumb) {
+        [[ImageCache sharedStore] setImage:riderPhotoThumb forKey:self.riderPhotoThumbUrl];
+        [self.delegate riderPhotoThumbDidUpdate:riderPhotoThumb];
     }
 }
 

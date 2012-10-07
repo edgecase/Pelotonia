@@ -3,7 +3,7 @@
 //  Pelotonia
 //
 //  Created by Mark Harris on 7/15/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
 #ifndef Pelotonia_Pelotonia_Colors_h

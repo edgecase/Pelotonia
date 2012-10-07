@@ -52,6 +52,15 @@
                     rider.riderType = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"alt"];
                 } else if ([classAttribute isEqualToString:@"route"]) {
                     rider.route = [self stripWhitespace:[[riderAttributeColumn firstChild] content]];
+                } else if ([classAttribute isEqualToString:@"high-roller"]) {
+                    // if the high-roller class is non-empty, we have a high roller
+                    NSLog(@"content: %d", [[riderAttributeColumn children] count]);
+                    if ([[riderAttributeColumn children] count] > 1) {
+                        rider.highRoller = YES;
+                    }
+                    else {
+                        rider.highRoller = NO;
+                    }
                 }
             }
             
@@ -93,6 +102,17 @@
         NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[@class='public-profile-photo']/img";
         NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
         NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
+        
+        // get the rider's story
+        NSString *riderStoryXPath = @"//*[@id='article']/div[3]/div[1]/text()";
+        NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
+        NSLog(@"story size %d", [storyRows count]);
+        rider.story = @"";
+        for (TFHppleElement *element in storyRows) {
+            NSLog(@"content = %@", [element content]);
+            rider.story = [rider.story stringByAppendingString:[element content]];
+        }
+        NSLog(@"story (pw) = %@", rider.story);
         
         rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
         
