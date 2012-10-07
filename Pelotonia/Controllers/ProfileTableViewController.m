@@ -13,6 +13,8 @@
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
+#import "SHK.h"
+#import "SHKFacebook.h"
 
 
 @interface ProfileTableViewController ()
@@ -63,6 +65,7 @@
     [self setNameAndRouteCell:nil];
     [self setRaisedAmountCell:nil];
     [self setSupportRiderButton:nil];
+    [self setShareOnFacebookButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -281,6 +284,22 @@
         [dataController removeObject:self.rider];
     }
     [self configureView];
+}
+
+- (IBAction)shareOnFacebook:(id)sender {
+    NSLog(@"Sharing on Facebook: %@", self.rider.name);
+    
+    // use the SHKFacebook object to share progress directly on FB
+    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride", self.rider.name] contentType:SHKURLContentTypeWebpage];
+    
+    [item setText:@"This is a test"];
+    
+    [item setFacebookURLShareDescription:@"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference."];
+    
+    [item setFacebookURLSharePictureURI:@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png"];
+    
+    [SHKFacebook shareItem:item];
+    
 }
 
 #pragma mark -- PullToRefreshDelegate

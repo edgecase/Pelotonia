@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameAndRouteCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *raisedAmountCell;
 @property (weak, nonatomic) IBOutlet UIButton *supportRiderButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareOnFacebookButton;
 
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;
@@ -36,6 +37,7 @@
 
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
+- (IBAction)shareOnFacebook:(id)sender;
 
 - (void)refreshRider;
 - (void)manualRefresh:(NSNotification *)notification;

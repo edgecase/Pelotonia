@@ -303,7 +303,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VcT-Ci-Xvo">
-                                        <rect key="frame" x="0.0" y="155" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="155" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -319,12 +319,38 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="K6w-kV-Dse">
+                                        <rect key="frame" x="0.0" y="199" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="K8r-7k-gYN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <state key="normal" title="Share Progress on Facebook">
+                                                        <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="shareOnFacebook:" destination="sKZ-lE-nf9" eventType="touchUpInside" id="4u9-Jc-ibV"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Support This Rider" id="dXS-r9-cSN">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="43" id="Kt1-gk-mp7">
-                                        <rect key="frame" x="0.0" y="246" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="290" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="42"/>
@@ -345,7 +371,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="43" id="Twe-Ey-3l8">
-                                        <rect key="frame" x="0.0" y="290" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="334" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="42"/>
@@ -366,14 +392,14 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="43" id="Vrg-rO-x9h">
-                                        <rect key="frame" x="0.0" y="333" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="377" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="42"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jq1-HB-VuN">
-                                                    <rect key="frame" x="20" y="2" width="260" height="37"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jq1-HB-VuN">
+                                                    <rect key="frame" x="0.0" y="2" width="300" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                     <state key="normal" title="Send Pledge">
@@ -396,7 +422,7 @@
                             <tableViewSection headerTitle="My Story" id="iV6-G5-76g">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="273" id="iHy-do-Kxv">
-                                        <rect key="frame" x="0.0" y="423" width="320" height="275"/>
+                                        <rect key="frame" x="0.0" y="467" width="320" height="275"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="272"/>
@@ -438,6 +464,7 @@
                         <outlet property="nameAndRouteCell" destination="0Uq-Pf-ndZ" id="6Hj-ug-Jsw"/>
                         <outlet property="pledgeAmountTextField" destination="c1P-ip-4p9" id="TwP-nW-EPh"/>
                         <outlet property="raisedAmountCell" destination="0rH-P2-a6L" id="nRK-s0-8uO"/>
+                        <outlet property="shareOnFacebookButton" destination="K8r-7k-gYN" id="wCX-Uw-krp"/>
                         <outlet property="storyTextView" destination="cR0-ko-TLj" id="Z6B-oh-tiM"/>
                         <outlet property="supportRiderButton" destination="Jq1-HB-VuN" id="KkY-Tr-r4s"/>
                     </connections>
@@ -463,13 +490,46 @@
         </scene>
     </scenes>
     <resources>
-        <image name="208-facebook.png" width="22" height="22"/>
-        <image name="209-twitter.png" width="22" height="22"/>
         <image name="Pelotonia_logo.png" width="530" height="54"/>
         <image name="new context.png" width="511" height="81"/>
-        <image name="one-goal-wallpaper.jpg" width="320" height="480"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
+    <classes>
+        <class className="AboutTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="action" name="newContextPressed:"/>
+                <relationship kind="action" name="sandlotPressed:"/>
+                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="storyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ProfileTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="followRider:"/>
+                <relationship kind="action" name="shareOnFacebook:"/>
+                <relationship kind="action" name="supportRider:"/>
+                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="donorEmailTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="nameAndRouteCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="pledgeAmountTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="raisedAmountCell" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="shareOnFacebookButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="storyTextView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="supportRiderButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="RidersViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
