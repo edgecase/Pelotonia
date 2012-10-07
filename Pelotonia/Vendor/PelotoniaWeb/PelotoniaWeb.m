@@ -100,13 +100,39 @@
         NSLog(@"Found rider %@", rider.name);
         
         TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
+        
+        // figure out what type of rider we are first
+        NSString *riderTypeUrlXPath = @"//*[@id='sectionheader']/img";
+        NSString *riderType = [[[[parser searchWithXPathQuery:riderTypeUrlXPath] objectAtIndex:0] attributes] valueForKey:@"alt"];
+        
+        NSRange superPelotonRange = [riderType rangeOfString:@"Profile > Super Peloton" options:NSCaseInsensitiveSearch];
+        NSRange pelotonRange = [riderType rangeOfString:@"Profile > Peloton" options:NSCaseInsensitiveSearch];
+        NSRange riderRange = [riderType rangeOfString:@"Profile > Rider" options:NSCaseInsensitiveSearch];
+        NSRange virtualRiderRange = [riderType rangeOfString:@"Profile > Virtual" options:NSCaseInsensitiveSearch];
+        NSRange volunteerRiderRange = [riderType rangeOfString:@"Profile > Volunteer" options:NSCaseInsensitiveSearch];
+        
+        if (superPelotonRange.location != NSNotFound) {
+            rider.riderType = @"Super Peloton";
+        } else if (pelotonRange.location != NSNotFound) {
+            rider.riderType = @"Peloton";
+        } else if (riderRange.location != NSNotFound) {
+            rider.riderType = @"Rider";
+        } else if (virtualRiderRange.location != NSNotFound) {
+            rider.riderType = @"Virtual Rider";
+        } else if (volunteerRiderRange.location != NSNotFound) {
+            rider.riderType = @"Volunteer";
+        }
+        
+        
+        // get the photos
         NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
         NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
         NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
+        rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
         
         // get the rider's story
         @try {
-            NSString *riderStoryXPath = @"//*[@id='article']/div[3]/div[1]/text()";
+            NSString *riderStoryXPath = @"//div[@class='story']/text()";
             NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
             NSLog(@"story size %d", [storyRows count]);
             rider.story = @"";
@@ -118,11 +144,10 @@
         }
         @catch (NSException *exception) {
             NSLog(@"trouble parsing %@'s profile story", rider.name);
-            rider.story = @"No Story on File";
+            rider.story = @"(no story on file)";
         }        
-        
-        rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
-        
+
+        // get the rider's properties off the page now
         NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
         NSArray *metaDataFields = [parser searchWithXPathQuery:metaDataXPath];
         

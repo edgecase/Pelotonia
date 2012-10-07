@@ -157,6 +157,7 @@
     self.nameAndRouteCell.textLabel.text = self.rider.name;
     if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
         [self.rider.riderType isEqualToString:@"Volunteer"] ||
+        [self.rider.riderType isEqualToString:@"Super Peloton"] ||
         [self.rider.riderType isEqualToString:@"Peloton"]) {
         self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
         self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
