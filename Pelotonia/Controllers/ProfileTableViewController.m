@@ -11,6 +11,7 @@
 #import "RiderDataController.h"
 #import "SHKActivityIndicator.h"
 #import "Pelotonia-Colors.h"
+#import "UIImage+RoundedCorner.h"
 
 
 @interface ProfileTableViewController ()
@@ -174,6 +175,8 @@
         [self.followButton setTitle:@"Follow"];
     }
     
+    self.nameAndRouteCell.imageView.layer.masksToBounds = YES;
+    self.nameAndRouteCell.imageView.layer.cornerRadius = 5.0;
     self.nameAndRouteCell.imageView.image = self.rider.riderPhoto;
 
 }

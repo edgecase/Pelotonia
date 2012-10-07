@@ -13,6 +13,7 @@
 #import "SearchViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
+#import "UIImage+Resize.h"
 
 
 @interface RidersViewController ()
@@ -172,25 +173,19 @@
     // Configure the cell...
     Rider *rider = nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
+        // we only have so much information in the search view
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-        cell.imageView.image = rider.riderPhotoThumb;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
+        // looking at the "regular" view, so show all our information
         rider = [self.dataController objectAtIndex:indexPath.row];
-        cell.textLabel.text = rider.name;
-        NSString *amount;
-        if ([rider.pelotonGrandTotal length] > 0) {
-            amount = rider.pelotonGrandTotal;
-        }
-        else {
-            amount = rider.amountRaised;
-        }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
-        cell.imageView.image = rider.riderPhotoThumb;
     }
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
+    cell.imageView.image = [rider.riderPhotoThumb thumbnailImage:cell.bounds.size.height transparentBorder:1 cornerRadius:0 interpolationQuality:kCGInterpolationDefault];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   
     cell.textLabel.textColor = PRIMARY_GREEN;

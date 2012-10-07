@@ -11,6 +11,9 @@
 		0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0531B93715B222B10015A003 /* PelotoniaWeb.m */; };
 		0531B94015B24FF00015A003 /* profile_default_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */; };
 		0531B94215B3206D0015A003 /* profile_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0531B94115B3206D0015A003 /* profile_default.jpg */; };
+		4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DDD71621C9140050DB17 /* UIImage+Alpha.m */; };
+		4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DDD91621C9140050DB17 /* UIImage+Resize.m */; };
+		4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DDDB1621C9140050DB17 /* UIImage+RoundedCorner.m */; };
 		4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3CBA2915BE7F97006CB6C3 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */; };
@@ -106,6 +109,12 @@
 		0531B93715B222B10015A003 /* PelotoniaWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaWeb.m; path = Vendor/PelotoniaWeb/PelotoniaWeb.m; sourceTree = "<group>"; };
 		0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default_thumb.jpg; sourceTree = "<group>"; };
 		0531B94115B3206D0015A003 /* profile_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_default.jpg; sourceTree = "<group>"; };
+		4D15DDD61621C9140050DB17 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		4D15DDD71621C9140050DB17 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		4D15DDD81621C9140050DB17 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		4D15DDD91621C9140050DB17 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		4D15DDDA1621C9140050DB17 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		4D15DDDB1621C9140050DB17 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutTableViewController.h; path = Controllers/AboutTableViewController.h; sourceTree = "<group>"; };
 		4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutTableViewController.m; path = Controllers/AboutTableViewController.m; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
@@ -295,6 +304,20 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		4D15DDD41621C8E00050DB17 /* UIImageExtras */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DDD61621C9140050DB17 /* UIImage+Alpha.h */,
+				4D15DDD71621C9140050DB17 /* UIImage+Alpha.m */,
+				4D15DDD81621C9140050DB17 /* UIImage+Resize.h */,
+				4D15DDD91621C9140050DB17 /* UIImage+Resize.m */,
+				4D15DDDA1621C9140050DB17 /* UIImage+RoundedCorner.h */,
+				4D15DDDB1621C9140050DB17 /* UIImage+RoundedCorner.m */,
+			);
+			name = UIImageExtras;
+			path = Vendor/UIImageExtras;
+			sourceTree = "<group>";
+		};
 		4D465A1215C229D400C7C506 /* PullToRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +489,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				4DB6495115C6146400980FCB /* SHKActivityIndicator */,
 				4DB6490415C60D4F00980FCB /* Appirater */,
 				4DB6490015C60D1A00980FCB /* TPKeyboardAvoidingScrollView */,
@@ -692,6 +716,9 @@
 				4DB6495415C6146400980FCB /* SHKActivityIndicator.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
+				4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */,
+				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
+				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
