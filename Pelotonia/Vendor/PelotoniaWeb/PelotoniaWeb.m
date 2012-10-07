@@ -93,26 +93,33 @@
 + (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSURL *url = [NSURL URLWithString:rider.profileUrl];
+    NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
     __unsafe_unretained __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    NSLog(@"looking for rider profile %@", rider.name);
     
     [request setCompletionBlock:^{
         NSLog(@"Found rider %@", rider.name);
+        
         TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-        NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[@class='public-profile-photo']/img";
+        NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
         NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
         NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
         
         // get the rider's story
-        NSString *riderStoryXPath = @"//*[@id='article']/div[3]/div[1]/text()";
-        NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
-        NSLog(@"story size %d", [storyRows count]);
-        rider.story = @"";
-        for (TFHppleElement *element in storyRows) {
-            NSLog(@"content = %@", [element content]);
-            rider.story = [rider.story stringByAppendingString:[element content]];
+        @try {
+            NSString *riderStoryXPath = @"//*[@id='article']/div[3]/div[1]/text()";
+            NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
+            NSLog(@"story size %d", [storyRows count]);
+            rider.story = @"";
+            for (TFHppleElement *element in storyRows) {
+                NSLog(@"content = %@", [element content]);
+                rider.story = [rider.story stringByAppendingString:[element content]];
+            }
+            NSLog(@"story (pw) = %@", rider.story);
         }
-        NSLog(@"story (pw) = %@", rider.story);
+        @catch (NSException *exception) {
+            NSLog(@"trouble parsing %@'s profile story", rider.name);
+            rider.story = @"No Story on File";
+        }        
         
         rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
         

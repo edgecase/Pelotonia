@@ -158,19 +158,19 @@
     if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
         [self.rider.riderType isEqualToString:@"Volunteer"] ||
         [self.rider.riderType isEqualToString:@"Peloton"]) {
-        self.nameAndRouteCell.detailTextLabel.text = self.rider.riderType;
-        self.raisedAmountCell.detailTextLabel.text = self.rider.totalRaised;
+        self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
+        self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
         self.donationProgress.hidden = YES;
     }
     else
     {
         // Riders and Pelotons are the only ones who get progress
-        self.nameAndRouteCell.detailTextLabel.text = self.rider.route;
+        self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.route];
         self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
         self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     }
     NSLog(@"story = %@", self.rider.story);
-    self.storyTextView.text = self.rider.story;
+    self.storyTextView.text = [NSString stringWithFormat:@"%@", self.rider.story];
     
     self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);
     self.nameAndRouteCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);

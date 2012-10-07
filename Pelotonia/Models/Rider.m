@@ -65,9 +65,6 @@
     [request setCompletionBlock:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             UIImage *image = [UIImage imageWithData:[request responseData]];
-//            if (image != nil) {
-//                [[ImageCache sharedStore] setImage:image forKey:url];
-//            }
             
             if (complete) {
                 complete(image);

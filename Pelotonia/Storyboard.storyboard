@@ -57,6 +57,23 @@
                                     <segue destination="sKZ-lE-nf9" kind="push" identifier="prepareProfile:" id="fch-sO-fiU"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PelotoniaCell" rowHeight="101" id="a02-kE-iiA">
+                                <rect key="frame" x="0.0" y="172" width="320" height="101"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <webView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" id="IZI-V5-C7O">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <dataDetectorType key="dataDetectorTypes"/>
+                                        </webView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
@@ -146,8 +163,8 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XT4-Ir-zBc">
-                                                    <rect key="frame" x="40" y="7" width="221" height="37"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XT4-Ir-zBc">
+                                                    <rect key="frame" x="0.0" y="7" width="300" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" size="button"/>
                                                     <state key="normal" title="Done">
@@ -503,6 +520,7 @@
                 <relationship kind="action" name="sandlotPressed:"/>
                 <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="storyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="totalRaisedWebView" candidateClass="UIWebView"/>
                 <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
