@@ -15,6 +15,9 @@
 		4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DDD91621C9140050DB17 /* UIImage+Resize.m */; };
 		4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DDDB1621C9140050DB17 /* UIImage+RoundedCorner.m */; };
 		4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */; };
+		4D18EE15168CB0E500B1BDCD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80015AE51A000205530 /* SystemConfiguration.framework */; };
+		4D18EE16168CB0E500B1BDCD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7FE15AE519800205530 /* CFNetwork.framework */; };
+		4D18EE17168CB0E500B1BDCD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3CBA2915BE7F97006CB6C3 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */; };
 		4D3CBA2A15BE7FFE006CB6C3 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */; };
@@ -33,7 +36,6 @@
 		4D465A2515C2381300C7C506 /* one-goal-wallpaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2315C2381300C7C506 /* one-goal-wallpaper@2x.png */; };
 		4D465A2715C2382600C7C506 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2615C2382600C7C506 /* Default.png */; };
 		4D465A2915C2382F00C7C506 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A2815C2382F00C7C506 /* Default@2x.png */; };
-		4D4A5B7415D2008C000174CE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7315D2008C000174CE /* CoreLocation.framework */; };
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
 		4D57C4E716171D1300ED7660 /* one-goal-wallpaper-586h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */; };
 		4D57C4EA16171D3200ED7660 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E916171D3200ED7660 /* Default-568h@2x.png */; };
@@ -80,7 +82,6 @@
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
 		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
-		4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
 		4DF7E28415DE8CBC00809BA2 /* 208-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28215DE8CBC00809BA2 /* 208-facebook.png */; };
 		4DF7E28515DE8CBC00809BA2 /* 208-facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28315DE8CBC00809BA2 /* 208-facebook@2x.png */; };
 		4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28615DE8CD800809BA2 /* 209-twitter.png */; };
@@ -103,8 +104,6 @@
 		BCE3B7F815AE516500205530 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7EE15AE516500205530 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7F915AE516500205530 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7F015AE516500205530 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BCE3B7FD15AE518800205530 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B7FC15AE518800205530 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7FE15AE519800205530 /* CFNetwork.framework */; };
-		BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80015AE51A000205530 /* SystemConfiguration.framework */; };
 		BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80215AE51A800205530 /* MobileCoreServices.framework */; };
 		BCE3B80515AE51BC00205530 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B80415AE51BC00205530 /* libz.dylib */; };
 		BCE3B81615AE573F00205530 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81115AE573F00205530 /* TFHpple.m */; };
@@ -321,23 +320,19 @@
 			files = (
 				4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */,
 				4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */,
-				BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */,
+				4D18EE15168CB0E500B1BDCD /* SystemConfiguration.framework in Frameworks */,
 				4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */,
-				BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */,
+				4D18EE16168CB0E500B1BDCD /* CFNetwork.framework in Frameworks */,
 				4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */,
 				4DB3347715D229430056E794 /* libShareKit.a in Frameworks */,
-				4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */,
+				4D18EE17168CB0E500B1BDCD /* MessageUI.framework in Frameworks */,
 				4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */,
-				4D4A5B7415D2008C000174CE /* CoreLocation.framework in Frameworks */,
 				4D465A1D15C22AB500C7C506 /* QuartzCore.framework in Frameworks */,
-				4DD7F53F15B5108B00B1DF42 /* MessageUI.framework in Frameworks */,
 				4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */,
 				4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */,
 				BCE3B81A15AE586800205530 /* libxml2.dylib in Frameworks */,
 				BCE3B80515AE51BC00205530 /* libz.dylib in Frameworks */,
 				BCE3B80315AE51A800205530 /* MobileCoreServices.framework in Frameworks */,
-				BCE3B80115AE51A000205530 /* SystemConfiguration.framework in Frameworks */,
-				BCE3B7FF15AE519800205530 /* CFNetwork.framework in Frameworks */,
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
 				BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */,
@@ -692,7 +687,7 @@
 		BCE3B7A915AE49DA00205530 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = BCE3B7AC15AE49DA00205530 /* Build configuration list for PBXProject "Pelotonia" */;
 			compatibilityVersion = "Xcode 3.2";
