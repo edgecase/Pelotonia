@@ -4,3 +4,6 @@
 [submodule "Pelotonia/Vendor/ShareKit"]
 	path = Pelotonia/Vendor/ShareKit
 	url = git://github.com/ShareKit/ShareKit.git
+[submodule "Pelotonia/Vendor/MBProgressHUD"]
+	path = Pelotonia/Vendor/MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git
