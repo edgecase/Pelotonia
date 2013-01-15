@@ -18,7 +18,6 @@
 
 @interface RidersViewController ()
 
-//- (void)loadImagesForOnScreenRows;
 - (void)reloadTableData;
 
 @end
@@ -148,35 +147,52 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        // it's a "regular" cell
-        static NSString *CellIdentifier = @"riderCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
-        
-        // Configure the cell...
-        Rider *rider = nil;
-        if (tableView == self.searchDisplayController.searchResultsTableView) {
-            // we only have so much information in the search view
-            rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
-        }
-        else {
-            // looking at the "regular" view, so show all our information
-            rider = [self.dataController objectAtIndex:indexPath.row];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
-        }
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-        cell.imageView.image = rider.riderPhotoThumb;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    // it's a "regular" cell
+    static NSString *CellIdentifier = @"riderCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    // Configure the cell...
+    Rider *rider = nil;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        // we only have so much information in the search view
+        rider = [self.riderSearchResults objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
+    }
+    else {
+        // looking at the "regular" view, so show all our information
+        rider = [self.dataController objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
 
-        cell.textLabel.font = PELOTONIA_FONT(21);
-        cell.detailTextLabel.font = PELOTONIA_FONT(12);   
-        cell.textLabel.textColor = PRIMARY_GREEN;
-        cell.detailTextLabel.textColor = SECONDARY_GREEN;
-        return cell;
+    __block UIActivityIndicatorView *activityIndicator;
+    [cell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+    activityIndicator.center = cell.imageView.center;
+    [activityIndicator startAnimating];
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
+                                    placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
+     {
+         if (error != nil) {
+             NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
+         }
+         [activityIndicator removeFromSuperview];
+         activityIndicator = nil;
+     }];
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    cell.textLabel.font = PELOTONIA_FONT(21);
+    cell.detailTextLabel.font = PELOTONIA_FONT(12);   
+    cell.textLabel.textColor = PRIMARY_GREEN;
+    cell.detailTextLabel.textColor = SECONDARY_GREEN;
+    [cell layoutSubviews];
+    return cell;
 }
 
 

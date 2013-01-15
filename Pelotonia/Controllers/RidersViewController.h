@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PelotoniaWeb.h"
 #import "Rider.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, PhotoUpdateDelegate> {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate> {
     RiderDataController *_dataController;
     NSMutableArray *_riderSearchResults;
 }

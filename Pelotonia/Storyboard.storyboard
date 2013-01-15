@@ -78,7 +78,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
                         <barButtonItem key="rightBarButtonItem" title="About" id="8fA-ZK-rv5">
-                            <color key="tintColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="0.22352941176470587" green="0.83529411764705885" blue="0.1764705882352941" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <segue destination="KrS-bT-Crh" kind="modal" identifier="showAbout:" modalTransitionStyle="flipHorizontal" id="zB1-3L-YWm"/>
                             </connections>
@@ -129,7 +129,7 @@
                                                     <rect key="frame" x="30" y="54" width="240" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -280,7 +280,7 @@
                                                     <rect key="frame" x="10" y="26" width="50" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Route" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" id="udj-Fh-629">
@@ -305,7 +305,7 @@
                                                     <rect key="frame" x="10" y="15" width="56" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="0.60392159223556519" green="0.7921568751335144" blue="0.23529411852359772" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dT0-2h-pqW">
@@ -329,7 +329,7 @@
                                                 <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" progress="0.5" id="YHx-BQ-azD">
                                                     <rect key="frame" x="20" y="17" width="260" height="11"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="progressTintColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="progressTintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="trackTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                                                 </progressView>
                                             </subviews>
@@ -468,7 +468,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Profile" id="4mt-W5-jF6">
                         <barButtonItem key="rightBarButtonItem" title="Follow" id="Gmx-RL-Jo8">
-                            <color key="tintColor" red="0.60392159219999997" green="0.79215687509999999" blue="0.23529411850000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="followRider:" destination="sKZ-lE-nf9" id="xys-00-C00"/>
                             </connections>
@@ -496,6 +496,7 @@
                 <navigationController title="Pelotonia" definesPresentationContext="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1Sn-hP-BGB">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="puZ-qr-IB2" kind="relationship" relationship="rootViewController" id="NB3-16-6CG"/>

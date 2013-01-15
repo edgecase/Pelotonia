@@ -73,7 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self configureView];
+    [self manualRefresh:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -90,7 +90,6 @@
 - (void)setRider:(Rider *)rider
 {
     _rider = rider;
-    rider.delegate = self;
 }
 
 #pragma mark - Table view delegate
@@ -135,10 +134,10 @@
 - (void)refreshRider
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
-        self.rider.delegate = self;
         [self configureView];
         [pull finishedLoading];
-    } onFailure:^(NSString *error) {
+    }
+    onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
         [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
         [self configureView];
@@ -195,7 +194,23 @@
     self.nameAndRouteCell.imageView.layer.cornerRadius = 5.0;
     
     // now we resize the photo and the cell so that the photo looks right
-    self.nameAndRouteCell.imageView.image = [self.rider.riderPhoto resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(110, self.nameAndRouteCell.bounds.size.height) interpolationQuality:kCGInterpolationDefault];
+    __block UIActivityIndicatorView *activityIndicator;
+    self.nameAndRouteCell.imageView.image = [UIImage imageNamed:@"profile_default.jpg"];
+    [self.nameAndRouteCell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
+    activityIndicator.center = self.nameAndRouteCell.imageView.center;
+    [activityIndicator startAnimating];
+    
+    [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
+            placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
+     {
+         if (error != nil) {
+             NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
+         }
+         [activityIndicator removeFromSuperview];
+         activityIndicator = nil;
+     }];
+    
     
     // re-layout subviews so that the image auto-adjusts
     [self.nameAndRouteCell layoutSubviews];

@@ -7,23 +7,17 @@
 //
 
 #import "Rider.h"
-#import "ImageCache.h"
-#import "ASIHTTPRequest.h"
-#import "ASIDownloadCache.h"
 #import "PelotoniaWeb.h"
 
 @interface Rider ()
 
-- (void)asynchronousGetImageAtUrl:(NSString *)url onComplete:(void(^)(UIImage *image))complete;
 
 @end
 
 @implementation Rider
-@synthesize delegate = _delegate;
 @synthesize name = _name;
 @synthesize riderId = _riderId;
 @synthesize riderPhotoThumbUrl = _riderPhotoThumbUrl;
-@synthesize riderPhotoThumb = _riderPhotoThumb;
 @synthesize donateUrl = _donateUrl;
 @synthesize profileUrl = _profileUrl;
 @synthesize riderType = _riderType;
@@ -34,7 +28,6 @@
 @synthesize totalCommit = _totalCommit;
 
 @synthesize riderPhotoUrl = _riderPhotoUrl;
-@synthesize riderPhoto = _riderPhoto;
 @synthesize amountRaised = _amountRaised;
 @synthesize myPeloton = _myPeloton;
 @synthesize pelotonFundsRaised = _pelotonFundsRaised;
@@ -60,20 +53,6 @@
 }
 
 
-- (void)asynchronousGetImageAtUrl:(NSString *)url onComplete:(void(^)(UIImage *image))complete
-{
-    __weak ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-    [request setCompletionBlock:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage *image = [UIImage imageWithData:[request responseData]];
-            
-            if (complete) {
-                complete(image);
-            }
-        });
-    }];
-    [request startAsynchronous];
-}
 
 #pragma mark -- Properties
 
@@ -210,62 +189,6 @@
 
 #pragma mark -- property overrides
 
-- (UIImage *)riderPhoto
-{
-    if (_riderPhoto == nil) {
-        // look in the cache
-        _riderPhoto = [[ImageCache sharedStore] imageForKey:self.riderPhotoUrl];
-        
-        // use default image for now
-        if (_riderPhoto == nil) {
-
-            // get the photo from the web
-            [self asynchronousGetImageAtUrl:self.riderPhotoUrl onComplete:^(UIImage *image) {
-                self.riderPhoto = image;
-            }];
-            return [UIImage imageNamed:@"profile_default.jpg"];
-        }
-        
-    }
-    return _riderPhoto;
-}
-
-- (UIImage *)riderPhotoThumb
-{
-    if (_riderPhotoThumb == nil) {
-        // first look in cache
-        _riderPhotoThumb = [[ImageCache sharedStore] imageForKey:self.riderPhotoThumbUrl];
-        
-        if (_riderPhotoThumb == nil) {
-            // get the photo from the web
-            [self asynchronousGetImageAtUrl:self.riderPhotoThumbUrl onComplete:^(UIImage *image) {
-                self.riderPhotoThumb = image;
-            }];
-            
-            // use default thumb
-            return [UIImage imageNamed:@"profile_default_thumb.jpg"];
-        }
-    }
-    return _riderPhotoThumb;
-}
-
-- (void)setRiderPhoto:(UIImage *)riderPhoto
-{
-    _riderPhoto = riderPhoto;
-    if (self.riderPhotoUrl && riderPhoto) {
-        [[ImageCache sharedStore] setImage:riderPhoto forKey:self.riderPhotoUrl];
-        [self.delegate riderPhotoDidUpdate:riderPhoto];
-    }
-}
-
-- (void)setRiderPhotoThumb:(UIImage *)riderPhotoThumb
-{
-    _riderPhotoThumb = riderPhotoThumb;
-    if (self.riderPhotoThumbUrl && riderPhotoThumb) {
-        [[ImageCache sharedStore] setImage:riderPhotoThumb forKey:self.riderPhotoThumbUrl];
-        [self.delegate riderPhotoThumbDidUpdate:riderPhotoThumb];
-    }
-}
 
 
 #pragma mark -- implementation
@@ -288,8 +211,6 @@
         self.pelotonTotalOfAllMembers = updatedRider.pelotonTotalOfAllMembers;
         self.pelotonGrandTotal = updatedRider.pelotonGrandTotal;
         self.pelotonCaptain = updatedRider.pelotonCaptain;
-        self.riderPhoto = updatedRider.riderPhoto;
-        self.riderPhotoThumb = updatedRider.riderPhotoThumb;
         if (completeBlock) {
             completeBlock(self);
         }

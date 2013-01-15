@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-@protocol PhotoUpdateDelegate;
 
 @interface Rider : NSObject <NSCoding> {
     NSString *_name;
@@ -31,12 +30,10 @@
     NSString *_pelotonCaptain;
 }
 
-@property (retain, nonatomic) id <PhotoUpdateDelegate> delegate;
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *riderId;
 @property (nonatomic, strong) NSString *riderPhotoThumbUrl;
-@property (nonatomic, strong, readonly) UIImage  *riderPhotoThumb;
 @property (nonatomic, strong) NSString *donateUrl;
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
@@ -48,7 +45,6 @@
 @property (nonatomic, readonly) NSNumber *pctRaised;
 
 @property (nonatomic, strong) NSString *riderPhotoUrl;
-@property (nonatomic, strong, readonly) UIImage  *riderPhoto;
 @property (nonatomic, strong) NSString *amountRaised;
 @property (nonatomic, strong) NSString *myPeloton;
 @property (nonatomic, strong) NSString *pelotonFundsRaised;
@@ -68,10 +64,6 @@
 
 @end
 
-@protocol PhotoUpdateDelegate <NSObject>
-- (void)riderPhotoDidUpdate:(UIImage *)image;
-- (void)riderPhotoThumbDidUpdate:(UIImage *)image;
-@end
 
 
 

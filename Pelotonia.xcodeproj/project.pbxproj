@@ -20,7 +20,6 @@
 		4D18EE17168CB0E500B1BDCD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3CBA2915BE7F97006CB6C3 /* one-goal-wallpaper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */; };
-		4D3CBA2A15BE7FFE006CB6C3 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */; };
 		4D3ED0A215C38F5B006FFE04 /* PF_EULA_online.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3ED09215C38F5B006FFE04 /* PF_EULA_online.pdf */; };
 		4D465A0C15C222CA00C7C506 /* Pelotonia_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A0B15C222CA00C7C506 /* Pelotonia_arrow.png */; };
 		4D465A0F15C222D300C7C506 /* Pelotonia_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A0E15C222D300C7C506 /* Pelotonia_logo.png */; };
@@ -39,6 +38,8 @@
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
 		4D57C4E716171D1300ED7660 /* one-goal-wallpaper-586h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */; };
 		4D57C4EA16171D3200ED7660 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D57C4E916171D3200ED7660 /* Default-568h@2x.png */; };
+		4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */; };
+		4D5D564216A4F8DD00B5B609 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D564116A4F8DD00B5B609 /* ImageIO.framework */; };
 		4D6B2B5F16A3C67C002987C1 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6B2B5C16A3C663002987C1 /* libMBProgressHUD.a */; };
 		4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */; };
 		4DB3347715D229430056E794 /* libShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3346D15D2290E0056E794 /* libShareKit.a */; };
@@ -189,8 +190,6 @@
 		4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutTableViewController.m; path = Controllers/AboutTableViewController.m; sourceTree = "<group>"; };
 		4D35C72715B116E5006E5D5D /* RiderDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderDataController.h; path = Models/RiderDataController.h; sourceTree = "<group>"; };
 		4D35C72815B116E5006E5D5D /* RiderDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderDataController.m; path = Models/RiderDataController.m; sourceTree = "<group>"; };
-		4D3CBA2615BE7F50006CB6C3 /* ImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageCache.h; path = Models/ImageCache.h; sourceTree = "<group>"; };
-		4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImageCache.m; path = Models/ImageCache.m; sourceTree = "<group>"; };
 		4D3CBA2815BE7F97006CB6C3 /* one-goal-wallpaper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "one-goal-wallpaper.jpg"; sourceTree = "<group>"; };
 		4D3ED09215C38F5B006FFE04 /* PF_EULA_online.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = PF_EULA_online.pdf; sourceTree = "<group>"; };
 		4D465A0B15C222CA00C7C506 /* Pelotonia_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pelotonia_arrow.png; sourceTree = "<group>"; };
@@ -212,6 +211,8 @@
 		4D4A5B7515D2009B000174CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4D57C4E616171D1300ED7660 /* one-goal-wallpaper-586h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "one-goal-wallpaper-586h@2x.png"; sourceTree = "<group>"; };
 		4D57C4E916171D3200ED7660 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		4D5D564116A4F8DD00B5B609 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD.xcodeproj; path = Pelotonia/Vendor/MBProgressHUD/MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ShareKit.xcodeproj; path = Pelotonia/Vendor/ShareKit/ShareKit.xcodeproj; sourceTree = "<group>"; };
@@ -334,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D5D564216A4F8DD00B5B609 /* ImageIO.framework in Frameworks */,
 				4D6B2B5F16A3C67C002987C1 /* libMBProgressHUD.a in Frameworks */,
 				4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */,
 				4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */,
@@ -353,6 +355,7 @@
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
 				BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */,
+				4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +521,7 @@
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
+				4D5D564116A4F8DD00B5B609 /* ImageIO.framework */,
 				4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */,
 				4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */,
 				4D57C4E916171D3200ED7660 /* Default-568h@2x.png */,
@@ -540,6 +544,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */,
 				4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */,
 				4DB3347D15D229F70056E794 /* CoreFoundation.framework */,
 				4DB3347B15D229DC0056E794 /* Security.framework */,
@@ -673,8 +678,6 @@
 		BCE3B81B15AE5B4F00205530 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4D3CBA2615BE7F50006CB6C3 /* ImageCache.h */,
-				4D3CBA2715BE7F50006CB6C3 /* ImageCache.m */,
 				BCE3B81C15AE5B6F00205530 /* Rider.h */,
 				BCE3B81D15AE5B6F00205530 /* Rider.m */,
 				4D35C72715B116E5006E5D5D /* RiderDataController.h */,
@@ -865,7 +868,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D3CBA2A15BE7FFE006CB6C3 /* ImageCache.m in Sources */,
 				BCE3B7C315AE49DA00205530 /* main.m in Sources */,
 				BCE3B7C715AE49DA00205530 /* AppDelegate.m in Sources */,
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
@@ -980,6 +982,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
@@ -1053,6 +1056,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
@@ -1078,6 +1082,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";

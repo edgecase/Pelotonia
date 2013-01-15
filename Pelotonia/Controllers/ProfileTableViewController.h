@@ -10,12 +10,13 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "Rider.h"
 #import "PelotoniaWeb.h"
 #import "PullToRefreshView.h"
 
-@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, PhotoUpdateDelegate> {
+@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate> {
     PullToRefreshView *pull;
     BOOL _following;
 }
