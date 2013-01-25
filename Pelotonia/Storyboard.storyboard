@@ -512,42 +512,6 @@
         <image name="new context.png" width="511" height="81"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
-    <classes>
-        <class className="AboutTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="newContextPressed:"/>
-                <relationship kind="action" name="sandlotPressed:"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="storyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ProfileTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="followRider:"/>
-                <relationship kind="action" name="shareOnFacebook:"/>
-                <relationship kind="action" name="supportRider:"/>
-                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="donorEmailTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="nameAndRouteCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="pledgeAmountTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="raisedAmountCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="shareOnFacebookButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="storyTextView" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="supportRiderButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="RidersViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

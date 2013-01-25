@@ -27,7 +27,7 @@
 				<string>Default@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
@@ -68,6 +68,8 @@
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Storyboard</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

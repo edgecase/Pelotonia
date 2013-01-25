@@ -183,6 +183,7 @@
          }
          [activityIndicator removeFromSuperview];
          activityIndicator = nil;
+         [cell layoutSubviews];
      }];
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
