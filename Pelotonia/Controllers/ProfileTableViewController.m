@@ -44,15 +44,18 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO; //so that action such as clear text field button can be pressed
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)hideKeyboard
+{
+    [self.tableView endEditing:YES];
 }
 
 - (void)viewDidUnload
@@ -85,6 +88,8 @@
 {
     [self.tableView removeObserver:pull forKeyPath:@"contentOffset"];
 }
+
+//implementation
 
 
 - (void)setRider:(Rider *)rider
@@ -127,6 +132,21 @@
     }
     [headerView addSubview:label];
     return headerView;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            // progress row -- hide if we're a volunteer rider
+            if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
+                [self.rider.riderType isEqualToString:@"Volunteer"])
+            {
+                return 0;
+            }
+        }
+    }
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 #pragma mark -- view configuration
@@ -265,10 +285,22 @@
 
 
 #pragma mark -- text field delegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    CGRect rc = [textField bounds];
+    rc = [textField convertRect:rc toView:self.tableView];
+    rc.origin.x = 0 ;
+    rc.origin.y -= 60 ;
+    
+    rc.size.height = 400;
+    [self.tableView scrollRectToVisible:rc animated:YES];
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)tf
 {
     [tf resignFirstResponder];
-    if (tf == self.donorEmailTextField) {
+    if (tf == self.donorEmailTextField)
+    {
         [self sendPledgeMail];
     }
     return YES;
