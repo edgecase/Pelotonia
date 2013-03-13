@@ -180,13 +180,13 @@ static void logNetworkStatus_(const char *name, int line, NetworkStatus status) 
 #define logNetworkStatus(status)
 #endif
 
-@interface Reachability (private)
+@interface MyReachability (private)
 
 - (NetworkStatus) networkStatusForFlags: (SCNetworkReachabilityFlags) flags;
 
 @end
 
-@implementation Reachability
+@implementation MyReachability
 
 @synthesize key = key_;
 
@@ -214,7 +214,7 @@ static void logNetworkStatus_(const char *name, int line, NetworkStatus status) 
 } // dealloc
 
 
-- (Reachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref 
+- (MyReachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref 
 {
     self = [super init];
 	if (self != nil) 
@@ -251,7 +251,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 	#pragma unused (target, flags)
 	NSCAssert(info, @"info was NULL in ReachabilityCallback");
-	NSCAssert([(NSObject*) info isKindOfClass: [Reachability class]], @"info was the wrong class in ReachabilityCallback");
+	NSCAssert([(NSObject*) info isKindOfClass: [MyReachability class]], @"info was the wrong class in ReachabilityCallback");
 	
 	//We're on the main RunLoop, so an NSAutoreleasePool is not necessary, but is added defensively
 	// in case someone uses the Reachablity object in a different thread.
@@ -259,7 +259,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	
 	// Post a notification to notify the client that the network reachability changed.
 	[[NSNotificationCenter defaultCenter] postNotificationName: kReachabilityChangedNotification 
-														object: (Reachability *) info];
+														object: (MyReachability *) info];
 	
 	[pool release];
 
@@ -296,7 +296,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 } // stopNotifier
 
 
-- (BOOL) isEqual: (Reachability *) r {
+- (BOOL) isEqual: (MyReachability *) r {
 	
 	return [r.key isEqualToString: self.key];
 	
@@ -304,16 +304,16 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 
 
 #pragma mark -
-#pragma mark Reachability Allocation Methods
+#pragma mark MyReachability Allocation Methods
 
 
-+ (Reachability *) reachabilityWithHostName: (NSString *) hostName {
++ (MyReachability *) reachabilityWithHostName: (NSString *) hostName {
 	
 	SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
 	
 	if (ref) {
 		
-		Reachability *r = [[[self alloc] initWithReachabilityRef: ref] autorelease];
+		MyReachability *r = [[[self alloc] initWithReachabilityRef: ref] autorelease];
 		
 		r.key = hostName;
 
@@ -345,13 +345,13 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 } // makeAddressKey:
 
 
-+ (Reachability *) reachabilityWithAddress: (const struct sockaddr_in *) hostAddress {
++ (MyReachability *) reachabilityWithAddress: (const struct sockaddr_in *) hostAddress {
 	
 	SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, (const struct sockaddr*)hostAddress);
 
 	if (ref) {
 		
-		Reachability *r = [[[self alloc] initWithReachabilityRef: ref] autorelease];
+		MyReachability *r = [[[self alloc] initWithReachabilityRef: ref] autorelease];
 		
 		r.key = [self makeAddressKey: hostAddress->sin_addr.s_addr];
 		
@@ -364,14 +364,14 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 } // reachabilityWithAddress
 
 
-+ (Reachability *) reachabilityForInternetConnection {
++ (MyReachability *) reachabilityForInternetConnection {
 	
 	struct sockaddr_in zeroAddress;
 	bzero(&zeroAddress, sizeof(zeroAddress));
 	zeroAddress.sin_len = sizeof(zeroAddress);
 	zeroAddress.sin_family = AF_INET;
 
-	Reachability *r = [self reachabilityWithAddress: &zeroAddress];
+	MyReachability *r = [self reachabilityWithAddress: &zeroAddress];
 
 	r.key = kInternetConnection;
 	
@@ -380,7 +380,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 } // reachabilityForInternetConnection
 
 
-+ (Reachability *) reachabilityForLocalWiFi {
++ (MyReachability *) reachabilityForLocalWiFi {
 	
 	struct sockaddr_in localWifiAddress;
 	bzero(&localWifiAddress, sizeof(localWifiAddress));
@@ -389,7 +389,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 	// IN_LINKLOCALNETNUM is defined in <netinet/in.h> as 169.254.0.0
 	localWifiAddress.sin_addr.s_addr = htonl(IN_LINKLOCALNETNUM);
 
-	Reachability *r = [self reachabilityWithAddress: &localWifiAddress];
+	MyReachability *r = [self reachabilityWithAddress: &localWifiAddress];
 
 	r.key = kLocalWiFiConnection;
 

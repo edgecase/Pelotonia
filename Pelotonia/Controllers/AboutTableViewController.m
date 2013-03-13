@@ -62,6 +62,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0 || indexPath.row == 1) {
+            [self pelotoniaPressed:tableView];
+        }
+    }
+    
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [self sandlotPressed:tableView];
@@ -95,20 +101,25 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)sandlotPressed:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"http://www.isandlot.com"];
+- (void)openURLFromString:(NSString *)urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
     
     if (![[UIApplication sharedApplication] openURL:url])
         
-        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    NSLog(@"%@%@",@"Failed to open url:",[url description]);
+}
+
+
+- (void)sandlotPressed:(id)sender {
+    [self openURLFromString:@"http://www.isandlot.com"];
 }
 
 - (void)newContextPressed:(id)sender {
-    NSURL *url = [NSURL URLWithString:@"http://www.newcontext.com"];
-    
-    if (![[UIApplication sharedApplication] openURL:url])
-        
-        NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    [self openURLFromString:@"http://www.newcontext.com"];
+}
+
+- (void)pelotoniaPressed:(id)sender {
+    [self openURLFromString:@"http://www.pelotonia.org"];
 }
 
 @end

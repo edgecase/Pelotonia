@@ -16,5 +16,6 @@
 - (IBAction)done:(id)sender;
 - (IBAction)sandlotPressed:(id)sender;
 - (IBAction)newContextPressed:(id)sender;
+- (void)openURLFromString:(NSString *)urlString;
 
 @end

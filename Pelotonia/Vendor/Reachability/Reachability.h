@@ -47,7 +47,7 @@
 
 /*
  
- Apple's Original License on Reachability v2.0
+ Apple's Original License on MyMyReachability v2.0
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
  ("Apple") in consideration of your agreement to the following terms, and your
@@ -93,11 +93,11 @@
 
 /*
  DDG extensions include:
- Each reachability object now has a copy of the key used to store it in a
+ Each MyReachability object now has a copy of the key used to store it in a
  dictionary. This allows each observer to quickly determine if the event is
  important to them.
  
- -currentReachabilityStatus also has a significantly different decision criteria than 
+ -currentMyReachabilityStatus also has a significantly different decision criteria than 
  Apple's code.
  
  A multiple convenience test methods have been added.
@@ -135,7 +135,7 @@ extern NSString *const kInternetConnection;
 extern NSString *const kLocalWiFiConnection;
 extern NSString *const kReachabilityChangedNotification;
 
-@interface Reachability: NSObject {
+@interface MyReachability: NSObject {
 	
 @private
 	NSString                *key_;
@@ -146,27 +146,27 @@ extern NSString *const kReachabilityChangedNotification;
 @property (copy) NSString *key; // Atomic because network operations are asynchronous.
 
 // Designated Initializer.
-- (Reachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref;
+- (MyReachability *) initWithReachabilityRef: (SCNetworkReachabilityRef) ref;
 
 // Use to check the reachability of a particular host name. 
-+ (Reachability *) reachabilityWithHostName: (NSString*) hostName;
++ (MyReachability *) reachabilityWithHostName: (NSString*) hostName;
 
 // Use to check the reachability of a particular IP address. 
-+ (Reachability *) reachabilityWithAddress: (const struct sockaddr_in*) hostAddress;
++ (MyReachability *) reachabilityWithAddress: (const struct sockaddr_in*) hostAddress;
 
 // Use to check whether the default route is available.  
 // Should be used to, at minimum, establish network connectivity.
-+ (Reachability *) reachabilityForInternetConnection;
++ (MyReachability *) reachabilityForInternetConnection;
 
 // Use to check whether a local wifi connection is available.
-+ (Reachability *) reachabilityForLocalWiFi;
++ (MyReachability *) reachabilityForLocalWiFi;
 
 //Start listening for reachability notifications on the current run loop.
 - (BOOL) startNotifier;
 - (void)  stopNotifier;
 
 // Comparison routines to enable choosing actions in a notification.
-- (BOOL) isEqual: (Reachability *) r;
+- (BOOL) isEqual: (MyReachability *) r;
 
 // These are the status tests.
 - (NetworkStatus) currentReachabilityStatus;
