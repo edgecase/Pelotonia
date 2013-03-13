@@ -76,7 +76,9 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self manualRefresh:nil];
+    // manual refresh takes too long when you're just trying to get information.
+//    [self manualRefresh:nil];
+    [self configureView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
