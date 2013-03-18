@@ -99,6 +99,10 @@
 		BB6816F816C73A7E000E120F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816EE16C73A7E000E120F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816F016C73A7E000E120F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
+		BBB3265416F679FD007153BC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BBB3265016F679FD007153BC /* README.md */; };
+		BBB3265516F679FD007153BC /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = BBB3265116F679FD007153BC /* release_notes.md */; };
+		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
 		BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7BA15AE49DA00205530 /* CoreGraphics.framework */; };
@@ -521,6 +525,12 @@
 		BB6816F116C73A7E000E120F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = Vendor/ASIHTTPRequestGit/Classes/ASIProgressDelegate.h; sourceTree = "<group>"; };
 		BB8DB07216F020E0005BB646 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB8DB07316F020E0005BB646 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		BBB3265016F679FD007153BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BBB3265116F679FD007153BC /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		BBB3265216F679FD007153BC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
+		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -579,6 +589,7 @@
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
 				4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */,
+				BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +809,17 @@
 			path = Vendor/Reachability;
 			sourceTree = "<group>";
 		};
+		BBB3264E16F679FD007153BC /* TestFlightSDK1 */ = {
+			isa = PBXGroup;
+			children = (
+				BBB3264F16F679FD007153BC /* libTestFlight.a */,
+				BBB3265016F679FD007153BC /* README.md */,
+				BBB3265116F679FD007153BC /* release_notes.md */,
+				BBB3265216F679FD007153BC /* TestFlight.h */,
+			);
+			path = TestFlightSDK1;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +891,8 @@
 		BCE3B7BD15AE49DA00205530 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */,
+				BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */,
 				BCE3B7BE15AE49DA00205530 /* Pelotonia-Info.plist */,
 				BCE3B7BF15AE49DA00205530 /* InfoPlist.strings */,
 				BCE3B7C215AE49DA00205530 /* main.m */,
@@ -894,6 +918,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BBB3264E16F679FD007153BC /* TestFlightSDK1 */,
 				BB8DB07116F020E0005BB646 /* Reachability */,
 				BB6816DD16C739E5000E120F /* ASIHTTPRequestGit */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
@@ -1319,6 +1344,8 @@
 				4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */,
 				4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */,
 				4D6FF09916B23E9300252DEC /* one-goal-wallpaper-568h@2x.png in Resources */,
+				BBB3265416F679FD007153BC /* README.md in Resources */,
+				BBB3265516F679FD007153BC /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,6 +1382,7 @@
 				BB6816F816C73A7E000E120F /* ASIInputStream.m in Sources */,
 				BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */,
 				BB8DB07416F020E0005BB646 /* Reachability.m in Sources */,
+				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,6 +1478,10 @@
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1457,6 +1489,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E6E3DCA6-C234-4F2C-A4F9-7BBA8FF3E828";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -1531,11 +1564,16 @@
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -1556,6 +1594,10 @@
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -1563,6 +1605,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;

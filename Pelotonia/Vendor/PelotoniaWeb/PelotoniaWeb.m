@@ -9,6 +9,7 @@
 #import "PelotoniaWeb.h"
 #import "ASIHTTPRequest.h"
 #import "TFHpple.h"
+#import "TFHppleElement+IDSearch.h"
 
 @interface PelotoniaWeb()
 + (NSString *)stripWhitespace:(NSString *)input;
@@ -102,7 +103,7 @@
         {
         
             TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-            
+
             // figure out what type of rider we are first
             NSString *riderTypeUrlXPath = @"//*[@id='sectionheader']/img";
             NSString *riderType = [[[[parser searchWithXPathQuery:riderTypeUrlXPath] objectAtIndex:0] attributes] valueForKey:@"alt"];
@@ -134,13 +135,23 @@
             NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
             rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
             
-            NSString *riderStoryXPath = @"//div[@class='story']/text()";
-            NSArray *storyRows = [parser searchWithXPathQuery:riderStoryXPath];
-            NSLog(@"story size %d", [storyRows count]);
-            rider.story = @"";
-            for (TFHppleElement *element in storyRows) {
-                rider.story = [rider.story stringByAppendingString:[element content]];
+            // get the riders' story
+            TFHppleElement *div = [[parser searchWithXPathQuery:@"//div[@class='story']"] objectAtIndex:0];
+            if (div != nil)
+            {
+                rider.story = @"";
+                
+                // the div contains all the stories
+                for (TFHppleElement *childText in div.children)
+                {
+                    // get the content from within the div
+                    if (nil != childText.content)
+                    {
+                        rider.story = [rider.story stringByAppendingString:childText.content];
+                    }
+                }
             }
+            
 
             // get the rider's properties off the page now
             NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
@@ -182,7 +193,7 @@
         @catch (NSException *exception) {
             NSLog(@"trouble parsing %@'s profile story", rider.name);
             rider.story = @"(no story on file)";
-            rider.riderType = @"Unknown";
+            NSLog(@"%@", [exception description]);
         }
      
         if (completeBlock) {
@@ -193,7 +204,8 @@
     [request setFailedBlock:^{
         NSError *error = [request error];
         NSLog(@"%@", error);
-        if (failureBlock) {
+        if (failureBlock)
+        {
             failureBlock(@"Network error");
         }
     }];

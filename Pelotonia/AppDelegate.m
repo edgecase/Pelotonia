@@ -14,6 +14,7 @@
 #import "SHKConfiguration.h"
 #import "SHKFacebook.h"
 #import "PelotoniaSHKConfigurator.h"
+#import "TestFlight.h"
 
 @implementation AppDelegate
 
@@ -23,6 +24,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
+    
+    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
 
