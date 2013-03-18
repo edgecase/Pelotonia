@@ -20,7 +20,8 @@
 + (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId]];
-    __unsafe_unretained __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
+    __unsafe_unretained __block ASIHTTPRequest *request = _request;
     
     NSLog(@"searchForRiderWithLastName: finding %@ (%@)", lastName, riderId);
     
@@ -95,7 +96,8 @@
 {
     NSURL *url = [NSURL URLWithString:rider.profileUrl];
     NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
-    __unsafe_unretained __block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
+    __unsafe_unretained __block ASIHTTPRequest *request = _request;
     
     [request setCompletionBlock:^{
         NSLog(@"Found rider %@", rider.name);

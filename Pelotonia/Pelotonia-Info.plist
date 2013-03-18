@@ -54,7 +54,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22</string>
+	<string>23</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
@@ -83,11 +83,11 @@
 			<key>TintColor</key>
 			<dict>
 				<key>Blue</key>
-				<real>0.13516244292259216</real>
+				<real>0.396078431372549</real>
 				<key>Green</key>
-				<real>0.8200681209564209</real>
+				<real>0.36862745098039218</real>
 				<key>Red</key>
-				<real>0.20559866726398468</real>
+				<real>0.32941176470588235</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
