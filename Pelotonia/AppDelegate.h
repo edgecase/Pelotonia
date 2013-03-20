@@ -6,7 +6,16 @@
 //  Copyright (c) 2012 Sandlot Software, LLC. All rights reserved.
 //
 
+
 #import <UIKit/UIKit.h>
+
+#define IF_IOS60_OR_GREATER(...) \
+if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_6_0) \
+{ \
+__VA_ARGS__ \
+}
+
+
 @class RiderDataController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {

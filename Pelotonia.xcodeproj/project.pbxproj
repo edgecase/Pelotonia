@@ -86,10 +86,10 @@
 		4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28615DE8CD800809BA2 /* 209-twitter.png */; };
 		4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */; };
 		4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */; };
-		BB6816D516C725B1000E120F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816D416C725B1000E120F /* Accounts.framework */; };
-		BB6816D716C725B9000E120F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816D616C725B9000E120F /* Social.framework */; };
+		BB6816D516C725B1000E120F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816D416C725B1000E120F /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BB6816D716C725B9000E120F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816D616C725B9000E120F /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BB6816D916C726D5000E120F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816D816C726D5000E120F /* libsqlite3.dylib */; };
-		BB6816DB16C726DE000E120F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816DA16C726DE000E120F /* AdSupport.framework */; };
+		BB6816DB16C726DE000E120F /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6816DA16C726DE000E120F /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BB6816F216C73A7E000E120F /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816DF16C73A7E000E120F /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F316C73A7E000E120F /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816E216C73A7E000E120F /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F416C73A7E000E120F /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816E416C73A7E000E120F /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };

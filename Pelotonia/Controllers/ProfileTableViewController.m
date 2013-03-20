@@ -346,8 +346,8 @@
     
     // use the SHKFacebook object to share progress directly on FB
     SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride", self.rider.name] contentType:SHKURLContentTypeWebpage];
-    
-    [item setText:@"This is a test"];
+
+    [item setText:[NSString stringWithFormat:@"Supportive message here"]];
     
     [item setFacebookURLShareDescription:@"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference."];
     
