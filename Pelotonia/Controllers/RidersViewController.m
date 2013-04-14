@@ -14,6 +14,7 @@
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
 #import "UIImage+Resize.h"
+#import "MenuViewController.h"
 
 
 @interface RidersViewController ()
@@ -82,6 +83,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
+        self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    }
+    
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.slidingViewController setAnchorRightRevealAmount:280.0f];
+    
     [self reloadTableData];
 }
 
@@ -149,11 +158,13 @@
 {
     // it's a "regular" cell
     static NSString *CellIdentifier = @"riderCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
+    UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (_cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    // this trick with the temporary variable silences the warning about capturing cell strongly in the block below
+    __weak UITableViewCell *cell = _cell;
     
     // Configure the cell...
     Rider *rider = nil;
@@ -169,6 +180,7 @@
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
 
+    // __block keyword lets ARC know we're using activityIndicator in a block, so don't gc it
     __block UIActivityIndicatorView *activityIndicator;
     [cell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
     activityIndicator.center = cell.imageView.center;
@@ -335,5 +347,12 @@
 {
     // do nothing
 }
+
+#pragma mark -- ECSlidingMenu class
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
 
 @end

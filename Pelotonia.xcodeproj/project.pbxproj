@@ -99,6 +99,12 @@
 		BB6816F816C73A7E000E120F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816EE16C73A7E000E120F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816F016C73A7E000E120F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
+		BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */; };
+		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
+		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
+		BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684E171B035800A3D2E7 /* 259-list.png */; };
+		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -523,6 +529,16 @@
 		BB6816F116C73A7E000E120F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = Vendor/ASIHTTPRequestGit/Classes/ASIProgressDelegate.h; sourceTree = "<group>"; };
 		BB8DB07216F020E0005BB646 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB8DB07316F020E0005BB646 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		BB9E0944171AFB6D0093FDD5 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitialSlidingViewController.h; path = Controllers/InitialSlidingViewController.h; sourceTree = "<group>"; };
+		BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitialSlidingViewController.m; path = Controllers/InitialSlidingViewController.m; sourceTree = "<group>"; };
+		BB9E096C171AFF360093FDD5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Controllers/MenuViewController.h; sourceTree = "<group>"; };
+		BB9E096D171AFF360093FDD5 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Controllers/MenuViewController.m; sourceTree = "<group>"; };
+		BBAC684E171B035800A3D2E7 /* 259-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list.png"; sourceTree = "<group>"; };
+		BBAC684F171B035800A3D2E7 /* 259-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list@2x.png"; sourceTree = "<group>"; };
 		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		BBB3265216F679FD007153BC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
@@ -604,6 +620,8 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BBAC684E171B035800A3D2E7 /* 259-list.png */,
+				BBAC684F171B035800A3D2E7 /* 259-list@2x.png */,
 				4DF7E28615DE8CD800809BA2 /* 209-twitter.png */,
 				4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */,
 				4DF7E28215DE8CBC00809BA2 /* 208-facebook.png */,
@@ -805,6 +823,17 @@
 			path = Vendor/Reachability;
 			sourceTree = "<group>";
 		};
+		BB9E0941171AFB6D0093FDD5 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */,
+				BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */,
+				BB9E0944171AFB6D0093FDD5 /* UIImage+ImageWithUIView.h */,
+				BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */,
+			);
+			path = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
 		BBB3264E16F679FD007153BC /* TestFlightSDK1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,12 +928,16 @@
 		BCE3B7CF15AE4DE000205530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */,
+				BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */,
 				4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */,
 				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
 				4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */,
 				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
+				BB9E096C171AFF360093FDD5 /* MenuViewController.h */,
+				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -912,6 +945,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BB9E0941171AFB6D0093FDD5 /* ECSlidingViewController */,
 				BBB3264E16F679FD007153BC /* TestFlightSDK1 */,
 				BB8DB07116F020E0005BB646 /* Reachability */,
 				BB6816DD16C739E5000E120F /* ASIHTTPRequestGit */,
@@ -1338,6 +1372,8 @@
 				4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */,
 				4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */,
 				4D6FF09916B23E9300252DEC /* one-goal-wallpaper-568h@2x.png in Resources */,
+				BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */,
+				BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1375,6 +1411,10 @@
 				BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */,
 				BB8DB07416F020E0005BB646 /* Reachability.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
+				BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */,
+				BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */,
+				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
+				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1554,12 +1594,18 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"TESTING=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
 				);
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
