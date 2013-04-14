@@ -109,6 +109,10 @@
     NSLog(@"%@%@",@"Failed to open url:",[url description]);
 }
 
+- (IBAction)revealMenu:(id)sender {
+    [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
 
 - (void)sandlotPressed:(id)sender {
     [self openURLFromString:@"http://www.isandlot.com"];

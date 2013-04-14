@@ -50,16 +50,29 @@
 {
     UIViewController *newTopViewController = nil;
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            // see my profile
-        }
-        if (indexPath.row == 1) {
-            // see pelotonia
-        }
-        if (indexPath.row == 2) {
-            // go to my followers (riders' list)
-            newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
+    if (indexPath.section == 0)
+    {
+        switch (indexPath.row) {
+            case 0:
+                // see my profile
+                break;
+                
+            case 1:
+                // see pelotonia
+                break;
+                
+            case 2:
+                // go to my followers (riders' list)
+                newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
+                break;
+                
+            case 3:
+                // go to the about controller
+                newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutTableViewController"];
+                break;
+                
+            default:
+                break;
         }
     }
     

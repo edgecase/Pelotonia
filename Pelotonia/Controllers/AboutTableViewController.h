@@ -17,5 +17,6 @@
 - (IBAction)sandlotPressed:(id)sender;
 - (IBAction)newContextPressed:(id)sender;
 - (void)openURLFromString:(NSString *)urlString;
+- (IBAction)revealMenu:(id)sender;
 
 @end
