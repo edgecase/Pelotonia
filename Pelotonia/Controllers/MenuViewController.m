@@ -14,6 +14,7 @@
 
 @implementation MenuViewController
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -27,11 +28,9 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // set the colors appropriately
+    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
+    self.tableView.opaque = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,36 +45,45 @@
 
 #pragma mark - Table view delegate
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+
+//    cell.textLabel.text = "";
+    cell.textLabel.font = PELOTONIA_SECONDARY_FONT(16);
+    return cell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *newTopViewController = nil;
+    NSString *newViewControllerName = nil;
     
     if (indexPath.section == 0)
     {
         switch (indexPath.row) {
-            case 0:
+            case ID_PROFILE_MENU:
                 // see my profile
+                newViewControllerName = @"ProfileTableViewController";
                 break;
                 
-            case 1:
-                // see pelotonia
-                break;
+//            case ID_ACTIVITY_STREAM_MENU:
+//                // see pelotonia
+//                break;
                 
-            case 2:
+            case ID_RIDERS_MENU:
                 // go to my followers (riders' list)
-                newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
+                newViewControllerName = @"RidersNavViewController";
                 break;
                 
-            case 3:
+            case ID_ABOUT_PELOTONIA_MENU:
                 // go to the about controller
-                newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutTableViewController"];
-                break;
-                
-            default:
+                newViewControllerName = @"AboutTableViewController";
                 break;
         }
     }
     
+    newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:newViewControllerName];
     
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;

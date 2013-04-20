@@ -39,6 +39,7 @@
 - (IBAction)supportRider:(id)sender;
 - (IBAction)followRider:(id)sender;
 - (IBAction)shareOnFacebook:(id)sender;
+- (IBAction)revealMenu:(id)sender;
 
 - (void)refreshRider;
 - (void)manualRefresh:(NSNotification *)notification;

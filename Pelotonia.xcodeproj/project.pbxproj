@@ -107,6 +107,16 @@
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
+		BBD91F181722EC280027A263 /* 13-bicycle.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F161722EC280027A263 /* 13-bicycle.png */; };
+		BBD91F191722EC280027A263 /* 13-bicycle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F171722EC280027A263 /* 13-bicycle@2x.png */; };
+		BBD91F1C1722EC6A0027A263 /* 253-person.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F1A1722EC6A0027A263 /* 253-person.png */; };
+		BBD91F1D1722EC6A0027A263 /* 253-person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F1B1722EC6A0027A263 /* 253-person@2x.png */; };
+		BBD91F201722ECE60027A263 /* 08-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F1E1722ECE60027A263 /* 08-chat.png */; };
+		BBD91F211722ECE60027A263 /* 08-chat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F1F1722ECE60027A263 /* 08-chat@2x.png */; };
+		BBD91F231722EEC40027A263 /* pelotonia-menu-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F221722EEC40027A263 /* pelotonia-menu-icon@2x.png */; };
+		BBD91F251722EF0D0027A263 /* pelotonia-menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */; };
+		BBD91F281722EF880027A263 /* 37-circle-x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F261722EF880027A263 /* 37-circle-x.png */; };
+		BBD91F291722EF880027A263 /* 37-circle-x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F271722EF880027A263 /* 37-circle-x@2x.png */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
 		BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7BA15AE49DA00205530 /* CoreGraphics.framework */; };
@@ -543,6 +553,16 @@
 		BBB3265216F679FD007153BC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
+		BBD91F161722EC280027A263 /* 13-bicycle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-bicycle.png"; sourceTree = "<group>"; };
+		BBD91F171722EC280027A263 /* 13-bicycle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-bicycle@2x.png"; sourceTree = "<group>"; };
+		BBD91F1A1722EC6A0027A263 /* 253-person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "253-person.png"; sourceTree = "<group>"; };
+		BBD91F1B1722EC6A0027A263 /* 253-person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "253-person@2x.png"; sourceTree = "<group>"; };
+		BBD91F1E1722ECE60027A263 /* 08-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08-chat.png"; sourceTree = "<group>"; };
+		BBD91F1F1722ECE60027A263 /* 08-chat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "08-chat@2x.png"; sourceTree = "<group>"; };
+		BBD91F221722EEC40027A263 /* pelotonia-menu-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelotonia-menu-icon@2x.png"; sourceTree = "<group>"; };
+		BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelotonia-menu-icon.png"; sourceTree = "<group>"; };
+		BBD91F261722EF880027A263 /* 37-circle-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37-circle-x.png"; sourceTree = "<group>"; };
+		BBD91F271722EF880027A263 /* 37-circle-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37-circle-x@2x.png"; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -620,6 +640,16 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BBD91F261722EF880027A263 /* 37-circle-x.png */,
+				BBD91F271722EF880027A263 /* 37-circle-x@2x.png */,
+				BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */,
+				BBD91F221722EEC40027A263 /* pelotonia-menu-icon@2x.png */,
+				BBD91F1E1722ECE60027A263 /* 08-chat.png */,
+				BBD91F1F1722ECE60027A263 /* 08-chat@2x.png */,
+				BBD91F1A1722EC6A0027A263 /* 253-person.png */,
+				BBD91F1B1722EC6A0027A263 /* 253-person@2x.png */,
+				BBD91F161722EC280027A263 /* 13-bicycle.png */,
+				BBD91F171722EC280027A263 /* 13-bicycle@2x.png */,
 				BBAC684E171B035800A3D2E7 /* 259-list.png */,
 				BBAC684F171B035800A3D2E7 /* 259-list@2x.png */,
 				4DF7E28615DE8CD800809BA2 /* 209-twitter.png */,
@@ -1374,6 +1404,16 @@
 				4D6FF09916B23E9300252DEC /* one-goal-wallpaper-568h@2x.png in Resources */,
 				BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */,
 				BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */,
+				BBD91F181722EC280027A263 /* 13-bicycle.png in Resources */,
+				BBD91F191722EC280027A263 /* 13-bicycle@2x.png in Resources */,
+				BBD91F1C1722EC6A0027A263 /* 253-person.png in Resources */,
+				BBD91F1D1722EC6A0027A263 /* 253-person@2x.png in Resources */,
+				BBD91F201722ECE60027A263 /* 08-chat.png in Resources */,
+				BBD91F211722ECE60027A263 /* 08-chat@2x.png in Resources */,
+				BBD91F231722EEC40027A263 /* pelotonia-menu-icon@2x.png in Resources */,
+				BBD91F251722EF0D0027A263 /* pelotonia-menu-icon.png in Resources */,
+				BBD91F281722EF880027A263 /* 37-circle-x.png in Resources */,
+				BBD91F291722EF880027A263 /* 37-circle-x@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

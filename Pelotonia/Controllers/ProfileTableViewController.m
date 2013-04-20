@@ -357,6 +357,12 @@
     
 }
 
+#pragma mark -- ECSlidingMenu class
+- (IBAction)revealMenu:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
 #pragma mark -- PullToRefreshDelegate
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
 {
