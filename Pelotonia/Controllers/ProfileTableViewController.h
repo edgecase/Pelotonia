@@ -15,8 +15,9 @@
 #import "Rider.h"
 #import "PelotoniaWeb.h"
 #import "PullToRefreshView.h"
+#import "SendPledgeModalViewController.h"
 
-@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate> {
+@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, SendPledgeModalViewControllerDelegate> {
     PullToRefreshView *pull;
     BOOL _following;
 }

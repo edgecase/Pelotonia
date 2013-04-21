@@ -81,8 +81,6 @@
 		4DD0407A15B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD0407915B36E320073E7B6 /* 1.1_LOGOTYPE_RGB_GRN.png */; };
 		4DD7F53B15B5108300B1DF42 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53915B5108300B1DF42 /* AddressBook.framework */; };
 		4DD7F53C15B5108300B1DF42 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */; };
-		4DF7E28415DE8CBC00809BA2 /* 208-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28215DE8CBC00809BA2 /* 208-facebook.png */; };
-		4DF7E28515DE8CBC00809BA2 /* 208-facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28315DE8CBC00809BA2 /* 208-facebook@2x.png */; };
 		4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28615DE8CD800809BA2 /* 209-twitter.png */; };
 		4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */; };
 		4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */; };
@@ -117,6 +115,11 @@
 		BBD91F251722EF0D0027A263 /* pelotonia-menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */; };
 		BBD91F281722EF880027A263 /* 37-circle-x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F261722EF880027A263 /* 37-circle-x.png */; };
 		BBD91F291722EF880027A263 /* 37-circle-x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F271722EF880027A263 /* 37-circle-x@2x.png */; };
+		BBF5C29717242D3300E5376A /* 18-envelope.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF5C29517242D3300E5376A /* 18-envelope.png */; };
+		BBF5C29817242D3300E5376A /* 18-envelope@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF5C29617242D3300E5376A /* 18-envelope@2x.png */; };
+		BBF5C29B17242D5100E5376A /* 208-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF5C29917242D5100E5376A /* 208-facebook.png */; };
+		BBF5C29C17242D5100E5376A /* 208-facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF5C29A17242D5100E5376A /* 208-facebook@2x.png */; };
+		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
 		BCE3B7BB15AE49DA00205530 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7BA15AE49DA00205530 /* CoreGraphics.framework */; };
@@ -507,8 +510,6 @@
 		4DD7F53915B5108300B1DF42 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4DD7F53A15B5108300B1DF42 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		4DF7E28215DE8CBC00809BA2 /* 208-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook.png"; sourceTree = "<group>"; };
-		4DF7E28315DE8CBC00809BA2 /* 208-facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook@2x.png"; sourceTree = "<group>"; };
 		4DF7E28615DE8CD800809BA2 /* 209-twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "209-twitter.png"; sourceTree = "<group>"; };
 		4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "209-twitter@2x.png"; sourceTree = "<group>"; };
 		4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = Controllers/ProfileTableViewController.h; sourceTree = "<group>"; };
@@ -563,6 +564,12 @@
 		BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pelotonia-menu-icon.png"; sourceTree = "<group>"; };
 		BBD91F261722EF880027A263 /* 37-circle-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37-circle-x.png"; sourceTree = "<group>"; };
 		BBD91F271722EF880027A263 /* 37-circle-x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37-circle-x@2x.png"; sourceTree = "<group>"; };
+		BBF5C29517242D3300E5376A /* 18-envelope.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-envelope.png"; sourceTree = "<group>"; };
+		BBF5C29617242D3300E5376A /* 18-envelope@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "18-envelope@2x.png"; sourceTree = "<group>"; };
+		BBF5C29917242D5100E5376A /* 208-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook.png"; sourceTree = "<group>"; };
+		BBF5C29A17242D5100E5376A /* 208-facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "208-facebook@2x.png"; sourceTree = "<group>"; };
+		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
+		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCE3B7B615AE49DA00205530 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BCE3B7B815AE49DA00205530 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -640,6 +647,10 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BBF5C29917242D5100E5376A /* 208-facebook.png */,
+				BBF5C29A17242D5100E5376A /* 208-facebook@2x.png */,
+				BBF5C29517242D3300E5376A /* 18-envelope.png */,
+				BBF5C29617242D3300E5376A /* 18-envelope@2x.png */,
 				BBD91F261722EF880027A263 /* 37-circle-x.png */,
 				BBD91F271722EF880027A263 /* 37-circle-x@2x.png */,
 				BBD91F241722EF0D0027A263 /* pelotonia-menu-icon.png */,
@@ -654,8 +665,6 @@
 				BBAC684F171B035800A3D2E7 /* 259-list@2x.png */,
 				4DF7E28615DE8CD800809BA2 /* 209-twitter.png */,
 				4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */,
-				4DF7E28215DE8CBC00809BA2 /* 208-facebook.png */,
-				4DF7E28315DE8CBC00809BA2 /* 208-facebook@2x.png */,
 				052144AA15C9A0FC00E8B090 /* new context.png */,
 				4DB6493815C60FA300980FCB /* Baksheesh */,
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
@@ -968,6 +977,8 @@
 				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
 				BB9E096C171AFF360093FDD5 /* MenuViewController.h */,
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
+				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
+				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1397,8 +1408,6 @@
 				052144AB15C9A0FC00E8B090 /* new context.png in Resources */,
 				4D57C4EA16171D3200ED7660 /* Default-568h@2x.png in Resources */,
 				4DB3347815D229650056E794 /* ShareKit.bundle in Resources */,
-				4DF7E28415DE8CBC00809BA2 /* 208-facebook.png in Resources */,
-				4DF7E28515DE8CBC00809BA2 /* 208-facebook@2x.png in Resources */,
 				4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */,
 				4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */,
 				4D6FF09916B23E9300252DEC /* one-goal-wallpaper-568h@2x.png in Resources */,
@@ -1414,6 +1423,10 @@
 				BBD91F251722EF0D0027A263 /* pelotonia-menu-icon.png in Resources */,
 				BBD91F281722EF880027A263 /* 37-circle-x.png in Resources */,
 				BBD91F291722EF880027A263 /* 37-circle-x@2x.png in Resources */,
+				BBF5C29717242D3300E5376A /* 18-envelope.png in Resources */,
+				BBF5C29817242D3300E5376A /* 18-envelope@2x.png in Resources */,
+				BBF5C29B17242D5100E5376A /* 208-facebook.png in Resources */,
+				BBF5C29C17242D5100E5376A /* 208-facebook@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1455,6 +1468,7 @@
 				BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
+				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

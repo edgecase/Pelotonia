@@ -15,6 +15,7 @@
 #import "UIImage+RoundedCorner.h"
 #import "SHK.h"
 #import "SHKFacebook.h"
+#import "SendPledgeModalViewController.h"
 
 
 @interface ProfileTableViewController ()
@@ -99,18 +100,29 @@
     _rider = rider;
 }
 
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+}
+
+- (void)showPledge:(SendPledgeModalViewController *)pledgeViewController
+{
+    pledgeViewController.rider = self.rider;
+    pledgeViewController.delegate = self;
+}
+
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            [self.pledgeAmountTextField becomeFirstResponder];
-        }
-        else if (indexPath.row == 1)
-        {
-            [self.donorEmailTextField becomeFirstResponder];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 3) {
+            // share progress on facebook
+            [self shareOnFacebook:nil];
         }
     }
 }
@@ -125,10 +137,6 @@
     label.shadowColor = SECONDARY_GREEN;
     
     if (section == 1)
-    {
-        label.text = [NSString stringWithFormat:@"Support %@", self.rider.name];
-    }
-    else if (section == 2)
     {
         label.text = @"My Story";
     }
@@ -255,59 +263,29 @@
     [alert show];
 }
 
-- (void)sendPledgeMail
+- (void)sendPledgeMailToEmail:(NSString *)email withAmount:(NSString *)amount
 {
-    NSLog(@"Email sent to: %@", self.donorEmailTextField.text);
-    NSLog(@"You have decided to sponsor %@ the amount %@", self.rider.name, self.donorEmailTextField.text);
-    
-    MFMailComposeViewController *mailComposer;
-    mailComposer  = [[MFMailComposeViewController alloc] init];
-    mailComposer.mailComposeDelegate = self;
-    [mailComposer setToRecipients:[NSArray arrayWithObject:self.donorEmailTextField.text]];
-    [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
-    [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
-    
-    NSString *amountFormat;
-    if ([self.pledgeAmountTextField.text length] > 0) {
-        amountFormat = @"$%@";
+    if (email && amount) {
+        
+        NSLog(@"Email sent to: %@", email);
+        NSLog(@"You have decided to sponsor %@ the amount %@", self.rider.name, amount);
+        
+        MFMailComposeViewController *mailComposer;
+        mailComposer  = [[MFMailComposeViewController alloc] init];
+        mailComposer.mailComposeDelegate = self;
+        [mailComposer setToRecipients:[NSArray arrayWithObject:email]];
+        [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
+        [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
+        
+        NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you for your <a href=%@>pledge</a> of %@ to my Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia 12 on August 10-12, 2012. The ride will span two days and will cover as many as 180 miles. In its first three years, Pelotonia has attracted over 8,300 riders from 38 states, over 2,800 volunteers, hundreds of thousands of donors and raised $25.4 million for cancer research. In 2011 alone, a record $13.1 million was raised. Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
+        
+        NSLog(@"msgBody: %@", msg);
+        [mailComposer setMessageBody:msg isHTML:YES];
+        [self presentModalViewController:mailComposer animated:YES];
     }
-    else {
-        amountFormat = @"%@";
-    }
-    NSString *amount = [NSString stringWithFormat:amountFormat, self.pledgeAmountTextField.text];
-    
-    NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you for your <a href=%@>pledge</a> of %@ to my Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia 12 on August 10-12, 2012. The ride will span two days and will cover as many as 180 miles. In its first three years, Pelotonia has attracted over 8,300 riders from 38 states, over 2,800 volunteers, hundreds of thousands of donors and raised $25.4 million for cancer research. In 2011 alone, a record $13.1 million was raised. Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
-    
-    NSLog(@"msgBody: %@", msg);
-    [mailComposer setMessageBody:msg isHTML:YES];
-    [self presentModalViewController:mailComposer animated:YES];
+
     
 }
-
-
-
-#pragma mark -- text field delegate methods
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    CGRect rc = [textField bounds];
-    rc = [textField convertRect:rc toView:self.tableView];
-    rc.origin.x = 0 ;
-    rc.origin.y -= 60 ;
-    
-    rc.size.height = 400;
-    [self.tableView scrollRectToVisible:rc animated:YES];
-}
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)tf
-{
-    [tf resignFirstResponder];
-    if (tf == self.donorEmailTextField)
-    {
-        [self sendPledgeMail];
-    }
-    return YES;
-}
-
 
 #pragma mark - MFMailComposeViewDelegate methods
 - (void)mailComposeController:(MFMailComposeViewController*)controller
@@ -320,12 +298,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
-- (IBAction)supportRider:(id)sender {
-    if ([self validateForm]) {
-        [self sendPledgeMail];
-    }
-}
 
 - (IBAction)followRider:(id)sender {
     // add the current rider to the main list of riders
@@ -341,7 +313,8 @@
     [self configureView];
 }
 
-- (IBAction)shareOnFacebook:(id)sender {
+- (IBAction)shareOnFacebook:(id)sender
+{
     NSLog(@"Sharing on Facebook: %@", self.rider.name);
     
     // use the SHKFacebook object to share progress directly on FB
@@ -385,6 +358,23 @@
 - (void)riderPhotoThumbDidUpdate:(UIImage *)image
 {
     [self configureView];
+}
+
+#pragma mark -- SendPledgeViewControllerDelegate
+- (void)sendPledgeModalViewControllerDidCancel:(SendPledgeModalViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)sendPledgeModalViewControllerDidFinish:(SendPledgeModalViewController *)controller
+{
+
+    NSString *email = controller.textViewName.text;
+    NSString *amount = controller.textViewAmount.text;
+    
+    [controller dismissViewControllerAnimated:YES completion:^(void){
+        [self sendPledgeMailToEmail:email withAmount:amount];
+    }];
 }
 
 
