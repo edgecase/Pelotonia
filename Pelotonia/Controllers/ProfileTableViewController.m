@@ -15,7 +15,10 @@
 #import "UIImage+RoundedCorner.h"
 #import "SHK.h"
 #import "SHKFacebook.h"
+#import "SHKTwitter.h"
 #import "SendPledgeModalViewController.h"
+
+static NSDictionary *sharersTable = nil;
 
 
 @interface ProfileTableViewController ()
@@ -23,14 +26,11 @@
 @end
 
 @implementation ProfileTableViewController 
-@synthesize pledgeAmountTextField;
-@synthesize donorEmailTextField;
 @synthesize donationProgress;
 @synthesize storyTextView;
 @synthesize followButton;
 @synthesize nameAndRouteCell;
 @synthesize raisedAmountCell;
-@synthesize supportRiderButton;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,32 +44,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (sharersTable == nil) {
+        // list of potential sharers that we care about 
+        sharersTable = @{@"Twitter" : @"shareOnTwitter",
+                         @"Facebook" : @"shareOnFacebook"
+                         };
+    }
 
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
-    
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.cancelsTouchesInView = NO; //so that action such as clear text field button can be pressed
-    [self.tableView addGestureRecognizer:gestureRecognizer];
-}
-
-- (void)hideKeyboard
-{
-    [self.tableView endEditing:YES];
 }
 
 - (void)viewDidUnload
 {
-    [self setPledgeAmountTextField:nil];
-    [self setDonorEmailTextField:nil];
     [self setDonationProgress:nil];
     [self setStoryTextView:nil];
     [self setFollowButton:nil];
     [self setNameAndRouteCell:nil];
     [self setRaisedAmountCell:nil];
-    [self setSupportRiderButton:nil];
-    [self setShareOnFacebookButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -77,8 +71,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // manual refresh takes too long when you're just trying to get information.
-//    [self manualRefresh:nil];
     [self configureView];
 }
 
@@ -121,8 +113,8 @@
 
     if (indexPath.section == 0) {
         if (indexPath.row == 3) {
-            // share progress on facebook
-            [self shareOnFacebook:nil];
+            // show the "share on..." dialog
+            [self showShareActionSheet];
         }
     }
 }
@@ -134,7 +126,7 @@
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = SECONDARY_GREEN;
+    label.shadowColor = [UIColor blackColor];
     
     if (section == 1)
     {
@@ -225,13 +217,12 @@
     
     // now we resize the photo and the cell so that the photo looks right
     __block UIActivityIndicatorView *activityIndicator;
-    self.nameAndRouteCell.imageView.image = [UIImage imageNamed:@"profile_default.jpg"];
     [self.nameAndRouteCell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
     activityIndicator.center = self.nameAndRouteCell.imageView.center;
     [activityIndicator startAnimating];
     
     [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-            placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+            placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
      {
          if (error != nil) {
@@ -245,12 +236,6 @@
     
     // re-layout subviews so that the image auto-adjusts
     [self.nameAndRouteCell layoutSubviews];
-}
-
-- (BOOL)validateForm
-{
-    return (([self.donorEmailTextField.text length] > 0)
-            && ([self.pledgeAmountTextField.text length] > 0));
 }
 
 - (void)postAlert:(NSString *)msg {
@@ -313,7 +298,7 @@
     [self configureView];
 }
 
-- (IBAction)shareOnFacebook:(id)sender
+- (void)shareOnFacebook
 {
     NSLog(@"Sharing on Facebook: %@", self.rider.name);
     
@@ -327,7 +312,16 @@
     [item setFacebookURLSharePictureURI:@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png"];
     
     [SHKFacebook shareItem:item];
+}
+
+- (void)shareOnTwitter
+{
+    NSLog(@"Sharing on Twitter: %@", self.rider.name);
     
+    // use the SHKFacebook object to share progress directly on FB
+    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride at %@", self.rider.name, self.rider.profileUrl] contentType:SHKURLContentTypeWebpage];
+    
+    [SHKTwitter shareItem:item];
 }
 
 #pragma mark -- ECSlidingMenu class
@@ -376,6 +370,43 @@
         [self sendPledgeMailToEmail:email withAmount:amount];
     }];
 }
+
+#pragma mark -- sharing
+- (void)showShareActionSheet
+{
+    NSString *actionSheetTitle = [NSString stringWithFormat:NSLocalizedString(@"Choose a Social Network", nil)];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionSheetTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    for (NSString *title in [sharersTable allKeys]) {
+        [actionSheet addButtonWithTitle:title];
+    }
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons-1;
+    
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    actionSheet.tag = kShareActionSheet;
+    
+    // Display the action sheet
+    [actionSheet showFromBarButtonItem:self.followButton animated:YES];
+}
+
+#pragma mark -- UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == kShareActionSheet) {
+        if (buttonIndex != actionSheet.cancelButtonIndex) {
+            // this is what we do when we share...
+            NSString *sharersName = [actionSheet buttonTitleAtIndex:buttonIndex];
+            NSString *selectorName = [sharersTable objectForKey:sharersName];
+            
+            // call the appropriate selector
+            if (selectorName) {
+                [self performSelector:NSSelectorFromString(selectorName)];
+            }
+        }
+    }
+}
+
 
 
 @end

@@ -406,7 +406,7 @@
                         <sections>
                             <tableViewSection id="beo-uE-WYn">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cWh-5g-VPe" detailTextLabel="udj-Fh-629" rowHeight="92" style="IBUITableViewCellStyleSubtitle" id="0Uq-Pf-ndZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cWh-5g-VPe" detailTextLabel="udj-Fh-629" imageView="kxR-iQ-tKC" rowHeight="92" style="IBUITableViewCellStyleSubtitle" id="0Uq-Pf-ndZ">
                                         <rect key="frame" x="0.0" y="10" width="320" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -414,19 +414,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="cWh-5g-VPe">
-                                                    <rect key="frame" x="10" y="26" width="50" height="22"/>
+                                                    <rect key="frame" x="77" y="26" width="50" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Route" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" id="udj-Fh-629">
-                                                    <rect key="frame" x="10" y="48" width="38" height="18"/>
+                                                    <rect key="frame" x="77" y="48" width="38" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pelotonia-icon.png" id="kxR-iQ-tKC">
+                                                    <rect key="frame" x="10" y="17" width="57" height="57"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -503,14 +507,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pledge your support" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jp0-t1-HbQ">
-                                                    <rect key="frame" x="44" y="0.0" width="226" height="43"/>
+                                                    <rect key="frame" x="43" y="0.0" width="227" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="18-envelope.png" id="sQI-5H-nQR">
-                                                    <rect key="frame" x="10" y="13" width="24" height="16"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pelotonia-menu-icon.png" id="sQI-5H-nQR">
+                                                    <rect key="frame" x="9" y="9" width="24" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -711,12 +715,12 @@
     <resources>
         <image name="08-chat.png" width="24" height="22"/>
         <image name="13-bicycle.png" width="34" height="21"/>
-        <image name="18-envelope.png" width="24" height="16"/>
         <image name="208-facebook.png" width="22" height="22"/>
         <image name="253-person.png" width="26" height="24"/>
         <image name="259-list.png" width="20" height="14"/>
         <image name="Pelotonia_logo.png" width="530" height="54"/>
         <image name="new context.png" width="511" height="81"/>
+        <image name="pelotonia-icon.png" width="57" height="57"/>
         <image name="pelotonia-menu-icon.png" width="24" height="24"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
