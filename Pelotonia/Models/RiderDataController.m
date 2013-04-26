@@ -13,10 +13,6 @@
 
 - (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
-#if TESTING
-    Rider *firstRider = [[Rider alloc] initWithName:@"Mark Harris" andId:@"4111"];
-    [defaultList addObject:firstRider];
-#endif
     _riderList = defaultList;
 }
 

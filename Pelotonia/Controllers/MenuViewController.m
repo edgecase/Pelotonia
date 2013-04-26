@@ -64,12 +64,13 @@
         switch (indexPath.row) {
             case ID_PROFILE_MENU:
                 // see my profile
-                newViewControllerName = @"ProfileTableViewController";
+                newViewControllerName = @"UserProfileViewController";
                 break;
                 
-//            case ID_ACTIVITY_STREAM_MENU:
-//                // see pelotonia
-//                break;
+            case ID_ACTIVITY_STREAM_MENU:
+                // see pelotonia
+                newViewControllerName = @"ActivityViewController";
+                break;
                 
             case ID_RIDERS_MENU:
                 // go to my followers (riders' list)

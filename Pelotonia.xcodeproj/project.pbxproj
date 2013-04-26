@@ -101,6 +101,8 @@
 		BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
 		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
+		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
+		BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C38172AA00E002DE00A /* UserProfileViewController.m */; };
 		BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684E171B035800A3D2E7 /* 259-list.png */; };
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
@@ -548,6 +550,10 @@
 		BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitialSlidingViewController.m; path = Controllers/InitialSlidingViewController.m; sourceTree = "<group>"; };
 		BB9E096C171AFF360093FDD5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Controllers/MenuViewController.h; sourceTree = "<group>"; };
 		BB9E096D171AFF360093FDD5 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Controllers/MenuViewController.m; sourceTree = "<group>"; };
+		BBA66C13172A9FD8002DE00A /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = Controllers/ActivityViewController.h; sourceTree = "<group>"; };
+		BBA66C14172A9FD9002DE00A /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = Controllers/ActivityViewController.m; sourceTree = "<group>"; };
+		BBA66C37172AA00D002DE00A /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = Controllers/UserProfileViewController.h; sourceTree = "<group>"; };
+		BBA66C38172AA00E002DE00A /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = Controllers/UserProfileViewController.m; sourceTree = "<group>"; };
 		BBAC684E171B035800A3D2E7 /* 259-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list.png"; sourceTree = "<group>"; };
 		BBAC684F171B035800A3D2E7 /* 259-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list@2x.png"; sourceTree = "<group>"; };
 		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -979,6 +985,10 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
 				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
+				BBA66C13172A9FD8002DE00A /* ActivityViewController.h */,
+				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
+				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
+				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1469,6 +1479,8 @@
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
+				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
+				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
