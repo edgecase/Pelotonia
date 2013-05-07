@@ -84,6 +84,8 @@ static NSDictionary *sharersTable = nil;
     [self.tableView removeObserver:pull forKeyPath:@"contentOffset"];
 }
 
+
+
 //implementation
 
 

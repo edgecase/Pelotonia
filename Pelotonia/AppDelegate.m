@@ -42,6 +42,8 @@
     // set up Parse
     [Parse setApplicationId:@"9CUxtD0xEc85ZoN3D9wv5H5li7fQMBx6XjZ6GhqP"
                   clientKey:@"JMsMecnjVTIsjWNyradXSMVSeflHq6StaQmN3Eqz"];
+    [PFFacebookUtils initializeFacebook];
+    
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     // call the Appirater class
@@ -102,6 +104,8 @@
 
 - (BOOL)handleOpenURL:(NSURL*)url
 {
+    [PFFacebookUtils handleOpenURL:url];
+    
     NSString* scheme = [url scheme];
     NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
     if ([scheme hasPrefix:prefix])

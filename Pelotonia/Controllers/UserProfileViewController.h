@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserProfileViewController : UITableViewController
+@interface UserProfileViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *signInOutButton;
 
 - (IBAction)revealMenu:(id)sender;
+- (IBAction)signInOutPressed:(id)sender;
 
 @end

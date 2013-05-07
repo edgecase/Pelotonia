@@ -123,6 +123,7 @@
 		BBD452A81738A4B4000CC966 /* 117-todo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452A61738A4B4000CC966 /* 117-todo@2x.png */; };
 		BBD452AB1738AC36000CC966 /* header-background.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452A91738AC36000CC966 /* header-background.png */; };
 		BBD452AC1738AC36000CC966 /* header-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452AA1738AC36000CC966 /* header-background@2x.png */; };
+		BBD452AE1738BD21000CC966 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBD452AD1738BD21000CC966 /* FacebookSDK.framework */; };
 		BBD91F181722EC280027A263 /* 13-bicycle.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F161722EC280027A263 /* 13-bicycle.png */; };
 		BBD91F191722EC280027A263 /* 13-bicycle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F171722EC280027A263 /* 13-bicycle@2x.png */; };
 		BBD91F1C1722EC6A0027A263 /* 253-person.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD91F1A1722EC6A0027A263 /* 253-person.png */; };
@@ -592,6 +593,7 @@
 		BBD452A61738A4B4000CC966 /* 117-todo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "117-todo@2x.png"; sourceTree = "<group>"; };
 		BBD452A91738AC36000CC966 /* header-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-background.png"; sourceTree = "<group>"; };
 		BBD452AA1738AC36000CC966 /* header-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-background@2x.png"; sourceTree = "<group>"; };
+		BBD452AD1738BD21000CC966 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		BBD91F161722EC280027A263 /* 13-bicycle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-bicycle.png"; sourceTree = "<group>"; };
 		BBD91F171722EC280027A263 /* 13-bicycle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "13-bicycle@2x.png"; sourceTree = "<group>"; };
 		BBD91F1A1722EC6A0027A263 /* 253-person.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "253-person.png"; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 				4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */,
 				BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */,
 				BB6587EB1735F02D00ABA5AF /* Parse.framework in Frameworks */,
+				BBD452AE1738BD21000CC966 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,6 +964,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBD452AD1738BD21000CC966 /* FacebookSDK.framework */,
 				BB6588111735F0AA00ABA5AF /* StoreKit.framework */,
 				BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */,
 				BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */,
