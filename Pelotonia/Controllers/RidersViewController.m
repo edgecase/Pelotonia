@@ -15,6 +15,7 @@
 #import "PelotoniaWeb.h"
 #import "UIImage+Resize.h"
 #import "MenuViewController.h"
+#import <Parse/Parse.h>
 
 
 @interface RidersViewController ()
@@ -70,6 +71,7 @@
     for (Rider *rider in [self.dataController allRiders]) {
         [rider refreshFromWebOnComplete:nil onFailure:nil];
     }
+    
 }
 
 - (void)viewDidUnload

@@ -66,6 +66,9 @@
         if (indexPath.row == 0 || indexPath.row == 1) {
             [self pelotoniaPressed:tableView];
         }
+        if (indexPath.row == 3) {
+            [self faqPressed:tableView];
+        }
     }
     
     if (indexPath.section == 1) {
@@ -124,6 +127,10 @@
 
 - (void)pelotoniaPressed:(id)sender {
     [self openURLFromString:@"http://www.pelotonia.org"];
+}
+
+- (void)faqPressed:(id)sender {
+    [self openURLFromString:@"http://pelotonia.org/ride/faq"];
 }
 
 @end

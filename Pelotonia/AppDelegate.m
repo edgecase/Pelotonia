@@ -15,6 +15,7 @@
 #import "SHKFacebook.h"
 #import "PelotoniaSHKConfigurator.h"
 #import "TestFlight.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -37,6 +38,11 @@
 
     // send any cached messages
     [SHK flushOfflineQueue];
+    
+    // set up Parse
+    [Parse setApplicationId:@"9CUxtD0xEc85ZoN3D9wv5H5li7fQMBx6XjZ6GhqP"
+                  clientKey:@"JMsMecnjVTIsjWNyradXSMVSeflHq6StaQmN3Eqz"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     // call the Appirater class
     [Appirater appLaunched:YES];

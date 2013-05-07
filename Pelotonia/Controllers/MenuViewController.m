@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "Pelotonia-Colors.h"
 
 @interface MenuViewController ()
 
@@ -49,10 +50,26 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-//    cell.textLabel.text = "";
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(16);
     return cell;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header-background.png"]];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 21)];
+    label.textColor = PRIMARY_GREEN;
+    label.font = PELOTONIA_FONT(17);
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = SECONDARY_LIGHT_GRAY;
+
+    label.text = [super tableView:tableView titleForHeaderInSection:section];
+    [headerView addSubview:label];
+    return headerView;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,8 +94,32 @@
                 newViewControllerName = @"RidersNavViewController";
                 break;
                 
+            default:
+                newViewControllerName = @"AboutTableViewController";
+        }
+    }
+    
+    if (indexPath.section == 1)
+    {
+        switch (indexPath.row) {
             case ID_ABOUT_PELOTONIA_MENU:
                 // go to the about controller
+                newViewControllerName = @"AboutTableViewController";
+                break;
+                
+            case ID_REGISTER_MENU:
+                // see the registration form
+                newViewControllerName = @"AboutTableViewController";
+                [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:[NSURL URLWithString:@"http://pelotonia.org/register/"] afterDelay:1.0];
+                
+                
+            case ID_SAFETY_MENU:
+                // open safari to the safety site
+                newViewControllerName = @"AboutTableViewController";
+                [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:[NSURL URLWithString:@"http://pelotonia.org/ride/safety"] afterDelay:1.0];
+                break;
+                
+            default:
                 newViewControllerName = @"AboutTableViewController";
                 break;
         }
