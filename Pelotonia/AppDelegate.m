@@ -16,6 +16,7 @@
 #import "PelotoniaSHKConfigurator.h"
 #import "TestFlight.h"
 #import <Parse/Parse.h>
+#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation AppDelegate
 
@@ -45,6 +46,9 @@
     [PFFacebookUtils initializeFacebook];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // mobile monitoring
+    [NewRelicAgent startWithApplicationToken:@"AAfae4b2471c8cc189d477aa2a6fe80390d0fd490d"];
     
     // call the Appirater class
     [Appirater appLaunched:YES];

@@ -84,6 +84,8 @@
 		4DF7E28815DE8CD800809BA2 /* 209-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28615DE8CD800809BA2 /* 209-twitter.png */; };
 		4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */; };
 		4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */; };
+		BB02D28C173B473700656E43 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB02D28B173B473700656E43 /* NewRelicAgent.framework */; };
+		BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB02D28D173B476400656E43 /* CoreTelephony.framework */; };
 		BB6587EB1735F02D00ABA5AF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6587EA1735F02D00ABA5AF /* Parse.framework */; };
 		BB65880E1735F05E00ABA5AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */; };
 		BB6588101735F09100ABA5AF /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */; };
@@ -533,6 +535,8 @@
 		4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "209-twitter@2x.png"; sourceTree = "<group>"; };
 		4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = Controllers/ProfileTableViewController.h; sourceTree = "<group>"; };
 		4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileTableViewController.m; path = Controllers/ProfileTableViewController.m; sourceTree = "<group>"; };
+		BB02D28B173B473700656E43 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
+		BB02D28D173B476400656E43 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BB6587EA1735F02D00ABA5AF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
@@ -643,6 +647,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */,
 				4D18EE15168CB0E500B1BDCD /* SystemConfiguration.framework in Frameworks */,
 				BB6588121735F0AA00ABA5AF /* StoreKit.framework in Frameworks */,
 				4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */,
@@ -674,6 +679,7 @@
 				BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */,
 				BB6587EB1735F02D00ABA5AF /* Parse.framework in Frameworks */,
 				BBD452AE1738BD21000CC966 /* FacebookSDK.framework in Frameworks */,
+				BB02D28C173B473700656E43 /* NewRelicAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,6 +948,7 @@
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
+				BB02D28D173B476400656E43 /* CoreTelephony.framework */,
 				4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */,
 				4DB3345F15D2290D0056E794 /* ShareKit.xcodeproj */,
 				4D57C4E916171D3200ED7660 /* Default-568h@2x.png */,
@@ -964,6 +971,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB02D28B173B473700656E43 /* NewRelicAgent.framework */,
 				BBD452AD1738BD21000CC966 /* FacebookSDK.framework */,
 				BB6588111735F0AA00ABA5AF /* StoreKit.framework */,
 				BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */,
@@ -1639,6 +1647,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
@@ -1725,6 +1734,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
@@ -1761,6 +1771,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
