@@ -107,6 +107,7 @@
 		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
 		BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C38172AA00E002DE00A /* UserProfileViewController.m */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
+		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684E171B035800A3D2E7 /* 259-list.png */; };
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
@@ -316,6 +317,8 @@
 		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
 		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
+		BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashScreenViewController.h; path = Controllers/SplashScreenViewController.h; sourceTree = "<group>"; };
+		BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreenViewController.m; path = Controllers/SplashScreenViewController.m; sourceTree = "<group>"; };
 		BBAC684E171B035800A3D2E7 /* 259-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list.png"; sourceTree = "<group>"; };
 		BBAC684F171B035800A3D2E7 /* 259-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list@2x.png"; sourceTree = "<group>"; };
 		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -739,6 +742,8 @@
 				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
 				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
+				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
+				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -988,6 +993,7 @@
 				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
+				BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

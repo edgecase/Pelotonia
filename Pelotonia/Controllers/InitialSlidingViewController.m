@@ -7,6 +7,7 @@
 //
 
 #import "InitialSlidingViewController.h"
+#import "SplashScreenViewController.h"
 
 @interface InitialSlidingViewController ()
 
@@ -26,14 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIStoryboard *storyboard;
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
-    
 }
+
 
 - (void)didReceiveMemoryWarning
 {

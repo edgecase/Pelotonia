@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FacebookAppID</key>
-	<string>269799726466566</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -57,6 +55,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>24</string>
+	<key>FacebookAppID</key>
+	<string>269799726466566</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
@@ -76,6 +76,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
@@ -87,9 +89,9 @@
 				<key>Blue</key>
 				<real>0.396078431372549</real>
 				<key>Green</key>
-				<real>0.3686274509803922</real>
+				<real>0.36862745098039218</real>
 				<key>Red</key>
-				<real>0.3294117647058823</real>
+				<real>0.32941176470588229</real>
 			</dict>
 			<key>Translucent</key>
 			<false/>
