@@ -106,6 +106,7 @@
 		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
 		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
 		BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C38172AA00E002DE00A /* UserProfileViewController.m */; };
+		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684E171B035800A3D2E7 /* 259-list.png */; };
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
@@ -312,6 +313,9 @@
 		BBA66C14172A9FD9002DE00A /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = Controllers/ActivityViewController.m; sourceTree = "<group>"; };
 		BBA66C37172AA00D002DE00A /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = Controllers/UserProfileViewController.h; sourceTree = "<group>"; };
 		BBA66C38172AA00E002DE00A /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = Controllers/UserProfileViewController.m; sourceTree = "<group>"; };
+		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
+		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
+		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
 		BBAC684E171B035800A3D2E7 /* 259-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list.png"; sourceTree = "<group>"; };
 		BBAC684F171B035800A3D2E7 /* 259-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list@2x.png"; sourceTree = "<group>"; };
 		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -702,6 +706,9 @@
 		BCE3B7BD15AE49DA00205530 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BBABDD75174B195C004B64D5 /* PRPWebViewController.h */,
+				BBABDD76174B195C004B64D5 /* PRPWebViewController.m */,
+				BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */,
 				BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */,
 				BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */,
 				BCE3B7BE15AE49DA00205530 /* Pelotonia-Info.plist */,
@@ -980,6 +987,7 @@
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
 				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
+				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

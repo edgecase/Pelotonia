@@ -173,6 +173,39 @@
             </objects>
             <point key="canvasLocation" x="-486" y="254"/>
         </scene>
+        <!--Pelotonia Web View Controller-->
+        <scene sceneID="mR1-Ui-Fu7">
+            <objects>
+                <viewController storyboardIdentifier="PelotoniaWebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qtY-pr-2JC" customClass="PelotoniaWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AFD-Cn-32M">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" id="Azw-by-Dz3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ycx-Zx-yDR">
+                        <barButtonItem key="leftBarButtonItem" image="259-list.png" id="g3D-NZ-xqg">
+                            <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="revealMenu:" destination="qtY-pr-2JC" id="8n6-3h-hI5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="Azw-by-Dz3" id="ucW-VP-Avo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wGh-S8-efp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="1093"/>
+        </scene>
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
             <objects>
@@ -460,7 +493,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="316" y="1002"/>
+            <point key="canvasLocation" x="842" y="1002"/>
         </scene>
         <!--Activity View Controller - Updates-->
         <scene sceneID="m8a-Js-YyP">
@@ -916,6 +949,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2O-MU-OL0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="339" y="-400"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jqN-Ir-GWm">
+            <objects>
+                <navigationController id="wJK-rO-IwN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7k6-cR-ahn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qtY-pr-2JC" kind="relationship" relationship="rootViewController" id="wnA-pX-Unp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gUY-fj-kN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-528" y="1093"/>
         </scene>
     </scenes>
     <resources>

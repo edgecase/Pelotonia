@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "PRPWebViewController.h"
 #import "Pelotonia-Colors.h"
 
 @interface MenuViewController ()
@@ -70,10 +71,43 @@
     return headerView;
 }
 
+- (void)slideToStoryboardViewControllerNamed:(NSString *)newViewControllerName
+{
+    if (newViewControllerName == nil) {
+        // just close the sliding view controller
+        [self.slidingViewController resetTopView];
+        return;
+    }
+    
+    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:newViewControllerName];
+    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+        CGRect frame = self.slidingViewController.topViewController.view.frame;
+        self.slidingViewController.topViewController = newTopViewController;
+        self.slidingViewController.topViewController.view.frame = frame;
+        [self.slidingViewController resetTopView];
+    }];
+}
+
+- (void)openWebViewWithURL:(NSString *)url
+{
+    // see the registration form
+    PRPWebViewController *webVC = [[PRPWebViewController alloc] init];
+    webVC.url = [NSURL URLWithString:url];
+    webVC.showsDoneButton = NO;
+    webVC.delegate = self;
+    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:webVC];
+    
+    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
+        CGRect frame = self.slidingViewController.topViewController.view.frame;
+        self.slidingViewController.topViewController = navc;
+        self.slidingViewController.topViewController.view.frame = frame;
+        [self.slidingViewController resetTopView];
+    }];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *newTopViewController = nil;
     NSString *newViewControllerName = nil;
     
     if (indexPath.section == 0)
@@ -95,44 +129,53 @@
                 break;
                 
             default:
-                newViewControllerName = @"AboutTableViewController";
+                break;
         }
+        [self slideToStoryboardViewControllerNamed:newViewControllerName];
     }
     
     if (indexPath.section == 1)
     {
         switch (indexPath.row) {
-            case ID_ABOUT_PELOTONIA_MENU:
+            case ID_ABOUT_PELOTONIA_MENU: {
                 // go to the about controller
                 newViewControllerName = @"AboutTableViewController";
+                [self slideToStoryboardViewControllerNamed:newViewControllerName];
                 break;
-                
-            case ID_REGISTER_MENU:
-                // see the registration form
-                newViewControllerName = @"AboutTableViewController";
-                [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:[NSURL URLWithString:@"http://pelotonia.org/register/"] afterDelay:1.0];
-                
+            }
+            case ID_REGISTER_MENU: 
+                [self openWebViewWithURL:@"http://www.pelotonia.org/register"];
+                break;
                 
             case ID_SAFETY_MENU:
                 // open safari to the safety site
-                newViewControllerName = @"AboutTableViewController";
-                [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:[NSURL URLWithString:@"http://pelotonia.org/ride/safety"] afterDelay:1.0];
+                [self openWebViewWithURL:@"http://www.pelotonia.org/ride/safety"];
                 break;
                 
             default:
-                newViewControllerName = @"AboutTableViewController";
                 break;
         }
+        
+
     }
     
-    newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:newViewControllerName];
     
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = newTopViewController;
-        self.slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopView];
-    }];
 }
+
+
+#pragma mark - PRPWebViewControllerDelegate
+- (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
+    NSLog(@"webControllerDidFinishLoading!");
+}
+
+- (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
+}
+
+- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    return [self shouldAutorotateToInterfaceOrientation:orientation];
+}
+
+
 
 @end

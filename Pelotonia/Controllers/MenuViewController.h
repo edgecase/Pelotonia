@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
+#import "PRPWebViewControllerDelegate.h"
+
 
 #define ID_ACTIVITY_STREAM_MENU 0
 #define ID_PROFILE_MENU 1
@@ -17,6 +19,7 @@
 #define ID_ABOUT_PELOTONIA_MENU 2
 
 
-@interface MenuViewController : UITableViewController
+@interface MenuViewController : UITableViewController <PRPWebViewControllerDelegate>
+
 
 @end
