@@ -9,14 +9,12 @@
 #import "ProfileTableViewController.h"
 #import "AppDelegate.h"
 #import "RiderDataController.h"
-#import "SHKActivityIndicator.h"
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
-#import "SHK.h"
-#import "SHKFacebook.h"
-#import "SHKTwitter.h"
 #import "SendPledgeModalViewController.h"
+#import "SHKActivityIndicator.h"
+#import <Social/Social.h>
 
 static NSDictionary *sharersTable = nil;
 
@@ -116,7 +114,8 @@ static NSDictionary *sharersTable = nil;
     if (indexPath.section == 0) {
         if (indexPath.row == 3) {
             // show the "share on..." dialog
-            [self showShareActionSheet];
+            [self shareProfile:nil];
+//            [self showShareActionSheet];
         }
     }
 }
@@ -126,7 +125,7 @@ static NSDictionary *sharersTable = nil;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 18)];
     label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(21);
+    label.font = PELOTONIA_FONT(24);
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = [UIColor blackColor];
     
@@ -163,7 +162,6 @@ static NSDictionary *sharersTable = nil;
     }
     onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
-        [[SHKActivityIndicator currentIndicator] displayCompleted:@"Error"];
         [self configureView];
         [pull finishedLoading];
     }];
@@ -286,7 +284,8 @@ static NSDictionary *sharersTable = nil;
 }
 
 
-- (IBAction)followRider:(id)sender {
+- (IBAction)followRider:(id)sender
+{
     // add the current rider to the main list of riders
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     RiderDataController *dataController = appDelegate.riderDataController;
@@ -300,30 +299,54 @@ static NSDictionary *sharersTable = nil;
     [self configureView];
 }
 
+
+- (IBAction)shareProfile:(id)sender
+{
+    NSArray *activityItems;
+
+    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
+    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
+//    UIImage *imgToShare = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]]];
+//
+//    NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
+    activityItems = @[txtToShare, urlToShare];
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+    
+    [self presentViewController:activityController animated:YES completion:nil];
+}
+
+- (ACAccount *)requestPermissionsForFB
+{
+    return nil;
+}
+
+
 - (void)shareOnFacebook
 {
-    NSLog(@"Sharing on Facebook: %@", self.rider.name);
+    // share natively with facebook sdk
+    NSLog(@"sharing on Facebook: %@", self.rider.name);
     
-    // use the SHKFacebook object to share progress directly on FB
-    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride", self.rider.name] contentType:SHKURLContentTypeWebpage];
-
-    [item setText:[NSString stringWithFormat:@"Supportive message here"]];
+//    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride", self.rider.name] contentType:SHKURLContentTypeWebpage];
+//
+//    [item setText:[NSString stringWithFormat:@"Supportive message here"]];
+//    
+//    [item setFacebookURLShareDescription:@"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference."];
+//    
+//    [item setFacebookURLSharePictureURI:@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png"];
+//    
+//    [SHKFacebook shareItem:item];
     
-    [item setFacebookURLShareDescription:@"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference."];
-    
-    [item setFacebookURLSharePictureURI:@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png"];
-    
-    [SHKFacebook shareItem:item];
 }
 
 - (void)shareOnTwitter
 {
     NSLog(@"Sharing on Twitter: %@", self.rider.name);
-    
-    // use the SHKFacebook object to share progress directly on FB
-    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride at %@", self.rider.name, self.rider.profileUrl] contentType:SHKURLContentTypeWebpage];
-    
-    [SHKTwitter shareItem:item];
+    // use iOS built-in twitter support
+    SLComposeViewController *post = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [post setInitialText:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride at %@", self.rider.name, self.rider.profileUrl]];
+    [self presentViewController:post animated:YES completion:nil];
 }
 
 

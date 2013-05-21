@@ -50,7 +50,7 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-    cell.textLabel.font = PELOTONIA_SECONDARY_FONT(16);
+    cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
     return cell;
 }
 
@@ -61,7 +61,7 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 21)];
     label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(17);
+    label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = SECONDARY_LIGHT_GRAY;
 

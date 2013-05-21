@@ -36,8 +36,9 @@
 @property (strong, nonatomic) Rider *rider;
 @property (assign, nonatomic, readonly) BOOL following;
 
-- (IBAction)supportRider:(id)sender;
+- (IBAction)shareProfile:(id)sender;
 - (IBAction)followRider:(id)sender;
+- (void)showShareActionSheet;
 - (void)shareOnFacebook;
 - (void)shareOnTwitter;
 

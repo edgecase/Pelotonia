@@ -10,10 +10,6 @@
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
-#import "SHK.h"
-#import "SHKConfiguration.h"
-#import "SHKFacebook.h"
-#import "PelotoniaSHKConfigurator.h"
 #import "TestFlight.h"
 #import <Parse/Parse.h>
 #import <NewRelicAgent/NewRelicAgent.h>
@@ -34,12 +30,6 @@
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
 
-    DefaultSHKConfigurator *configurator = [[PelotoniaSHKConfigurator alloc] init];
-    [SHKConfiguration sharedInstanceWithConfigurator:configurator];
-
-    // send any cached messages
-    [SHK flushOfflineQueue];
-    
     // set up Parse
     [Parse setApplicationId:@"9CUxtD0xEc85ZoN3D9wv5H5li7fQMBx6XjZ6GhqP"
                   clientKey:@"JMsMecnjVTIsjWNyradXSMVSeflHq6StaQmN3Eqz"];
@@ -110,10 +100,6 @@
 {
     [PFFacebookUtils handleOpenURL:url];
     
-    NSString* scheme = [url scheme];
-    NSString* prefix = [NSString stringWithFormat:@"fb%@", SHKCONFIG(facebookAppId)];
-    if ([scheme hasPrefix:prefix])
-        return [SHKFacebook handleOpenURL:url];
     return YES;
 }
 
