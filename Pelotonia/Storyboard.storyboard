@@ -596,6 +596,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="signInOutButton" destination="Jdd-Ci-RiE" id="Oh1-9p-Jor"/>
+                        <outlet property="userName" destination="Sc3-wi-iYa" id="E8y-tz-daH"/>
+                        <outlet property="userProfileImageView" destination="Puf-B6-RLb" id="DiY-Fy-38C"/>
+                        <outlet property="userType" destination="tZh-Oo-j0I" id="TMF-HI-Z7d"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>

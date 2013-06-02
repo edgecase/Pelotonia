@@ -7,6 +7,8 @@
 //
 
 #import "UserProfileViewController.h"
+#import "PelotoniaLogInViewController.h"
+#import "PelotoniaSignUpViewController.h"
 
 @interface UserProfileViewController ()
 
@@ -27,11 +29,7 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,6 +52,9 @@
     // update the UI of the app appropriately.
     if ([PFUser currentUser]) { // user is logged in
         [self.signInOutButton setTitle:@"Log Out"];
+        PFUser *currentUser = [PFUser currentUser];
+        self.userName.text = currentUser.username;
+        
     }
     else {
         [self.signInOutButton setTitle:@"Sign In/Up"];
@@ -63,13 +64,13 @@
 - (void)showSignInOutDialog
 {
     // Create the log in view controller
-    PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
+    PelotoniaLogInViewController *logInViewController = [[PelotoniaLogInViewController alloc] init];
     [logInViewController setDelegate:self]; // Set ourselves as the delegate
     [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
     [logInViewController setFields: PFLogInFieldsDefault | PFLogInFieldsPasswordForgotten | PFLogInFieldsTwitter | PFLogInFieldsFacebook | PFLogInFieldsDismissButton];
     
     // Create the sign up view controller
-    PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
+    PelotoniaSignUpViewController *signUpViewController = [[PelotoniaSignUpViewController alloc] init];
     [signUpViewController setDelegate:self]; // Set ourselves as the delegate
     [signUpViewController setFields: PFSignUpFieldsEmail | PFSignUpFieldsUsernameAndPassword | PFSignUpFieldsSignUpButton | PFSignUpFieldsDismissButton];
     
@@ -123,6 +124,10 @@
 // Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:NULL];
+    if (user && user.isNew) {
+        // just signed up & logged in with facebook/twitter/whatever, so get the user's info if we can
+        
+    }
 }
 
 // Sent to the delegate when the log in attempt fails.
@@ -180,6 +185,9 @@
 
 - (void)viewDidUnload {
     [self setSignInOutButton:nil];
+    [self setUserName:nil];
+    [self setUserType:nil];
+    [self setUserProfileImageView:nil];
     [super viewDidUnload];
 }
 @end

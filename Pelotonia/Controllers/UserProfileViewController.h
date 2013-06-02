@@ -10,6 +10,9 @@
 
 @interface UserProfileViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *signInOutButton;
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (weak, nonatomic) IBOutlet UILabel *userType;
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 
 - (IBAction)revealMenu:(id)sender;
 - (IBAction)signInOutPressed:(id)sender;

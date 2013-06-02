@@ -112,6 +112,8 @@
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
 		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
+		BBC825A1174C6F3700E2DA22 /* PelotoniaLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC825A0174C6F3700E2DA22 /* PelotoniaLogInViewController.m */; };
+		BBC825A4174C72A200E2DA22 /* PelotoniaSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC825A3174C72A100E2DA22 /* PelotoniaSignUpViewController.m */; };
 		BBD452721738A232000CC966 /* 46-movie-2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452701738A232000CC966 /* 46-movie-2.png */; };
 		BBD452731738A232000CC966 /* 46-movie-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452711738A232000CC966 /* 46-movie-2@2x.png */; };
 		BBD4529B1738A301000CC966 /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452991738A301000CC966 /* 112-group.png */; };
@@ -325,6 +327,10 @@
 		BBB3265216F679FD007153BC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
+		BBC8259F174C6F3700E2DA22 /* PelotoniaLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaLogInViewController.h; path = Controllers/PelotoniaLogInViewController.h; sourceTree = "<group>"; };
+		BBC825A0174C6F3700E2DA22 /* PelotoniaLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaLogInViewController.m; path = Controllers/PelotoniaLogInViewController.m; sourceTree = "<group>"; };
+		BBC825A2174C72A100E2DA22 /* PelotoniaSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaSignUpViewController.h; path = Controllers/PelotoniaSignUpViewController.h; sourceTree = "<group>"; };
+		BBC825A3174C72A100E2DA22 /* PelotoniaSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaSignUpViewController.m; path = Controllers/PelotoniaSignUpViewController.m; sourceTree = "<group>"; };
 		BBD452701738A232000CC966 /* 46-movie-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46-movie-2.png"; sourceTree = "<group>"; };
 		BBD452711738A232000CC966 /* 46-movie-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46-movie-2@2x.png"; sourceTree = "<group>"; };
 		BBD452991738A301000CC966 /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
@@ -744,6 +750,10 @@
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
 				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
 				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
+				BBC8259F174C6F3700E2DA22 /* PelotoniaLogInViewController.h */,
+				BBC825A0174C6F3700E2DA22 /* PelotoniaLogInViewController.m */,
+				BBC825A2174C72A100E2DA22 /* PelotoniaSignUpViewController.h */,
+				BBC825A3174C72A100E2DA22 /* PelotoniaSignUpViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -994,6 +1004,8 @@
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 				BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */,
+				BBC825A1174C6F3700E2DA22 /* PelotoniaLogInViewController.m in Sources */,
+				BBC825A4174C72A200E2DA22 /* PelotoniaSignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
