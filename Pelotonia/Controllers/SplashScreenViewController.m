@@ -63,7 +63,6 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     InitialSlidingViewController *initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"InitialSlidingViewController"];
     [self presentModalViewController:initialViewController animated:YES];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated

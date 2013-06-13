@@ -123,7 +123,7 @@ static NSDictionary *sharersTable = nil;
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 18)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(24);
     label.backgroundColor = [UIColor clearColor];
@@ -151,6 +151,7 @@ static NSDictionary *sharersTable = nil;
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
+
 
 #pragma mark -- view configuration
 
