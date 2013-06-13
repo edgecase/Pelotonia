@@ -53,7 +53,12 @@
     if ([PFUser currentUser]) { // user is logged in
         [self.signInOutButton setTitle:@"Log Out"];
         PFUser *currentUser = [PFUser currentUser];
-        self.userName.text = currentUser.username;
+        NSDictionary *profile = [currentUser objectForKey:@"profile"];
+        if (profile) {
+            self.userName.text = [profile objectForKey:@"name"];
+        } else {
+            self.userName.text = currentUser.username;
+        }
         
     }
     else {
@@ -106,6 +111,57 @@
 
 
 #pragma mark -- PFLoginController/PFSignUpController delegates
+// update the user's information from facebook or twitter if we can
+- (void)updateProfile:(PFUser *)user
+{
+    // Send request to Facebook
+    FBRequest *request = [FBRequest requestForMe];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        // handle response
+        if (!error)
+        {
+            // Parse the data received
+            NSDictionary *userData = (NSDictionary *)result;
+            
+            NSString *facebookID = userData[@"id"];
+            
+            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            
+            
+            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:4];
+            
+            if (facebookID) {
+                userProfile[@"facebookId"] = facebookID;
+            }
+            
+            if (userData[@"name"]) {
+                userProfile[@"name"] = userData[@"name"];
+            }
+            
+            if (userData[@"location"][@"name"]) {
+                userProfile[@"location"] = userData[@"location"][@"name"];
+            }
+            
+            if ([pictureURL absoluteString]) {
+                userProfile[@"pictureURL"] = [pictureURL absoluteString];
+            }
+            
+            [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
+            [[PFUser currentUser] saveEventually];
+            
+        }
+        else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"] isEqualToString: @"OAuthException"])
+        {
+            // Since the request failed, we can check if it was due to an invalid session
+            NSLog(@"The facebook session was invalidated");
+        }
+        else
+        {
+            NSLog(@"Some other error: %@", error);
+        }
+    }];
+}
+
 // Sent to the delegate to determine whether the log in request should be submitted to the server.
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
     // Check if both fields are completed
@@ -124,9 +180,20 @@
 // Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    if (user && user.isNew) {
-        // just signed up & logged in with facebook/twitter/whatever, so get the user's info if we can
-        
+    // just signed up & logged in with facebook/twitter/whatever, so get the user's info if we can
+    if (!user)
+    {
+        NSLog(@"The user cancelled the Facebook login.");
+    }
+    else if (user.isNew)
+    {
+        NSLog(@"User with facebook signed up and logged in!");
+        [self updateProfile:user];
+    }
+    else
+    {
+        NSLog(@"User with facebook logged in!");
+        [self updateProfile:user];
     }
 }
 
