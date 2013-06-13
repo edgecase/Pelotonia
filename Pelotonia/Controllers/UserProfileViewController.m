@@ -56,6 +56,9 @@
         NSDictionary *profile = [currentUser objectForKey:@"profile"];
         if (profile) {
             self.userName.text = [profile objectForKey:@"name"];
+            NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
+            UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:url]];
+            self.userProfileImageView.image = image;
         } else {
             self.userName.text = currentUser.username;
         }
