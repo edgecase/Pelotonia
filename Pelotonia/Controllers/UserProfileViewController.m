@@ -9,6 +9,7 @@
 #import "UserProfileViewController.h"
 #import "PelotoniaLogInViewController.h"
 #import "PelotoniaSignUpViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface UserProfileViewController ()
 
@@ -52,16 +53,6 @@
     // update the UI of the app appropriately.
     if ([PFUser currentUser]) { // user is logged in
         [self.signInOutButton setTitle:@"Log Out"];
-        PFUser *currentUser = [PFUser currentUser];
-        NSDictionary *profile = [currentUser objectForKey:@"profile"];
-        if (profile) {
-            self.userName.text = [profile objectForKey:@"name"];
-            NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
-            UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:url]];
-            self.userProfileImageView.image = image;
-        } else {
-            self.userName.text = currentUser.username;
-        }
         
     }
     else {
@@ -93,7 +84,102 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        // get the user's RiderID and get the rider object
+        // fire up rider search box
+        
+        // copy properties from the rider object into this rider
+    }
+}
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 0)
+        {
+            // name/rider type cell
+            if ([PFUser currentUser])
+            {
+                // user is logged in
+                PFUser *currentUser = [PFUser currentUser];
+                NSDictionary *profile = [currentUser objectForKey:@"profile"];
+                if (profile)
+                {
+                    cell.textLabel.font = PELOTONIA_FONT(18);
+                    cell.textLabel.text = [profile objectForKey:@"name"];
+                    
+                    // this masks the photo to the tableviewcell
+                    cell.imageView.layer.masksToBounds = YES;
+                    cell.imageView.layer.cornerRadius = 5.0;
+
+                    __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+                    [cell.imageView addSubview:activityIndicator];
+                    activityIndicator.center = cell.imageView.center;
+                    [activityIndicator startAnimating];
+
+                    // get the user's photo from the profile object
+                    NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
+                    [cell.imageView setImageWithURL:url
+                                   placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
+                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
+                     {
+                         if (error != nil) {
+                             NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
+                         }
+                         [activityIndicator removeFromSuperview];
+                         activityIndicator = nil;
+                         [cell layoutSubviews];
+                     }];
+                }
+                else
+                {
+                    cell.textLabel.text = currentUser.username;
+                }
+            }
+        }
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        return 26;
+    }
+    else
+    {
+        return [super tableView:tableView heightForHeaderInSection:section];
+    }
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        return @"Recent Activity";
+    }
+    else {
+        return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
+    label.textColor = PRIMARY_GREEN;
+    label.font = PELOTONIA_FONT(24);
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = [UIColor blackColor];
+    label.text = [self tableView:tableView titleForHeaderInSection:section];
+    
+    [headerView addSubview:label];
+    return headerView;
 }
 
 #pragma mark -- menu code
@@ -110,6 +196,9 @@
         [PFUser logOut];
     }
     [self configureView];
+}
+
+- (IBAction)shareButtonPressed:(id)sender {
 }
 
 
@@ -258,6 +347,7 @@
     [self setUserName:nil];
     [self setUserType:nil];
     [self setUserProfileImageView:nil];
+    [self setShareButton:nil];
     [super viewDidUnload];
 }
 @end

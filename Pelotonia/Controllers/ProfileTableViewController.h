@@ -19,8 +19,7 @@
 
 #define kShareActionSheet 100
 
-@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, SendPledgeModalViewControllerDelegate,
-    UIActionSheetDelegate> {
+@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, SendPledgeModalViewControllerDelegate> {
     PullToRefreshView *pull;
     BOOL _following;
 }
@@ -38,9 +37,6 @@
 
 - (IBAction)shareProfile:(id)sender;
 - (IBAction)followRider:(id)sender;
-- (void)showShareActionSheet;
-- (void)shareOnFacebook;
-- (void)shareOnTwitter;
 
 - (void)refreshRider;
 - (void)manualRefresh:(NSNotification *)notification;

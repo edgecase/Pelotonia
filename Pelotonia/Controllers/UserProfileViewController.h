@@ -13,8 +13,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 - (IBAction)revealMenu:(id)sender;
 - (IBAction)signInOutPressed:(id)sender;
+- (IBAction)shareButtonPressed:(id)sender;
 
 @end

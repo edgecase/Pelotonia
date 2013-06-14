@@ -13,10 +13,9 @@
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
 #import "SendPledgeModalViewController.h"
+#import "ProfileDetailsTableViewController.h"
 #import "SHKActivityIndicator.h"
 #import <Social/Social.h>
-
-static NSDictionary *sharersTable = nil;
 
 
 @interface ProfileTableViewController ()
@@ -43,13 +42,6 @@ static NSDictionary *sharersTable = nil;
 {
     [super viewDidLoad];
     
-    if (sharersTable == nil) {
-        // list of potential sharers that we care about 
-        sharersTable = @{@"Twitter" : @"shareOnTwitter",
-                         @"Facebook" : @"shareOnFacebook"
-                         };
-    }
-
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
@@ -104,18 +96,19 @@ static NSDictionary *sharersTable = nil;
     pledgeViewController.delegate = self;
 }
 
-
+- (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController
+{
+    profileDetailsViewController.rider = self.rider;
+}
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (indexPath.section == 0) {
         if (indexPath.row == 3) {
             // show the "share on..." dialog
             [self shareProfile:nil];
-//            [self showShareActionSheet];
         }
     }
 }
@@ -324,32 +317,6 @@ static NSDictionary *sharersTable = nil;
 }
 
 
-- (void)shareOnFacebook
-{
-    // share natively with facebook sdk
-    NSLog(@"sharing on Facebook: %@", self.rider.name);
-    
-//    SHKItem *item = [SHKItem URL:[NSURL URLWithString:self.rider.profileUrl] title:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride", self.rider.name] contentType:SHKURLContentTypeWebpage];
-//
-//    [item setText:[NSString stringWithFormat:@"Supportive message here"]];
-//    
-//    [item setFacebookURLShareDescription:@"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference."];
-//    
-//    [item setFacebookURLSharePictureURI:@"http://pelotonia.resource.com/facebook/images/pelotonia_352x310_v2.png"];
-//    
-//    [SHKFacebook shareItem:item];
-    
-}
-
-- (void)shareOnTwitter
-{
-    NSLog(@"Sharing on Twitter: %@", self.rider.name);
-    // use iOS built-in twitter support
-    SLComposeViewController *post = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-    [post setInitialText:[NSString stringWithFormat:@"Please support %@'s Pelotonia Ride at %@", self.rider.name, self.rider.profileUrl]];
-    [self presentViewController:post animated:YES completion:nil];
-}
-
 
 #pragma mark -- PullToRefreshDelegate
 - (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
@@ -390,42 +357,6 @@ static NSDictionary *sharersTable = nil;
     [controller dismissViewControllerAnimated:YES completion:^(void){
         [self sendPledgeMailToEmail:email withAmount:amount];
     }];
-}
-
-#pragma mark -- sharing
-- (void)showShareActionSheet
-{
-    NSString *actionSheetTitle = [NSString stringWithFormat:NSLocalizedString(@"Choose a Social Network", nil)];
-    
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:actionSheetTitle delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    for (NSString *title in [sharersTable allKeys]) {
-        [actionSheet addButtonWithTitle:title];
-    }
-    [actionSheet addButtonWithTitle:@"Cancel"];
-    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons-1;
-    
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-    actionSheet.tag = kShareActionSheet;
-    
-    // Display the action sheet
-    [actionSheet showFromBarButtonItem:self.followButton animated:YES];
-}
-
-#pragma mark -- UIActionSheetDelegate
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (actionSheet.tag == kShareActionSheet) {
-        if (buttonIndex != actionSheet.cancelButtonIndex) {
-            // this is what we do when we share...
-            NSString *sharersName = [actionSheet buttonTitleAtIndex:buttonIndex];
-            NSString *selectorName = [sharersTable objectForKey:sharersName];
-            
-            // call the appropriate selector
-            if (selectorName) {
-                [self performSelector:NSSelectorFromString(selectorName)];
-            }
-        }
-    }
 }
 
 
