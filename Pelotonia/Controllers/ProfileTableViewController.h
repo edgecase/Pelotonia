@@ -16,6 +16,7 @@
 #import "PelotoniaWeb.h"
 #import "PullToRefreshView.h"
 #import "SendPledgeModalViewController.h"
+#import "ProfileDetailsTableViewController.h"
 
 #define kShareActionSheet 100
 
@@ -35,6 +36,9 @@
 @property (strong, nonatomic) Rider *rider;
 @property (assign, nonatomic, readonly) BOOL following;
 
+// UI actions
+- (void)showPledge:(SendPledgeModalViewController *)pledgeViewController;
+- (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController;
 - (IBAction)shareProfile:(id)sender;
 - (IBAction)followRider:(id)sender;
 

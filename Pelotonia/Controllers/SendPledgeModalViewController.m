@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.textViewName.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +75,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)tf
 {
     [tf resignFirstResponder];
+    [self done:self.textViewName];
     return YES;
 }
 
