@@ -182,24 +182,27 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <segue destination="61J-5L-bDV" kind="modal" identifier="fadeToInitial:" modalTransitionStyle="crossDissolve" id="k7i-jp-gfO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iz1-67-UhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-490" y="843"/>
+            <point key="canvasLocation" x="-1090" y="577"/>
         </scene>
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
             <objects>
                 <viewController storyboardIdentifier="InitialSlidingViewController" modalTransitionStyle="crossDissolve" id="61J-5L-bDV" customClass="InitialSlidingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QII-Lx-UbJ">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J63-ME-rxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1207" y="279"/>
+            <point key="canvasLocation" x="-486" y="879"/>
         </scene>
         <!--Riders View Controller - Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
@@ -557,7 +560,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Share" image="211-action.png">
+                                                    <state key="normal" title="Update" image="211-action.png">
                                                         <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -572,7 +575,7 @@
                                                     <rect key="frame" x="150" y="0.0" width="150" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" title="Invite">
+                                                    <state key="normal" title="Followers" image="112-group-gray.png">
                                                         <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -681,62 +684,47 @@
                                             <segue destination="pMn-37-Pi2" kind="push" identifier="showDetails:" id="0V8-FD-T58"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="zpP-Sc-3z3" imageView="FF5-Zx-yW3" style="IBUITableViewCellStyleDefault" id="6qp-UC-zYg">
-                                        <rect key="frame" x="0.0" y="106" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="zpP-Sc-3z3" rowHeight="89" style="IBUITableViewCellStyleDefault" id="6qp-UC-zYg">
+                                        <rect key="frame" x="0.0" y="106" width="320" height="89"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                            <rect key="frame" x="10" y="0.0" width="280" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Most recent Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zpP-Sc-3z3">
-                                                    <rect key="frame" x="43" y="0.0" width="227" height="43"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Latest Update" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zpP-Sc-3z3">
+                                                    <rect key="frame" x="10" y="0.0" width="260" height="88"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pelotonia-menu-icon.png" id="FF5-Zx-yW3">
-                                                    <rect key="frame" x="9" y="9" width="24" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="8xx-4G-6mB" detailTextLabel="dT0-2h-pqW" style="IBUITableViewCellStyleValue1" id="0rH-P2-a6L">
-                                        <rect key="frame" x="0.0" y="150" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="82" id="0rH-P2-a6L">
+                                        <rect key="frame" x="0.0" y="195" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="0.0" width="300" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Raised" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8xx-4G-6mB">
-                                                    <rect key="frame" x="10" y="11" width="56" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Raised" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O0k-wY-gNJ">
+                                                    <rect key="frame" x="20" y="15" width="76" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dT0-2h-pqW">
-                                                    <rect key="frame" x="246" y="11" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="$2500 of $2200" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CIQ-0U-vqG">
+                                                    <rect key="frame" x="104" y="20" width="176" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VcT-Ci-Xvo">
-                                        <rect key="frame" x="0.0" y="194" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" progress="0.5" id="YHx-BQ-azD">
-                                                    <rect key="frame" x="20" y="17" width="260" height="11"/>
+                                                    <rect key="frame" x="20" y="51" width="260" height="11"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="progressTintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="trackTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
@@ -746,16 +734,17 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hW8-28-e5C">
-                                        <rect key="frame" x="0.0" y="238" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="277" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RgP-fD-eB3">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RgP-fD-eB3">
                                                     <rect key="frame" x="150" y="0.0" width="150" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Pledge" image="pelotonia-menu-icon.png">
                                                         <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -767,10 +756,11 @@
                                                         <segue destination="g8Z-dt-BpM" kind="modal" identifier="showPledge:" id="NCk-Ha-gvw"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tOX-99-A52">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tOX-99-A52">
                                                     <rect key="frame" x="0.0" y="0.0" width="151" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" title="Share" image="211-action.png">
                                                         <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -782,30 +772,6 @@
                                                         <action selector="shareProfile:" destination="sKZ-lE-nf9" eventType="touchUpInside" id="Hbb-PS-6Xy"/>
                                                     </connections>
                                                 </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Activity" id="iV6-G5-76g">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="273" id="iHy-do-Kxv">
-                                        <rect key="frame" x="0.0" y="329" width="320" height="275"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="272"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No story given" id="cR0-ko-TLj">
-                                                    <rect key="frame" x="6" y="7" width="285" height="258"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
-                                                </textView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -831,8 +797,8 @@
                         <outlet property="followButton" destination="Gmx-RL-Jo8" id="RVF-yV-Z6U"/>
                         <outlet property="nameAndRouteCell" destination="0Uq-Pf-ndZ" id="6Hj-ug-Jsw"/>
                         <outlet property="pledgeAmountTextField" destination="c1P-ip-4p9" id="TwP-nW-EPh"/>
-                        <outlet property="raisedAmountCell" destination="0rH-P2-a6L" id="nRK-s0-8uO"/>
-                        <outlet property="storyTextView" destination="cR0-ko-TLj" id="Z6B-oh-tiM"/>
+                        <outlet property="raisedAmountLabel" destination="CIQ-0U-vqG" id="1aQ-YK-Hoe"/>
+                        <outlet property="raisedLabel" destination="O0k-wY-gNJ" id="Key-af-aRA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1061,6 +1027,7 @@
     </scenes>
     <resources>
         <image name="08-chat.png" width="24" height="22"/>
+        <image name="112-group-gray.png" width="32" height="21"/>
         <image name="112-group.png" width="32" height="21"/>
         <image name="117-todo.png" width="18" height="19"/>
         <image name="211-action.png" width="28" height="22"/>
@@ -1072,82 +1039,6 @@
         <image name="pelotonia-menu-icon.png" width="24" height="24"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
-    <classes>
-        <class className="AboutTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="newContextPressed:"/>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="action" name="sandlotPressed:"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="storyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ActivityViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-            </relationships>
-        </class>
-        <class className="ECSlidingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
-        </class>
-        <class className="InitialSlidingViewController" superclassName="ECSlidingViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialSlidingViewController.h"/>
-        </class>
-        <class className="MenuViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
-        </class>
-        <class className="ProfileDetailsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileDetailsTableViewController.h"/>
-        </class>
-        <class className="ProfileTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="followRider:"/>
-                <relationship kind="action" name="shareProfile:"/>
-                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="followButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="nameAndRouteCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="raisedAmountCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="storyTextView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="RidersViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SendPledgeModalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SendPledgeModalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="outlet" name="textViewAmount" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textViewName" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SplashScreenViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
-        </class>
-        <class className="UserProfileViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="action" name="shareButtonPressed:"/>
-                <relationship kind="action" name="signInOutPressed:"/>
-                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="signInOutButton" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="userName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userType" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

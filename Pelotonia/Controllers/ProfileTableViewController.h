@@ -30,7 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *followButton;
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameAndRouteCell;
-@property (weak, nonatomic) IBOutlet UITableViewCell *raisedAmountCell;
+@property (weak, nonatomic) IBOutlet UILabel *raisedAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
 
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;

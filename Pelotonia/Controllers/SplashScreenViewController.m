@@ -8,6 +8,7 @@
 
 #import "SplashScreenViewController.h"
 #import "InitialSlidingViewController.h"
+#import "ECSlidingViewController.h"
 
 @interface SplashScreenViewController ()
 
@@ -54,20 +55,26 @@
 
 - (void)hide
 {
-    // first hide the current view
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    [self dismissModalViewControllerAnimated:YES];
-    
-    // now start up our initial view controller for the sliding menu
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    InitialSlidingViewController *initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"InitialSlidingViewController"];
-    [self presentModalViewController:initialViewController animated:YES];
+    [self performSegueWithIdentifier:@"fadeToInitial:" sender:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self performSelector:@selector(hide) withObject:nil afterDelay:0];
+}
+
+- (void)fadeToInitial:(InitialSlidingViewController *)initialSlidingViewController
+{
+    // first hide the current view
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    // now start up our initial view controller for the sliding menu
+    initialSlidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
 }
 
 @end

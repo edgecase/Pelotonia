@@ -90,7 +90,7 @@
         self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
     }
     
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     [self.slidingViewController setAnchorRightRevealAmount:280.0f];
     
     [self reloadTableData];

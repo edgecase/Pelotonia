@@ -27,7 +27,6 @@
 @synthesize storyTextView;
 @synthesize followButton;
 @synthesize nameAndRouteCell;
-@synthesize raisedAmountCell;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -53,7 +52,8 @@
     [self setStoryTextView:nil];
     [self setFollowButton:nil];
     [self setNameAndRouteCell:nil];
-    [self setRaisedAmountCell:nil];
+    [self setRaisedAmountLabel:nil];
+    [self setRaisedLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -118,22 +118,6 @@
     }
 }
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
-    label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(24);
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = [UIColor blackColor];
-    
-    if (section == 1)
-    {
-        label.text = @"My Story";
-    }
-    [headerView addSubview:label];
-    return headerView;
-}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -185,23 +169,20 @@
         [self.rider.riderType isEqualToString:@"Super Peloton"] ||
         [self.rider.riderType isEqualToString:@"Peloton"]) {
         self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
-        self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
+        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
         self.donationProgress.hidden = YES;
     }
     else
     {
         // Riders and Pelotons are the only ones who get progress
         self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.route];
-        self.raisedAmountCell.detailTextLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
+        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
         self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     }
     self.storyTextView.text = [NSString stringWithFormat:@"%@", self.rider.story];
     
     self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);
     self.nameAndRouteCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    self.raisedAmountCell.textLabel.font = PELOTONIA_FONT(21);
-    self.raisedAmountCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
     
     if (self.following) {
         [self.followButton setTitle:@"Unfollow"];
