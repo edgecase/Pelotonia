@@ -50,13 +50,15 @@
 
 - (void)configureView
 {
+    [self.tableView reloadData];
     // update the UI of the app appropriately.
     if ([PFUser currentUser]) { // user is logged in
         [self.signInOutButton setTitle:@"Log Out"];
         
+        
     }
     else {
-        [self.signInOutButton setTitle:@"Sign In/Up"];
+        [self.signInOutButton setTitle:@"Sign In"];
     }
 }
 
@@ -95,10 +97,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *_cell;
     
     if (indexPath.section == 0)
     {
+        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        __weak UITableViewCell *cell = _cell;
         if (indexPath.row == 0)
         {
             // name/rider type cell
@@ -142,8 +146,13 @@
             }
         }
     }
+    else
+    {
+        // current activity
+        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
     
-    return cell;
+    return _cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
