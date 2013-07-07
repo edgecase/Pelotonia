@@ -59,8 +59,28 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)setupActionBar
+{
+    if (self.actionBar == nil)
+    {
+        if (self.actionBar == nil)
+        {
+            self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+            self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
+
+            SZLikeButton *likeButton = [[SZLikeButton alloc] initWithFrame:CGRectNull entity:self.entity viewController:self];
+            self.actionBar.itemsRight = [NSArray arrayWithObjects:likeButton, [SZActionButton commentButton], nil];
+            
+            self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], nil];
+            
+            [self.view addSubview:self.actionBar];
+        }
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self setupActionBar];
     [self configureView];
 }
 
@@ -111,7 +131,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (indexPath.row == 3) {
+        if (indexPath.row == 3)
+        {
             // show the "share on..." dialog
             [self shareProfile:nil];
         }
@@ -210,6 +231,7 @@
          }
          [activityIndicator removeFromSuperview];
          activityIndicator = nil;
+         [self.nameAndRouteCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
          [self.nameAndRouteCell layoutSubviews];
      }];
     
@@ -282,20 +304,82 @@
 
 - (IBAction)shareProfile:(id)sender
 {
-    NSArray *activityItems;
+    SZShareDialogViewController *share = [[SZShareDialogViewController alloc] initWithEntity:self.entity];
+    
+    share.title = [NSString stringWithFormat:@"Share %@", self.rider.name];
+    
+    SZShareOptions *options = [SZShareUtils userShareOptions];
+    
+    options.dontShareLocation = YES;
+    
+    options.willShowSMSComposerBlock = ^(SZSMSShareData *smsData) {
+        NSLog(@"Sharing SMS");
+    };
+    
+    options.willShowEmailComposerBlock = ^(SZEmailShareData *emailData) {
+        NSLog(@"Sharing Email");
+    };
+    
+    options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
+        if (network == SZSocialNetworkTwitter) {
+            NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
+            NSString *displayName = [postData.entity displayName];
+            SZShareOptions *shareOptions = (SZShareOptions*)postData.options;
+            NSString *text = shareOptions.text;
+            
+            NSString *customStatus = [NSString stringWithFormat:@"%@ / Custom status for %@ with url %@", text, displayName, entityURL];
+            
+            [postData.params setObject:customStatus forKey:@"status"];
+            
+        } else if (network == SZSocialNetworkFacebook) {
+            NSString *entityURL = [[postData.propagationInfo objectForKey:@"facebook"] objectForKey:@"entity_url"];
+            NSString *displayName = [postData.entity displayName];
+            NSString *customMessage = [NSString stringWithFormat:@"Custom status for %@ ", displayName];
+            
+            [postData.params setObject:customMessage forKey:@"message"];
+            [postData.params setObject:entityURL forKey:@"link"];
+            [postData.params setObject:@"A caption" forKey:@"caption"];
+            [postData.params setObject:@"Custom Name" forKey:@"name"];
+            [postData.params setObject:@"A Site" forKey:@"description"];
+        }
+        
+        NSLog(@"Posting to %d", network);
+    };
+    
+    options.didSucceedPostingToSocialNetworkBlock = ^(SZSocialNetwork network, id result) {
+        NSLog(@"Posted %@ to %d", result, network);
+    };
+    
+    options.didFailPostingToSocialNetworkBlock = ^(SZSocialNetwork network, NSError *error) {
+        NSLog(@"Failed posting to %d", network);
+    };
+    
+    share.shareOptions = options;
+    
+    share.completionBlock = ^(NSArray *shares) {
+        
+        // Dismiss however you want here
+        [self dismissModalViewControllerAnimated:YES];
+    };
+    
+    [self presentModalViewController:share animated:YES];
+    
+}
 
-    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
-    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
+//    NSArray *activityItems;
+//
+//    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
+//    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
 //    UIImage *imgToShare = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]]];
 //
 //    NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
-    activityItems = @[txtToShare, urlToShare];
-    
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-    
-    [self presentViewController:activityController animated:YES completion:nil];
-}
+//    activityItems = @[txtToShare, urlToShare];
+//    
+//    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+//    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+//    
+//    [self presentViewController:activityController animated:YES completion:nil];
+//}
 
 - (ACAccount *)requestPermissionsForFB
 {

@@ -39,15 +39,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (![PFUser currentUser])
-    {
-        // show log in dialog
-        [self showSignInOutDialog];
-    }
-    else
-    {
-        [self configureView];
-    }
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,32 +52,12 @@
 {
     [self.tableView reloadData];
     // update the UI of the app appropriately.
-    if ([PFUser currentUser]) { // user is logged in
-        [self.signInOutButton setTitle:@"Log Out"];
-    }
-    else {
-        [self.signInOutButton setTitle:@"Sign In"];
-    }
+    [self.signInOutButton setTitle:@"Log In"];
 }
 
 - (void)showSignInOutDialog
 {
-    // Create the log in view controller
-    PelotoniaLogInViewController *logInViewController = [[PelotoniaLogInViewController alloc] init];
-    [logInViewController setDelegate:self]; // Set ourselves as the delegate
-    [logInViewController setFacebookPermissions:[NSArray arrayWithObjects:@"friends_about_me", nil]];
-    [logInViewController setFields: PFLogInFieldsDefault | PFLogInFieldsPasswordForgotten | PFLogInFieldsTwitter | PFLogInFieldsFacebook | PFLogInFieldsDismissButton];
-    
-    // Create the sign up view controller
-    PelotoniaSignUpViewController *signUpViewController = [[PelotoniaSignUpViewController alloc] init];
-    [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-    [signUpViewController setFields: PFSignUpFieldsEmail | PFSignUpFieldsUsernameAndPassword | PFSignUpFieldsSignUpButton | PFSignUpFieldsDismissButton];
-    
-    // Assign our sign up controller to be displayed from the login controller
-    [logInViewController setSignUpController:signUpViewController];
-    
-    // Present the log in view controller
-    [self presentViewController:logInViewController animated:YES completion:NULL];
+    // do nothing for now
 }
 
 #pragma mark - Segue
@@ -98,13 +70,8 @@
 {
     NSLog(@"executing showPelotoniaRiderProfile");
     NSString *riderID;
-    if ([PFUser currentUser])
-    {
-        PFUser *currentUser = [PFUser currentUser];
-        riderID = [currentUser objectForKey:@"riderID"];
-    }
     
-    Rider *rider = [[Rider alloc] initWithName:nil andId:riderID];
+    Rider *rider = [[Rider alloc] initWithName:@"Mark Harris" andId:@"MH0015"];
     if (rider)
     {
         profileTableViewController.rider = rider;
@@ -126,12 +93,6 @@
         // fire up rider search box
         NSString *riderID = nil;
         
-        if ([PFUser currentUser])
-        {
-            PFUser *currentUser = [PFUser currentUser];
-            riderID = [currentUser objectForKey:@"riderID"];
-        }
-
         if (nil != riderID)
         {
             // transition to the rider's profile
@@ -147,46 +108,14 @@
 
 - (void)setUserNameCell:(__weak UITableViewCell *)cell
 {
-    // name/rider type cell
-    if ([PFUser currentUser])
-    {
-        // user is logged in
-        PFUser *currentUser = [PFUser currentUser];
-        NSDictionary *profile = [currentUser objectForKey:@"profile"];
-        if (profile)
-        {
-            cell.textLabel.font = PELOTONIA_FONT(20);
-            cell.textLabel.text = [profile objectForKey:@"name"];
-            
-            // this masks the photo to the tableviewcell
-            cell.imageView.layer.masksToBounds = YES;
-            cell.imageView.layer.cornerRadius = 5.0;
-            
-            __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            [cell.imageView addSubview:activityIndicator];
-            activityIndicator.center = cell.imageView.center;
-            [activityIndicator startAnimating];
-            
-            // get the user's photo from the profile object
-            NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
-            [cell.imageView setImageWithURL:url
-                           placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-             {
-                 if (error != nil) {
-                     NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-                 }
-                 [activityIndicator removeFromSuperview];
-                 activityIndicator = nil;
-                 [cell layoutSubviews];
-             }];
-        }
-        else
-        {
-            cell.textLabel.font = PELOTONIA_FONT(20);
-            cell.textLabel.text = currentUser.username;
-        }
-    }
+    cell.textLabel.font = PELOTONIA_FONT(20);
+    cell.textLabel.text = @"CHANGE ME";
+    
+    // this masks the photo to the tableviewcell
+    cell.imageView.layer.masksToBounds = YES;
+    cell.imageView.layer.cornerRadius = 5.0;
+    [cell.imageView setImage:[UIImage imageNamed:@"pelotonia-icon.png"]];
+    [cell layoutSubviews];
 }
 
 - (void)linkProfileToPelotonia
@@ -210,17 +139,6 @@
         if (indexPath.row == 0)
         {
             [self setUserNameCell:cell];
-        }
-        else
-        {
-            if ([PFUser currentUser])
-            {
-                PFUser *currentUser = [PFUser currentUser];
-                NSString *riderID = [currentUser objectForKey:@"riderID"];
-                if (riderID) {
-                    // set cell with rider's name & such
-                }
-            }
         }
     }
     else
@@ -275,157 +193,11 @@
 
 - (IBAction)signInOutPressed:(id)sender
 {
-    if (![PFUser currentUser]) { // no one logged in
-        [self showSignInOutDialog];
-    }
-    else {
-        [PFUser logOut];
-    }
     [self configureView];
 }
 
 - (IBAction)shareButtonPressed:(id)sender {
 }
-
-
-#pragma mark -- PFLoginController/PFSignUpController delegates
-// update the user's information from facebook or twitter if we can
-- (void)updateProfile:(PFUser *)user
-{
-    // Send request to Facebook
-    FBRequest *request = [FBRequest requestForMe];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        // handle response
-        if (!error)
-        {
-            // Parse the data received
-            NSDictionary *userData = (NSDictionary *)result;
-            
-            NSString *facebookID = userData[@"id"];
-            
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            
-            // get information from the facebook data
-            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:4];
-            
-            if (facebookID) {
-                userProfile[@"facebookId"] = facebookID;
-            }
-            
-            if (userData[@"name"]) {
-                userProfile[@"name"] = userData[@"name"];
-            }
-            
-            if (userData[@"location"][@"name"]) {
-                userProfile[@"location"] = userData[@"location"][@"name"];
-            }
-            
-            if ([pictureURL absoluteString]) {
-                userProfile[@"pictureURL"] = [pictureURL absoluteString];
-            }
-            
-            [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
-            [[PFUser currentUser] saveEventually];
-            
-        }
-        else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"] isEqualToString: @"OAuthException"])
-        {
-            // Since the request failed, we can check if it was due to an invalid session
-            NSLog(@"The facebook session was invalidated");
-        }
-        else
-        {
-            NSLog(@"Some other error: %@", error);
-        }
-    }];
-}
-
-// Sent to the delegate to determine whether the log in request should be submitted to the server.
-- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
-    // Check if both fields are completed
-    if (username && password && username.length != 0 && password.length != 0) {
-        return YES; // Begin login process
-    }
-    
-    [[[UIAlertView alloc] initWithTitle:@"Missing Information"
-                                message:@"We need your email and password before you can log in."
-                               delegate:nil
-                      cancelButtonTitle:@"ok"
-                      otherButtonTitles:nil] show];
-    return NO; // Interrupt login process
-}
-
-// Sent to the delegate when a PFUser is logged in.
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    // just signed up & logged in with facebook/twitter/whatever, so get the user's info if we can
-    if (!user)
-    {
-        NSLog(@"The user cancelled the Facebook login.");
-    }
-    else if (user.isNew)
-    {
-        NSLog(@"User with facebook signed up and logged in!");
-        [self updateProfile:user];
-    }
-    else
-    {
-        NSLog(@"User with facebook logged in!");
-        [self updateProfile:user];
-    }
-}
-
-// Sent to the delegate when the log in attempt fails.
-- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
-    NSLog(@"Failed to log in...");
-}
-
-// Sent to the delegate when the log in screen is dismissed.
-- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-// Sent to the delegate to determine whether the sign up request should be submitted to the server.
-- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
-    BOOL informationComplete = YES;
-    
-    // loop through all of the submitted data
-    for (id key in info) {
-        NSString *field = [info objectForKey:key];
-        if (!field || field.length == 0) { // check completion
-            informationComplete = NO;
-            break;
-        }
-    }
-    
-    // Display an alert if a field wasn't completed
-    if (!informationComplete) {
-        [[[UIAlertView alloc] initWithTitle:@"Missing Information"
-                                    message:@"Make sure you fill out all of the information!"
-                                   delegate:nil
-                          cancelButtonTitle:@"ok"
-                          otherButtonTitles:nil] show];
-    }
-    
-    return informationComplete;
-}
-
-// Sent to the delegate when a PFUser is signed up.
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    [self dismissModalViewControllerAnimated:YES]; // Dismiss the PFSignUpViewController
-}
-
-// Sent to the delegate when the sign up attempt fails.
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error {
-    NSLog(@"Failed to sign up...");
-}
-
-// Sent to the delegate when the sign up screen is dismissed.
-- (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
-    NSLog(@"User dismissed the signUpViewController");
-}
-
-
 
 
 - (void)viewDidUnload {

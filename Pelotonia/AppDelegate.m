@@ -11,7 +11,7 @@
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
 #import "TestFlight.h"
-#import <Parse/Parse.h>
+#import <Socialize/Socialize.h>
 #import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation AppDelegate
@@ -30,12 +30,11 @@
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
 
-    // set up Parse
-    [Parse setApplicationId:@"9CUxtD0xEc85ZoN3D9wv5H5li7fQMBx6XjZ6GhqP"
-                  clientKey:@"JMsMecnjVTIsjWNyradXSMVSeflHq6StaQmN3Eqz"];
-    [PFFacebookUtils initializeFacebook];
-    
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
+    [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
+    [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
+    [SZFacebookUtils setAppId:@"269799726466566"];
+    [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
     
     // mobile monitoring
     [NewRelicAgent startWithApplicationToken:@"AAfae4b2471c8cc189d477aa2a6fe80390d0fd490d"];
@@ -98,7 +97,7 @@
 
 - (BOOL)handleOpenURL:(NSURL*)url
 {
-    [PFFacebookUtils handleOpenURL:url];
+    [Socialize handleOpenURL:url];
     
     return YES;
 }

@@ -52,9 +52,19 @@
 				<string>fb269799726466566</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>OpenSmartDownloads</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sz453825</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>92</string>
+	<string>117</string>
 	<key>FacebookAppID</key>
 	<string>269799726466566</string>
 	<key>LSRequiresIPhoneOS</key>

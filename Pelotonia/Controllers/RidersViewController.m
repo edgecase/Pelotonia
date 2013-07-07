@@ -15,7 +15,6 @@
 #import "PelotoniaWeb.h"
 #import "UIImage+Resize.h"
 #import "MenuViewController.h"
-#import <Parse/Parse.h>
 
 
 @interface RidersViewController ()
@@ -197,6 +196,8 @@
          }
          [activityIndicator removeFromSuperview];
          activityIndicator = nil;
+         [cell setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+
          [cell layoutSubviews];
      }];
 

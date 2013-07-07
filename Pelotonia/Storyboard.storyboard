@@ -627,7 +627,6 @@
                     <connections>
                         <outlet property="shareButton" destination="Gbc-p2-6oN" id="MEW-vv-fkU"/>
                         <outlet property="signInOutButton" destination="Jdd-Ci-RiE" id="Oh1-9p-Jor"/>
-                        <segue destination="sKZ-lE-nf9" kind="push" identifier="showPelotoniaRiderProfile:" id="9iH-ZX-ERv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1020,7 +1019,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="9iH-ZX-ERv"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,7 @@
 //
 
 #import "ProfileDetailsTableViewController.h"
+#import "UIImage+Resize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ProfileDetailsTableViewController ()
@@ -47,7 +48,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // we're using static cells, so get the cell from the parent
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *_cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    __weak UITableViewCell *cell = _cell;
     
     // Configure the cell...
     if (indexPath.section == 0 && indexPath.row == 0) {
@@ -77,6 +79,7 @@
              }
              [activityIndicator removeFromSuperview];
              activityIndicator = nil;
+             [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
              [cell layoutSubviews];
          }];
 

@@ -56,45 +56,10 @@
 
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
     if (indexPath.row == USER_PROFILE_ROW && indexPath.section == 0) {
-        // name/rider type cell
-        if ([PFUser currentUser])
-        {
-            // user is logged in
-            PFUser *currentUser = [PFUser currentUser];
-            NSDictionary *profile = [currentUser objectForKey:@"profile"];
-            if (profile)
-            {
-                cell.textLabel.text = [profile objectForKey:@"name"];
-                NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
-                
-                // this masks the photo to the tableviewcell
-                cell.imageView.layer.masksToBounds = YES;
-                cell.imageView.layer.cornerRadius = 5.0;
-                
-                __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                [cell.imageView addSubview:activityIndicator];
-                activityIndicator.center = cell.imageView.center;
-                [activityIndicator startAnimating];
-                
-                [cell.imageView setImageWithURL:url
-                               placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-                 {
-                     if (error != nil) {
-                         NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-                     }
-                     [activityIndicator removeFromSuperview];
-                     activityIndicator = nil;
-                     [cell layoutSubviews];
-                 }];
-            } else {
-                cell.textLabel.text = currentUser.username;
-            }
-
-        } else {
-            cell.textLabel.text = @"Sign In";
-            [cell.imageView setImage:nil];
-        }
+        cell.textLabel.text = @"CHANGE ME";
+        cell.imageView.layer.masksToBounds = YES;
+        cell.imageView.layer.cornerRadius = 5.0;
+        cell.imageView.image = [UIImage imageNamed:@"pelotonia-icon.png"];
     }
     return cell;
 }

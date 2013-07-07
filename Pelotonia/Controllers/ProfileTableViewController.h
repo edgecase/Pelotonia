@@ -11,6 +11,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Socialize/Socialize.h>
 
 #import "Rider.h"
 #import "PelotoniaWeb.h"
@@ -36,6 +37,10 @@
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;
 @property (assign, nonatomic, readonly) BOOL following;
+
+// for the Socialize Action Bar
+@property (nonatomic, retain) SZActionBar *actionBar;
+@property (nonatomic, retain) id<SZEntity> entity;
 
 // UI actions
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController;
