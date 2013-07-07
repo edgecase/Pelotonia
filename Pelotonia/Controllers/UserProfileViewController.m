@@ -39,7 +39,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self configureView];
+    if (![PFUser currentUser])
+    {
+        // show log in dialog
+        [self showSignInOutDialog];
+    }
+    else
+    {
+        [self configureView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,8 +62,6 @@
     // update the UI of the app appropriately.
     if ([PFUser currentUser]) { // user is logged in
         [self.signInOutButton setTitle:@"Log Out"];
-        
-        
     }
     else {
         [self.signInOutButton setTitle:@"Sign In"];
@@ -82,6 +88,34 @@
     [self presentViewController:logInViewController animated:YES completion:NULL];
 }
 
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+}
+
+- (void)showPelotoniaRiderProfile:(ProfileTableViewController *)profileTableViewController
+{
+    NSLog(@"executing showPelotoniaRiderProfile");
+    NSString *riderID;
+    if ([PFUser currentUser])
+    {
+        PFUser *currentUser = [PFUser currentUser];
+        riderID = [currentUser objectForKey:@"riderID"];
+    }
+    
+    Rider *rider = [[Rider alloc] initWithName:nil andId:riderID];
+    if (rider)
+    {
+        profileTableViewController.rider = rider;
+    }
+    else
+    {
+        NSLog(@"rider not found %@", riderID);
+    }
+}
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,9 +124,79 @@
     if (indexPath.section == 0 && indexPath.row == 1) {
         // get the user's RiderID and get the rider object
         // fire up rider search box
+        NSString *riderID = nil;
         
-        // copy properties from the rider object into this rider
+        if ([PFUser currentUser])
+        {
+            PFUser *currentUser = [PFUser currentUser];
+            riderID = [currentUser objectForKey:@"riderID"];
+        }
+
+        if (nil != riderID)
+        {
+            // transition to the rider's profile
+            /// execute segue
+            [self performSegueWithIdentifier:@"showPelotoniaRiderProfile:" sender:self];
+        }
+        else
+        {
+            [self linkProfileToPelotonia];
+        }
     }
+}
+
+- (void)setUserNameCell:(__weak UITableViewCell *)cell
+{
+    // name/rider type cell
+    if ([PFUser currentUser])
+    {
+        // user is logged in
+        PFUser *currentUser = [PFUser currentUser];
+        NSDictionary *profile = [currentUser objectForKey:@"profile"];
+        if (profile)
+        {
+            cell.textLabel.font = PELOTONIA_FONT(20);
+            cell.textLabel.text = [profile objectForKey:@"name"];
+            
+            // this masks the photo to the tableviewcell
+            cell.imageView.layer.masksToBounds = YES;
+            cell.imageView.layer.cornerRadius = 5.0;
+            
+            __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            [cell.imageView addSubview:activityIndicator];
+            activityIndicator.center = cell.imageView.center;
+            [activityIndicator startAnimating];
+            
+            // get the user's photo from the profile object
+            NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
+            [cell.imageView setImageWithURL:url
+                           placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
+             {
+                 if (error != nil) {
+                     NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
+                 }
+                 [activityIndicator removeFromSuperview];
+                 activityIndicator = nil;
+                 [cell layoutSubviews];
+             }];
+        }
+        else
+        {
+            cell.textLabel.font = PELOTONIA_FONT(20);
+            cell.textLabel.text = currentUser.username;
+        }
+    }
+}
+
+- (void)linkProfileToPelotonia
+{
+    // prompt user for his/her credentials
+    
+    // post against the pelotonia login form
+    
+    // if it comes back OK, then add a user ID to the current user object
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,43 +209,16 @@
         __weak UITableViewCell *cell = _cell;
         if (indexPath.row == 0)
         {
-            // name/rider type cell
+            [self setUserNameCell:cell];
+        }
+        else
+        {
             if ([PFUser currentUser])
             {
-                // user is logged in
                 PFUser *currentUser = [PFUser currentUser];
-                NSDictionary *profile = [currentUser objectForKey:@"profile"];
-                if (profile)
-                {
-                    cell.textLabel.font = PELOTONIA_FONT(18);
-                    cell.textLabel.text = [profile objectForKey:@"name"];
-                    
-                    // this masks the photo to the tableviewcell
-                    cell.imageView.layer.masksToBounds = YES;
-                    cell.imageView.layer.cornerRadius = 5.0;
-
-                    __block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-                    [cell.imageView addSubview:activityIndicator];
-                    activityIndicator.center = cell.imageView.center;
-                    [activityIndicator startAnimating];
-
-                    // get the user's photo from the profile object
-                    NSURL *url = [NSURL URLWithString:[profile objectForKey:@"pictureURL"]];
-                    [cell.imageView setImageWithURL:url
-                                   placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-                     {
-                         if (error != nil) {
-                             NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-                         }
-                         [activityIndicator removeFromSuperview];
-                         activityIndicator = nil;
-                         [cell layoutSubviews];
-                     }];
-                }
-                else
-                {
-                    cell.textLabel.text = currentUser.username;
+                NSString *riderID = [currentUser objectForKey:@"riderID"];
+                if (riderID) {
+                    // set cell with rider's name & such
                 }
             }
         }
@@ -228,7 +305,7 @@
             
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
             
-            
+            // get information from the facebook data
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:4];
             
             if (facebookID) {

@@ -277,7 +277,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
                         <barButtonItem key="leftBarButtonItem" image="259-list.png" id="QZU-aO-8lk">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="revealMenu:" destination="puZ-qr-IB2" id="ryz-Jd-Brb"/>
                             </connections>
@@ -450,7 +450,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="842" y="1002"/>
+            <point key="canvasLocation" x="327" y="888"/>
         </scene>
         <!--Activity View Controller - Updates-->
         <scene sceneID="m8a-Js-YyP">
@@ -502,7 +502,7 @@
                         <sections>
                             <tableViewSection id="XMZ-D2-Tk1">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rmp-rN-3fK" detailTextLabel="fDu-TW-sKv" imageView="mvT-TP-T2R" rowHeight="96" style="IBUITableViewCellStyleSubtitle" id="PjR-wh-5aG">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rmp-rN-3fK" imageView="mvT-TP-T2R" rowHeight="96" style="IBUITableViewCellStyleDefault" id="PjR-wh-5aG">
                                         <rect key="frame" x="0.0" y="10" width="320" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -510,17 +510,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rmp-rN-3fK">
-                                                    <rect key="frame" x="77" y="27" width="50" height="22"/>
+                                                    <rect key="frame" x="77" y="0.0" width="213" height="95"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Type of rider, volunteer, or follower" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fDu-TW-sKv">
-                                                    <rect key="frame" x="77" y="49" width="213" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pelotonia-icon.png" id="mvT-TP-T2R">
@@ -531,15 +524,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="van-t8-ciz" style="IBUITableViewCellStyleDefault" id="5wn-vV-PQW">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="van-t8-ciz" style="IBUITableViewCellStyleDefault" id="5wn-vV-PQW">
                                         <rect key="frame" x="0.0" y="107" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Link to Pelotonia Participant" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="van-t8-ciz">
-                                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Sign In to My Pelotonia Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="van-t8-ciz">
+                                                    <rect key="frame" x="10" y="0.0" width="260" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -634,6 +627,7 @@
                     <connections>
                         <outlet property="shareButton" destination="Gbc-p2-6oN" id="MEW-vv-fkU"/>
                         <outlet property="signInOutButton" destination="Jdd-Ci-RiE" id="Oh1-9p-Jor"/>
+                        <segue destination="sKZ-lE-nf9" kind="push" identifier="showPelotoniaRiderProfile:" id="9iH-ZX-ERv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -684,26 +678,8 @@
                                             <segue destination="pMn-37-Pi2" kind="push" identifier="showDetails:" id="0V8-FD-T58"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="zpP-Sc-3z3" rowHeight="89" style="IBUITableViewCellStyleDefault" id="6qp-UC-zYg">
-                                        <rect key="frame" x="0.0" y="106" width="320" height="89"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="0.0" width="280" height="88"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Latest Update" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zpP-Sc-3z3">
-                                                    <rect key="frame" x="10" y="0.0" width="260" height="88"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="82" id="0rH-P2-a6L">
-                                        <rect key="frame" x="0.0" y="195" width="320" height="82"/>
+                                        <rect key="frame" x="0.0" y="106" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="81"/>
@@ -734,7 +710,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hW8-28-e5C">
-                                        <rect key="frame" x="0.0" y="277" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="188" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -803,7 +779,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560" y="254"/>
+            <point key="canvasLocation" x="1524" y="-4"/>
         </scene>
         <!--Send Pledge Modal View Controller-->
         <scene sceneID="mry-ek-Boq">
@@ -1044,4 +1020,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="9iH-ZX-ERv"/>
+    </inferredMetricsTieBreakers>
 </document>

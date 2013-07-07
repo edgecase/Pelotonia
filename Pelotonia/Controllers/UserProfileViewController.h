@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileTableViewController.h"
 
 @interface UserProfileViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *signInOutButton;
