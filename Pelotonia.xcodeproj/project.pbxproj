@@ -309,6 +309,8 @@
 		BB5D241F1789D54D00A4429A /* SZBaseShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB5D23421789D54D00A4429A /* SZBaseShareViewController.xib */; };
 		BB5D24201789D54D00A4429A /* SZStatusImageLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB5D23431789D54D00A4429A /* SZStatusImageLabelView.xib */; };
 		BB5D24211789D54D00A4429A /* Socialize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5D23441789D54D00A4429A /* Socialize.framework */; };
+		BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */; };
+		BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */; };
 		BB65880E1735F05E00ABA5AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */; };
 		BB6588101735F09100ABA5AF /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */; };
 		BB6588121735F0AA00ABA5AF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6588111735F0AA00ABA5AF /* StoreKit.framework */; };
@@ -724,6 +726,10 @@
 		BB5D23421789D54D00A4429A /* SZBaseShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZBaseShareViewController.xib; sourceTree = "<group>"; };
 		BB5D23431789D54D00A4429A /* SZStatusImageLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SZStatusImageLabelView.xib; sourceTree = "<group>"; };
 		BB5D23441789D54D00A4429A /* Socialize.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Socialize.framework; sourceTree = "<group>"; };
+		BB5D24221789EEB800A4429A /* PRPSmartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPSmartTableViewCell.h; sourceTree = "<group>"; };
+		BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPSmartTableViewCell.m; sourceTree = "<group>"; };
+		BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentTableViewCell.h; path = Controllers/CommentTableViewCell.h; sourceTree = "<group>"; };
+		BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentTableViewCell.m; path = Controllers/CommentTableViewCell.m; sourceTree = "<group>"; };
 		BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		BB6588111735F0AA00ABA5AF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -1400,6 +1406,8 @@
 		BCE3B7BD15AE49DA00205530 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BB5D24221789EEB800A4429A /* PRPSmartTableViewCell.h */,
+				BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */,
 				BBABDD75174B195C004B64D5 /* PRPWebViewController.h */,
 				BBABDD76174B195C004B64D5 /* PRPWebViewController.m */,
 				BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */,
@@ -1437,6 +1445,8 @@
 				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
 				BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */,
 				BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */,
+				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
+				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1929,6 +1939,8 @@
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 				BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */,
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
+				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,
+				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

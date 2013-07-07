@@ -15,6 +15,7 @@
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 #import "SHKActivityIndicator.h"
+#import "CommentTableViewCell.h"
 #import <Social/Social.h>
 
 
@@ -27,6 +28,9 @@
 @synthesize storyTextView;
 @synthesize followButton;
 @synthesize nameAndRouteCell;
+@synthesize riderComments;
+@synthesize entity;
+@synthesize actionBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -63,18 +67,18 @@
 {
     if (self.actionBar == nil)
     {
-        if (self.actionBar == nil)
-        {
-            self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
-            self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
+        self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+        self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
 
-            SZLikeButton *likeButton = [[SZLikeButton alloc] initWithFrame:CGRectNull entity:self.entity viewController:self];
-            self.actionBar.itemsRight = [NSArray arrayWithObjects:likeButton, [SZActionButton commentButton], nil];
-            
-            self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], nil];
-            
-            [self.view addSubview:self.actionBar];
-        }
+        SZLikeButton *likeButton = [[SZLikeButton alloc] initWithFrame:CGRectNull entity:self.entity viewController:self];
+        self.actionBar.itemsRight = [NSArray arrayWithObjects:likeButton, [SZActionButton commentButton], nil];
+        
+        self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], nil];
+        [self.view addSubview:self.actionBar];
+    }
+    if (self.entity)
+    {
+        [self reloadComments];
     }
 }
 
@@ -93,8 +97,6 @@
 {
     [self.tableView removeObserver:pull forKeyPath:@"contentOffset"];
 }
-
-
 
 //implementation
 
@@ -127,6 +129,30 @@
 }
 
 #pragma mark - Table view delegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        // comments section
+        CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
+        id<SZComment> comment = [self.riderComments objectAtIndex:indexPath.row];
+        if (comment) {
+            cell.textLabel.text = [comment text];
+        }
+        return cell;
+    }
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 1)
+    {
+        NSInteger num = [self.riderComments count];
+        return num;
+    }
+    return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -157,10 +183,22 @@
 
 
 #pragma mark -- view configuration
+- (void)reloadComments
+{
+    [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
+        NSLog(@"Fetched comments successfully");
+        self.riderComments = comments;
+        NSInteger num = [self.riderComments count];
+    } failure:^(NSError *error) {
+        NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
+    }];
+}
+
 
 - (void)refreshRider
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
+        [self reloadComments];
         [self configureView];
         [pull finishedLoading];
     }

@@ -19,6 +19,7 @@
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 
+
 #define kShareActionSheet 100
 
 @interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, SendPledgeModalViewControllerDelegate> {
@@ -37,6 +38,7 @@
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;
 @property (assign, nonatomic, readonly) BOOL following;
+@property (strong, nonatomic) NSArray *riderComments;
 
 // for the Socialize Action Bar
 @property (nonatomic, retain) SZActionBar *actionBar;
