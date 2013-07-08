@@ -30,10 +30,10 @@
 // UI properties
 @property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *followButton;
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameAndRouteCell;
 @property (weak, nonatomic) IBOutlet UILabel *raisedAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *starFollowButton;
 
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;

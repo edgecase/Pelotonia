@@ -196,7 +196,7 @@
          }
          [activityIndicator removeFromSuperview];
          activityIndicator = nil;
-         [cell setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+         [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
 
          [cell layoutSubviews];
      }];
