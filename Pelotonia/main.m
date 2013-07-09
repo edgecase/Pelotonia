@@ -13,13 +13,17 @@
 int main(int argc, char *argv[])
 {
     int retval = 0;
-        @autoreleasepool {
+    @autoreleasepool {
+        @try
+        {
             retval =  UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
         }
-//    }
-//    @catch (NSException *exception) {
-//        NSLog(@"Exception - %@",[exception description]);
-//        exit(EXIT_FAILURE);
-//    }
+        @catch (NSException *exception)
+        {
+            NSLog(@"Exception - %@",[exception description]);
+            NSLog(@"%@", [exception reason]);
+            exit(EXIT_FAILURE);
+        }
+    }
     return retval;
 }

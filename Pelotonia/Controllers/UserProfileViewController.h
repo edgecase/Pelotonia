@@ -8,16 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileTableViewController.h"
+#import <Socialize/Socialize.h>
 
 @interface UserProfileViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *signInOutButton;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
+// non-UI properties
+@property (strong, nonatomic) id<SZFullUser> currentUser;
+@property (strong, nonatomic) NSArray *recentActions;
+
 - (IBAction)revealMenu:(id)sender;
-- (IBAction)signInOutPressed:(id)sender;
 - (IBAction)shareButtonPressed:(id)sender;
 
 @end

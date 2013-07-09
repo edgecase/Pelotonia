@@ -9,7 +9,9 @@
 #import "MenuViewController.h"
 #import "PRPWebViewController.h"
 #import "Pelotonia-Colors.h"
+#import "UIImage+Resize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Socialize/Socialize.h>
 
 #define USER_PROFILE_ROW 1
 
@@ -52,14 +54,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-
+    UITableViewCell *_cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    __weak UITableViewCell *cell = _cell;
+    
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
-    if (indexPath.row == USER_PROFILE_ROW && indexPath.section == 0) {
-        cell.textLabel.text = @"CHANGE ME";
+    if (indexPath.row == USER_PROFILE_ROW && indexPath.section == 0)
+    {
+        id<SZFullUser> currentUser = [SZUserUtils currentUser];
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentUser firstName], [currentUser lastName]];
         cell.imageView.layer.masksToBounds = YES;
         cell.imageView.layer.cornerRadius = 5.0;
-        cell.imageView.image = [UIImage imageNamed:@"pelotonia-icon.png"];
+
+        [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]] placeholderImage:[UIImage imageNamed:@"profile_default.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [cell layoutSubviews];
+        }];
     }
     return cell;
 }
