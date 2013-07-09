@@ -9,8 +9,11 @@
 #import "UserProfileViewController.h"
 #import "PelotoniaLogInViewController.h"
 #import "PelotoniaSignUpViewController.h"
+#import "NSDate-Utilities.h"
+#import "NSDate+Helper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
+#import "CommentTableViewCell.h"
 
 @interface UserProfileViewController ()
 
@@ -156,6 +159,23 @@
     
 }
 
+- (NSString *)getTitleFromComment:(id<SZActivity>) comment
+{
+    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
+}
+
+- (NSString *)getTextFromComment:(id<SZActivity>) comment
+{
+    return [comment description];
+}
+
+- (NSURL *)getImageURLFromComment:(id<SZActivity>) comment
+{
+    NSString *strURL = [[comment user] smallImageUrl];
+    return [NSURL URLWithString:strURL];
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *_cell;
@@ -169,8 +189,17 @@
     if (indexPath.section == 1)
     {
         // current activity
+        id<SZActivity> activity = [self.recentActions objectAtIndex:indexPath.row];
         
-        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
+        cell.titleString = [self getTitleFromComment:activity];
+        cell.commentString = [self getTextFromComment:activity];
+        
+        [cell.imageView setImageWithURL:[self getImageURLFromComment:activity]
+                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+
+        
+        _cell = (UITableViewCell *)cell;
     }
     
     return _cell;
@@ -240,7 +269,7 @@
     if (indexPath.section == 1)
     {
         // figure out Pelotonia activity cell
-        sz = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+        sz = 26;
     }
     else
     {

@@ -41,7 +41,6 @@ NSDictionary *DictionaryForNode(xmlNodePtr currentNode, NSMutableDictionary *par
                 return nil;
             }
             [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];
-//            NSLog(@"content: %@",currentNodeContent);
             return resultForNode;
 
         }
