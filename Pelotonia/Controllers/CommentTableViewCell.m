@@ -10,10 +10,12 @@
 #import "UIImage+Resize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+static CGFloat tableCellWidth = 235;
+
 @implementation CommentTableViewCell
 
-@synthesize mainLabel;
-@synthesize dateLabel;
+@synthesize titleString;
+@synthesize commentString;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,9 +29,8 @@
 - (id)initWithCellIdentifier:(NSString *)cellID
 {
     if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID])
-    {
-        
-        self.textLabel.font = [UIFont boldSystemFontOfSize:15.0];
+    {   
+        self.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
         self.textLabel.textColor = PRIMARY_DARK_GRAY;
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -38,21 +39,67 @@
         self.detailTextLabel.textColor = SECONDARY_DARK_GREEN;
         self.detailTextLabel.numberOfLines = 0;
         self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        
+
     }
     return self;
 }
 
-+(CGFloat)sizeForComment:(id<SocializeComment>)comment
++ (CGFloat)getCellHeightForString:(NSString *)comment withFont:(UIFont *)font
 {
-    // figure out the height of comment cells
-    CGSize initialSize = CGSizeMake(300, MAXFLOAT);
-
-    NSString *commentText = [comment text];
-    CGSize sz = [commentText sizeWithFont:PELOTONIA_FONT(14) constrainedToSize:initialSize];
-    CGSize szDetail = [@"User, Jan 1, 2001" sizeWithFont:[UIFont boldSystemFontOfSize:15.0] constrainedToSize:initialSize];
+    CGSize expectedLabelSize = [comment sizeWithFont:font
+                                   constrainedToSize:CGSizeMake(tableCellWidth, CGFLOAT_MAX)
+                                       lineBreakMode:NSLineBreakByWordWrapping];
     
-    return sz.height + szDetail.height + 20.0;
+	return expectedLabelSize.height;
 }
 
++ (CGFloat)getCellHeightForTitle:(NSString *)text
+{
+    return [[self class] getCellHeightForString:text withFont:[UIFont boldSystemFontOfSize:14.0]];
+}
+
++ (CGFloat)getCellHeightForCommentText:(NSString *)text
+{
+    return [[self class] getCellHeightForString:text withFont:PELOTONIA_FONT(14)];
+}
+
++ (CGFloat)getTotalHeightForCellWithCommentText:(NSString *)comment andTitle:(NSString *)title
+{
+    return [[self class] getCellHeightForCommentText:comment] + [[self class] getCellHeightForTitle:title] + 20.0;
+}
+
+
+// need this for properly laying out the images, since they're funny sized
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.imageView.frame = CGRectMake(5,5,40,40);
+    float limgW =  self.imageView.image.size.width;
+    
+    CGFloat commentHeight = [[self class] getCellHeightForCommentText:self.commentString];
+    CGFloat titleHeight = [[self class] getCellHeightForTitle:self.titleString];
+    
+	CGRect newFrame = self.detailTextLabel.frame;
+    newFrame.size.height = commentHeight;
+	self.detailTextLabel.text = self.commentString;
+    self.detailTextLabel.frame = newFrame;
+    
+    CGRect newTitleFrame = self.textLabel.frame;
+    newTitleFrame.size.height = titleHeight;
+    self.textLabel.text = self.titleString;
+    self.textLabel.frame = newTitleFrame;
+
+    if(limgW > 0)
+    {
+        self.textLabel.frame = CGRectMake(55, self.imageView.frame.origin.y,tableCellWidth,self.textLabel.frame.size.height);
+        self.detailTextLabel.frame = CGRectMake(55, CGRectGetMaxY(self.textLabel.frame)+5,tableCellWidth,self.detailTextLabel.frame.size.height);
+    }
+    
+	CGRect cellFrame = self.frame;
+	cellFrame.size.height = newFrame.size.height + newTitleFrame.size.height + 20.0;
+	self.frame = cellFrame;
+}
 
 @end

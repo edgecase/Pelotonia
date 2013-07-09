@@ -29,7 +29,6 @@
 
 // UI properties
 @property (weak, nonatomic) IBOutlet UIProgressView *donationProgress;
-@property (weak, nonatomic) IBOutlet UITextView *storyTextView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameAndRouteCell;
 @property (weak, nonatomic) IBOutlet UILabel *raisedAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
@@ -43,6 +42,7 @@
 // for the Socialize Action Bar
 @property (nonatomic, retain) SZActionBar *actionBar;
 @property (nonatomic, retain) id<SZEntity> entity;
+@property (nonatomic, assign) NSInteger numLikes;
 
 // UI actions
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController;

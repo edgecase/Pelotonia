@@ -11,9 +11,11 @@
 
 @interface CommentTableViewCell : PRPSmartTableViewCell
 
-@property (strong, nonatomic) UILabel *mainLabel;
-@property (strong, nonatomic) UILabel *dateLabel;
+@property (strong, nonatomic) NSString *commentString;
+@property (strong, nonatomic) NSString *titleString;
 
-+(CGFloat)sizeForComment:(id<SZComment>)comment;
-
++ (CGFloat)getCellHeightForString:(NSString *)comment withFont:(UIFont *)font;
++ (CGFloat)getCellHeightForTitle:(NSString *)text;
++ (CGFloat)getCellHeightForCommentText:(NSString *)text;
++ (CGFloat)getTotalHeightForCellWithCommentText:(NSString *)comment andTitle:(NSString *)title;
 @end

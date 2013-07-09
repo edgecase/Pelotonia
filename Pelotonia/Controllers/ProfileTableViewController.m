@@ -12,6 +12,7 @@
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 #import "SHKActivityIndicator.h"
@@ -19,7 +20,7 @@
 #import "CommentTableViewCell.h"
 #import <Social/Social.h>
 
-#define SECTION_1_HEADER_HEIGHT   30.0 + 30.0
+#define SECTION_1_HEADER_HEIGHT   40.0
 
 
 @interface ProfileTableViewController ()
@@ -28,7 +29,6 @@
 
 @implementation ProfileTableViewController 
 @synthesize donationProgress;
-@synthesize storyTextView;
 @synthesize nameAndRouteCell;
 @synthesize riderComments;
 @synthesize entity;
@@ -50,12 +50,16 @@
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
+
+    if (self.entity == nil)
+    {
+        self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+    }
 }
 
 - (void)viewDidUnload
 {
     [self setDonationProgress:nil];
-    [self setStoryTextView:nil];
     [self setNameAndRouteCell:nil];
     [self setRaisedAmountLabel:nil];
     [self setRaisedLabel:nil];
@@ -65,28 +69,9 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)setupActionBar
-{
-    if (self.actionBar == nil)
-    {
-        self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
-        self.actionBar = [SZActionBar defaultActionBarWithFrame:CGRectNull entity:self.entity viewController:self];
-
-        SZLikeButton *likeButton = [[SZLikeButton alloc] initWithFrame:CGRectNull entity:self.entity viewController:self];
-        self.actionBar.itemsRight = [NSArray arrayWithObjects:likeButton, [SZActionButton commentButton], nil];
-        
-        self.actionBar.itemsLeft = [NSArray arrayWithObjects:[SZActionButton viewsButton], nil];
-//        [self.view addSubview:self.actionBar];
-    }
-    if (self.entity)
-    {
-        [self reloadComments];
-    }
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setupActionBar];
     [self configureView];
     [self manualRefresh:nil];
 }
@@ -131,10 +116,28 @@
     profileDetailsViewController.rider = self.rider;
 }
 
+- (NSString *)getTitleFromComment:(id<SZComment>) comment
+{
+    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
+}
+
+- (NSString *)getTextFromComment:(id<SZComment>) comment
+{
+    return [comment text];
+}
+
+- (NSURL *)getImageURLFromComment:(id<SZComment>) comment
+{
+    NSString *strURL = [[comment user] smallImageUrl];
+    return [NSURL URLWithString:strURL];
+}
+
+
 #pragma mark - Table view delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1)
+    {
         // comments section
         CommentTableViewCell *_cell = [CommentTableViewCell cellForTableView:tableView];
         __weak CommentTableViewCell *cell = _cell;
@@ -142,32 +145,11 @@
         id<SZComment> comment = [self.riderComments objectAtIndex:indexPath.row];
         if (comment)
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
-            cell.detailTextLabel.text = [comment text];
+            cell.titleString = [self getTitleFromComment:comment];
+            cell.commentString = [self getTextFromComment:comment];
             
-            // __block keyword lets ARC know we're using activityIndicator in a block, so don't gc it
-            __block UIActivityIndicatorView *activityIndicator;
-            [cell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
-            activityIndicator.center = cell.imageView.center;
-            [activityIndicator startAnimating];
-            
-            NSURL *imageURL = [NSURL URLWithString:[[comment user] smallImageUrl]];
-            
-            [cell.imageView setImageWithURL:imageURL
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-             {
-                 if (error != nil)
-                 {
-                     NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
-                 }
-                 [activityIndicator removeFromSuperview];
-                 activityIndicator = nil;
-                 [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-                 [cell layoutSubviews];
-             }];
-
-            
+            [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
+                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
         }
         return cell;
     }
@@ -213,27 +195,30 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    CGFloat sz = 40;
+    
+    if (indexPath.section == 0 && indexPath.row == 2)
     {
-        if (indexPath.row == 2)
+        // progress row -- hide if we're a volunteer rider
+        if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
+            [self.rider.riderType isEqualToString:@"Volunteer"])
         {
-            // progress row -- hide if we're a volunteer rider
-            if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
-                [self.rider.riderType isEqualToString:@"Volunteer"])
-            {
-                return 0;
-            }
+            sz = 0;
         }
     }
-    
-    // comment section
-    if (indexPath.section == 1)
+    else if (indexPath.section == 1)
     {
         id<SZComment> riderComment = [self.riderComments objectAtIndex:indexPath.row];
-        CGFloat sz = [CommentTableViewCell sizeForComment:riderComment];
-        return sz;
+        NSString *comment = [self getTextFromComment:riderComment];
+        NSString *title = [self getTitleFromComment:riderComment];
+        sz = [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
     }
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    else
+    {
+        sz = [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+    
+    return sz;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -262,11 +247,17 @@
         label.text = [self tableView:tableView titleForHeaderInSection:section];
         
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [writePostButton setTitle:@"Write Post" forState:UIControlStateNormal];
-        [writePostButton setFrame:CGRectMake(10.0, CGRectGetMaxY(label.frame), self.view.bounds.size.width - 20.0, 30.0)];
-        [writePostButton setBackgroundColor:PRIMARY_GREEN];
+        writePostButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        [writePostButton setTitle:@"Post" forState:UIControlStateNormal];
+        NSInteger writeButtonW = 150;
+        NSInteger writeButtonBorder = 10.0;
+        NSInteger writeButtonH = 30.0;
+        [writePostButton setFrame:CGRectMake(self.view.bounds.size.width - writeButtonW - writeButtonBorder,
+                                             label.frame.origin.y,
+                                             writeButtonW, writeButtonH)];
+        [writePostButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-background.png"]]];
         [writePostButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        writePostButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
+        writePostButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
         [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
         writePostButton.layer.cornerRadius = 5.0;
@@ -336,6 +327,8 @@
     [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
         NSLog(@"Fetched comments successfully, %@", comments);
         self.riderComments = comments;
+        [self.tableView reloadData];
+//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
     }];
@@ -346,6 +339,7 @@
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
         [self reloadComments];
+        [self getLikesByEntity];
         [self configureView];
         [pull finishedLoading];
     }
@@ -368,6 +362,8 @@
 
 - (void)configureView
 {
+    // configures the static cells to have the correct data
+    
     // set the name & ID appropriately
     self.nameAndRouteCell.textLabel.text = self.rider.name;
     if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
@@ -385,17 +381,18 @@
         self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
         self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
     }
-    self.storyTextView.text = [NSString stringWithFormat:@"%@", self.rider.story];
     
     self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);
     self.nameAndRouteCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
     
-    if (self.following) {
-        [self.starFollowButton setTitle:@"Following" forState:UIControlStateNormal];
+    if (self.following)
+    {
+        [self.starFollowButton setTitle:[NSString stringWithFormat:@"Following"] forState:UIControlStateNormal];
         [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star.png"] forState:UIControlStateNormal];
     }
-    else {
-        [self.starFollowButton setTitle:@"Follow" forState:UIControlStateNormal];
+    else
+    {
+        [self.starFollowButton setTitle:[NSString stringWithFormat:@"Follow"] forState:UIControlStateNormal];
         [self.starFollowButton setImage:[UIImage imageNamed:@"28-star.png"] forState:UIControlStateNormal];
     }
     
@@ -425,8 +422,6 @@
     
     // re-layout subviews so that the image auto-adjusts
     [self.nameAndRouteCell layoutSubviews];
-    
-    [self.tableView reloadData];
 }
 
 - (void)postAlert:(NSString *)msg {
@@ -474,6 +469,39 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma Socialize stuff
+
+- (void)getLikesByEntity
+{
+    [SZLikeUtils getLikesForEntity:self.entity start:nil end:nil success:^(NSArray *likes) {
+        NSLog(@"Got likes: %@", likes);
+        self.numLikes = [likes count];
+        [self configureView];
+    } failure:^(NSError *error) {
+        self.numLikes = 0;
+        NSLog(@"Failed getting likes: %@", [error localizedDescription]);
+        [self configureView];
+    }];
+}
+
+- (void)like
+{
+    [SZLikeUtils likeWithEntity:self.entity options:nil networks:SZAvailableSocialNetworks()
+    success:^(id<SZLike> like) {
+        NSLog(@"Created like: %d", [like objectID]);
+    } failure:^(NSError *error) {
+        NSLog(@"Failed creating like: %@", [error localizedDescription]);
+    }];
+}
+
+- (void)unlike
+{
+    [SZLikeUtils unlike:self.entity success:^(id<SZLike> like) {
+        NSLog(@"Deleted like: %d", [like objectID]);
+    } failure:^(NSError *error) {
+        NSLog(@"Failed deleting like: %@", [error localizedDescription]);
+    }];
+}
 
 - (IBAction)followRider:(id)sender
 {
@@ -481,11 +509,13 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     RiderDataController *dataController = appDelegate.riderDataController;
     
-    if (!self.following) {
-        [dataController addObject:self.rider];
+    if (self.following) {
+        [dataController removeObject:self.rider];
+        [self unlike];
     }
     else {
-        [dataController removeObject:self.rider];
+        [dataController addObject:self.rider];
+        [self like];
     }
     [self configureView];
 }
@@ -494,8 +524,8 @@
 - (IBAction)shareProfile:(id)sender
 {
     NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
-    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
-    UIImage *imgToShare = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]]];
+//    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
+//    UIImage *imgToShare = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]]];
     
     NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
 
@@ -514,11 +544,11 @@
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
-            NSString *displayName = [postData.entity displayName];
+//            NSString *displayName = [postData.entity displayName];
             SZShareOptions *shareOptions = (SZShareOptions*)postData.options;
             NSString *text = shareOptions.text;
             
-            NSString *customStatus = [NSString stringWithFormat:@"%@", txtToShare, entityURL];
+            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", text, entityURL];
             
             [postData.params setObject:customStatus forKey:@"status"];
             
@@ -552,23 +582,12 @@
         [self dismissModalViewControllerAnimated:YES];
     };
     
+    shareDialog.cancellationBlock = ^() {
+        [self dismissModalViewControllerAnimated:YES];
+    };
+    
     [self presentModalViewController:shareDialog animated:YES];
     
-}
-
-//    NSArray *activityItems;
-//
-//    activityItems = @[txtToShare, urlToShare];
-//    
-//    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-//    activityController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
-//    
-//    [self presentViewController:activityController animated:YES completion:nil];
-//}
-
-- (ACAccount *)requestPermissionsForFB
-{
-    return nil;
 }
 
 

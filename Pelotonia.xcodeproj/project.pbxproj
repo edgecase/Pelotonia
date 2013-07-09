@@ -317,6 +317,8 @@
 		BB5D242F178A3D0400A4429A /* 28-green-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5D242D178A3D0400A4429A /* 28-green-star@2x.png */; };
 		BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2433178A477300A4429A /* NSDate+Helper.m */; };
 		BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2436178A484900A4429A /* NSDate-Utilities.m */; };
+		BB5D243B178B8F2800A4429A /* button-background.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5D2439178B8F2800A4429A /* button-background.png */; };
+		BB5D243C178B8F2800A4429A /* button-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB5D243A178B8F2800A4429A /* button-background@2x.png */; };
 		BB65880E1735F05E00ABA5AF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */; };
 		BB6588101735F09100ABA5AF /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */; };
 		BB6588121735F0AA00ABA5AF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6588111735F0AA00ABA5AF /* StoreKit.framework */; };
@@ -744,6 +746,8 @@
 		BB5D2433178A477300A4429A /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		BB5D2435178A484900A4429A /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
 		BB5D2436178A484900A4429A /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
+		BB5D2439178B8F2800A4429A /* button-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background.png"; sourceTree = "<group>"; };
+		BB5D243A178B8F2800A4429A /* button-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-background@2x.png"; sourceTree = "<group>"; };
 		BB65880D1735F05E00ABA5AF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BB65880F1735F09100ABA5AF /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		BB6588111735F0AA00ABA5AF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -908,6 +912,8 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BB5D2439178B8F2800A4429A /* button-background.png */,
+				BB5D243A178B8F2800A4429A /* button-background@2x.png */,
 				BB5D242C178A3D0400A4429A /* 28-green-star.png */,
 				BB5D242D178A3D0400A4429A /* 28-green-star@2x.png */,
 				BB5D2428178A390D00A4429A /* 28-star.png */,
@@ -1903,6 +1909,8 @@
 				BB5D242B178A390D00A4429A /* 28-star@2x.png in Resources */,
 				BB5D242E178A3D0400A4429A /* 28-green-star.png in Resources */,
 				BB5D242F178A3D0400A4429A /* 28-green-star@2x.png in Resources */,
+				BB5D243B178B8F2800A4429A /* button-background.png in Resources */,
+				BB5D243C178B8F2800A4429A /* button-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
