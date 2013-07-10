@@ -12,7 +12,6 @@
 #import "Appirater.h"
 #import "TestFlight.h"
 #import <Socialize/Socialize.h>
-#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation AppDelegate
 
@@ -35,9 +34,6 @@
     [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
     [SZFacebookUtils setAppId:@"269799726466566"];
     [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
-    
-    // mobile monitoring
-    [NewRelicAgent startWithApplicationToken:@"AAfae4b2471c8cc189d477aa2a6fe80390d0fd490d"];
     
     // call the Appirater class
     [Appirater appLaunched:YES];
