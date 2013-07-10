@@ -11,6 +11,9 @@
 #import "PelotoniaSignUpViewController.h"
 #import "NSDate-Utilities.h"
 #import "NSDate+Helper.h"
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Resize.h"
+#import "UIImage+Alpha.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
@@ -23,7 +26,7 @@
 
 
 @synthesize currentUser;
-@synthesize recentActions;
+@synthesize recentComments;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,12 +41,12 @@
 {
     [super viewDidLoad];
     self.currentUser = [SZUserUtils currentUser];
-    [self getActionsByUserOnAllEntities];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+    self.currentUser = [SZUserUtils currentUser];
+    [self getActionsByUserOnAllEntities];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,17 +59,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)getActionsByUserOnAllEntities {
-    [SZActionUtils getActionsByUser:nil start:nil end:nil success:^(NSArray *actions) {
-        self.recentActions = actions;
-
-        for (id<SZActivity> action in actions) {
-            NSLog(@"Found action %d by user %@ %@", [action objectID], [action.user firstName], [action.user lastName]);
-        }
+- (void)getActionsByUserOnAllEntities
+{
+    [SZCommentUtils getCommentsByUser:nil first:nil last:nil success:^(NSArray *comments) {
+        NSLog(@"found comments %@", comments);
+        self.recentComments = comments;
         [self.tableView reloadData];
-        
     } failure:^(NSError *error) {
-        NSLog(@"Failure: %@", [error localizedDescription]);
+        NSLog(@"unable to get recent comments: %@", [error localizedDescription]);
     }];
 }
 
@@ -144,6 +144,7 @@
     [self.userProfileImageView setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]]
                    placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
                               [cell layoutSubviews];
                           }
      ];
@@ -159,17 +160,17 @@
     
 }
 
-- (NSString *)getTitleFromComment:(id<SZActivity>) comment
+- (NSString *)getTitleFromComment:(id<SZComment>) comment
 {
     return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
 }
 
-- (NSString *)getTextFromComment:(id<SZActivity>) comment
+- (NSString *)getTextFromComment:(id<SZComment>) comment
 {
-    return [comment description];
+    return [comment text];
 }
 
-- (NSURL *)getImageURLFromComment:(id<SZActivity>) comment
+- (NSURL *)getImageURLFromComment:(id<SZComment>) comment
 {
     NSString *strURL = [[comment user] smallImageUrl];
     return [NSURL URLWithString:strURL];
@@ -189,7 +190,7 @@
     if (indexPath.section == 1)
     {
         // current activity
-        id<SZActivity> activity = [self.recentActions objectAtIndex:indexPath.row];
+        id<SZComment> activity = [self.recentComments objectAtIndex:indexPath.row];
         
         CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
         cell.titleString = [self getTitleFromComment:activity];
@@ -207,7 +208,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
+    if (section == 1)
+    {
         return 26;
     }
     else
@@ -246,7 +248,7 @@
 {
     if (section == 1)
     {
-        NSInteger num = [self.recentActions count];
+        NSInteger num = [self.recentComments count];
         NSLog(@"Section 1 has %d cells", num);
         return num;
     }
@@ -269,7 +271,10 @@
     if (indexPath.section == 1)
     {
         // figure out Pelotonia activity cell
-        sz = 26;
+        id<SZComment> riderComment = [self.recentComments objectAtIndex:indexPath.row];
+        NSString *comment = [self getTextFromComment:riderComment];
+        NSString *title = [self getTitleFromComment:riderComment];
+        sz = [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
     }
     else
     {
