@@ -526,8 +526,6 @@
 - (IBAction)shareProfile:(id)sender
 {
     NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
-//    NSURL *urlToShare = [NSURL URLWithString:self.rider.profileUrl];
-//    UIImage *imgToShare = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]]];
     
     NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
 
@@ -536,21 +534,13 @@
     
     SZShareOptions *options = [SZShareUtils userShareOptions];
     options.dontShareLocation = YES;
-    options.willShowSMSComposerBlock = ^(SZSMSShareData *smsData) {
-        NSLog(@"Sharing SMS");
-    };
-    options.willShowEmailComposerBlock = ^(SZEmailShareData *emailData) {
-        NSLog(@"Sharing Email");
-    };
     
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
-//            NSString *displayName = [postData.entity displayName];
             SZShareOptions *shareOptions = (SZShareOptions*)postData.options;
-            NSString *text = shareOptions.text;
             
-            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", text, entityURL];
+            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", txtToShare, entityURL];
             
             [postData.params setObject:customStatus forKey:@"status"];
             
