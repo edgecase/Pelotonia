@@ -11,7 +11,7 @@
 #import "PRPWebViewControllerDelegate.h"
 
 
-#define ID_ACTIVITY_STREAM_MENU 0
+#define ID_ACTIVITY_MENU 0
 #define ID_PROFILE_MENU 1
 #define ID_RIDERS_MENU 2
 #define ID_REGISTER_MENU 0

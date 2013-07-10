@@ -6,13 +6,31 @@
 //
 //
 
+#import "AppDelegate.h"
 #import "ActivityViewController.h"
+#import "RiderDataController.h"
+#import "CommentTableViewCell.h"
+#import "NSDate+Helper.h"
+#import "NSDate-Utilities.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ActivityViewController ()
 
 @end
 
 @implementation ActivityViewController
+
+@synthesize recentActivity;
+@synthesize dataController = _dataController;
+
+
+// property overloads
+- (RiderDataController *)dataController
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    return appDelegate.riderDataController;
+}
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,12 +44,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [pull setDelegate:self];
+    [self.tableView addSubview:pull];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self manualRefresh:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,30 +62,80 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - ActivityViewController stuff
+- (void)getActionsForAllUsersOnAllRiders
+{
+    [SZCommentUtils getCommentsByApplicationWithFirst:nil last:nil success:^(NSArray *comments) {
+        self.recentActivity = comments;
+        [pull finishedLoading];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [pull finishedLoading];
+        NSLog(@"getActionsByApplicationWithStart failed: %@", [error localizedDescription]);
+    }];
+}
+
+
+- (NSString *)getTitleFromComment:(id<SZComment>) comment
+{
+    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
+}
+
+- (NSString *)getTextFromComment:(id<SZComment>) comment
+{
+    return [comment text];
+}
+
+- (NSURL *)getImageURLFromComment:(id<SZComment>) comment
+{
+    NSString *strURL = [[comment user] smallImageUrl];
+    return [NSURL URLWithString:strURL];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.recentActivity count];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.backgroundColor = [UIColor whiteColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    CommentTableViewCell *_cell = [CommentTableViewCell cellForTableView:tableView];
+    __weak CommentTableViewCell *cell = _cell;
     
-    // Configure the cell...
-    
+    id<SZComment> comment = [self.recentActivity objectAtIndex:indexPath.row];
+    if (comment)
+    {
+        cell.titleString = [self getTitleFromComment:comment];
+        cell.commentString = [self getTextFromComment:comment];
+        
+        [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
+                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+    }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<SZComment> riderComment = [self.recentActivity objectAtIndex:indexPath.row];
+    NSString *comment = [self getTextFromComment:riderComment];
+    NSString *title = [self getTitleFromComment:riderComment];
+    return [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
 }
 
 - (IBAction)revealMenu:(id)sender {
@@ -71,56 +143,25 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark -- PullToRefreshDelegate
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self performSelectorInBackground:@selector(getActionsForAllUsersOnAllRiders) withObject:nil];
+}
+
+-(void)manualRefresh:(NSNotification *)notification
+{
+    self.tableView.contentOffset = CGPointMake(0, -65);
+    [pull setState:PullToRefreshViewStateLoading];
+    [self performSelectorInBackground:@selector(getActionsForAllUsersOnAllRiders) withObject:nil];
+}
+
 
 @end

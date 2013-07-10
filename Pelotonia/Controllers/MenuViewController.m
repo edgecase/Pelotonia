@@ -13,7 +13,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 
-#define USER_PROFILE_ROW 1
 
 @interface MenuViewController ()
 
@@ -58,7 +57,7 @@
     __weak UITableViewCell *cell = _cell;
     
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
-    if (indexPath.row == USER_PROFILE_ROW && indexPath.section == 0)
+    if (indexPath.row == ID_PROFILE_MENU && indexPath.section == 0)
     {
         id<SZFullUser> currentUser = [SZUserUtils currentUser];
         
@@ -66,7 +65,9 @@
         cell.imageView.layer.masksToBounds = YES;
         cell.imageView.layer.cornerRadius = 5.0;
 
-        [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]] placeholderImage:[UIImage imageNamed:@"profile_default.jpg"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
+                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [cell layoutSubviews];
         }];
     }
@@ -131,14 +132,14 @@
     if (indexPath.section == 0)
     {
         switch (indexPath.row) {
+            case ID_ACTIVITY_MENU:
+                // see all activity by all users
+                newViewControllerName = @"ActivityViewController";
+                break;
+                
             case ID_PROFILE_MENU:
                 // see my profile
                 newViewControllerName = @"UserProfileViewController";
-                break;
-                
-            case ID_ACTIVITY_STREAM_MENU:
-                // see pelotonia
-                newViewControllerName = @"ActivityViewController";
                 break;
                 
             case ID_RIDERS_MENU:

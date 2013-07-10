@@ -34,12 +34,13 @@ static CGFloat tableCellWidth = 235;
         self.textLabel.textColor = PRIMARY_DARK_GRAY;
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        self.textLabel.backgroundColor = [UIColor clearColor];
         
         self.detailTextLabel.font = PELOTONIA_FONT(14);
         self.detailTextLabel.textColor = SECONDARY_DARK_GREEN;
         self.detailTextLabel.numberOfLines = 0;
         self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        
+        self.detailTextLabel.backgroundColor = [UIColor clearColor];
 
     }
     return self;
