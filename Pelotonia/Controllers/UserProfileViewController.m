@@ -134,20 +134,26 @@
 
 - (void)setUserNameCell:(__weak UITableViewCell *)cell
 {
-    
-    self.userName.text  = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
-    self.userType.text = [self.currentUser description];
-    
-    // this masks the photo to the tableviewcell
-    self.userProfileImageView.layer.masksToBounds = YES;
-    self.userProfileImageView.layer.cornerRadius = 5.0;
-    [self.userProfileImageView setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]]
-                   placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                              [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-                              [cell layoutSubviews];
-                          }
-     ];
+    if ([self.currentUser firstName]) {
+        
+        self.userName.text  = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
+        self.userType.text = [self.currentUser description];
+        
+        // this masks the photo to the tableviewcell
+        self.userProfileImageView.layer.masksToBounds = YES;
+        self.userProfileImageView.layer.cornerRadius = 5.0;
+        [self.userProfileImageView setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]]
+                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                  [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+                                  [cell layoutSubviews];
+                              }
+         ];
+    }
+    else {
+        self.userName.text = @"Sign In";
+        self.userType.text = @"Support Pelotonia with your friends";
+    }
 }
 
 - (void)linkProfileToPelotonia
@@ -222,7 +228,12 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
-        return @"Activity";
+        if ([self.recentComments count] > 0) {
+            return @"Activity";
+        }
+        else {
+            return @"";
+        }
     }
     else {
         return nil;

@@ -60,16 +60,22 @@
     if (indexPath.row == ID_PROFILE_MENU && indexPath.section == 0)
     {
         id<SZFullUser> currentUser = [SZUserUtils currentUser];
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentUser firstName], [currentUser lastName]];
-        cell.imageView.layer.masksToBounds = YES;
-        cell.imageView.layer.cornerRadius = 5.0;
+        if ([currentUser firstName]) {
+            
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentUser firstName], [currentUser lastName]];
+            cell.imageView.layer.masksToBounds = YES;
+            cell.imageView.layer.cornerRadius = 5.0;
 
-        [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
-                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [cell layoutSubviews];
-        }];
+            [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
+                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [cell layoutSubviews];
+            }];
+        }
+        else {
+            cell.textLabel.text = @"Sign In";
+            [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon.png"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
+        }
     }
     return cell;
 }
