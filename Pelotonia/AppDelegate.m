@@ -11,6 +11,8 @@
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
 #import "TestFlight.h"
+#import "NSDictionary+JSONConversion.h"
+#import "ProfileTableViewController.h"
 #import <Socialize/Socialize.h>
 
 @implementation AppDelegate
@@ -18,6 +20,29 @@
 @synthesize window = _window;
 @synthesize riderDataController = _riderDataController;
 
+
+- (void)handleNotification:(NSDictionary*)userInfo {
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+        if ([SZSmartAlertUtils openNotification:userInfo]) {
+            NSLog(@"Socialize handled the notification (background).");
+            
+        } else {
+            NSLog(@"Socialize did not handle the notification (background).");
+            
+        }
+    } else {
+        
+        NSLog(@"Notification received in foreground");
+        
+        // You may want to display an alert or other popup instead of immediately opening the notification here.
+        
+        if ([SZSmartAlertUtils openNotification:userInfo]) {
+            NSLog(@"Socialize handled the notification (foreground).");
+        } else {
+            NSLog(@"Socialize did not handle the notification (foreground).");
+        }
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -35,10 +60,56 @@
     [SZFacebookUtils setAppId:@"269799726466566"];
     [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
     
+    // Specify a Socialize entity loader block
+    [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
+        NSDictionary *metaDict = [NSDictionary dictionaryWithContentsOfJSONString:[entity meta]];
+        NSString *riderID = [metaDict objectForKey:@"riderID"];
+        Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
+        
+        ProfileTableViewController *entityLoader = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
+        [rider refreshFromWebOnComplete:^(Rider *rider) {
+            if (navigationController == nil)
+            {
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:entityLoader];
+                [self.window.rootViewController presentModalViewController:navigationController animated:YES];
+            } else {
+                [navigationController pushViewController:entityLoader animated:YES];
+            }
+        } onFailure:^(NSString *errorMessage) {
+            NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
+        }];
+    }];
+    
+    // Register for Apple Push Notification Service
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+
+    // Handle Socialize notification at launch
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo != nil) {
+        [self handleNotification:userInfo];
+    }
+    
     // call the Appirater class
     [Appirater appLaunched:YES];
 
     return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Handle Socialize notification at foreground
+    [self handleNotification:userInfo];
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken
+{
+    // If you are testing development (sandbox) notifications, you should instead pass development:YES
+    
+#if DEBUG
+    [SZSmartAlertUtils registerDeviceToken:deviceToken development:YES];
+#else
+    [SZSmartAlertUtils registerDeviceToken:deviceToken development:NO];
+#endif
 }
 
 

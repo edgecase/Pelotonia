@@ -18,6 +18,7 @@
 #import "SHKActivityIndicator.h"
 #import "NSDate+Helper.h"
 #import "CommentTableViewCell.h"
+#import "NSDictionary+JSONConversion.h"
 #import <Social/Social.h>
 
 #define SECTION_1_HEADER_HEIGHT   40.0
@@ -54,6 +55,20 @@
     if (self.entity == nil)
     {
         self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.rider.story, @"szsd_description",
+                                self.rider.riderPhotoThumbUrl, @"szsd_thumb",
+                                self.rider.riderId, @"riderID",
+                                nil];
+        
+        NSString *jsonString = [params toJSONString];
+        entity.meta = jsonString;
+        [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
+            NSLog(@"Successfully updated entity meta: %@", [serverEntity meta]);
+        } failure:^(NSError *error) {
+            NSLog(@"Failure: %@", [error localizedDescription]);
+        }];
+
     }
 }
 

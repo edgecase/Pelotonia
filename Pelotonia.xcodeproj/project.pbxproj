@@ -85,6 +85,7 @@
 		BB2865E6176AAEF5001BA804 /* 211-action.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2865E4176AAEF5001BA804 /* 211-action.png */; };
 		BB2865E7176AAEF5001BA804 /* 211-action@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2865E5176AAEF5001BA804 /* 211-action@2x.png */; };
 		BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */; };
+		BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */; };
 		BB3F0EE5177A6C6400E27EE7 /* 112-group-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3F0EE3177A6C6400E27EE7 /* 112-group-gray.png */; };
 		BB3F0EE6177A6C6400E27EE7 /* 112-group-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3F0EE4177A6C6400E27EE7 /* 112-group-gray@2x.png */; };
 		BB5D23451789D54D00A4429A /* _SZCommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB5D22681789D54C00A4429A /* _SZCommentsListViewController.xib */; };
@@ -509,6 +510,8 @@
 		BB2865E5176AAEF5001BA804 /* 211-action@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "211-action@2x.png"; sourceTree = "<group>"; };
 		BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileDetailsTableViewController.h; path = Controllers/ProfileDetailsTableViewController.h; sourceTree = "<group>"; };
 		BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileDetailsTableViewController.m; path = Controllers/ProfileDetailsTableViewController.m; sourceTree = "<group>"; };
+		BB32006D178E668A0035A2BA /* NSDictionary+JSONConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSONConversion.h"; sourceTree = "<group>"; };
+		BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSONConversion.m"; sourceTree = "<group>"; };
 		BB3F0EE3177A6C6400E27EE7 /* 112-group-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group-gray.png"; sourceTree = "<group>"; };
 		BB3F0EE4177A6C6400E27EE7 /* 112-group-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group-gray@2x.png"; sourceTree = "<group>"; };
 		BB5D22681789D54C00A4429A /* _SZCommentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = _SZCommentsListViewController.xib; sourceTree = "<group>"; };
@@ -1442,6 +1445,8 @@
 				BCE3B7C215AE49DA00205530 /* main.m */,
 				BCE3B7C415AE49DA00205530 /* Pelotonia-Prefix.pch */,
 				4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */,
+				BB32006D178E668A0035A2BA /* NSDictionary+JSONConversion.h */,
+				BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1973,6 +1978,7 @@
 				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
 				BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */,
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
+				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2047,7 +2053,7 @@
 		4D6768C615CA17A000EA0547 /* AdHoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Susan Pattison";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2069,7 +2075,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E6E3DCA6-C234-4F2C-A4F9-7BBA8FF3E828";
+				PROVISIONING_PROFILE = "2F0F34CD-6315-473F-B098-71667DE5AC96";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
@@ -2173,8 +2179,8 @@
 		BCE3B7CC15AE49DA00205530 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Susan Pattison";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Susan Pattison";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2195,8 +2201,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07FFC038-4FEB-4F3D-92B0-4C63A95D80E1";
+				PROVISIONING_PROFILE = "3C309562-C0AD-4967-BB8D-EDFF612A7411";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3C309562-C0AD-4967-BB8D-EDFF612A7411";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VERSIONING_SYSTEM = "apple-generic";
