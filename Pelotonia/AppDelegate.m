@@ -65,9 +65,11 @@
         NSDictionary *metaDict = [NSDictionary dictionaryWithContentsOfJSONString:[entity meta]];
         NSString *riderID = [metaDict objectForKey:@"riderID"];
         Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
+        rider.profileUrl = [entity key];
         
-        ProfileTableViewController *entityLoader = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
         [rider refreshFromWebOnComplete:^(Rider *rider) {
+            ProfileTableViewController *entityLoader = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
+            
             if (navigationController == nil)
             {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:entityLoader];
