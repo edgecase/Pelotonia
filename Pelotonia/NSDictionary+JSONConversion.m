@@ -23,10 +23,12 @@
 
 +(NSDictionary *)dictionaryWithContentsOfJSONString:(NSString *)jsonString
 {
-    NSData *data = [NSData dataWithBytes:(__bridge const void *)(jsonString) length:[jsonString lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
     NSError *error = nil;
-    id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    if (error != nil) {
+    id result = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    
+    if (error != nil)
+    {
+        NSLog(@"Error converting to dictionary from JSON: %@", [error localizedDescription]);
         return nil;
     }
     return result;

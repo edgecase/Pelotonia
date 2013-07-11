@@ -20,6 +20,7 @@
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
 #import <Social/Social.h>
+#import <Socialize/Socialize.h>
 
 #define SECTION_1_HEADER_HEIGHT   40.0
 
@@ -160,6 +161,7 @@
         id<SZComment> comment = [self.riderComments objectAtIndex:indexPath.row];
         if (comment)
         {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.titleString = [self getTitleFromComment:comment];
             cell.commentString = [self getTextFromComment:comment];
             
@@ -195,6 +197,11 @@
             [self shareProfile:nil];
         }
     }
+    if (indexPath.section == 1) {
+        // open up a commentdetailview view
+        [self manuallyShowCommentsList];
+    }
+
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -327,7 +334,8 @@
 
 
 #pragma mark -- view configuration
-- (void)manuallyShowCommentsList {
+- (void)manuallyShowCommentsList
+{
     SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:self.entity];
     comments.completionBlock = ^{
         
@@ -345,7 +353,6 @@
         NSLog(@"Fetched comments successfully, %@", comments);
         self.riderComments = comments;
         [self.tableView reloadData];
-//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
     }];

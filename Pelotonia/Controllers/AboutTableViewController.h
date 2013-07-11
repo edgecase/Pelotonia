@@ -18,5 +18,6 @@
 - (IBAction)newContextPressed:(id)sender;
 - (void)openURLFromString:(NSString *)urlString;
 - (IBAction)revealMenu:(id)sender;
+- (IBAction)launchFeedbackView:(id)sender;
 
 @end

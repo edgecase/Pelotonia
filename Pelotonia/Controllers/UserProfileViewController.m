@@ -132,6 +132,7 @@
     }
 }
 
+
 - (void)setUserNameCell:(__weak UITableViewCell *)cell
 {
     if ([self.currentUser firstName]) {

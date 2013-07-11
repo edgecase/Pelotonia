@@ -8,6 +8,7 @@
 
 #import "AboutTableViewController.h"
 #import "Pelotonia-Colors.h"
+#import "TestFlight.h"
 
 @interface AboutTableViewController ()
 
@@ -114,6 +115,10 @@
 
 - (IBAction)revealMenu:(id)sender {
     [self.slidingViewController anchorTopViewTo:ECRight];
+}
+
+- (IBAction)launchFeedbackView:(id)sender {
+    [TestFlight openFeedbackView];
 }
 
 
