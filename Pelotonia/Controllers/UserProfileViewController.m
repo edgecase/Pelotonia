@@ -100,6 +100,18 @@
 
 
 #pragma mark - Table view delegate
+- (void)manuallyShowCommentsListWithEntity:(id<SZEntity>)entity
+{
+    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:entity];
+    comments.completionBlock = ^{
+        
+        // Dismiss however you want here
+        [self dismissModalViewControllerAnimated:YES];
+    };
+    
+    // Present however you want here
+    [self presentModalViewController:comments animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -129,6 +141,11 @@
                 [self linkProfileToPelotonia];
             }
         }
+    }
+    else if (indexPath.section == 1)
+    {
+        id<SZComment> comment = [self.recentComments objectAtIndex:indexPath.row];
+        [self manuallyShowCommentsListWithEntity:[comment entity]];
     }
 }
 
@@ -202,6 +219,7 @@
         CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
         cell.titleString = [self getTitleFromComment:activity];
         cell.commentString = [self getTextFromComment:activity];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         [cell.imageView setImageWithURL:[self getImageURLFromComment:activity]
                        placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
@@ -273,7 +291,7 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [super tableView:tableView didDeselectRowAtIndexPath:indexPath];
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

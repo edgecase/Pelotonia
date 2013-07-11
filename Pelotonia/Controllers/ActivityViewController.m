@@ -121,6 +121,7 @@
     id<SZComment> comment = [self.recentActivity objectAtIndex:indexPath.row];
     if (comment)
     {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.titleString = [self getTitleFromComment:comment];
         cell.commentString = [self getTextFromComment:comment];
         
@@ -144,10 +145,24 @@
 
 
 #pragma mark - Table view delegate
+- (void)manuallyShowCommentsListWithEntity:(id<SZEntity>)entity
+{
+    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:entity];
+    comments.completionBlock = ^{
+        
+        // Dismiss however you want here
+        [self dismissModalViewControllerAnimated:YES];
+    };
+    
+    // Present however you want here
+    [self presentModalViewController:comments animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    id<SZComment> comment = [self.recentActivity objectAtIndex:indexPath.row];
+    [self manuallyShowCommentsListWithEntity:[comment entity]];
 }
 
 #pragma mark -- PullToRefreshDelegate

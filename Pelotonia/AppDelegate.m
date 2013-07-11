@@ -69,7 +69,7 @@
         
         [rider refreshFromWebOnComplete:^(Rider *rider) {
             ProfileTableViewController *entityLoader = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
-            
+            entityLoader.rider = rider;
             if (navigationController == nil)
             {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:entityLoader];
