@@ -22,7 +22,13 @@
 
 
 - (void)handleNotification:(NSDictionary*)userInfo {
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
+    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
+    {
+        NSDictionary *socializeDictionary = [userInfo objectForKey:@"socialize"];
+        NSString *notificationType = [socializeDictionary objectForKey:@"notification_type"];
+        NSLog(@"Notification type: %@", notificationType);
+        
+
         if ([SZSmartAlertUtils openNotification:userInfo]) {
             NSLog(@"Socialize handled the notification (background).");
             
@@ -59,7 +65,16 @@
     [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
     [SZFacebookUtils setAppId:@"269799726466566"];
     [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
+
+    // Register for Apple Push Notification Service
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
+    // Handle Socialize notification at launch
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo != nil) {
+        [self handleNotification:userInfo];
+    }
+
     // Specify a Socialize entity loader block
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
         NSDictionary *metaDict = [NSDictionary dictionaryWithContentsOfJSONString:[entity meta]];
@@ -82,14 +97,14 @@
         }];
     }];
     
-    // Register for Apple Push Notification Service
-    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-
-    // Handle Socialize notification at launch
-    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (userInfo != nil) {
-        [self handleNotification:userInfo];
-    }
+    [SZDisplayUtils setGlobalDisplayBlock:^id<SZDisplay>{
+        UIViewController *controller = self.window.rootViewController;
+        while (controller.presentedViewController != nil) {
+            controller = controller.presentedViewController;
+        }
+        return controller;
+    }];
+    
     
     // call the Appirater class
     [Appirater appLaunched:YES];

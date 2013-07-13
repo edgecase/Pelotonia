@@ -40,13 +40,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.currentUser = [SZUserUtils currentUser];
+    
+    // for pull to refresh view
+    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [pull setDelegate:self];
+    [self.tableView addSubview:pull];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.currentUser = [SZUserUtils currentUser];
-    [self getActionsByUserOnAllEntities];
+    [self refreshUser];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,8 +71,10 @@
         NSLog(@"found comments %@", comments);
         self.recentComments = comments;
         [self.tableView reloadData];
+        [pull finishedLoading];
     } failure:^(NSError *error) {
         NSLog(@"unable to get recent comments: %@", [error localizedDescription]);
+        [pull finishedLoading];
     }];
 }
 
@@ -75,27 +83,16 @@
     [self setUserNameCell:nil];
 }
 
+- (void)refreshUser
+{
+    [self getActionsByUserOnAllEntities];
+}
+
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
-}
-
-- (void)showPelotoniaRiderProfile:(ProfileTableViewController *)profileTableViewController
-{
-    NSLog(@"executing showPelotoniaRiderProfile");
-    NSString *riderID;
-    
-    Rider *rider = [[Rider alloc] initWithName:@"Mark Harris" andId:@"MH0015"];
-    if (rider)
-    {
-        profileTableViewController.rider = rider;
-    }
-    else
-    {
-        NSLog(@"rider not found %@", riderID);
-    }
 }
 
 
@@ -346,18 +343,11 @@
 }
 
 
-
 #pragma mark -- menu code
 - (IBAction)revealMenu:(id)sender
 {
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
-
-- (IBAction)shareButtonPressed:(id)sender
-{
-    
-}
-
 
 - (void)viewDidUnload {
     [self setUserName:nil];
@@ -366,4 +356,20 @@
     [self setShareButton:nil];
     [super viewDidUnload];
 }
+
+
+#pragma mark -- PullToRefreshDelegate
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self performSelectorInBackground:@selector(refreshUser) withObject:nil];
+}
+
+-(void)manualRefresh:(NSNotification *)notification
+{
+    self.tableView.contentOffset = CGPointMake(0, -65);
+    [pull setState:PullToRefreshViewStateLoading];
+    [self performSelectorInBackground:@selector(refreshUser) withObject:nil];
+}
+
+
 @end

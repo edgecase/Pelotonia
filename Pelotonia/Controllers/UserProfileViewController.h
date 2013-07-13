@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileTableViewController.h"
+#import "PullToRefreshView.h"
 #import <Socialize/Socialize.h>
 
-@interface UserProfileViewController : UITableViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface UserProfileViewController : UITableViewController <PullToRefreshViewDelegate> {
+    PullToRefreshView *pull;
+}
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
