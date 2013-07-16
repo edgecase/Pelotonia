@@ -170,7 +170,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEV-Fu-w1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="254"/>
+            <point key="canvasLocation" x="-158" y="262"/>
         </scene>
         <!--Splash Screen View Controller-->
         <scene sceneID="6kZ-l0-87B">
@@ -188,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iz1-67-UhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1090" y="577"/>
+            <point key="canvasLocation" x="-1342" y="269"/>
         </scene>
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
@@ -202,12 +202,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J63-ME-rxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="879"/>
+            <point key="canvasLocation" x="-694" y="269"/>
         </scene>
         <!--Riders View Controller - Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
-                <tableViewController storyboardIdentifier="RidersViewController" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RidersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -967,7 +967,7 @@
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
             <objects>
-                <navigationController storyboardIdentifier="RidersNavViewController" title="Pelotonia" definesPresentationContext="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RidersNavViewController" title="Pelotonia" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1Sn-hP-BGB">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
@@ -1033,81 +1033,6 @@
         <image name="pelotonia-menu-icon.png" width="24" height="24"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
-    <classes>
-        <class className="AboutTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="action" name="launchFeedbackView:"/>
-                <relationship kind="action" name="newContextPressed:"/>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="action" name="sandlotPressed:"/>
-                <relationship kind="outlet" name="doneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="storyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="versionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ActivityViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ActivityViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-            </relationships>
-        </class>
-        <class className="ECSlidingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSlidingViewController.h"/>
-        </class>
-        <class className="InitialSlidingViewController" superclassName="ECSlidingViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InitialSlidingViewController.h"/>
-        </class>
-        <class className="MenuViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
-        </class>
-        <class className="ProfileDetailsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileDetailsTableViewController.h"/>
-        </class>
-        <class className="ProfileTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ProfileTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="followRider:"/>
-                <relationship kind="action" name="shareProfile:"/>
-                <relationship kind="outlet" name="donationProgress" candidateClass="UIProgressView"/>
-                <relationship kind="outlet" name="nameAndRouteCell" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="raisedAmountLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="raisedLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="starFollowButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="RidersViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RidersViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="outlet" name="riderTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SendPledgeModalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SendPledgeModalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel:"/>
-                <relationship kind="action" name="done:"/>
-                <relationship kind="outlet" name="textViewAmount" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="textViewName" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SplashScreenViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashScreenViewController.h"/>
-        </class>
-        <class className="UserProfileViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UserProfileViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="revealMenu:"/>
-                <relationship kind="action" name="shareButtonPressed:"/>
-                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="userName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="userProfileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userType" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

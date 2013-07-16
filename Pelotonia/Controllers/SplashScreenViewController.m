@@ -53,24 +53,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)hide
+
+- (void)viewDidAppear:(BOOL)animated
 {
     [self performSegueWithIdentifier:@"fadeToInitial:" sender:self];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [self performSelector:@selector(hide) withObject:nil afterDelay:0];
-}
-
 - (void)fadeToInitial:(InitialSlidingViewController *)initialSlidingViewController
 {
-    // first hide the current view
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    
-    // now start up our initial view controller for the sliding menu
-    initialSlidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
+    // animate in the status bar
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:initialSlidingViewController];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

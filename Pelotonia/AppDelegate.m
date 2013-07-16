@@ -24,6 +24,9 @@
 - (void)handleNotification:(NSDictionary*)userInfo {
     if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
     {
+        for (NSString *key in [userInfo allKeys]) {
+            NSLog(@"userInfo[%@] = %@", key, [userInfo objectForKey:key]);
+        }
         NSDictionary *socializeDictionary = [userInfo objectForKey:@"socialize"];
         NSString *notificationType = [socializeDictionary objectForKey:@"notification_type"];
         NSLog(@"Notification type: %@", notificationType);
@@ -83,26 +86,21 @@
         rider.profileUrl = [entity key];
         
         [rider refreshFromWebOnComplete:^(Rider *rider) {
-            ProfileTableViewController *entityLoader = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
-            entityLoader.rider = rider;
+            ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
+            profileViewController.rider = rider;
+            
             if (navigationController == nil)
             {
-                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:entityLoader];
-                [self.window.rootViewController presentModalViewController:navigationController animated:YES];
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+                [self.window.rootViewController presentViewController:navigationController animated:YES completion:^{
+                    profileViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:profileViewController action:@selector(done)];
+                }];
             } else {
-                [navigationController pushViewController:entityLoader animated:YES];
+                [navigationController pushViewController:profileViewController animated:YES];
             }
         } onFailure:^(NSString *errorMessage) {
             NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
         }];
-    }];
-    
-    [SZDisplayUtils setGlobalDisplayBlock:^id<SZDisplay>{
-        UIViewController *controller = self.window.rootViewController;
-        while (controller.presentedViewController != nil) {
-            controller = controller.presentedViewController;
-        }
-        return controller;
     }];
     
     

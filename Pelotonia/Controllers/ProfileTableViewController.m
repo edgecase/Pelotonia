@@ -647,5 +647,11 @@
     }];
 }
 
+#pragma mark -- for when we're launched as a dialog
+- (void)done
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

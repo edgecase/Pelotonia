@@ -49,6 +49,7 @@
 - (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController;
 - (IBAction)shareProfile:(id)sender;
 - (IBAction)followRider:(id)sender;
+- (void)done;
 
 - (void)refreshRider;
 - (void)manualRefresh:(NSNotification *)notification;

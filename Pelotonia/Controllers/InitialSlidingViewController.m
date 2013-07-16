@@ -8,6 +8,10 @@
 
 #import "InitialSlidingViewController.h"
 #import "SplashScreenViewController.h"
+#import <Socialize/Socialize.h>
+#import "NSDictionary+JSONConversion.h"
+#import "Rider.h"
+#import "ProfileTableViewController.h"
 
 @interface InitialSlidingViewController ()
 
@@ -24,13 +28,14 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-//    self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
-}
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
 
+}
 
 - (void)didReceiveMemoryWarning
 {
