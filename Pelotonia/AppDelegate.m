@@ -59,9 +59,12 @@
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
 #endif
     
-    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
+    // set default appearance
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
+
+    // set up test flight
+    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
@@ -106,6 +109,10 @@
     
     // call the Appirater class
     [Appirater appLaunched:YES];
+    
+    // clear the SDWebImageCache
+    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+    [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
     return YES;
 }
