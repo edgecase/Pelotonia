@@ -138,23 +138,15 @@
             rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
             
             // get the riders' story
-            TFHppleElement *div = [[parser searchWithXPathQuery:@"//div[@class='story']"] objectAtIndex:0];
-            if (div != nil)
-            {
-                rider.story = @"";
-                
-                // the div contains all the stories
-                for (TFHppleElement *childText in div.children)
-                {
-                    // get the content from within the div
-                    if (nil != childText.content)
-                    {
-                        rider.story = [rider.story stringByAppendingString:childText.content];
-                    }
-                }
+            
+            NSArray *div = [parser searchWithXPathQuery:@"//div[@class='story']/descendant-or-self::*/text()"];
+            
+            if (div && ([div count] > 0)) {
+                TFHppleElement *story = [div objectAtIndex:0];
+                //div[@class='story']
+                rider.story = [rider.story stringByAppendingString:story.content];
             }
             
-
             // get the rider's properties off the page now
             NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
             NSArray *metaDataFields = [parser searchWithXPathQuery:metaDataXPath];
