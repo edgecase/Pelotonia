@@ -33,20 +33,22 @@ NSDictionary *DictionaryForNode(xmlNodePtr currentNode, NSMutableDictionary *par
       NSString *currentNodeContent =
         [NSString stringWithCString:(const char *)currentNode->content encoding:NSUTF8StringEncoding];
 
-      if ([[resultForNode objectForKey:@"nodeName"] isEqual:@"text"] && parentResult)
-        {
-            if(parentContent)
+        if (currentNodeContent) {
+          if ([[resultForNode objectForKey:@"nodeName"] isEqual:@"text"] && parentResult)
             {
-                [parentResult setObject:[currentNodeContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:@"nodeContent"];
-                return nil;
-            }
-            [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];
-            return resultForNode;
+                if(parentContent)
+                {
+                    [parentResult setObject:[currentNodeContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:@"nodeContent"];
+                    return nil;
+                }
+                [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];
+                return resultForNode;
 
+            }
+          else {
+              [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];          
+          }
         }
-      else {
-          [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];          
-      }
 
 
     }

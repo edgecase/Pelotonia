@@ -131,23 +131,26 @@
                 rider.riderType = nil;
             }
         
-            // get the photos
+            // get the photos' URLs
             NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
             NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
             NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
             rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
             
             // get the riders' story
-            
+            // this query gets all text from all descendant nodes of the div of class 'story'
+            // the query is formatted like this to catch text that's embedded in embedded HTML
             NSArray *div = [parser searchWithXPathQuery:@"//div[@class='story']/descendant-or-self::*/text()"];
-            
-            if (div && ([div count] > 0)) {
-                TFHppleElement *story = [div objectAtIndex:0];
-                //div[@class='story']
-                rider.story = [rider.story stringByAppendingString:story.content];
+            NSString *storyString = @"";
+            for (TFHppleElement *story in div)
+            {
+                NSLog(@"Story = %@", story.content);
+                if (story.content) {
+                    storyString = [storyString stringByAppendingString:story.content];
+                }
             }
-            
-            // get the rider's properties off the page now
+            rider.story = storyString;
+            // get the rider's properties like how much they've raised, etc.
             NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
             NSArray *metaDataFields = [parser searchWithXPathQuery:metaDataXPath];
             
