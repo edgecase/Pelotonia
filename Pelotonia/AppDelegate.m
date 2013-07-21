@@ -58,28 +58,25 @@
 #ifdef TESTING
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
 #endif
+    // set up test flight
+    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
+
+    // Register for Apple Push Notification Service
+    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
+    // clear the SDWebImageCache
+    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
+    [[[SDWebImageManager sharedManager] imageCache] clearMemory];
+
     // set default appearance
     [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
-
-    // set up test flight
-    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
     [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
     [SZFacebookUtils setAppId:@"269799726466566"];
     [SZTwitterUtils setConsumerKey:@"5wwPWS7GpGvcygqmfyPIcQ" consumerSecret:@"95FOLBeQqgv0uYGMWewxf50U0sVAVIbVBlvsmjiB4V8"];
-
-    // Register for Apple Push Notification Service
-    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    
-    // Handle Socialize notification at launch
-    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (userInfo != nil) {
-        [self handleNotification:userInfo];
-    }
 
     // Specify a Socialize entity loader block
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
@@ -106,13 +103,14 @@
         }];
     }];
     
+    // Handle Socialize notification at launch
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo != nil) {
+        [self handleNotification:userInfo];
+    }
     
     // call the Appirater class
     [Appirater appLaunched:YES];
-    
-    // clear the SDWebImageCache
-    [[[SDWebImageManager sharedManager] imageCache] clearDisk];
-    [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
     return YES;
 }
@@ -126,7 +124,7 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken
 {
     // If you are testing development (sandbox) notifications, you should instead pass development:YES
-    
+    NSLog(@"device token:%@", deviceToken);
 #if DEBUG
     [SZSmartAlertUtils registerDeviceToken:deviceToken development:YES];
 #else

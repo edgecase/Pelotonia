@@ -89,7 +89,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self configureView];
-    [self manualRefresh:nil];
+//    [self manualRefresh:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -362,15 +362,14 @@
 - (void)refreshRider
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
-        [self reloadComments];
         [self getLikesByEntity];
-        [self configureView];
         [pull finishedLoading];
+        [self configureView];
     }
     onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
-        [self configureView];
         [pull finishedLoading];
+        [self configureView];
     }];
 }
 
@@ -443,9 +442,8 @@
          [self.nameAndRouteCell layoutSubviews];
      }];
     
-    
-    // re-layout subviews so that the image auto-adjusts
-    [self.nameAndRouteCell layoutSubviews];
+    // update the comments in section 2 of our table
+    [self reloadComments];
 }
 
 - (void)postAlert:(NSString *)msg {
