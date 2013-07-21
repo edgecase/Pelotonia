@@ -11,6 +11,5 @@
 @interface SplashScreenViewController : UIViewController
 
 
-- (void)hide;
 
 @end

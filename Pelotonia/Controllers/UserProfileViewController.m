@@ -120,24 +120,6 @@
                 NSLog(@"Done showing settings");
             }];
         }
-        else if (indexPath.row == 1)
-        {
-            
-            // get the user's RiderID and get the rider object
-            // fire up rider search box
-            NSString *riderID = nil;
-            
-            if (nil != riderID)
-            {
-                // transition to the rider's profile
-                /// execute segue
-                [self performSegueWithIdentifier:@"showPelotoniaRiderProfile:" sender:self];
-            }
-            else
-            {
-                [self linkProfileToPelotonia];
-            }
-        }
     }
     else if (indexPath.section == 1)
     {
@@ -171,15 +153,6 @@
     }
 }
 
-- (void)linkProfileToPelotonia
-{
-    // prompt user for his/her credentials
-    
-    // post against the pelotonia login form
-    
-    // if it comes back OK, then add a user ID to the current user object
-    
-}
 
 - (NSString *)getTitleFromComment:(id<SZComment>) comment
 {
@@ -353,7 +326,6 @@
     [self setUserName:nil];
     [self setUserType:nil];
     [self setUserProfileImageView:nil];
-    [self setShareButton:nil];
     [super viewDidUnload];
 }
 

@@ -17,13 +17,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 // non-UI properties
 @property (strong, nonatomic) id<SZFullUser> currentUser;
 @property (strong, nonatomic) NSArray *recentComments;
 
 - (IBAction)revealMenu:(id)sender;
-- (IBAction)shareButtonPressed:(id)sender;
 
 @end
