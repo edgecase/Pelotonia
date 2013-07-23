@@ -2067,7 +2067,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2155,7 +2154,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2193,7 +2191,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/NewRelic_iOS_Agent_1.328\"",
 					"\"$(SRCROOT)/Socialize.embeddedframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
