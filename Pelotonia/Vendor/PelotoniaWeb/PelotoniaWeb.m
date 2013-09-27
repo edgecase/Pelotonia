@@ -92,6 +92,7 @@
     [request startAsynchronous];  
 }
 
+
 + (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSURL *url = [NSURL URLWithString:rider.profileUrl];
@@ -150,40 +151,26 @@
                 }
             }
             rider.story = storyString;
+
             // get the rider's properties like how much they've raised, etc.
-            NSString *metaDataXPath = @"//div[@id='article']/div/div/div/dl";
-            NSArray *metaDataFields = [parser searchWithXPathQuery:metaDataXPath];
+            NSDictionary *xpathTable = @{
+                @"raised": @"//*[@id='dashboard-rider']/div/div[2]/dl[2]/dd",
+                @"myPeloton": @"//*[@id='dashboard-rider']/div/div[2]/dl[3]/dd/a",
+                @"route": @"//*[@id='dashboard-rider']/div/div[2]/dl[1]/dd",
+                @"pelotonFundsRaised": @"//*[@id='dashboard-peloton']/div/div[2]/dl[1]/dd",
+                @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
+                @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
+                @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a"
+                };
             
-            for (TFHppleElement *metaDataElement in metaDataFields) {
-                NSString *header = [[[metaDataElement firstChild] firstChild] content];
-                
-                if (header) {
-                    TFHppleElement *content = [[[metaDataElement children] objectAtIndex:2] firstChild];
-                    
-                    if ([header isEqualToString:@"I've Raised:"]) { // volunteer/rider/virtual rider
-                        NSString *amountRaised = [content content];
-                        rider.amountRaised = amountRaised;
-                    } else if ([header isEqualToString:@"My Peloton:"]) { // rider/virtual rider
-                        NSString *myPeloton = [[content firstChild] content];
-                        rider.myPeloton = myPeloton;
-                    } else if ([header isEqualToString:@"Route I'm Riding:"]) { // rider
-                        NSString *route = [self stripWhitespace:[content content]];
-                        rider.route = route;
-                    } else if ([header isEqualToString:@"Peloton Funds Raised:"]) { // peloton
-                        NSString *pelotonFundsRaised = [content content];
-                        rider.pelotonFundsRaised = pelotonFundsRaised;
-                    } else if ([header isEqualToString:@"Total of All Members:"]) { // peloton
-                        NSString *pelotonTotalOfAllMembers = [content content];
-                        rider.pelotonTotalOfAllMembers = pelotonTotalOfAllMembers;
-                    } else if ([header isEqualToString:@"Grand Total Raised:"]) { // peloton
-                        NSString *pelotonGrandTotal = [content content];
-                        rider.pelotonGrandTotal = pelotonGrandTotal;
-                    } else if ([header isEqualToString:@"Peloton Captain:"]) { // peloton
-                        NSString *pelotonCaptain = [self stripWhitespace:[[[[[[metaDataElement children] objectAtIndex:2] children] objectAtIndex:1] firstChild] content]];
-                        rider.pelotonCaptain = pelotonCaptain;
-                    }
-                }
-            }
+            rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"raised"] parser:parser];
+            rider.myPeloton = [self getValueAtXPath:[xpathTable objectForKey:@"myPeloton"] parser:parser];
+            rider.route = [self getValueAtXPath:[xpathTable objectForKey:@"route"] parser:parser];
+            rider.pelotonFundsRaised = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonFundsRaised"] parser:parser];
+            rider.pelotonTotalOfAllMembers = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonTotalOfAllMembers"] parser:parser];
+            rider.pelotonGrandTotal = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonGrandTotal"] parser:parser];
+            rider.pelotonCaptain = [self stripWhitespace:[self getValueAtXPath:[xpathTable objectForKey:@"pelotonCaptain"] parser:parser]];
+            
             NSLog(@"Returning profile for rider %@", rider.name);
 
         }
@@ -214,5 +201,16 @@
 {
     return [input stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
+
++ (NSString *)getValueAtXPath:(NSString *)xpath parser:(TFHpple *)parser
+{
+    NSArray *results = [parser searchWithXPathQuery:xpath];
+    NSString *value = @"";
+    if (results && [results count] > 0) {
+        value = [[[results objectAtIndex:0] firstChild] content];
+    }
+    return value;
+}
+
 
 @end

@@ -56,7 +56,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 #ifdef TESTING
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] identifierForVendor].UUIDString];
 #endif
     // set up test flight
     [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
@@ -69,8 +69,9 @@
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
     // set default appearance
-    [[UINavigationBar appearance] setTintColor:PRIMARY_DARK_GRAY];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
+//    [[UIView appearance] setTintColor:[UIColor whiteColor]];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];

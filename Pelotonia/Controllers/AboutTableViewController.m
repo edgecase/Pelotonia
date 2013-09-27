@@ -38,6 +38,8 @@
     
     self.versionLabel.font = PELOTONIA_FONT(17);
     self.storyLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+    self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
     
 }
 
@@ -115,10 +117,6 @@
 
 - (IBAction)revealMenu:(id)sender {
     [self.slidingViewController anchorTopViewTo:ECRight];
-}
-
-- (IBAction)launchFeedbackView:(id)sender {
-    [TestFlight openFeedbackView];
 }
 
 

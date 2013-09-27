@@ -103,7 +103,8 @@
 
 #pragma mark -
 #pragma mark Private helper methods
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 // Returns a copy of the image that has been transformed using the given affine transform and scaled to the new size
 // The new image's orientation will be UIImageOrientationUp, regardless of the current image's orientation
 // If the new size is not integral, it will be rounded up
@@ -166,6 +167,10 @@
             transform = CGAffineTransformTranslate(transform, 0, newSize.height);
             transform = CGAffineTransformRotate(transform, -M_PI_2);
             break;
+
+        case UIImageOrientationUp:
+        case UIImageOrientationUpMirrored:
+            break;
     }
     
     switch (self.imageOrientation) {
@@ -180,9 +185,17 @@
             transform = CGAffineTransformTranslate(transform, newSize.height, 0);
             transform = CGAffineTransformScale(transform, -1, 1);
             break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationRight:
+        case UIImageOrientationDown:
+        case UIImageOrientationUp:
+            break;
+            
     }
     
     return transform;
 }
+#pragma clang diagnostic pop
 
 @end

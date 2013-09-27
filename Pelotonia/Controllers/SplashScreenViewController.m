@@ -59,15 +59,11 @@
     [self performSegueWithIdentifier:@"fadeToInitial:" sender:self];
 }
 
-- (void)fadeToInitial:(InitialSlidingViewController *)initialSlidingViewController
-{
-    // animate in the status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    [[[[UIApplication sharedApplication] delegate] window] setRootViewController:initialSlidingViewController];
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+    if ([segue.identifier isEqualToString:@"fadeToInitial"]) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    }
 }
 
 @end

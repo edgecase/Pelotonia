@@ -82,6 +82,7 @@
 		4DF7E28915DE8CD800809BA2 /* 209-twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF7E28715DE8CD800809BA2 /* 209-twitter@2x.png */; };
 		4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */; };
 		BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB02D28D173B476400656E43 /* CoreTelephony.framework */; };
+		BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB22414C17F529030054F16D /* FeedbackViewController.m */; };
 		BB2865E6176AAEF5001BA804 /* 211-action.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2865E4176AAEF5001BA804 /* 211-action.png */; };
 		BB2865E7176AAEF5001BA804 /* 211-action@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2865E5176AAEF5001BA804 /* 211-action@2x.png */; };
 		BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */; };
@@ -338,7 +339,6 @@
 		BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816F016C73A7E000E120F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
-		BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
 		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
 		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
@@ -508,6 +508,8 @@
 		4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileTableViewController.h; path = Controllers/ProfileTableViewController.h; sourceTree = "<group>"; };
 		4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileTableViewController.m; path = Controllers/ProfileTableViewController.m; sourceTree = "<group>"; };
 		BB02D28D173B476400656E43 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BB22414B17F529030054F16D /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = Controllers/FeedbackViewController.h; sourceTree = "<group>"; };
+		BB22414C17F529030054F16D /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = Controllers/FeedbackViewController.m; sourceTree = "<group>"; };
 		BB2865E4176AAEF5001BA804 /* 211-action.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "211-action.png"; sourceTree = "<group>"; };
 		BB2865E5176AAEF5001BA804 /* 211-action@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "211-action@2x.png"; sourceTree = "<group>"; };
 		BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileDetailsTableViewController.h; path = Controllers/ProfileDetailsTableViewController.h; sourceTree = "<group>"; };
@@ -1424,7 +1426,6 @@
 				BCE3B81B15AE5B4F00205530 /* Models */,
 				BCE3B7CF15AE4DE000205530 /* Controllers */,
 				BCE3B7C515AE49DA00205530 /* AppDelegate.h */,
-				BCE3B7C615AE49DA00205530 /* AppDelegate.m */,
 				BCE3B7DC15AE511F00205530 /* Vendor */,
 				BCE3B7BD15AE49DA00205530 /* Supporting Files */,
 				BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */,
@@ -1476,12 +1477,15 @@
 				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
 				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
-				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
+				BCE3B7C615AE49DA00205530 /* AppDelegate.m */,
 				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
+				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
 				BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */,
 				BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */,
 				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
 				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
+				BB22414B17F529030054F16D /* FeedbackViewController.h */,
+				BB22414C17F529030054F16D /* FeedbackViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1555,7 +1559,7 @@
 		BCE3B7A915AE49DA00205530 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = BCE3B7AC15AE49DA00205530 /* Build configuration list for PBXProject "Pelotonia" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1958,6 +1962,7 @@
 				4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */,
 				4DB6491615C60D4F00980FCB /* Appirater.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
+				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
 				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
 				4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */,
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
@@ -1973,7 +1978,6 @@
 				BB8DB07416F020E0005BB646 /* Reachability.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 				BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */,
-				BB9E0947171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
@@ -2036,9 +2040,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2046,8 +2051,11 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2095,9 +2103,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2112,11 +2121,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2125,9 +2138,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2135,8 +2149,11 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

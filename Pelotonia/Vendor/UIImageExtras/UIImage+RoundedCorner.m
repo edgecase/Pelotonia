@@ -54,6 +54,8 @@
 
 #pragma mark -
 #pragma mark Private helper methods
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 
 // Adds a rectangular path to the given context and rounds its corners by the given extents
 // Original author: BjÃ¶rn SÃ¥llarp. Used with permission. See: http://blog.sallarp.com/iphone-uiimage-round-corners/
@@ -76,4 +78,5 @@
     CGContextRestoreGState(context);
 }
 
+#pragma clang diagnostic pop
 @end

@@ -91,6 +91,9 @@
 #pragma mark -
 #pragma mark Private helper methods
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 // Creates a mask that makes the outer edges transparent and everything else opaque
 // The size must include the entire mask (opaque part + transparent border)
 // The caller is responsible for releasing the returned reference by calling CGImageRelease
@@ -123,5 +126,7 @@
     
     return maskImageRef;
 }
+
+#pragma clang diagnostic pop
 
 @end

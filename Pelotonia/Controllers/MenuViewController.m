@@ -89,7 +89,6 @@
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = SECONDARY_LIGHT_GRAY;
 
     label.text = [super tableView:tableView titleForHeaderInSection:section];
     [headerView addSubview:label];
@@ -122,7 +121,15 @@
     webVC.delegate = self;
     webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:webVC];
+    if ([navc.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        navc.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+    }
+    navc.navigationBar.tintColor = PRIMARY_GREEN;
+    [navc.navigationBar setTranslucent:NO];
+    navc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
+//    [webVC setNeedsStatusBarAppearanceUpdate];
+
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;
         self.slidingViewController.topViewController = navc;

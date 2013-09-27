@@ -49,10 +49,12 @@
 {
     [super viewDidLoad];
     
+    // set up pull to refresh
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
 
+    // set up socialize
     if (self.entity == nil)
     {
         self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
@@ -69,8 +71,19 @@
         } failure:^(NSError *error) {
             NSLog(@"Failure: %@", [error localizedDescription]);
         }];
-
     }
+    
+    // configure the UI appearance of the window
+    [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
+    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+//    [self setNeedsStatusBarAppearanceUpdate];
+
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidUnload
@@ -89,7 +102,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self configureView];
-//    [self manualRefresh:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -114,7 +126,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([self respondsToSelector:NSSelectorFromString(segue.identifier)]) {
-        [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+        if ([segue.identifier isEqualToString:@"showPledge:"]) {
+            [self showPledge:(SendPledgeModalViewController *)segue.destinationViewController];
+        }
+        if ([segue.identifier isEqualToString:@"showDetails:"]) {
+            [self showDetails:(ProfileDetailsTableViewController *)segue.destinationViewController];
+        }
     }
     else {
         NSLog(@"%@ is not recognized segue", segue.identifier);
@@ -261,30 +278,19 @@
     if (section == 1) {
         // create a view that says "Activity"
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
-        label.textColor = PRIMARY_GREEN;
-        label.font = PELOTONIA_FONT(24);
-        label.backgroundColor = [UIColor clearColor];
-        label.shadowColor = [UIColor blackColor];
-        label.text = [self tableView:tableView titleForHeaderInSection:section];
-        
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
         writePostButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         [writePostButton setTitle:@"Post" forState:UIControlStateNormal];
-        NSInteger writeButtonW = 150;
-        NSInteger writeButtonBorder = 10.0;
-        NSInteger writeButtonH = 30.0;
-        [writePostButton setFrame:CGRectMake(self.view.bounds.size.width - writeButtonW - writeButtonBorder,
-                                             label.frame.origin.y,
-                                             writeButtonW, writeButtonH)];
-        [writePostButton setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"button-background.png"]]];
+        NSInteger writeButtonW = tableView.bounds.size.width - 10;
+        NSInteger writeButtonH = 35.0;
+        [writePostButton setFrame:CGRectMake((self.view.bounds.size.width - writeButtonW)/2,
+                                             0, writeButtonW, writeButtonH)];
+        [writePostButton setBackgroundColor:PRIMARY_GREEN];
         [writePostButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         writePostButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
         [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
-        writePostButton.layer.cornerRadius = 5.0;
         
-        [headerView addSubview:label];
         [headerView addSubview:writePostButton];
         return headerView;
     }
@@ -558,7 +564,6 @@
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
-            SZShareOptions *shareOptions = (SZShareOptions*)postData.options;
             
             NSString *customStatus = [NSString stringWithFormat:@"%@ %@", txtToShare, entityURL];
             

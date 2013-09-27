@@ -54,7 +54,11 @@
     [super viewDidLoad];
 
     // set the colors appropriately
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY; 
+    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+    }
+    [self.navigationController.navigationBar setTranslucent:NO];
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
     
@@ -65,6 +69,10 @@
     UIImage *image = [UIImage imageNamed: @"Pelotonia_logo_22x216.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
     self.navigationItem.titleView = imageView;
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
     
     // update all riders in the list
     for (Rider *rider in [self.dataController allRiders]) {
@@ -112,7 +120,9 @@
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+    if ([segue.identifier isEqualToString:@"prepareProfile:"]) {
+        [self prepareProfile:(ProfileTableViewController *)segue.destinationViewController];
+    }
 }
 
 - (void)prepareProfile:(ProfileTableViewController *)profileTableViewController
@@ -127,11 +137,6 @@
         rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         profileTableViewController.rider = rider;
     }
-}
-
-- (void)showAbout:(AboutTableViewController *)aboutViewController
-{
-    // do nothing
 }
 
 
@@ -196,7 +201,7 @@
          }
          [activityIndicator removeFromSuperview];
          activityIndicator = nil;
-         [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+         [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
 
          [cell layoutSubviews];
      }];
@@ -207,8 +212,14 @@
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   
     cell.textLabel.textColor = PRIMARY_GREEN;
     cell.detailTextLabel.textColor = SECONDARY_GREEN;
+    
     [cell layoutSubviews];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85.0;
 }
 
 

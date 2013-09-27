@@ -48,6 +48,16 @@
     pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
+    
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+    }
+    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+    [self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+//    [self setNeedsStatusBarAppearanceUpdate];
+
 
 }
 
