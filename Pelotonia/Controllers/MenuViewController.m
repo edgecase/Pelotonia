@@ -37,6 +37,8 @@
     // set the colors appropriately
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
+    
+    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
 }
 
 - (void)didReceiveMemoryWarning
