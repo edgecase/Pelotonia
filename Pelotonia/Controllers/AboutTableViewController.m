@@ -66,7 +66,7 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     if (indexPath.section == 0) {
-        if (indexPath.row == 0 || indexPath.row == 1) {
+        if (indexPath.row == 0 || indexPath.row == 2) {
             [self pelotoniaPressed:tableView];
         }
         if (indexPath.row == 3) {

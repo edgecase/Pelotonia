@@ -12,5 +12,6 @@
 @interface ProfileDetailsTableViewController : UITableViewController
 
 @property (strong, nonatomic) Rider *rider;
+@property (weak, nonatomic) IBOutlet UITextView *riderStoryTextView;
 
 @end

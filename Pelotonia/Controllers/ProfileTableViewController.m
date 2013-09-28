@@ -77,8 +77,9 @@
     [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
     [self.navigationController.navigationBar setTranslucent:NO];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
-//    [self setNeedsStatusBarAppearanceUpdate];
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 
 }
 

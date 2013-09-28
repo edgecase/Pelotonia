@@ -32,11 +32,16 @@
     [super viewDidLoad];
 
     // configure the UI appearance of the window
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+    }
     [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
     [self.navigationController.navigationBar setTranslucent:NO];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-
-    [self setNeedsStatusBarAppearanceUpdate];
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -91,9 +96,8 @@
         
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
-        cell.textLabel.textColor = PRIMARY_DARK_GRAY;
-        cell.textLabel.font = PELOTONIA_SECONDARY_FONT(15.0);
-        cell.textLabel.text = self.rider.story;
+        self.riderStoryTextView.text = self.rider.story;
+        self.riderStoryTextView.textColor = PRIMARY_DARK_GRAY;
     }
     
     return cell;
@@ -104,12 +108,13 @@
     if (indexPath.section == 0)
     {
         if (indexPath.row == 1) {
-            // figure out the height of the inner text view
-            // story path, calculate height of the story & resize everything
-            UIFont *font = PELOTONIA_SECONDARY_FONT(15.0);
-            CGSize initialSize = CGSizeMake(self.view.bounds.size.width - 40, MAXFLOAT); // -40 for cell padding
+            UIFont *font = [UIFont systemFontOfSize:16];
+            if ([font respondsToSelector:@selector(preferredFontForTextStyle:)]) {
+                font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            }
+            CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, MAXFLOAT);
             CGSize sz = [self.rider.story sizeWithFont:font constrainedToSize:initialSize];
-            return sz.height + 20;
+            return sz.height+40;
         }
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];
