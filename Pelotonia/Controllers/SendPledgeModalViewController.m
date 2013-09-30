@@ -72,7 +72,8 @@
     }
 
     [footer setFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
-    footer.textLabel.textColor = PRIMARY_GREEN;
+    footer.textLabel.textColor = PRIMARY_GREEN_ALPHA(.75);
+    footer.textLabel.backgroundColor = [UIColor clearColor];
     footer.textLabel.text = [NSString stringWithFormat:@"Send an email to the specified email address, with a link to %@'s Pelotonia Profile page, to make a donation", self.rider.name];
     return footer;
 }
