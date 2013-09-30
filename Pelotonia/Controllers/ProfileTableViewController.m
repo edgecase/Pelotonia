@@ -21,6 +21,7 @@
 #import "NSDictionary+JSONConversion.h"
 #import <Social/Social.h>
 #import <Socialize/Socialize.h>
+#import "TestFlight.h"
 
 #define SECTION_1_HEADER_HEIGHT   40.0
 
@@ -141,12 +142,14 @@
 
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController
 {
+    [TestFlight passCheckpoint:@"ShowPledgeMailDialog"];
     pledgeViewController.rider = self.rider;
     pledgeViewController.delegate = self;
 }
 
 - (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController
 {
+    [TestFlight passCheckpoint:@"ShowRiderStory"];
     profileDetailsViewController.rider = self.rider;
 }
 
@@ -281,9 +284,9 @@
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
         writePostButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        [writePostButton setTitle:@"Post" forState:UIControlStateNormal];
-        NSInteger writeButtonW = tableView.bounds.size.width - 10;
-        NSInteger writeButtonH = 35.0;
+        [writePostButton setTitle:@"Rider Wall" forState:UIControlStateNormal];
+        NSInteger writeButtonW = tableView.bounds.size.width;
+        NSInteger writeButtonH = 35;
         [writePostButton setFrame:CGRectMake((self.view.bounds.size.width - writeButtonW)/2,
                                              0, writeButtonW, writeButtonH)];
         [writePostButton setBackgroundColor:PRIMARY_GREEN];
@@ -492,6 +495,7 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
 {
+    [TestFlight passCheckpoint:@"SentPledgeMail"];
     if(error) {
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
     }
@@ -539,12 +543,12 @@
     RiderDataController *dataController = appDelegate.riderDataController;
     
     if (self.following) {
+        [TestFlight passCheckpoint:@"UnfollowRider"];
         [dataController removeObject:self.rider];
-        [self unlike];
     }
     else {
+        [TestFlight passCheckpoint:@"FollowRider"];
         [dataController addObject:self.rider];
-        [self like];
     }
     [self configureView];
 }
@@ -597,6 +601,7 @@
     
     shareDialog.completionBlock = ^(NSArray *shares) {
         // Dismiss however you want here
+        [TestFlight passCheckpoint:@"ShareRiderProfile"];
         [self dismissModalViewControllerAnimated:YES];
     };
     

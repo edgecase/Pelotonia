@@ -40,6 +40,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
+
 #pragma mark - Table view data source
 // static tables don't need any of this
 
@@ -52,13 +58,29 @@
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = SECONDARY_GREEN;
 
     label.text = [NSString stringWithFormat:@"Support %@", self.rider.name];
     [headerView addSubview:label];
     return headerView;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"footer"];
+    if (!footer) {
+        footer = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:@"footer"];
+    }
+
+    [footer setFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
+    footer.textLabel.textColor = PRIMARY_GREEN;
+    footer.textLabel.text = [NSString stringWithFormat:@"Send an email to the specified email address, with a link to %@'s Pelotonia Profile page, to make a donation", self.rider.name];
+    return footer;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 90.0;
+}
 
 #pragma mark -- text field delegate methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

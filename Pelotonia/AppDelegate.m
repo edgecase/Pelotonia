@@ -71,7 +71,6 @@
     // set default appearance
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
-//    [[UIView appearance] setTintColor:[UIColor whiteColor]];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];

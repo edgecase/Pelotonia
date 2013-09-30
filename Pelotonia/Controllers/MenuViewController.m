@@ -12,6 +12,7 @@
 #import "UIImage+Resize.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
+#import "TestFlight.h"
 
 
 @interface MenuViewController ()
@@ -174,15 +175,18 @@
             case ID_ABOUT_PELOTONIA_MENU: {
                 // go to the about controller
                 newViewControllerName = @"AboutTableViewController";
+                [TestFlight passCheckpoint:@"ShowAboutDialog"];
                 [self slideToStoryboardViewControllerNamed:newViewControllerName];
                 break;
             }
-            case ID_REGISTER_MENU: 
+            case ID_REGISTER_MENU:
+                [TestFlight passCheckpoint:@"ShowRegistrationDialog"];
                 [self openWebViewWithURL:@"http://www.pelotonia.org/register"];
                 break;
                 
             case ID_SAFETY_MENU:
                 // open safari to the safety site
+                [TestFlight passCheckpoint:@"ShowSafetyVideo"];
                 [self openWebViewWithURL:@"http://www.pelotonia.org/ride/safety"];
                 break;
                 

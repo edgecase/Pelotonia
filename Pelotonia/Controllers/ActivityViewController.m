@@ -13,6 +13,7 @@
 #import "NSDate+Helper.h"
 #import "NSDate-Utilities.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "TestFlight.h"
 
 @interface ActivityViewController ()
 
@@ -55,9 +56,8 @@
     self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
     [self.navigationController.navigationBar setTranslucent:NO];
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    
-//    [self setNeedsStatusBarAppearanceUpdate];
 
+    [TestFlight passCheckpoint:@"ViewAllActivity"];
 
 }
 

@@ -113,7 +113,7 @@
                 font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
             }
             CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, MAXFLOAT);
-            CGSize sz = [self.rider.story sizeWithFont:font constrainedToSize:initialSize];
+            CGSize sz = [self.rider.story sizeWithFont:font constrainedToSize:initialSize lineBreakMode:NSLineBreakByWordWrapping];
             return sz.height+40;
         }
     }
