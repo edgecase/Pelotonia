@@ -337,6 +337,7 @@
 		BB6816F716C73A7E000E120F /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816EA16C73A7E000E120F /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F816C73A7E000E120F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816EE16C73A7E000E120F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816F016C73A7E000E120F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB78D32317F925F600DE639C /* libTestFlight.a */; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
@@ -347,7 +348,6 @@
 		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBAC6850171B035800A3D2E7 /* 259-list.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684E171B035800A3D2E7 /* 259-list.png */; };
 		BBAC6851171B035800A3D2E7 /* 259-list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAC684F171B035800A3D2E7 /* 259-list@2x.png */; };
-		BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB3264F16F679FD007153BC /* libTestFlight.a */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
 		BBD452721738A232000CC966 /* 46-movie-2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452701738A232000CC966 /* 46-movie-2.png */; };
 		BBD452731738A232000CC966 /* 46-movie-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD452711738A232000CC966 /* 46-movie-2@2x.png */; };
@@ -782,6 +782,10 @@
 		BB6816EF16C73A7E000E120F /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASINetworkQueue.h; path = Vendor/ASIHTTPRequestGit/Classes/ASINetworkQueue.h; sourceTree = "<group>"; };
 		BB6816F016C73A7E000E120F /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASINetworkQueue.m; path = Vendor/ASIHTTPRequestGit/Classes/ASINetworkQueue.m; sourceTree = "<group>"; };
 		BB6816F116C73A7E000E120F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = Vendor/ASIHTTPRequestGit/Classes/ASIProgressDelegate.h; sourceTree = "<group>"; };
+		BB78D32317F925F600DE639C /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		BB78D32817F925F600DE639C /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BB8DB07216F020E0005BB646 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB8DB07316F020E0005BB646 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
@@ -803,8 +807,6 @@
 		BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreenViewController.m; path = Controllers/SplashScreenViewController.m; sourceTree = "<group>"; };
 		BBAC684E171B035800A3D2E7 /* 259-list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list.png"; sourceTree = "<group>"; };
 		BBAC684F171B035800A3D2E7 /* 259-list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "259-list@2x.png"; sourceTree = "<group>"; };
-		BBB3264F16F679FD007153BC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		BBB3265216F679FD007153BC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
 		BBD452701738A232000CC966 /* 46-movie-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "46-movie-2.png"; sourceTree = "<group>"; };
@@ -869,6 +871,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */,
 				BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */,
 				4D18EE15168CB0E500B1BDCD /* SystemConfiguration.framework in Frameworks */,
 				BB6588121735F0AA00ABA5AF /* StoreKit.framework in Frameworks */,
@@ -897,7 +900,6 @@
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
 				4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */,
-				BBB3265316F679FD007153BC /* libTestFlight.a in Frameworks */,
 				BBD452AE1738BD21000CC966 /* FacebookSDK.framework in Frameworks */,
 				BB32DADE1791DBA800427047 /* Socialize.framework in Frameworks */,
 			);
@@ -1331,6 +1333,17 @@
 			name = ASIHTTPRequestGit;
 			sourceTree = "<group>";
 		};
+		BB78D32217F925F600DE639C /* TestFlightSDK2 */ = {
+			isa = PBXGroup;
+			children = (
+				BB78D32317F925F600DE639C /* libTestFlight.a */,
+				BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */,
+				BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */,
+				BB78D32817F925F600DE639C /* TestFlight.h */,
+			);
+			path = TestFlightSDK2;
+			sourceTree = "<group>";
+		};
 		BB8DB07116F020E0005BB646 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -1350,15 +1363,6 @@
 				BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */,
 			);
 			path = ECSlidingViewController;
-			sourceTree = "<group>";
-		};
-		BBB3264E16F679FD007153BC /* TestFlightSDK1 */ = {
-			isa = PBXGroup;
-			children = (
-				BBB3264F16F679FD007153BC /* libTestFlight.a */,
-				BBB3265216F679FD007153BC /* TestFlight.h */,
-			);
-			path = TestFlightSDK1;
 			sourceTree = "<group>";
 		};
 		BCE3B7A715AE49DA00205530 = {
@@ -1493,8 +1497,8 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BB78D32217F925F600DE639C /* TestFlightSDK2 */,
 				BB9E0941171AFB6D0093FDD5 /* ECSlidingViewController */,
-				BBB3264E16F679FD007153BC /* TestFlightSDK1 */,
 				BB8DB07116F020E0005BB646 /* Reachability */,
 				BB6816DD16C739E5000E120F /* ASIHTTPRequestGit */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
@@ -2083,7 +2087,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+					"$(SRCROOT)/Pelotonia/TestFlightSDK2",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2184,7 +2188,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+					"$(SRCROOT)/Pelotonia/TestFlightSDK2",
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -2216,7 +2220,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Pelotonia/TestFlightSDK1\"",
+					"$(SRCROOT)/Pelotonia/TestFlightSDK2",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
