@@ -48,12 +48,13 @@
     [pull setDelegate:self];
     [self.tableView addSubview:pull];
     
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
         self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+        [self.navigationController.navigationBar setTranslucent:NO];
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     }
-    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-    [self.navigationController.navigationBar setTranslucent:NO];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
 //    [self setNeedsStatusBarAppearanceUpdate];
 

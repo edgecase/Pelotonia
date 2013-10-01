@@ -82,10 +82,10 @@ static CGFloat tableCellWidth = 235;
     CGFloat commentHeight = [[self class] getCellHeightForCommentText:self.commentString];
     CGFloat titleHeight = [[self class] getCellHeightForTitle:self.titleString];
     
-	CGRect newFrame = self.detailTextLabel.frame;
-    newFrame.size.height = commentHeight;
+	CGRect newDetailTextFrame = self.detailTextLabel.frame;
+    newDetailTextFrame.size.height = commentHeight;
 	self.detailTextLabel.text = self.commentString;
-    self.detailTextLabel.frame = newFrame;
+    self.detailTextLabel.frame = newDetailTextFrame;
     
     CGRect newTitleFrame = self.textLabel.frame;
     newTitleFrame.size.height = titleHeight;
@@ -97,9 +97,10 @@ static CGFloat tableCellWidth = 235;
         self.textLabel.frame = CGRectMake(55, self.imageView.frame.origin.y,tableCellWidth,self.textLabel.frame.size.height);
         self.detailTextLabel.frame = CGRectMake(55, CGRectGetMaxY(self.textLabel.frame)+5,tableCellWidth,self.detailTextLabel.frame.size.height);
     }
-    
+
+    // set the frame up well
 	CGRect cellFrame = self.frame;
-	cellFrame.size.height = newFrame.size.height + newTitleFrame.size.height + 20.0;
+	cellFrame.size.height = newDetailTextFrame.size.height + newTitleFrame.size.height + 20.0;
 	self.frame = cellFrame;
 }
 

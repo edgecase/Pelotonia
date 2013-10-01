@@ -338,6 +338,7 @@
 		BB6816F816C73A7E000E120F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816EE16C73A7E000E120F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB6816F916C73A7E000E120F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6816F016C73A7E000E120F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB78D32317F925F600DE639C /* libTestFlight.a */; };
+		BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */ = {isa = PBXBuildFile; fileRef = BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
@@ -786,6 +787,8 @@
 		BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		BB78D32817F925F600DE639C /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
+		BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LightAndDark.m"; sourceTree = "<group>"; };
 		BB8DB07216F020E0005BB646 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB8DB07316F020E0005BB646 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
@@ -1459,6 +1462,8 @@
 				4DD0407B15B36FF80073E7B6 /* Pelotonia-Colors.h */,
 				BB32006D178E668A0035A2BA /* NSDictionary+JSONConversion.h */,
 				BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */,
+				BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */,
+				BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1964,6 +1969,7 @@
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 				4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */,
+				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DB6491615C60D4F00980FCB /* Appirater.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,

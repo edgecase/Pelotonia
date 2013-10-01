@@ -16,8 +16,8 @@
 
 @implementation AboutTableViewController
 @synthesize versionLabel;
-@synthesize storyLabel;
 @synthesize doneButton;
+@synthesize storyTextView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,26 +31,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
     self.versionLabel.text = [NSString stringWithFormat:@"Version %@.%@",
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"],
                               [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-    
     self.versionLabel.font = PELOTONIA_FONT(17);
-    self.storyLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-    self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+    
+    // set the colors appropriately
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+        [self.navigationController.navigationBar setTranslucent:NO];
+    }
+    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
+    self.tableView.opaque = YES;
     
 }
 
 - (void)viewDidUnload
 {
     [self setVersionLabel:nil];
-    [self setStoryLabel:nil];
+    [self setStoryTextView:nil];
     [self setDoneButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.storyTextView.backgroundColor = [UIColor clearColor];
+    self.storyTextView.opaque = NO;
+    self.storyTextView.text = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.";
+    self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
+    self.storyTextView.textColor = PRIMARY_DARK_GRAY;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

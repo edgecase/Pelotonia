@@ -75,11 +75,12 @@
     }
     
     // configure the UI appearance of the window
-    [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         [self setNeedsStatusBarAppearanceUpdate];
+        [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
+        [self.navigationController.navigationBar setTranslucent:NO];
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     }
 
 }
@@ -189,6 +190,7 @@
             [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
                            placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
         }
+        [cell layoutSubviews];
         return cell;
     }
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];

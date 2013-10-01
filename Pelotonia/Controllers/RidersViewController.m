@@ -54,25 +54,21 @@
     [super viewDidLoad];
 
     // set the colors appropriately
-    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
+        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
         self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+        [self.navigationController.navigationBar setTranslucent:NO];
     }
-    [self.navigationController.navigationBar setTranslucent:NO];
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
     
     // set up the search results
-    self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:1];
+    self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
     
     // logo in title bar
-    UIImage *image = [UIImage imageNamed: @"Pelotonia_logo_22x216.png"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216.png"]];
     self.navigationItem.titleView = imageView;
-    
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
     
     // update all riders in the list
     for (Rider *rider in [self.dataController allRiders]) {

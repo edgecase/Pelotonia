@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
     self.textViewName.delegate = self;
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"footer"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,11 +55,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 18)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 45)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, tableView.bounds.size.width - 10, 25)];
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = [UIColor clearColor];
 
     label.text = [NSString stringWithFormat:@"Support %@", self.rider.name];
     [headerView addSubview:label];
@@ -70,17 +73,19 @@
     if (!footer) {
         footer = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:@"footer"];
     }
-
-    [footer setFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
-    footer.textLabel.textColor = PRIMARY_GREEN_ALPHA(.75);
-    footer.textLabel.backgroundColor = [UIColor clearColor];
-    footer.textLabel.text = [NSString stringWithFormat:@"Send an email to the specified email address, with a link to %@'s Pelotonia Profile page, to make a donation", self.rider.name];
+    UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, self.tableView.bounds.size.width-20, 70.0)];
+    footerLabel.font = PELOTONIA_SECONDARY_FONT(17);
+    footerLabel.text = [NSString stringWithFormat:@"Enter an email address to send a notification with %@'s Pelotonia Profile", self.rider.name];
+    footerLabel.textColor = PRIMARY_GREEN;
+    footerLabel.numberOfLines = 4;
+    footerLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [footer.contentView addSubview:footerLabel];
     return footer;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 90.0;
+    return 70.0;
 }
 
 #pragma mark -- text field delegate methods

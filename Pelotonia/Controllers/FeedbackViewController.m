@@ -27,9 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-    self.navBar.tintColor = PRIMARY_GREEN;
+    // configure the UI appearance of the window
+    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        [self setNeedsStatusBarAppearanceUpdate];
+        [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
+        [self.navigationController.navigationBar setTranslucent:NO];
+        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    }
 }
 
 - (void)didReceiveMemoryWarning

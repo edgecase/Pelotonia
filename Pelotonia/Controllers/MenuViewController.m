@@ -13,6 +13,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 #import "TestFlight.h"
+#import "UIColor+LightAndDark.h"
 
 
 @interface MenuViewController ()
@@ -38,8 +39,6 @@
     // set the colors appropriately
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
-    
-    self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,16 +85,22 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    headerView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"header-background.png"]];
+    headerView.backgroundColor = [PRIMARY_DARK_GRAY darkerColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 21)];
     label.textColor = PRIMARY_GREEN;
     label.font = PELOTONIA_FONT(21);
     label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = [UIColor clearColor];
 
     label.text = [super tableView:tableView titleForHeaderInSection:section];
     [headerView addSubview:label];
     return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0;
 }
 
 - (void)slideToStoryboardViewControllerNamed:(NSString *)newViewControllerName
@@ -124,15 +129,14 @@
     webVC.delegate = self;
     webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:webVC];
+    navc.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([navc.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
         navc.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
+        navc.navigationBar.tintColor = PRIMARY_GREEN;
+        [navc.navigationBar setTranslucent:NO];
+        navc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     }
-    navc.navigationBar.tintColor = PRIMARY_GREEN;
-    [navc.navigationBar setTranslucent:NO];
-    navc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
-//    [webVC setNeedsStatusBarAppearanceUpdate];
-
     [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
         CGRect frame = self.slidingViewController.topViewController.view.frame;
         self.slidingViewController.topViewController = navc;

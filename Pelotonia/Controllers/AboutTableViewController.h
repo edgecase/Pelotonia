@@ -10,8 +10,8 @@
 
 @interface AboutTableViewController : UITableViewController
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *storyLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UITextView *storyTextView;
 
 - (IBAction)done:(id)sender;
 - (IBAction)sandlotPressed:(id)sender;
