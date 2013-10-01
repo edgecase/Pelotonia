@@ -314,6 +314,7 @@
 		BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB78D32317F925F600DE639C /* libTestFlight.a */; };
 		BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */ = {isa = PBXBuildFile; fileRef = BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */; };
 		BB78D33217FA8D3100DE639C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33117FA8D3100DE639C /* Media.xcassets */; };
+		BB78D33417FA925500DE639C /* profile_default_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33317FA925500DE639C /* profile_default_thumb.png */; };
 		BB8DB07416F020E0005BB646 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8DB07316F020E0005BB646 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
@@ -711,6 +712,7 @@
 		BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
 		BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LightAndDark.m"; sourceTree = "<group>"; };
 		BB78D33117FA8D3100DE639C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		BB78D33317FA925500DE639C /* profile_default_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_default_thumb.png; sourceTree = "<group>"; };
 		BB8DB07216F020E0005BB646 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BB8DB07316F020E0005BB646 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				BB78D33317FA925500DE639C /* profile_default_thumb.png */,
 				4DB6493815C60FA300980FCB /* Baksheesh */,
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
 				0531B94115B3206D0015A003 /* profile_default.jpg */,
@@ -1642,6 +1645,7 @@
 				BB32DA8C1791DBA800427047 /* socialize-comment-user-only-background.png in Resources */,
 				BB32DA8D1791DBA800427047 /* socialize-iphone-notification-button-highlighted.png in Resources */,
 				BB32DA8E1791DBA800427047 /* socialize-iphone-notification-button-highlighted@2x.png in Resources */,
+				BB78D33417FA925500DE639C /* profile_default_thumb.png in Resources */,
 				BB32DA8F1791DBA800427047 /* socialize-iphone-notification-button-normal.png in Resources */,
 				BB32DA901791DBA800427047 /* socialize-iphone-notification-button-normal@2x.png in Resources */,
 				BB32DA911791DBA800427047 /* socialize-iphone-subcribe-notification-icon.png in Resources */,
