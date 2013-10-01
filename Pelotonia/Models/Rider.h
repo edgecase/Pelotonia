@@ -18,7 +18,7 @@
     NSString *_riderType;
     NSString *_route;
     NSString *_story;
-    BOOL highRoller;
+    BOOL _highRoller;
     
     NSString *_riderPhotoUrl;
     UIImage *_riderPhoto;
