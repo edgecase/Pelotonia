@@ -44,6 +44,7 @@
         self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
         self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
         [self.navigationController.navigationBar setTranslucent:NO];
+        [self setNeedsStatusBarAppearanceUpdate];
     }
     self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
     self.tableView.opaque = YES;
@@ -122,7 +123,7 @@
 
 #pragma mark -- Custom Functionality
 - (IBAction)done:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)openURLFromString:(NSString *)urlString {

@@ -163,11 +163,11 @@
     comments.completionBlock = ^{
         
         // Dismiss however you want here
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
     
     // Present however you want here
-    [self presentModalViewController:comments animated:YES];
+    [self presentViewController:comments animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

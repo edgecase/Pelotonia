@@ -352,11 +352,11 @@
     comments.completionBlock = ^{
         
         // Dismiss however you want here
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
     
     // Present however you want here
-    [self presentModalViewController:comments animated:YES];
+    [self presentViewController:comments animated:YES completion:nil];
 }
 
 - (void)reloadComments
@@ -486,7 +486,7 @@
         
         NSLog(@"msgBody: %@", msg);
         [mailComposer setMessageBody:msg isHTML:YES];
-        [self presentModalViewController:mailComposer animated:YES];
+        [self presentViewController:mailComposer animated:YES completion:nil];
     }
 
     
@@ -501,7 +501,7 @@
     if(error) {
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
     }
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma Socialize stuff
@@ -604,14 +604,14 @@
     shareDialog.completionBlock = ^(NSArray *shares) {
         // Dismiss however you want here
         [TestFlight passCheckpoint:@"ShareRiderProfile"];
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
     
     shareDialog.cancellationBlock = ^() {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     };
-    
-    [self presentModalViewController:shareDialog animated:YES];
+
+    [self presentViewController:shareDialog animated:YES completion:nil];
     
 }
 
