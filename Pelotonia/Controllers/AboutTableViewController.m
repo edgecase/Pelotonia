@@ -86,19 +86,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0 || indexPath.row == 2) {
-            [self pelotoniaPressed:tableView];
-        }
-        if (indexPath.row == 4) {
-            [self faqPressed:tableView];
-        }
+    if (indexPath.row == 0 || indexPath.row == 2) {
+        [self pelotoniaPressed:tableView];
+    }
+    if (indexPath.row == 4) {
+        [self faqPressed:tableView];
     }
     
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            [self sandlotPressed:tableView];
-        }
+    if (indexPath.row == 5) {
+        [self sandlotPressed:tableView];
     }
 }
 
@@ -111,10 +107,6 @@
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = SECONDARY_GREEN;
     
-    if (section == 1)
-    {
-        label.text = [NSString stringWithFormat:@"Created for Pelotonia By"];
-    }
     [headerView addSubview:label];
     return headerView;
 }
@@ -131,7 +123,7 @@
 
 
 - (void)sandlotPressed:(id)sender {
-    [self openWebViewWithURL:@"http://www.isandlot.com"];
+    [self openWebViewWithURL:@"http://www.isandlot.com/about-us"];
 }
 
 - (void)pelotoniaPressed:(id)sender {
