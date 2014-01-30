@@ -71,6 +71,12 @@
     // set default appearance
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+           UITextAttributeTextColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],
+           UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
+           UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+           UITextAttributeFont: PELOTONIA_FONT(22),
+           }];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];

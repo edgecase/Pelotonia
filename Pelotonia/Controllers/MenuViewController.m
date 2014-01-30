@@ -178,7 +178,7 @@
         switch (indexPath.row) {
             case ID_ABOUT_PELOTONIA_MENU: {
                 // go to the about controller
-                newViewControllerName = @"AboutTableViewController";
+                newViewControllerName = @"AboutNavViewController";
                 [TestFlight passCheckpoint:@"ShowAboutDialog"];
                 [self slideToStoryboardViewControllerNamed:newViewControllerName];
                 break;

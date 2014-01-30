@@ -7,6 +7,8 @@
 //
 
 #import "AboutTableViewController.h"
+#import "PRPWebViewController.h"
+#import "ECSlidingViewController.h"
 #import "Pelotonia-Colors.h"
 #import "TestFlight.h"
 
@@ -88,7 +90,7 @@
         if (indexPath.row == 0 || indexPath.row == 2) {
             [self pelotoniaPressed:tableView];
         }
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             [self faqPressed:tableView];
         }
     }
@@ -96,9 +98,6 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [self sandlotPressed:tableView];
-        }
-        if (indexPath.row == 1) {
-            [self newContextPressed:tableView];
         }
     }
 }
@@ -126,33 +125,50 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)openURLFromString:(NSString *)urlString {
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    if (![[UIApplication sharedApplication] openURL:url])
-        
-    NSLog(@"%@%@",@"Failed to open url:",[url description]);
-}
-
 - (IBAction)revealMenu:(id)sender {
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 
 - (void)sandlotPressed:(id)sender {
-    [self openURLFromString:@"http://www.isandlot.com"];
-}
-
-- (void)newContextPressed:(id)sender {
-    [self openURLFromString:@"http://www.newcontext.com"];
+    [self openWebViewWithURL:@"http://www.isandlot.com"];
 }
 
 - (void)pelotoniaPressed:(id)sender {
-    [self openURLFromString:@"http://www.pelotonia.org"];
+    [self openWebViewWithURL:@"http://pelotonia.org"];
+
 }
 
 - (void)faqPressed:(id)sender {
-    [self openURLFromString:@"http://pelotonia.org/ride/faq"];
+    [self openWebViewWithURL:@"http://pelotonia.org/ride/faq"];
+
 }
+
+- (void)openWebViewWithURL:(NSString *)url
+{
+    // see the registration form
+    PRPWebViewController *webVC = [[PRPWebViewController alloc] init];
+    webVC.url = [NSURL URLWithString:url];
+    webVC.showsDoneButton = NO;
+    webVC.delegate = self;
+    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    
+    [self.navigationController pushViewController:webVC animated:YES];
+}
+
+#pragma mark - PRPWebViewControllerDelegate
+- (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
+    NSLog(@"webControllerDidFinishLoading!");
+}
+
+- (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
+}
+
+- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    return [self shouldAutorotateToInterfaceOrientation:orientation];
+}
+
+
 
 @end

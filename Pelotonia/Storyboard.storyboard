@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="b3w-QT-N98">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="b3w-QT-N98">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Menu View Controller-->
@@ -311,39 +311,20 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="SEf-tL-Ilh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" translucent="NO" id="VAN-Rb-nfN">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                            <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                            <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="About" id="5XV-Wf-yI9">
-                                    <barButtonItem key="leftBarButtonItem" image="259-list.png" id="4bz-sd-EVE">
-                                        <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                                        <connections>
-                                            <action selector="revealMenu:" destination="KrS-bT-Crh" id="GhX-6s-uc6"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
                         <sections>
                             <tableViewSection id="pkT-z8-3Cb">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="90" id="AwN-xp-8ae">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="90"/>
+                                        <rect key="frame" x="0.0" y="99" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AwN-xp-8ae" id="t7B-bP-loh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Pelotonia_logo.png" id="Ozz-te-45c">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Pelotonia_logo_22x216" id="Ozz-te-45c">
                                                     <rect key="frame" x="42" y="20" width="216" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -359,7 +340,7 @@
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rbo-OO-CVK" rowHeight="60" style="IBUITableViewCellStyleDefault" id="cjQ-90-wt0">
-                                        <rect key="frame" x="0.0" y="134" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="189" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjQ-90-wt0" id="vNl-LS-u0O">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
@@ -380,7 +361,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
-                                        <rect key="frame" x="0.0" y="194" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="249" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eUX-am-qsE" id="4MM-d5-ljR">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
@@ -396,15 +377,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="452" id="B5r-Td-5PN">
-                                        <rect key="frame" x="0.0" y="247" width="320" height="452"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="428" id="B5r-Td-5PN">
+                                        <rect key="frame" x="0.0" y="302" width="320" height="428"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B5r-Td-5PN" id="dW2-vz-MCr">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="451"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="tvQ-OG-bvb">
-                                                    <rect key="frame" x="20" y="20" width="280" height="411"/>
+                                                    <rect key="frame" x="20" y="20" width="280" height="387"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <string key="text">Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.</string>
@@ -417,7 +398,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cTo-5s-Ikw" rowHeight="53" style="IBUITableViewCellStyleDefault" id="ADM-7i-HpY">
-                                        <rect key="frame" x="0.0" y="699" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="730" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ADM-7i-HpY" id="VPi-0E-MgF">
                                             <rect key="frame" x="0.0" y="0.0" width="253" height="52"/>
@@ -438,7 +419,7 @@
                             <tableViewSection headerTitle="Created By" id="kYs-Wk-ydg">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="62" id="sT8-JP-aMg">
-                                        <rect key="frame" x="0.0" y="800" width="320" height="62"/>
+                                        <rect key="frame" x="0.0" y="831" width="320" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sT8-JP-aMg" id="eAE-q1-tIC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
@@ -470,6 +451,14 @@
                             <outlet property="delegate" destination="KrS-bT-Crh" id="F54-yi-LS9"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="About" id="Ysn-go-vhB">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="rxs-O9-8we">
+                            <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="revealMenu:" destination="KrS-bT-Crh" id="GV9-H5-lwN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="storyTextView" destination="tvQ-OG-bvb" id="9ow-Be-dse"/>
                         <outlet property="versionLabel" destination="E81-3A-9gN" id="LRh-mw-ecC"/>
@@ -477,7 +466,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="888"/>
+            <point key="canvasLocation" x="853" y="888"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Qij-r6-qB5">
@@ -538,7 +527,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="858" y="888"/>
+            <point key="canvasLocation" x="1384" y="888"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -1035,7 +1024,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkZ-H9-ApC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2155" y="833"/>
+            <point key="canvasLocation" x="2681" y="833"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
@@ -1101,6 +1090,24 @@
             </objects>
             <point key="canvasLocation" x="339" y="-400"/>
         </scene>
+        <!--Navigation Controller - About-->
+        <scene sceneID="OTL-Q0-hmp">
+            <objects>
+                <navigationController storyboardIdentifier="AboutNavViewController" title="About" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dbJ-Hy-gcq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Agj-s1-Xbq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="KrS-bT-Crh" kind="relationship" relationship="rootViewController" id="AIH-Pq-93C"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vH3-82-zce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="327" y="888"/>
+        </scene>
     </scenes>
     <resources>
         <image name="08-chat.png" width="24" height="22"/>
@@ -1108,10 +1115,11 @@
         <image name="117-todo.png" width="18" height="19"/>
         <image name="211-action.png" width="28" height="22"/>
         <image name="253-person.png" width="26" height="24"/>
+        <image name="259-list" width="20" height="14"/>
         <image name="259-list.png" width="20" height="14"/>
         <image name="28-star.png" width="26" height="26"/>
         <image name="46-movie-2.png" width="20" height="25"/>
-        <image name="Pelotonia_logo.png" width="530" height="54"/>
+        <image name="Pelotonia_logo_22x216" width="216" height="22"/>
         <image name="pelotonia-icon.png" width="57" height="57"/>
         <image name="pelotonia-menu-icon.png" width="24" height="24"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
