@@ -80,6 +80,22 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     [self reload];
 }
 
+- (BOOL) shouldAutorotate
+{
+    BOOL shouldRotate = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(shouldAutorotate)]) {
+        shouldRotate = [self.delegate shouldAutorotate];
+    }
+    
+    return shouldRotate;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     BOOL shouldRotate = YES;
     

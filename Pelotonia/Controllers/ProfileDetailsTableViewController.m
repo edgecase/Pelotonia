@@ -113,9 +113,17 @@
             if ([font respondsToSelector:@selector(preferredFontForTextStyle:)]) {
                 font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
             }
-            CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, MAXFLOAT);
-            CGSize sz = [self.rider.story sizeWithFont:font constrainedToSize:initialSize lineBreakMode:NSLineBreakByWordWrapping];
-            return sz.height+40;
+            CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, CGFLOAT_MAX);
+            
+            NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:self.rider.story
+                                                                                 attributes:@{
+                                                                                              NSFontAttributeName:font
+                                                                                              }];
+            CGRect rect = [attributedText boundingRectWithSize:initialSize
+                                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                                       context:nil];
+        
+            return ceilf(rect.size.height) + 20; //  sz.height+40;
         }
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

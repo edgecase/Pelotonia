@@ -148,6 +148,17 @@
     [self.navigationController pushViewController:webVC animated:YES];
 }
 
+- (BOOL) shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
 #pragma mark - PRPWebViewControllerDelegate
 - (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
     NSLog(@"webControllerDidFinishLoading!");
@@ -157,9 +168,10 @@
     [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
 }
 
-- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return [self shouldAutorotateToInterfaceOrientation:orientation];
-}
+
+//- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+//    return [self shouldAutorotateToInterfaceOrientation:orientation];
+//}
 
 
 

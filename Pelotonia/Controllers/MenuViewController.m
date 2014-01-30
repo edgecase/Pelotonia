@@ -215,7 +215,11 @@
 }
 
 - (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return [self shouldAutorotateToInterfaceOrientation:orientation];
+    return [self shouldAutorotate];
+}
+
+- (BOOL)shouldAutorotate {
+    return [self shouldAutorotate];
 }
 
 
