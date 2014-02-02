@@ -10,7 +10,6 @@
 #import "PelotoniaWeb.h"
 #import "Rider.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "ECSlidingViewController.h"
 
 @class RiderDataController;
 
@@ -23,6 +22,5 @@
 @property (strong, nonatomic) NSMutableArray *riderSearchResults;
 @property (weak, nonatomic) IBOutlet UITableView *riderTableView;
 
-- (IBAction)revealMenu:(id)sender;
 
 @end

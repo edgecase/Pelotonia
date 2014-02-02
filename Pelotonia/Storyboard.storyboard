@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="b3w-QT-N98">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -52,6 +52,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kEl-WH-vDA" kind="custom" customClass="ECSlidingSegue" id="6GR-0F-IpE"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="8Vw-hx-GYS" imageView="72C-03-Gle" style="IBUITableViewCellStyleDefault" id="YEp-uB-gmK">
                                         <rect key="frame" x="0.0" y="110" width="320" height="44"/>
@@ -76,6 +79,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="aoi-70-fZE" kind="custom" customClass="ECSlidingSegue" id="3UN-hs-Uvu"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="CEG-KB-6rQ" imageView="Hc1-i3-KSh" style="IBUITableViewCellStyleDefault" id="YZQ-30-SKW">
                                         <rect key="frame" x="0.0" y="154" width="320" height="44"/>
@@ -100,6 +106,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ZpJ-uT-0fb" kind="custom" customClass="ECSlidingSegue" id="Vbj-gi-Wcx"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -176,6 +185,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="dbJ-Hy-gcq" kind="custom" customClass="ECSlidingSegue" id="6hm-XA-xy3"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -189,7 +201,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEV-Fu-w1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-158" y="262"/>
+            <point key="canvasLocation" x="-404" y="888"/>
         </scene>
         <!--Splash Screen View Controller-->
         <scene sceneID="6kZ-l0-87B">
@@ -218,6 +230,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="topViewControllerStoryboardId" value="RidersNavViewController"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="underLeftViewControllerStoryboardId" value="MenuViewController"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J63-ME-rxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,10 +295,11 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Pelotonia" id="dR0-l0-2SN">
-                        <barButtonItem key="leftBarButtonItem" image="259-list.png" id="QZU-aO-8lk">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="QZU-aO-8lk">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="revealMenu:" destination="puZ-qr-IB2" id="ryz-Jd-Brb"/>
+                                <segue destination="xhw-vx-22F" kind="unwind" unwindAction="unwindToMenuViewController:" id="NWc-zj-WQ9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -292,6 +309,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="juW-zQ-p1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xhw-vx-22F" userLabel="Exit" sceneMemberID="exit"/>
                 <searchDisplayController id="98K-l2-sFA">
                     <connections>
                         <outlet property="delegate" destination="puZ-qr-IB2" id="4T3-Mx-N7F"/>
@@ -413,6 +431,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="519-uj-OJn" kind="push" identifier="SegueToFAQ" id="Jue-uU-zqa"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="114" id="sT8-JP-aMg">
                                         <rect key="frame" x="0.0" y="743" width="320" height="114"/>
@@ -459,6 +480,7 @@
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="revealMenu:" destination="KrS-bT-Crh" id="GV9-H5-lwN"/>
+                                <segue destination="dn4-h4-Aam" kind="unwind" unwindAction="unwindToMenuViewController:" id="tXb-9s-pbp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -468,6 +490,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dn4-h4-Aam" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="853" y="888"/>
         </scene>
@@ -544,7 +567,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ez-4j-izt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1323" y="1465"/>
+            <point key="canvasLocation" x="1380" y="2344"/>
         </scene>
         <!--Activity View Controller - Updates-->
         <scene sceneID="m8a-Js-YyP">
@@ -571,17 +594,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Updates" id="VaX-jb-EiR">
-                        <barButtonItem key="leftBarButtonItem" image="259-list.png" id="dOg-bp-OQa">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="dOg-bp-OQa">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="revealMenu:" destination="QjF-de-6rP" id="dfk-Kc-taG"/>
+                                <segue destination="c8y-u1-kjc" kind="unwind" unwindAction="unwindToMenuViewController:" id="hgi-LK-fnp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBX-Lf-U40" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="c8y-u1-kjc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="853" y="1854"/>
+            <point key="canvasLocation" x="852" y="2344"/>
         </scene>
         <!--User Profile View Controller - User Profile-->
         <scene sceneID="ctE-OW-v4P">
@@ -660,10 +685,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="User Profile" id="MzS-wD-5CF">
-                        <barButtonItem key="leftBarButtonItem" image="259-list.png" id="RmB-2l-lK9">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="RmB-2l-lK9">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="revealMenu:" destination="elF-Cv-4kH" id="TeQ-9p-s60"/>
+                                <segue destination="gxJ-6o-AuJ" kind="unwind" unwindAction="unwindToMenuViewController:" id="i1h-FX-aju"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -674,6 +700,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gxJ-6o-AuJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="865" y="-400"/>
         </scene>
@@ -855,7 +882,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1524" y="-4"/>
+            <point key="canvasLocation" x="1478" y="254"/>
         </scene>
         <!--Send Pledge Modal View Controller-->
         <scene sceneID="mry-ek-Boq">
@@ -952,7 +979,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFN-tP-zEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2155" y="254"/>
+            <point key="canvasLocation" x="2315" y="254"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="SoG-UX-0Qg">
+            <objects>
+                <viewController id="519-uj-OJn" customClass="PRPWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cZz-0p-hRD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FFM-xM-l4f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4or-18-pZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1384" y="1537"/>
         </scene>
         <!--Profile Details Table View Controller-->
         <scene sceneID="zDr-6D-YPF">
@@ -1027,7 +1069,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkZ-H9-ApC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2681" y="833"/>
+            <point key="canvasLocation" x="2315" y="901"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
@@ -1068,7 +1110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIv-4F-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="327" y="1854"/>
+            <point key="canvasLocation" x="326" y="2344"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="crK-kO-1N3">
@@ -1123,7 +1165,6 @@
         <image name="211-action.png" width="28" height="22"/>
         <image name="253-person.png" width="26" height="24"/>
         <image name="259-list" width="20" height="14"/>
-        <image name="259-list.png" width="20" height="14"/>
         <image name="28-star.png" width="26" height="26"/>
         <image name="46-movie-2.png" width="20" height="25"/>
         <image name="Pelotonia_logo_22x216" width="216" height="22"/>

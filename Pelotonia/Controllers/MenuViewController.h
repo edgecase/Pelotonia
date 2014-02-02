@@ -20,6 +20,6 @@
 
 
 @interface MenuViewController : UITableViewController <PRPWebViewControllerDelegate>
-
+- (IBAction) unwindToMenuViewController:(UIStoryboardSegue *)segue;
 
 @end

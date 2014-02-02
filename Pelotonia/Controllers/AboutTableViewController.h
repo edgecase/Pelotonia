@@ -16,6 +16,5 @@
 
 - (IBAction)done:(id)sender;
 - (IBAction)sandlotPressed:(id)sender;
-- (IBAction)revealMenu:(id)sender;
 
 @end

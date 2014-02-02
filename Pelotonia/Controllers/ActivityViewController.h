@@ -22,6 +22,5 @@
 @property (strong, nonatomic) NSArray *recentActivity;
 @property (strong, nonatomic) RiderDataController *dataController;
 
-- (IBAction)revealMenu:(id)sender;
 
 @end

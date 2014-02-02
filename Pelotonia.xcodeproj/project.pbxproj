@@ -26,9 +26,7 @@
 		4D465A1B15C229D400C7C506 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A1715C229D400C7C506 /* README */; };
 		4D465A1D15C22AB500C7C506 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D465A1C15C22AB500C7C506 /* QuartzCore.framework */; };
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
-		4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */; };
 		4D5D564216A4F8DD00B5B609 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D564116A4F8DD00B5B609 /* ImageIO.framework */; };
-		4D6B2B5F16A3C67C002987C1 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6B2B5C16A3C663002987C1 /* libMBProgressHUD.a */; };
 		4D99DE3F15D23A6300DA2B3D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */; };
 		4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347915D229C40056E794 /* Twitter.framework */; };
 		4DB3347C15D229DD0056E794 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3347B15D229DC0056E794 /* Security.framework */; };
@@ -306,7 +304,6 @@
 		BB78D33217FA8D3100DE639C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33117FA8D3100DE639C /* Media.xcassets */; };
 		BB78D33417FA925500DE639C /* profile_default_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33317FA925500DE639C /* profile_default_thumb.png */; };
 		BB822A1B17FBAA8500ABCA5C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */; };
-		BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
 		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
 		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
@@ -328,23 +325,6 @@
 		BCE3B81A15AE586800205530 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B81915AE586800205530 /* libxml2.dylib */; };
 		BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE3B81D15AE5B6F00205530 /* Rider.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		4D6B2B5B16A3C663002987C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D286A7491518C70F00E13FB8;
-			remoteInfo = MBProgressHUD;
-		};
-		4D6B2B5D16A3C672002987C1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D286A7481518C70F00E13FB8;
-			remoteInfo = MBProgressHUD;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0531B93615B222B10015A003 /* PelotoniaWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaWeb.h; path = Vendor/PelotoniaWeb/PelotoniaWeb.h; sourceTree = "<group>"; };
@@ -370,9 +350,7 @@
 		4D465A1C15C22AB500C7C506 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4D4A5B7315D2008C000174CE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D4A5B7515D2009B000174CE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		4D5D564116A4F8DD00B5B609 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD.xcodeproj; path = Pelotonia/Vendor/MBProgressHUD/MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4DB3347915D229C40056E794 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		4DB3347B15D229DC0056E794 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -665,10 +643,6 @@
 		BB78D33117FA8D3100DE639C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		BB78D33317FA925500DE639C /* profile_default_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_default_thumb.png; sourceTree = "<group>"; };
 		BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
-		BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
-		BB9E0944171AFB6D0093FDD5 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
-		BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitialSlidingViewController.h; path = Controllers/InitialSlidingViewController.h; sourceTree = "<group>"; };
 		BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitialSlidingViewController.m; path = Controllers/InitialSlidingViewController.m; sourceTree = "<group>"; };
 		BB9E096C171AFF360093FDD5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Controllers/MenuViewController.h; sourceTree = "<group>"; };
@@ -732,7 +706,6 @@
 				BB6816D716C725B9000E120F /* Social.framework in Frameworks */,
 				BB6816D516C725B1000E120F /* Accounts.framework in Frameworks */,
 				4D5D564216A4F8DD00B5B609 /* ImageIO.framework in Frameworks */,
-				4D6B2B5F16A3C67C002987C1 /* libMBProgressHUD.a in Frameworks */,
 				4DB3347E15D229F70056E794 /* CoreFoundation.framework in Frameworks */,
 				4DB3347A15D229C40056E794 /* Twitter.framework in Frameworks */,
 				BB822A1B17FBAA8500ABCA5C /* FacebookSDK.framework in Frameworks */,
@@ -744,7 +717,6 @@
 				BCE3B81A15AE586800205530 /* libxml2.dylib in Frameworks */,
 				BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */,
 				BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */,
-				4D5D563716A4F7AB00B5B609 /* SDWebImage.framework in Frameworks */,
 				40AC65A5EC934870A6348701 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,14 +770,6 @@
 			);
 			name = PullToRefresh;
 			path = Vendor/PullToRefresh;
-			sourceTree = "<group>";
-		};
-		4D6B2B5516A3C663002987C1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4D6B2B5C16A3C663002987C1 /* libMBProgressHUD.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4DB6493715C60F8900980FCB /* PFDinTextPro */ = {
@@ -1099,22 +1063,10 @@
 			path = TestFlightSDK2;
 			sourceTree = "<group>";
 		};
-		BB9E0941171AFB6D0093FDD5 /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				BB9E0942171AFB6D0093FDD5 /* ECSlidingViewController.h */,
-				BB9E0943171AFB6D0093FDD5 /* ECSlidingViewController.m */,
-				BB9E0944171AFB6D0093FDD5 /* UIImage+ImageWithUIView.h */,
-				BB9E0945171AFB6D0093FDD5 /* UIImage+ImageWithUIView.m */,
-			);
-			path = ECSlidingViewController;
-			sourceTree = "<group>";
-		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
 				BB78D33117FA8D3100DE639C /* Media.xcassets */,
-				4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */,
 				BCE3B7BC15AE49DA00205530 /* Pelotonia */,
 				BCE3B7B515AE49DA00205530 /* Frameworks */,
 				BCE3B7B315AE49DA00205530 /* Products */,
@@ -1144,7 +1096,6 @@
 				BB6816D616C725B9000E120F /* Social.framework */,
 				BB6816D416C725B1000E120F /* Accounts.framework */,
 				4D5D564116A4F8DD00B5B609 /* ImageIO.framework */,
-				4D5D563616A4F7AB00B5B609 /* SDWebImage.framework */,
 				4D99DE3E15D23A6300DA2B3D /* CoreLocation.framework */,
 				4DB3347D15D229F70056E794 /* CoreFoundation.framework */,
 				4DB3347B15D229DC0056E794 /* Security.framework */,
@@ -1245,7 +1196,6 @@
 			isa = PBXGroup;
 			children = (
 				BB78D32217F925F600DE639C /* TestFlightSDK2 */,
-				BB9E0941171AFB6D0093FDD5 /* ECSlidingViewController */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				4D465A1215C229D400C7C506 /* PullToRefresh */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
@@ -1281,7 +1231,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4D6B2B5E16A3C672002987C1 /* PBXTargetDependency */,
 			);
 			name = Pelotonia;
 			productName = Pelotonia;
@@ -1323,28 +1272,12 @@
 			mainGroup = BCE3B7A715AE49DA00205530;
 			productRefGroup = BCE3B7B315AE49DA00205530 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4D6B2B5516A3C663002987C1 /* Products */;
-					ProjectRef = 4D6B2B5416A3C663002987C1 /* MBProgressHUD.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				BCE3B7B115AE49DA00205530 /* Pelotonia */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4D6B2B5C16A3C663002987C1 /* libMBProgressHUD.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMBProgressHUD.a;
-			remoteRef = 4D6B2B5B16A3C663002987C1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BCE3B7B015AE49DA00205530 /* Resources */ = {
@@ -1681,7 +1614,6 @@
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
-				BB9E0946171AFB6D0093FDD5 /* ECSlidingViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
@@ -1699,14 +1631,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4D6B2B5E16A3C672002987C1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MBProgressHUD;
-			targetProxy = 4D6B2B5D16A3C672002987C1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BCE3B7BF15AE49DA00205530 /* InfoPlist.strings */ = {

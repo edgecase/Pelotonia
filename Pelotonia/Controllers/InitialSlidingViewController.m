@@ -32,9 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
-
 }
 
 - (void)didReceiveMemoryWarning

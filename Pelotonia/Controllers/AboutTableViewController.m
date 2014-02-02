@@ -87,10 +87,10 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     if (indexPath.row == 0 || indexPath.row == 2) {
-        [self pelotoniaPressed:tableView];
+//        [self pelotoniaPressed:tableView];
     }
     if (indexPath.row == 4) {
-        [self faqPressed:tableView];
+//        [self faqPressed:tableView];
     }
     
     if (indexPath.row == 5) {
@@ -117,36 +117,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)revealMenu:(id)sender {
-    [self.slidingViewController anchorTopViewTo:ECRight];
-}
+//- (void)sandlotPressed:(id)sender {
+//    [self openWebViewWithURL:@"http://www.isandlot.com/about-us"];
+//}
 
+//- (void)pelotoniaPressed:(id)sender {
+//    [self openWebViewWithURL:@"http://pelotonia.org"];
+//
+//}
 
-- (void)sandlotPressed:(id)sender {
-    [self openWebViewWithURL:@"http://www.isandlot.com/about-us"];
-}
-
-- (void)pelotoniaPressed:(id)sender {
-    [self openWebViewWithURL:@"http://pelotonia.org"];
-
-}
-
-- (void)faqPressed:(id)sender {
-    [self openWebViewWithURL:@"http://pelotonia.org/ride/faq"];
-
-}
-
-- (void)openWebViewWithURL:(NSString *)url
-{
-    // see the registration form
-    PRPWebViewController *webVC = [[PRPWebViewController alloc] init];
-    webVC.url = [NSURL URLWithString:url];
-    webVC.showsDoneButton = NO;
-    webVC.delegate = self;
-    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
-    
-    [self.navigationController pushViewController:webVC animated:YES];
-}
 
 - (BOOL) shouldAutorotate
 {
@@ -158,6 +137,20 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SegueToFAQ"]) {
+        PRPWebViewController *webVC = (PRPWebViewController *)segue.destinationViewController;
+
+        // see the registration form
+        webVC.url = [NSURL URLWithString:@"http://pelotonia.org/ride/faq"];
+        webVC.showsDoneButton = NO;
+        webVC.delegate = self;
+        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    }
+}
+
 
 #pragma mark - PRPWebViewControllerDelegate
 - (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
@@ -167,12 +160,6 @@
 - (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
     [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
 }
-
-
-//- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-//    return [self shouldAutorotateToInterfaceOrientation:orientation];
-//}
-
 
 
 @end

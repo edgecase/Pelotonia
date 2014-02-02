@@ -51,6 +51,10 @@
 // static tables don't need all this
 
 
+#pragma mark - ECSlidingViewController unwind segue thing
+- (IBAction) unwindToMenuViewController:(UIStoryboardSegue *)segue { }
+
+
 #pragma mark - Table view delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,22 +107,6 @@
     return 30.0;
 }
 
-- (void)slideToStoryboardViewControllerNamed:(NSString *)newViewControllerName
-{
-    if (newViewControllerName == nil) {
-        // just close the sliding view controller
-        [self.slidingViewController resetTopView];
-        return;
-    }
-    
-    UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:newViewControllerName];
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = newTopViewController;
-        self.slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopView];
-    }];
-}
 
 - (void)openWebViewWithURL:(NSString *)url
 {
@@ -128,6 +116,7 @@
     webVC.showsDoneButton = NO;
     webVC.delegate = self;
     webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+
     UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:webVC];
     navc.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([navc.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
@@ -137,52 +126,14 @@
         navc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     }
     
-    [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
-        CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = navc;
-        self.slidingViewController.topViewController.view.frame = frame;
-        [self.slidingViewController resetTopView];
-    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *newViewControllerName = nil;
-    
-    if (indexPath.section == 0)
-    {
-        switch (indexPath.row) {
-            case ID_ACTIVITY_MENU:
-                // see all activity by all users
-                newViewControllerName = @"ActivityViewController";
-                break;
-                
-            case ID_PROFILE_MENU:
-                // see my profile
-                newViewControllerName = @"UserProfileViewController";
-                break;
-                
-            case ID_RIDERS_MENU:
-                // go to my followers (riders' list)
-                newViewControllerName = @"RidersNavViewController";
-                break;
-                
-            default:
-                break;
-        }
-        [self slideToStoryboardViewControllerNamed:newViewControllerName];
-    }
     
     if (indexPath.section == 1)
     {
         switch (indexPath.row) {
-            case ID_ABOUT_PELOTONIA_MENU: {
-                // go to the about controller
-                newViewControllerName = @"AboutNavViewController";
-                [TestFlight passCheckpoint:@"ShowAboutDialog"];
-                [self slideToStoryboardViewControllerNamed:newViewControllerName];
-                break;
-            }
             case ID_REGISTER_MENU:
                 [TestFlight passCheckpoint:@"ShowRegistrationDialog"];
                 [self openWebViewWithURL:@"http://www.pelotonia.org/register"];
@@ -197,11 +148,7 @@
             default:
                 break;
         }
-        
-
     }
-    
-    
 }
 
 
