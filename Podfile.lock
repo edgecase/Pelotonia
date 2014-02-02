@@ -1,0 +1,29 @@
+PODS:
+  - Appirater (2.0.2)
+  - ASIHTTPRequest (1.8.1):
+    - ASIHTTPRequest/ASIWebPageRequest
+    - ASIHTTPRequest/CloudFiles
+    - ASIHTTPRequest/S3
+    - Reachability
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/CloudFiles (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.1):
+    - Reachability
+  - hpple (0.2.0)
+  - Reachability (3.1.1)
+
+DEPENDENCIES:
+  - Appirater (~> 2.0.2)
+  - ASIHTTPRequest (~> 1.8.1)
+  - hpple (~> 0.2.0)
+  - Reachability (~> 3.1.1)
+
+SPEC CHECKSUMS:
+  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
+  ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
+  hpple: dde62f905f482bbec50186280d1a1be2c881241b
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+
+COCOAPODS: 0.29.0
