@@ -61,9 +61,9 @@
 
     <!-- Permissions required for Push Notifications -->
     <!-- Replace your_package_name with your app package name -->
-    <permission android:name="your_package_name.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission android:name="org.pelotonia.pelotonia.permission.C2D_MESSAGE" android:protectionLevel="signature" />
 
-    <uses-permission android:name="your_package_name.permission.C2D_MESSAGE" />
+    <uses-permission android:name="org.pelotonia.pelotonia.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <!-- Google Cloud Messaging Requires these additional permissions -->
