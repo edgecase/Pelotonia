@@ -109,21 +109,18 @@
     if (indexPath.section == 0)
     {
         if (indexPath.row == 1) {
-            UIFont *font = [UIFont systemFontOfSize:16];
-            if ([font respondsToSelector:@selector(preferredFontForTextStyle:)]) {
-                font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-            }
+            UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
             CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, CGFLOAT_MAX);
             
-            NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:self.rider.story
-                                                                                 attributes:@{
-                                                                                              NSFontAttributeName:font
-                                                                                              }];
+            NSAttributedString *attributedText =
+                [[NSAttributedString alloc] initWithString:self.rider.story
+                                                attributes:@{NSFontAttributeName:font}];
+            
             CGRect rect = [attributedText boundingRectWithSize:initialSize
-                                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                                       options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                                        context:nil];
-        
-            return ceilf(rect.size.height) + 20; //  sz.height+40;
+            CGFloat height = ceilf(rect.size.height/2);
+            return ceilf(rect.size.height/2);
         }
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];
