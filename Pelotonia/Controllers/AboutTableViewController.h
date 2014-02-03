@@ -15,6 +15,5 @@
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;
 
 - (IBAction)done:(id)sender;
-- (IBAction)sandlotPressed:(id)sender;
 
 @end

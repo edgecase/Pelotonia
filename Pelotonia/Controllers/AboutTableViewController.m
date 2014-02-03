@@ -83,21 +83,6 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    if (indexPath.row == 0 || indexPath.row == 2) {
-//        [self pelotoniaPressed:tableView];
-    }
-    if (indexPath.row == 4) {
-//        [self faqPressed:tableView];
-    }
-    
-    if (indexPath.row == 5) {
-        [self sandlotPressed:tableView];
-    }
-}
-
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
@@ -117,15 +102,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)sandlotPressed:(id)sender {
-//    [self openWebViewWithURL:@"http://www.isandlot.com/about-us"];
-//}
-
-//- (void)pelotoniaPressed:(id)sender {
-//    [self openWebViewWithURL:@"http://pelotonia.org"];
-//
-//}
-
 
 - (BOOL) shouldAutorotate
 {
@@ -137,18 +113,30 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
+- (void)setupWebViewController:(PRPWebViewController *)webVC forURL:(NSString *)url
+{
+    // see the registration form
+    webVC.url = [NSURL URLWithString:url];
+    webVC.showsDoneButton = NO;
+    webVC.delegate = self;
+    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+}
+
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SegueToFAQ"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *)segue.destinationViewController;
-
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://pelotonia.org/ride/faq"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org/ride/faq"];
     }
+    
+    if ([segue.identifier isEqualToString:@"SegueToPelotonia"]) {
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org"];
+    }
+    
+    if ([segue.identifier isEqualToString:@"SegueToSandlot"]) {
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.isandlot.com/about-us"];
+    }
+
 }
 
 

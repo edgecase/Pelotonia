@@ -137,6 +137,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToRegister" customClass="ECSlidingSegue" id="0mA-u6-zGO"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="UQs-xu-b74" imageView="ZeJ-um-VEd" style="IBUITableViewCellStyleDefault" id="nvU-Ie-1E2">
                                         <rect key="frame" x="0.0" y="264" width="320" height="44"/>
@@ -161,6 +164,9 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToVideo" customClass="ECSlidingSegue" id="42R-2Z-EJ1"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-ej-CIF" imageView="BVp-Ag-Fky" style="IBUITableViewCellStyleDefault" id="HrD-3N-1ys">
                                         <rect key="frame" x="0.0" y="308" width="320" height="44"/>
@@ -202,6 +208,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEV-Fu-w1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-404" y="888"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="0nN-M1-RyW">
+            <objects>
+                <viewController storyboardIdentifier="RegistrationViewController" id="Ty3-fs-mIs" customClass="PRPWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eAb-cR-7a0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="oz0-bU-PKc">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="BQ2-mk-1z8">
+                            <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <segue destination="egm-XV-4e8" kind="unwind" unwindAction="unwindToMenuViewController:" id="plS-c1-Nlj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pIJ-AL-Q9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="egm-XV-4e8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="451" y="1496"/>
         </scene>
         <!--Splash Screen View Controller-->
         <scene sceneID="6kZ-l0-87B">
@@ -378,15 +408,15 @@
                                             <segue destination="sqm-pg-TNy" kind="modal" id="HW8-5s-9Cg"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
                                         <rect key="frame" x="0.0" y="209" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eUX-am-qsE" id="4MM-d5-ljR">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="http://www.pelotonia.org" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9lF-7j-HuU">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="52"/>
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="52"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
@@ -394,6 +424,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="519-uj-OJn" kind="push" identifier="SegueToPelotonia" id="VAG-5d-ToW"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="428" id="B5r-Td-5PN">
                                         <rect key="frame" x="0.0" y="262" width="320" height="428"/>
@@ -435,11 +468,11 @@
                                             <segue destination="519-uj-OJn" kind="push" identifier="SegueToFAQ" id="Jue-uU-zqa"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="114" id="sT8-JP-aMg">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="114" id="sT8-JP-aMg">
                                         <rect key="frame" x="0.0" y="743" width="320" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sT8-JP-aMg" id="eAE-q1-tIC">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="113"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cl1-60-zI0">
@@ -453,9 +486,6 @@
                                                     <state key="highlighted" image="sandlot-logo.png">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="sandlotPressed:" destination="KrS-bT-Crh" eventType="touchUpInside" id="QRn-Kb-ZC6"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created for Pelotonia By" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tdm-Yb-CSR">
                                                     <rect key="frame" x="20" y="12" width="280" height="21"/>
@@ -466,6 +496,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="519-uj-OJn" kind="push" identifier="SegueToSandlot" id="lZa-h3-ufJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -553,7 +586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="888"/>
+            <point key="canvasLocation" x="1478" y="888"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -994,7 +1027,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4or-18-pZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1384" y="1537"/>
+            <point key="canvasLocation" x="1910" y="1537"/>
         </scene>
         <!--Profile Details Table View Controller-->
         <scene sceneID="zDr-6D-YPF">
@@ -1157,6 +1190,29 @@
             </objects>
             <point key="canvasLocation" x="327" y="888"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eh8-Lx-hEY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txg-Ru-1NB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="swt-Dc-06C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ty3-fs-mIs" kind="relationship" relationship="rootViewController" id="xMT-TV-ueh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uII-Xe-H8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-75" y="1496"/>
+        </scene>
     </scenes>
     <resources>
         <image name="08-chat.png" width="24" height="22"/>
@@ -1177,4 +1233,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="42R-2Z-EJ1"/>
+        <segue reference="lZa-h3-ufJ"/>
+    </inferredMetricsTieBreakers>
 </document>

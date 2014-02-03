@@ -130,25 +130,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.section == 1)
-    {
-        switch (indexPath.row) {
-            case ID_REGISTER_MENU:
-                [TestFlight passCheckpoint:@"ShowRegistrationDialog"];
-                [self openWebViewWithURL:@"http://www.pelotonia.org/register"];
-                break;
-                
-            case ID_SAFETY_MENU:
-                // open safari to the safety site
-                [TestFlight passCheckpoint:@"ShowSafetyVideo"];
-                [self openWebViewWithURL:@"http://www.pelotonia.org/ride/safety"];
-                break;
-                
-            default:
-                break;
-        }
+}
+
+#pragma mark - preparation for segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SegueToRegister"]) {
+        [TestFlight passCheckpoint:@"ShowRegistrationDialog"];
+        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
+
+        // see the registration form
+        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/register"];
+        webVC.showsDoneButton = NO;
+        webVC.delegate = self;
+        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     }
+    if ([segue.identifier isEqualToString:@"SegueToVideo"]) {
+        [TestFlight passCheckpoint:@"ShowSafetyVideo"];
+        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
+        
+        // see the registration form
+        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/ride/safety"];
+        webVC.showsDoneButton = NO;
+        webVC.delegate = self;
+        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    }
+
 }
 
 
