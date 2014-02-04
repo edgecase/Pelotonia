@@ -108,26 +108,6 @@
 }
 
 
-- (void)openWebViewWithURL:(NSString *)url
-{
-    // see the registration form
-    PRPWebViewController *webVC = [[PRPWebViewController alloc] init];
-    webVC.url = [NSURL URLWithString:url];
-    webVC.showsDoneButton = NO;
-    webVC.delegate = self;
-    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
-
-    UINavigationController *navc = [[UINavigationController alloc] initWithRootViewController:webVC];
-    navc.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([navc.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        navc.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        navc.navigationBar.tintColor = PRIMARY_GREEN;
-        [navc.navigationBar setTranslucent:NO];
-        navc.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
-    
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 }
@@ -173,7 +153,7 @@
 }
 
 - (BOOL)shouldAutorotate {
-    return [self shouldAutorotate];
+    return YES;
 }
 
 

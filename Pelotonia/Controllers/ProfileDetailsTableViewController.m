@@ -119,7 +119,6 @@
             CGRect rect = [attributedText boundingRectWithSize:initialSize
                                                        options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                                        context:nil];
-            CGFloat height = ceilf(rect.size.height/2);
             return ceilf(rect.size.height/2);
         }
     }

@@ -13,6 +13,7 @@
 #import "TestFlight.h"
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
+#import "RidersViewController.h"
 #import <Socialize/Socialize.h>
 
 @implementation AppDelegate

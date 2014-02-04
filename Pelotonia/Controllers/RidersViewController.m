@@ -120,7 +120,6 @@
     if ([self.searchDisplayController isActive]) {
         rider = [self.riderSearchResults objectAtIndex:[self.searchDisplayController.searchResultsTableView indexPathForSelectedRow].row];
         profileTableViewController.rider = rider;
-        [profileTableViewController manualRefresh:nil];
     }
     else {
         rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
