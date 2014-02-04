@@ -100,7 +100,7 @@
         [rider refreshFromWebOnComplete:^(Rider *rider) {
             ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
             profileViewController.rider = rider;
-            
+            profileViewController.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
             if (navigationController == nil)
             {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
