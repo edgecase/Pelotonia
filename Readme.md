@@ -24,7 +24,7 @@ on iOS 5.0 and above.
 Feature Requests
 ----------------
 Value Stories are kept in our 
-[PivotalTracker repository](https://www.pivotaltracker.com/projects/583089).  Please refer to these stories if you have a feature request.  
+[PivotalTracker repository](https://www.pivotaltracker.com/projects/1008120).  Please refer to these stories if you have a feature request.  
 
 Contributing
 ------------
