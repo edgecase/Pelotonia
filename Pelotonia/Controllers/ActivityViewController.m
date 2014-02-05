@@ -12,6 +12,7 @@
 #import "CommentTableViewCell.h"
 #import "NSDate+Helper.h"
 #import "NSDate-Utilities.h"
+#import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TestFlight.h"
 
@@ -19,7 +20,9 @@
 
 @end
 
-@implementation ActivityViewController
+@implementation ActivityViewController {
+    AAPullToRefresh *_tv;
+}
 
 @synthesize recentActivity;
 @synthesize dataController = _dataController;
@@ -46,9 +49,15 @@
 {
     [super viewDidLoad];
     
-    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
-    [pull setDelegate:self];
-    [self.tableView addSubview:pull];
+    __weak ActivityViewController *weakSelf = self;
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        [weakSelf getActionsForAllUsersOnAllRiders];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:2.0f];
+    }];
+    
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
+
     
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
@@ -79,10 +88,8 @@
 {
     [SZCommentUtils getCommentsByApplicationWithFirst:nil last:nil success:^(NSArray *comments) {
         self.recentActivity = comments;
-        [pull finishedLoading];
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-        [pull finishedLoading];
         NSLog(@"getActionsByApplicationWithStart failed: %@", [error localizedDescription]);
     }];
 }
@@ -174,16 +181,10 @@
 }
 
 #pragma mark -- PullToRefreshDelegate
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    [self performSelectorInBackground:@selector(getActionsForAllUsersOnAllRiders) withObject:nil];
-}
 
 -(void)manualRefresh:(NSNotification *)notification
 {
-    self.tableView.contentOffset = CGPointMake(0, -65);
-    [pull setState:PullToRefreshViewStateLoading];
-    [self performSelectorInBackground:@selector(getActionsForAllUsersOnAllRiders) withObject:nil];
+    [_tv manuallyTriggered];
 }
 
 

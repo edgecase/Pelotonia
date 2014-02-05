@@ -1687,7 +1687,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\\\\\"$(SRCROOT)/Socialize.embeddedframework\\\\\\\"/**",
+					"$(SRCROOT)/Socialize.embeddedframework/**",
 					"/Users/markharris/Documents/Clients/Pelotonia/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1790,7 +1790,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\\\\\"$(SRCROOT)/Socialize.embeddedframework\\\\\\\"/**",
+					"$(SRCROOT)/Socialize.embeddedframework/**",
 					"/Users/markharris/Documents/Clients/Pelotonia/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1831,7 +1831,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\\\\\"$(SRCROOT)/Socialize.embeddedframework\\\\\\\"/**",
+					"$(SRCROOT)/Socialize.embeddedframework/**",
 					"/Users/markharris/Documents/Clients/Pelotonia/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

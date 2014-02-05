@@ -107,7 +107,7 @@
                                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ZpJ-uT-0fb" kind="custom" customClass="ECSlidingSegue" id="Vbj-gi-Wcx"/>
+                                            <segue destination="ZpJ-uT-0fb" kind="custom" identifier="ShowMyTeam" customClass="ECSlidingSegue" id="Vbj-gi-Wcx"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -231,7 +231,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIJ-AL-Q9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="egm-XV-4e8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="865" y="1584"/>
+            <point key="canvasLocation" x="909" y="1584"/>
         </scene>
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
@@ -507,7 +507,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dn4-h4-Aam" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="853" y="888"/>
+            <point key="canvasLocation" x="909" y="900"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Qij-r6-qB5">
@@ -897,7 +897,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="254"/>
+            <point key="canvasLocation" x="1478" y="245"/>
         </scene>
         <!--Send Pledge Modal View Controller-->
         <scene sceneID="mry-ek-Boq">
@@ -1093,10 +1093,10 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translucent="NO" id="1Sn-hP-BGB">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>

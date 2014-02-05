@@ -16,7 +16,6 @@
 
 
 @interface ActivityViewController : UITableViewController<PullToRefreshViewDelegate> {
-    PullToRefreshView *pull;
 }
 
 @property (strong, nonatomic) NSArray *recentActivity;
