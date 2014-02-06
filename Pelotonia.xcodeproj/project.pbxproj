@@ -20,10 +20,6 @@
 		4D18EE17168CB0E500B1BDCD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD7F53E15B5108B00B1DF42 /* MessageUI.framework */; };
 		4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D35C72815B116E5006E5D5D /* RiderDataController.m */; };
 		4D3ED0A215C38F5B006FFE04 /* PF_EULA_online.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3ED09215C38F5B006FFE04 /* PF_EULA_online.pdf */; };
-		4D465A1815C229D400C7C506 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A1315C229D400C7C506 /* arrow.png */; };
-		4D465A1915C229D400C7C506 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A1415C229D400C7C506 /* arrow@2x.png */; };
-		4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D465A1615C229D400C7C506 /* PullToRefreshView.m */; };
-		4D465A1B15C229D400C7C506 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 4D465A1715C229D400C7C506 /* README */; };
 		4D465A1D15C22AB500C7C506 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D465A1C15C22AB500C7C506 /* QuartzCore.framework */; };
 		4D4A5B7615D2009B000174CE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4A5B7515D2009B000174CE /* MapKit.framework */; };
 		4D5D564216A4F8DD00B5B609 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5D564116A4F8DD00B5B609 /* ImageIO.framework */; };
@@ -1307,7 +1303,6 @@
 				BB21197517FEE4A600857569 /* socialize-notifications-bottom-shadow-background.png in Resources */,
 				BB2118D317FEE4A600857569 /* action-bar-button-red-hover.png in Resources */,
 				BB21196217FEE4A600857569 /* socialize-navbar-button-blue-bg-highlighted@2x.png in Resources */,
-				4D465A1815C229D400C7C506 /* arrow.png in Resources */,
 				BB21194917FEE4A600857569 /* socialize-comment-notification-disabled@2x.png in Resources */,
 				BB2118DE17FEE4A600857569 /* action-bar-icon-share@2x.png in Resources */,
 				BB2118E917FEE4A600857569 /* comments-cell-bg-borders.png in Resources */,
@@ -1329,13 +1324,11 @@
 				BB2118E817FEE4A600857569 /* comment_template_clear.htm in Resources */,
 				BB2118F117FEE4A600857569 /* socialize-activity-call-out-arrow@2x.png in Resources */,
 				BB21191717FEE4A600857569 /* socialize-authorize-facebook-disabled-icon@2x.png in Resources */,
-				4D465A1915C229D400C7C506 /* arrow@2x.png in Resources */,
 				BB2118F017FEE4A600857569 /* socialize-activity-call-out-arrow.png in Resources */,
 				BB2118F617FEE4A600857569 /* socialize-activity-cell-icon-comment.png in Resources */,
 				BB2118FE17FEE4A600857569 /* socialize-activity-cell-icon-like.png in Resources */,
 				BB2118FA17FEE4A600857569 /* socialize-activity-cell-icon-like-highlighted.png in Resources */,
 				BB2118E117FEE4A600857569 /* background_brushed_metal@2x.png in Resources */,
-				4D465A1B15C229D400C7C506 /* README in Resources */,
 				BB2118C917FEE4A600857569 /* _SZLinkDialogViewController.xib in Resources */,
 				BB21192F17FEE4A600857569 /* socialize-checkmark@2x.png in Resources */,
 				BB21190B17FEE4A600857569 /* socialize-activity-details-categ_arrow@2x.png in Resources */,
@@ -1605,7 +1598,6 @@
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
-				4D465A1A15C229D400C7C506 /* PullToRefreshView.m in Sources */,
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,

@@ -12,10 +12,9 @@
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
 #import "RiderDataController.h"
-#import "PullToRefreshView.h"
 
 
-@interface ActivityViewController : UITableViewController<PullToRefreshViewDelegate> {
+@interface ActivityViewController : UITableViewController {
 }
 
 @property (strong, nonatomic) NSArray *recentActivity;
