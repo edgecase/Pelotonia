@@ -29,6 +29,5 @@
 @property (nonatomic, assign) id <PRPWebViewControllerDelegate> delegate;
 
 - (void)reload;
-- (IBAction)revealMenu:(id)sender;
 
 @end

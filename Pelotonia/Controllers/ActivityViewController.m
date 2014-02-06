@@ -151,10 +151,6 @@
     return [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
 }
 
-- (IBAction)revealMenu:(id)sender {
-    [self.slidingViewController anchorTopViewTo:ECRight];
-}
-
 
 #pragma mark - Table view delegate
 - (void)manuallyShowCommentsListWithEntity:(id<SZEntity>)entity

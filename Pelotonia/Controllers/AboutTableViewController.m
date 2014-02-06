@@ -7,6 +7,8 @@
 //
 
 #import "AboutTableViewController.h"
+#import "PRPWebViewController.h"
+#import "ECSlidingViewController.h"
 #import "Pelotonia-Colors.h"
 #import "TestFlight.h"
 
@@ -81,28 +83,6 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0 || indexPath.row == 2) {
-            [self pelotoniaPressed:tableView];
-        }
-        if (indexPath.row == 3) {
-            [self faqPressed:tableView];
-        }
-    }
-    
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            [self sandlotPressed:tableView];
-        }
-        if (indexPath.row == 1) {
-            [self newContextPressed:tableView];
-        }
-    }
-}
-
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
@@ -112,10 +92,6 @@
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = SECONDARY_GREEN;
     
-    if (section == 1)
-    {
-        label.text = [NSString stringWithFormat:@"Created for Pelotonia By"];
-    }
     [headerView addSubview:label];
     return headerView;
 }
@@ -126,33 +102,52 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)openURLFromString:(NSString *)urlString {
-    NSURL *url = [NSURL URLWithString:urlString];
+
+- (BOOL) shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)setupWebViewController:(PRPWebViewController *)webVC forURL:(NSString *)url
+{
+    // see the registration form
+    webVC.url = [NSURL URLWithString:url];
+    webVC.showsDoneButton = NO;
+    webVC.delegate = self;
+    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+}
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SegueToFAQ"]) {
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org/ride/faq"];
+    }
     
-    if (![[UIApplication sharedApplication] openURL:url])
-        
-    NSLog(@"%@%@",@"Failed to open url:",[url description]);
+    if ([segue.identifier isEqualToString:@"SegueToPelotonia"]) {
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org"];
+    }
+    
+    if ([segue.identifier isEqualToString:@"SegueToSandlot"]) {
+        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.isandlot.com/about-us"];
+    }
+
 }
 
-- (IBAction)revealMenu:(id)sender {
-    [self.slidingViewController anchorTopViewTo:ECRight];
+
+#pragma mark - PRPWebViewControllerDelegate
+- (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
+    NSLog(@"webControllerDidFinishLoading!");
 }
 
-
-- (void)sandlotPressed:(id)sender {
-    [self openURLFromString:@"http://www.isandlot.com"];
+- (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
 }
 
-- (void)newContextPressed:(id)sender {
-    [self openURLFromString:@"http://www.newcontext.com"];
-}
-
-- (void)pelotoniaPressed:(id)sender {
-    [self openURLFromString:@"http://www.pelotonia.org"];
-}
-
-- (void)faqPressed:(id)sender {
-    [self openURLFromString:@"http://pelotonia.org/ride/faq"];
-}
 
 @end

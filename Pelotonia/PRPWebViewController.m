@@ -57,9 +57,6 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     webView.delegate = self;
     [self.view addSubview:webView];
     
-    // added for ECSlidingMenu
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"259-list.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(revealMenu:)];
-
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin |
                                         UIViewAutoresizingFlexibleRightMargin |
@@ -78,6 +75,22 @@ const float PRPWebViewControllerFadeDuration = 0.5;
     [super viewDidLoad];
     [self resetBackgroundColor];
     [self reload];
+}
+
+- (BOOL) shouldAutorotate
+{
+    BOOL shouldRotate = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(shouldAutorotate)]) {
+        shouldRotate = [self.delegate shouldAutorotate];
+    }
+    
+    return shouldRotate;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskPortraitUpsideDown;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -180,10 +193,6 @@ const float PRPWebViewControllerFadeDuration = 0.5;
             [alert show];
         }
     }
-}
-
-- (IBAction)revealMenu:(id)sender {
-    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end

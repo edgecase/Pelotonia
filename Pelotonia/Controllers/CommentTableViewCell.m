@@ -48,11 +48,17 @@ static CGFloat tableCellWidth = 235;
 
 + (CGFloat)getCellHeightForString:(NSString *)comment withFont:(UIFont *)font
 {
-    CGSize expectedLabelSize = [comment sizeWithFont:font
-                                   constrainedToSize:CGSizeMake(tableCellWidth, CGFLOAT_MAX)
-                                       lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize initialSize = CGSizeMake(tableCellWidth, CGFLOAT_MAX);
     
-	return expectedLabelSize.height;
+    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:comment
+                                                                         attributes:@{
+                                                                                      NSFontAttributeName:font
+                                                                                      }];
+    CGRect rect = [attributedText boundingRectWithSize:initialSize
+                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                               context:nil];
+    
+    return ceilf(rect.size.height);
 }
 
 + (CGFloat)getCellHeightForTitle:(NSString *)text

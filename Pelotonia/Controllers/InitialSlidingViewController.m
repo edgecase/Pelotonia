@@ -19,6 +19,8 @@
 
 @implementation InitialSlidingViewController
 
+@synthesize iv;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,13 +30,13 @@
     return self;
 }
 
+- (void)fadeBGImage {
+    [self.iv removeFromSuperview];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"RidersNavViewController"];
-
 }
 
 - (void)didReceiveMemoryWarning

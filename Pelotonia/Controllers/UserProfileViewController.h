@@ -22,6 +22,5 @@
 @property (strong, nonatomic) id<SZFullUser> currentUser;
 @property (strong, nonatomic) NSArray *recentComments;
 
-- (IBAction)revealMenu:(id)sender;
 
 @end

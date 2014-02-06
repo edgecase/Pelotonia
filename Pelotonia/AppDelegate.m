@@ -13,6 +13,7 @@
 #import "TestFlight.h"
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
+#import "RidersViewController.h"
 #import <Socialize/Socialize.h>
 
 @implementation AppDelegate
@@ -71,6 +72,17 @@
     // set default appearance
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
+    shadow.shadowBlurRadius = 0.0;
+    shadow.shadowOffset = CGSizeMake(0.0, -1.0);
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+           NSForegroundColorAttributeName: SECONDARY_LIGHT_GRAY,
+           NSShadowAttributeName: shadow,
+           NSFontAttributeName: PELOTONIA_FONT(20),
+           }];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
@@ -88,7 +100,7 @@
         [rider refreshFromWebOnComplete:^(Rider *rider) {
             ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
             profileViewController.rider = rider;
-            
+            profileViewController.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
             if (navigationController == nil)
             {
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];

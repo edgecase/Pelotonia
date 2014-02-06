@@ -8,6 +8,9 @@
 
 #import "ECSlidingViewController.h"
 
-@interface InitialSlidingViewController : ECSlidingViewController
+@interface InitialSlidingViewController : ECSlidingViewController {
+}
+
+@property (strong, nonatomic) UIImageView *iv;
 
 @end

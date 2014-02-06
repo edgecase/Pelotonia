@@ -327,12 +327,6 @@
 }
 
 
-#pragma mark -- menu code
-- (IBAction)revealMenu:(id)sender
-{
-    [self.slidingViewController anchorTopViewTo:ECRight];
-}
-
 - (void)viewDidUnload {
     [self setUserName:nil];
     [self setUserType:nil];

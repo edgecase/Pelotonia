@@ -15,15 +15,13 @@
 
 #import "Rider.h"
 #import "PelotoniaWeb.h"
-#import "PullToRefreshView.h"
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 
 
 #define kShareActionSheet 100
 
-@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, PullToRefreshViewDelegate, SendPledgeModalViewControllerDelegate> {
-    PullToRefreshView *pull;
+@interface ProfileTableViewController : UITableViewController<MFMailComposeViewControllerDelegate, UITextFieldDelegate, SendPledgeModalViewControllerDelegate> {
     BOOL _following;
 }
 
@@ -50,9 +48,6 @@
 - (IBAction)shareProfile:(id)sender;
 - (IBAction)followRider:(id)sender;
 - (void)done;
-
-- (void)refreshRider;
-- (void)manualRefresh:(NSNotification *)notification;
 
 
 @end

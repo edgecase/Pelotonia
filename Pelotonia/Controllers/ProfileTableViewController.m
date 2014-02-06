@@ -15,10 +15,10 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
-#import "SHKActivityIndicator.h"
 #import "NSDate+Helper.h"
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
+#import <AAPullToRefresh/AAPullToRefresh.h>
 #import <Social/Social.h>
 #import <Socialize/Socialize.h>
 #import "TestFlight.h"
@@ -50,11 +50,15 @@
 {
     [super viewDidLoad];
     
-    // set up pull to refresh
-    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
-    [pull setDelegate:self];
-    [self.tableView addSubview:pull];
-
+    __weak ProfileTableViewController *weakSelf = self;
+    AAPullToRefresh *tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        NSLog(@"fire from top");
+        [weakSelf performSelectorInBackground:@selector(refreshRider:) withObject:v];
+    }];
+    
+    tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    tv.borderColor = [UIColor whiteColor];
+    
     // set up socialize
     if (self.entity == nil)
     {
@@ -114,7 +118,6 @@
 
 - (void)dealloc
 {
-    [self.tableView removeObserver:pull forKeyPath:@"contentOffset"];
 }
 
 //implementation
@@ -371,16 +374,15 @@
 }
 
 
-- (void)refreshRider
+- (void)refreshRider:(AAPullToRefresh *)v
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
         [self getLikesByEntity];
-        [pull finishedLoading];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
         [self configureView];
     }
     onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
-        [pull finishedLoading];
         [self configureView];
     }];
 }
@@ -616,19 +618,6 @@
 }
 
 
-
-#pragma mark -- PullToRefreshDelegate
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    [self performSelectorInBackground:@selector(refreshRider) withObject:nil];
-}
-
--(void)manualRefresh:(NSNotification *)notification
-{
-    self.tableView.contentOffset = CGPointMake(0, -65);
-    [pull setState:PullToRefreshViewStateLoading];
-    [self performSelectorInBackground:@selector(refreshRider) withObject:nil];
-}
 
 #pragma mark -- PhotoUpdateDelegate
 - (void)riderPhotoDidUpdate:(UIImage *)image
