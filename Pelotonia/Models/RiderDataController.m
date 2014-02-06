@@ -73,8 +73,7 @@
 
 - (void)addObject:(Rider *)object
 {
-    [_riderList addObject:object];
-
+        [_riderList addObject:object];
 }
 
 - (void)insertObject:(Rider *)object atIndex:(NSUInteger)index
