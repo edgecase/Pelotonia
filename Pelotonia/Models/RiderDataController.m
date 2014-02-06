@@ -73,9 +73,7 @@
 
 - (void)addObject:(Rider *)object
 {
-    if (false != [self containsRider:object]) {
         [_riderList addObject:object];
-    }
 }
 
 - (void)insertObject:(Rider *)object atIndex:(NSUInteger)index
