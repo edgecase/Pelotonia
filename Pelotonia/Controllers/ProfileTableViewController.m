@@ -562,7 +562,7 @@
 
 - (IBAction)shareProfile:(id)sender
 {
-    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
+//    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
     
     NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
 
@@ -570,24 +570,26 @@
     shareDialog.title = [NSString stringWithFormat:@"Share %@", self.rider.name];
     
     SZShareOptions *options = [SZShareUtils userShareOptions];
-    options.dontShareLocation = YES;
+    // when the bug is fixed in the socialize SDK, uncomment the below line
+//    options.text = txtToShare;
     
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {
+            SZShareOptions *twoptions = (SZShareOptions *)postData.options;
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
-            
-            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", txtToShare, entityURL];
+            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", twoptions.text, entityURL];
             
             [postData.params setObject:customStatus forKey:@"status"];
             
         } else if (network == SZSocialNetworkFacebook) {
+            SZShareOptions *fboptions = (SZShareOptions *)postData.options;
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"facebook"] objectForKey:@"entity_url"];
             NSString *displayName = [postData.entity displayName];
-            NSString *customMessage = [NSString stringWithFormat:@"%@", txtToShare];
+            NSString *customMessage = [NSString stringWithFormat:@"%@", fboptions.text];
             
-            [postData.params setObject:customMessage forKey:@"message"];
+            [postData.params setObject:customMessage forKey:@"caption"];
             [postData.params setObject:entityURL forKey:@"link"];
-            [postData.params setObject:txtToShare forKey:@"caption"];
+            [postData.params setObject:customMessage forKey:@"message"];
             [postData.params setObject:displayName forKey:@"name"];
             [postData.params setObject:descriptionText forKey:@"description"];
         }
@@ -614,7 +616,7 @@
     shareDialog.cancellationBlock = ^() {
         [self dismissViewControllerAnimated:YES completion:nil];
     };
-
+    
     [self presentViewController:shareDialog animated:YES completion:nil];
     
 }
