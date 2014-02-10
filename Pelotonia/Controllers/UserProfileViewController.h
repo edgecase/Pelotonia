@@ -15,9 +15,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *riderName;
+@property (weak, nonatomic) IBOutlet UILabel *riderDistance;
+@property (weak, nonatomic) IBOutlet UITableViewCell *RiderCell;
 
 // non-UI properties
 @property (strong, nonatomic) id<SZFullUser> currentUser;
+@property (strong, nonatomic) Rider *rider;
 @property (strong, nonatomic) NSArray *recentComments;
 
 

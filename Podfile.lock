@@ -19,6 +19,8 @@ PODS:
   - SDWebImage (3.5.2):
     - SDWebImage/Core
   - SDWebImage/Core (3.5.2)
+  - UIActivityIndicator-for-SDWebImage (1.0.3):
+    - SDWebImage (~> 3.2)
 
 DEPENDENCIES:
   - AAPullToRefresh
@@ -29,6 +31,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.8)
   - Reachability (~> 3.1.1)
   - SDWebImage (~> 3.5.2)
+  - UIActivityIndicator-for-SDWebImage
 
 SPEC CHECKSUMS:
   AAPullToRefresh: cb06c382ebbcdd2b396e9b1b564d33e7580e44c5
@@ -39,5 +42,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
+  UIActivityIndicator-for-SDWebImage: e712b97826395022ce7b4a4b56eb7194090c19d5
 
 COCOAPODS: 0.29.0

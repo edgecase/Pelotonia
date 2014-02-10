@@ -52,42 +52,32 @@
 {
     [super viewDidLoad];
     
+    // get the pull to refresh working
     __weak ProfileTableViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshRider:v];
         [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:2.0f];
     }];
-    
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
     
     // set up socialize
-    if (self.entity == nil)
-    {
-        self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                self.rider.story, @"szsd_description",
-                                self.rider.riderPhotoThumbUrl, @"szsd_thumb",
-                                self.rider.riderId, @"riderID",
-                                nil];
-        
-        NSString *jsonString = [params toJSONString];
-        entity.meta = jsonString;
-        [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
-            NSLog(@"Successfully updated entity meta: %@", [serverEntity meta]);
-        } failure:^(NSError *error) {
-            NSLog(@"Failure: %@", [error localizedDescription]);
-        }];
-    }
+    self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            self.rider.story, @"szsd_description",
+                            self.rider.riderPhotoThumbUrl, @"szsd_thumb",
+                            self.rider.riderId, @"riderID",
+                            nil];
     
-    // configure the UI appearance of the window
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        [self setNeedsStatusBarAppearanceUpdate];
-        [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
+    NSString *jsonString = [params toJSONString];
+    entity.meta = jsonString;
+    [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
+        NSLog(@"Successfully updated entity meta");
+        NSLog(@"it has %d likes, %d comments, %d shares, %d views", [serverEntity likes], [serverEntity comments], [serverEntity shares], [serverEntity views]);
+
+    } failure:^(NSError *error) {
+        NSLog(@"Failure: %@", [error localizedDescription]);
+    }];
 
 }
 
@@ -110,6 +100,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [SZViewUtils viewEntity:self.entity success:^(id<SocializeView> view) {
+        NSLog(@"Entity recorded another view ");
+    } failure:^(NSError *error) {
+        NSLog(@"Unable to view entity %@", [self.entity displayName]);
+    }];
+
     [self configureView];
 }
 
@@ -368,7 +364,6 @@
 - (void)reloadComments
 {
     [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
-        NSLog(@"Fetched comments successfully, %@", comments);
         self.riderComments = comments;
         [self.tableView reloadData];
     } failure:^(NSError *error) {
@@ -393,10 +388,7 @@
 - (BOOL)following
 {
     // return true if current rider is in the dataController
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    RiderDataController *dataController = appDelegate.riderDataController;
-    
-    return [dataController containsRider:self.rider];
+    return [[AppDelegate sharedDataController] containsRider:self.rider];
 }
 
 - (void)configureView
@@ -545,8 +537,7 @@
 - (IBAction)followRider:(id)sender
 {
     // add the current rider to the main list of riders
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    RiderDataController *dataController = appDelegate.riderDataController;
+    RiderDataController *dataController = [AppDelegate sharedDataController];
     
     if (self.following) {
         [TestFlight passCheckpoint:@"UnfollowRider"];

@@ -31,8 +31,7 @@
 // property overloads
 - (RiderDataController *)dataController
 {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    return appDelegate.riderDataController;
+    return [AppDelegate sharedDataController];
 }
 
 
@@ -48,27 +47,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    _tv = [[AAPullToRefresh alloc] init];
     __weak ActivityViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
-        [weakSelf getActionsForAllUsersOnAllRiders];
+        [weakSelf getActionsForAllUsersOnPelotonia];
         [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:2.0f];
     }];
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
 
-    
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
-
     [TestFlight passCheckpoint:@"ViewAllActivity"];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -84,25 +73,48 @@
 
 
 #pragma mark - ActivityViewController stuff
-- (void)getActionsForAllUsersOnAllRiders
+- (void)getActionsForAllUsersOnPelotonia
 {
-    [SZCommentUtils getCommentsByApplicationWithFirst:nil last:nil success:^(NSArray *comments) {
-        self.recentActivity = comments;
-        [self.tableView reloadData];
+    [SZEntityUtils getEntityWithKey:@"http://www.pelotonia.org" success:^(id<SocializeEntity> entity) {
+        // get actions on the Pelotonia entity
+        if (entity) {
+            [SZActionUtils getActionsByEntity:entity start:[NSNumber numberWithInt:0] end:[NSNumber numberWithInt:100]
+                success:^(NSArray *actions) {
+                    // add the actions to the activity array
+                    self.recentActivity =
+                    [actions sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                        SZActivity *act1 = (SZActivity *)obj1;
+                        SZActivity *act2 = (SZActivity *)obj2;
+                        NSComparisonResult result = [act1.date compare:act2.date];
+                        if (result == NSOrderedDescending || result == NSOrderedSame) {
+                            return NSOrderedAscending;
+                        }
+                        else {
+                            return NSOrderedDescending;
+                        }
+                    }];
+                    [self.tableView reloadData];
+                }
+                failure:^(NSError *error) {
+                    NSLog(@"unable to get actions for Pelotonia");
+                }];
+        }
     } failure:^(NSError *error) {
-        NSLog(@"getActionsByApplicationWithStart failed: %@", [error localizedDescription]);
+        NSLog(@"unable to get Pelotonia entity");
     }];
+    
 }
-
 
 - (NSString *)getTitleFromComment:(id<SZComment>) comment
 {
-    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
+    
+    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:YES]];
 }
 
 - (NSString *)getTextFromComment:(id<SZComment>) comment
 {
-    return [comment text];
+    NSString *text = [NSString stringWithFormat:@"%@ commented on %@: %@", [comment.user userName], [[comment entity] displayName], [comment text]];
+    return text;
 }
 
 - (NSURL *)getImageURLFromComment:(id<SZComment>) comment
@@ -133,18 +145,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentTableViewCell *_cell = [CommentTableViewCell cellForTableView:tableView];
-    __weak CommentTableViewCell *cell = _cell;
+    CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
+    id<SZActivity> activity = [self.recentActivity objectAtIndex:indexPath.row];
+
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]] placeholderImage:[UIImage imageNamed:@"profile_default"]];
     
-    id<SZComment> comment = [self.recentActivity objectAtIndex:indexPath.row];
-    if (comment)
+    if ([activity isMemberOfClass:[SocializeShare class]])
     {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.titleString = [self getTitleFromComment:comment];
-        cell.commentString = [self getTextFromComment:comment];
-        
-        [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
-                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+        SZShare *riderShare = (SZShare *)activity;
+        cell.commentString = [NSString stringWithFormat:@"%@ shared %@'s profile", [[riderShare user] displayName],
+                   [[riderShare entity] displayName]];
+        cell.titleString = [NSString stringWithFormat:@"Shared at %@", [NSDate stringForDisplayFromDate:[riderShare date] prefixed:YES alwaysDisplayTime:YES]];
+    }
+    else if ([activity isMemberOfClass:[SocializeComment class]])
+        {
+            SZComment *comment = (SZComment *)activity;
+            cell.titleString = [self getTitleFromComment:comment];
+            cell.commentString = [self getTextFromComment:comment];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+    else if ([activity isMemberOfClass:[SZLike class]])
+    {
+        SZLike *riderLike = (SZLike *)activity;
+        cell.commentString = [NSString stringWithFormat:@"%@ is now following %@", [[riderLike user] displayName], [[riderLike entity] displayName]];
+        cell.titleString = [NSString stringWithFormat:@"Shared at %@", [NSDate stringForDisplayFromDate:[riderLike date] prefixed:YES alwaysDisplayTime:YES]];
+    }
+    else
+    {
+        cell.commentString = @"Unknown";
+        cell.titleString = @"Unknown";
     }
     [cell layoutSubviews];
     return cell;
@@ -152,10 +181,34 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<SZComment> riderComment = [self.recentActivity objectAtIndex:indexPath.row];
-    NSString *comment = [self getTextFromComment:riderComment];
-    NSString *title = [self getTitleFromComment:riderComment];
+    id<SZActivity> riderActivity = [self.recentActivity objectAtIndex:indexPath.row];
+    NSString *comment;
+    NSString *title;
+    
+    if ([riderActivity isMemberOfClass:[SZComment class]]) {
+        SZComment *riderComment = (SZComment *)riderActivity;
+        comment = [self getTextFromComment:riderComment];
+        title = [self getTitleFromComment:riderComment];
+    }
+    else if ([riderActivity isMemberOfClass:[SZShare class]]) {
+        SZShare *riderShare = (SZShare *)riderActivity;
+        comment = [NSString stringWithFormat:@"%@ shared %@'s profile", [[riderShare user] displayName],
+                              [[riderShare entity] displayName]];
+        title = [NSString stringWithFormat:@"Shared at %@", [NSDate stringForDisplayFromDate:[riderShare date] prefixed:YES alwaysDisplayTime:YES]];
+    }
+    else if ([riderActivity isMemberOfClass:[SZLike class]]) {
+        SZLike *riderLike = (SZLike *)riderActivity;
+        comment = [NSString stringWithFormat:@"%@ is now following %@", [[riderLike user] displayName], [[riderLike entity] displayName]];
+        title = [NSString stringWithFormat:@"Followed at %@", [NSDate stringForDisplayFromDate:[riderLike date] prefixed:YES alwaysDisplayTime:YES]];
+    }
+    else
+    {
+        comment = @"Unknown";
+        title = @"Unknown";
+    }
+    
     return [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
+    
 }
 
 
@@ -176,8 +229,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    id<SZComment> comment = [self.recentActivity objectAtIndex:indexPath.row];
-    [self manuallyShowCommentsListWithEntity:[comment entity]];
+    id<SZActivity> comment = [self.recentActivity objectAtIndex:indexPath.row];
+    if ([comment isMemberOfClass:[SZComment class]]) {
+        [self manuallyShowCommentsListWithEntity:[comment entity]];
+    }
 }
 
 #pragma mark -- PullToRefreshDelegate

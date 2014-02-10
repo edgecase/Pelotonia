@@ -57,7 +57,7 @@ static CGFloat tableCellWidth = 235;
     CGRect rect = [attributedText boundingRectWithSize:initialSize
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                                context:nil];
-    
+//    NSLog(@"height of string %@ is %f", comment, ceilf(rect.size.height));
     return ceilf(rect.size.height);
 }
 
@@ -73,7 +73,8 @@ static CGFloat tableCellWidth = 235;
 
 + (CGFloat)getTotalHeightForCellWithCommentText:(NSString *)comment andTitle:(NSString *)title
 {
-    return [[self class] getCellHeightForCommentText:comment] + [[self class] getCellHeightForTitle:title] + 20.0;
+    CGFloat height = [[self class] getCellHeightForCommentText:comment] + [[self class] getCellHeightForTitle:title] + 20.0;
+    return height;
 }
 
 

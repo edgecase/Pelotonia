@@ -25,6 +25,9 @@ __VA_ARGS__ \
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RiderDataController *riderDataController;
 
++ (RiderDataController *)sharedDataController;
+
 - (void)archiveData;
+
 
 @end

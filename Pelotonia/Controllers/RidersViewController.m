@@ -15,6 +15,9 @@
 #import "PelotoniaWeb.h"
 #import "UIImage+Resize.h"
 #import "MenuViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
 
 
 @interface RidersViewController ()
@@ -24,7 +27,9 @@
 @end
 
 
-@implementation RidersViewController
+@implementation RidersViewController {
+    AAPullToRefresh *_tv;
+}
 
 @synthesize dataController = _dataController;
 @synthesize riderTableView = _riderTableView;
@@ -32,11 +37,7 @@
 
 // property overloads
 - (RiderDataController *)dataController {
-    if (_dataController == nil) {
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        _dataController = appDelegate.riderDataController;
-    }
-    return _dataController;
+    return [AppDelegate sharedDataController];
 }
 
 
@@ -52,28 +53,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // set the colors appropriately
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        [self.navigationController.navigationBar setTranslucent:NO];
-    }
-    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
-    self.tableView.opaque = YES;
     
+    // set up pull to refresh
+    __weak RidersViewController *weakSelf = self;
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        [weakSelf refresh];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
+    }];
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
+
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
     
     // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
     self.navigationItem.titleView = imageView;
-    
-    // update all riders in the list
-    for (Rider *rider in [self.dataController allRiders]) {
-        [rider refreshFromWebOnComplete:nil onFailure:nil];
-    }
     
 }
 
@@ -98,6 +93,16 @@
 }
 
 #pragma mark -- pull to refresh view
+- (void)refresh
+{
+    // update all riders in the list
+    for (Rider *rider in [self.dataController allRiders]) {
+        [rider refreshFromWebOnComplete:^(Rider *rider) {
+            [self reloadTableData];
+        } onFailure:nil];
+    }
+}
+
 - (void)reloadTableData
 {
     NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -173,35 +178,24 @@
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-
-    // __block keyword lets ARC know we're using activityIndicator in a block, so don't gc it
-    __block UIActivityIndicatorView *activityIndicator;
-    [cell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
-    activityIndicator.center = cell.imageView.center;
-    [activityIndicator startAnimating];
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
-                                    placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
-                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-     {
-         if (error != nil) {
+                   placeholderImage:[UIImage imageNamed:@"profile_default"]
+                            options:SDWebImageRefreshCached
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+         if (error) {
              NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
          }
-         [activityIndicator removeFromSuperview];
-         activityIndicator = nil;
          [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
 
          [cell layoutSubviews];
-     }];
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   
     cell.textLabel.textColor = PRIMARY_GREEN;
     cell.detailTextLabel.textColor = SECONDARY_GREEN;
     
-    [cell layoutSubviews];
     return cell;
 }
 

@@ -13,6 +13,8 @@
     NSMutableArray *_riderList;
 }
 
+@property (weak, nonatomic) Rider *favoriteRider;
+
 - (unsigned)count;
 - (Rider *)objectAtIndex:(NSUInteger)index;
 - (void)removeObjectAtIndex:(NSUInteger)index;

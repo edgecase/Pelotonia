@@ -11,6 +11,8 @@
 
 @implementation RiderDataController
 
+@synthesize favoriteRider = _favoriteRider;
+
 - (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
     _riderList = defaultList;
@@ -24,6 +26,13 @@
         return self;
     }
     return nil;
+}
+
+- (Rider *)favoriteRider
+{
+    Rider *r = [[Rider alloc] initWithName:@"Mark Harris" andId:@"MH0015"];
+    r.profileUrl = @"https://www.mypelotonia.org/riders_profile.jsp?MemberID=4111";
+    return r;
 }
 
 
@@ -91,6 +100,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_riderList forKey:@"rider_list"];
+    [aCoder encodeObject:_favoriteRider forKey:@"favorite_rider"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -99,6 +109,7 @@
     // and pass it to the setters.
     if (self = [super init]) {
         _riderList = [aDecoder decodeObjectForKey:@"rider_list"];
+        _favoriteRider = [aDecoder decodeObjectForKey:@"favorite_rider"];
     }
     
     return self;

@@ -73,14 +73,14 @@
             cell.imageView.layer.cornerRadius = 5.0;
 
             [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+                           placeholderImage:[UIImage imageNamed:@"profile_default"]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                 [cell layoutSubviews];
             }];
         }
         else {
             cell.textLabel.text = @"Sign In";
-            [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon.png"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
+            [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
         }
     }
     return cell;

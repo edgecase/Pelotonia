@@ -81,10 +81,11 @@
     shadow.shadowOffset = CGSizeMake(0.0, -1.0);
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-           NSForegroundColorAttributeName: SECONDARY_LIGHT_GRAY,
+           NSForegroundColorAttributeName: PRIMARY_GREEN,
            NSShadowAttributeName: shadow,
            NSFontAttributeName: PELOTONIA_FONT(20),
            }];
+    [[UINavigationBar appearance] setTintColor:PRIMARY_GREEN];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
@@ -181,7 +182,7 @@
 
 // data controller methods
 #pragma mark -- data controller
-- (NSString *)PelotoniaFiles:(NSString *)fileName
++ (NSString *)PelotoniaFiles:(NSString *)fileName
 {
     // get list of directories in sandbox
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -193,11 +194,42 @@
     return [documentDirectory stringByAppendingPathComponent:fileName];
 }
 
-- (NSString *)riderFilePath 
++ (NSString *)riderFilePath
 {
-    return [self PelotoniaFiles:@"Riders"];
+    return [AppDelegate PelotoniaFiles:@"Riders"];
 }
 
+- (RiderDataController *)riderDataController {
+    if (_riderDataController == nil) {
+        _riderDataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[AppDelegate riderFilePath]];
+        if (_riderDataController == nil) {
+            _riderDataController = [[RiderDataController alloc] init];
+        }
+    }
+    return _riderDataController;
+}
+
+- (void)archiveData
+{
+    // get the game list & write it out
+    [NSKeyedArchiver archiveRootObject:self.riderDataController toFile:[AppDelegate riderFilePath]];
+}
+
++ (RiderDataController *)sharedDataController
+{
+    static RiderDataController *dataController = nil;
+    
+    if (dataController == nil)
+    {
+        dataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[self riderFilePath]];
+        if (dataController == nil) {
+            dataController = [[RiderDataController alloc] init];
+        }
+    }
+    return dataController;
+}
+
+#pragma mark - open URL stuff
 - (BOOL)handleOpenURL:(NSURL*)url
 {
     [Socialize handleOpenURL:url];
@@ -215,22 +247,6 @@
     return [self handleOpenURL:url];
 }
 
-- (RiderDataController *)riderDataController {
-    if (_riderDataController == nil) {
-        _riderDataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[self riderFilePath]];
-        if (_riderDataController == nil) {
-            _riderDataController = [[RiderDataController alloc] init]; 
-        }
-    }
-    return _riderDataController;
-}
-
-- (void)archiveData
-{
-    // get the game list & write it out
-    [NSKeyedArchiver archiveRootObject:self.riderDataController toFile:[self riderFilePath]];
-    
-}
 
 
 

@@ -14,8 +14,11 @@
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
 #import "UIImage+Alpha.h"
+#import "RiderDataController.h"
+#import "AppDelegate.h"
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 
@@ -31,6 +34,8 @@
 @synthesize currentUser;
 @synthesize recentComments;
 
+// property overloads
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -45,24 +50,15 @@
     [super viewDidLoad];
     
     self.currentUser = [SZUserUtils currentUser];
+    self.rider = [[AppDelegate sharedDataController] favoriteRider];
 
     __weak UserProfileViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshUser];
-//        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
     }];
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -72,6 +68,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.currentUser = [SZUserUtils currentUser];
+    if ([self.currentUser firstName]) {
+        self.navigationController.navigationBar.topItem.title = [self.currentUser displayName];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,26 +79,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)getActionsByUserOnAllEntities
-{
-    [SZCommentUtils getCommentsByUser:nil first:nil last:nil success:^(NSArray *comments) {
-        self.recentComments = comments;
-        [self.tableView reloadData];
-        [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
-
-    } failure:^(NSError *error) {
-        NSLog(@"unable to get recent comments: %@", [error localizedDescription]);
-    }];
-}
-
 - (void)configureView
 {
     [self setUserNameCell:nil];
+    [self setRiderCell];
+    [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
 }
 
 - (void)refreshUser
 {
-    [self getActionsByUserOnAllEntities];
+    [self.rider refreshFromWebOnComplete:^(Rider *rider) {
+        [self configureView];
+    } onFailure:^(NSString *errorMessage) {
+        NSLog(@"Unable to refresh user");
+    }];
     [self configureView];
 }
 
@@ -107,42 +100,51 @@
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
+    if ([[segue identifier] isEqualToString:@"SegueToRiderProfile"]) {
+        // seeing a rider profile next
+        ProfileTableViewController *profVC = (ProfileTableViewController *)segue.destinationViewController;
+        profVC.rider = self.rider;
+    }
+    
+    if ([[segue identifier] isEqualToString:@"SegueToLinkProfile"]) {
+        NSLog(@"linking profile...");
+    }
 }
-
 
 #pragma mark - Table view delegate
-- (void)manuallyShowCommentsListWithEntity:(id<SZEntity>)entity
-{
-    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:entity];
-    comments.completionBlock = ^{
-        
-        // Dismiss however you want here
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
-    
-    // Present however you want here
-    [self presentViewController:comments animated:YES completion:nil];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0) {
-            [SZUserUtils showUserSettingsInViewController:self completion:^{
-                NSLog(@"Done showing settings");
-            }];
+            [SZUserUtils showUserSettingsInViewController:self completion:nil];
         }
-    }
-    else if (indexPath.section == 1)
-    {
-        id<SZComment> comment = [self.recentComments objectAtIndex:indexPath.row];
-        [self manuallyShowCommentsListWithEntity:[comment entity]];
     }
 }
 
+- (void)setRiderCell
+{
+    if (self.rider) {
+        self.riderName.text = self.rider.name;
+        self.riderDistance.text = self.rider.route;
+        [self.RiderCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
+                                 placeholderImage:[UIImage imageNamed:@"profile_default_thumb"]];
+
+        [self.RiderCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.RiderCell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            
+            [self.RiderCell layoutSubviews];
+
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }
+    else {
+        // let them pick a rider
+        self.riderName.text = @"Choose your Rider Profile";
+        self.riderDistance.text = nil;
+        [self.RiderCell.imageView setImage:nil];
+    }
+}
 
 - (void)setUserNameCell:(__weak UITableViewCell *)cell
 {
@@ -150,7 +152,7 @@
         
         self.userName.text  = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
         self.userType.text = [self.currentUser description];
-        
+
         // this masks the photo to the tableviewcell
         self.userProfileImageView.layer.masksToBounds = YES;
         self.userProfileImageView.layer.cornerRadius = 5.0;
@@ -159,8 +161,7 @@
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                   [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
                                   [cell layoutSubviews];
-                              }
-         ];
+                              }];
     }
     else {
         self.userName.text = @"Sign In";
@@ -168,22 +169,6 @@
     }
 }
 
-
-- (NSString *)getTitleFromComment:(id<SZComment>) comment
-{
-    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
-}
-
-- (NSString *)getTextFromComment:(id<SZComment>) comment
-{
-    return [comment text];
-}
-
-- (NSURL *)getImageURLFromComment:(id<SZComment>) comment
-{
-    NSString *strURL = [[comment user] smallImageUrl];
-    return [NSURL URLWithString:strURL];
-}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -196,61 +181,36 @@
         _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     
-    if (indexPath.section == 1)
-    {
-        // current activity
-        id<SZComment> activity = [self.recentComments objectAtIndex:indexPath.row];
-        
-        CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
-        cell.titleString = [self getTitleFromComment:activity];
-        cell.commentString = [self getTextFromComment:activity];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        [cell.imageView setImageWithURL:[self getImageURLFromComment:activity]
-                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
-
-        
-        _cell = (UITableViewCell *)cell;
-        [_cell layoutSubviews];
+    // rider profile cell
+    if (indexPath.section == 1) {
+        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+        _cell.textLabel.font = PELOTONIA_FONT(21);
+        _cell.detailTextLabel.font = PELOTONIA_FONT(12);
+        _cell.textLabel.textColor = PRIMARY_GREEN;
+        _cell.detailTextLabel.textColor = SECONDARY_GREEN;
     }
+    
     
     return _cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
-        return 26;
-    }
-    else
-    {
-        return [super tableView:tableView heightForHeaderInSection:section];
-    }
+    return [super tableView:tableView heightForHeaderInSection:section];
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
-        if ([self.recentComments count] > 0) {
-            return @"Activity";
-        }
-        else {
-            return @"";
-        }
-    }
-    else {
-        return nil;
-    }
+    return [super tableView:tableView titleForHeaderInSection:section];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
-    label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(24);
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 24)];
+    label.textColor = [UIColor whiteColor];
+    label.font = PELOTONIA_FONT(20);
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = [UIColor blackColor];
     label.text = [self tableView:tableView titleForHeaderInSection:section];
@@ -262,16 +222,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
-        NSInteger num = [self.recentComments count];
-        NSLog(@"Section 1 has %d cells", num);
-        return num;
-    }
-    else
-    {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    }
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 
@@ -282,37 +233,13 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat sz = 26;
-    
-    if (indexPath.section == 1)
-    {
-        // figure out Pelotonia activity cell
-        id<SZComment> riderComment = [self.recentComments objectAtIndex:indexPath.row];
-        NSString *comment = [self getTextFromComment:riderComment];
-        NSString *title = [self getTitleFromComment:riderComment];
-        sz = [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
-    }
-    else
-    {
-        sz = [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-    
-    return sz;
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
-    
     // if dynamic section make all rows the same indentation level as row 0
-    if (section == 1)
-    {
-        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-    }
-    else
-    {
-        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
-    }
+    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
 }
 
 
@@ -340,12 +267,6 @@
 }
 
 
-#pragma mark -- PullToRefreshDelegate
-
--(void)manualRefresh:(NSNotification *)notification
-{
-    [_tv manuallyTriggered];
-}
 
 
 @end
