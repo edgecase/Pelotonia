@@ -35,10 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // set the colors appropriately
-    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
-    self.tableView.opaque = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,7 +64,7 @@
         id<SZFullUser> currentUser = [SZUserUtils currentUser];
         if ([currentUser firstName]) {
             
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentUser firstName], [currentUser lastName]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", [currentUser displayName]];
             cell.imageView.layer.masksToBounds = YES;
             cell.imageView.layer.cornerRadius = 5.0;
 

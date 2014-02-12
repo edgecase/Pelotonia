@@ -128,8 +128,6 @@
     if (self.rider) {
         self.riderName.text = self.rider.name;
         self.riderDistance.text = self.rider.route;
-        [self.RiderCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-                                 placeholderImage:[UIImage imageNamed:@"profile_default_thumb"]];
 
         [self.RiderCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self.RiderCell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];

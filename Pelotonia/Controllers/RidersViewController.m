@@ -31,15 +31,8 @@
     AAPullToRefresh *_tv;
 }
 
-@synthesize dataController = _dataController;
 @synthesize riderTableView = _riderTableView;
 @synthesize riderSearchResults = _riderSearchResults;
-
-// property overloads
-- (RiderDataController *)dataController {
-    return [AppDelegate sharedDataController];
-}
-
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -95,8 +88,9 @@
 #pragma mark -- pull to refresh view
 - (void)refresh
 {
+    
     // update all riders in the list
-    for (Rider *rider in [self.dataController allRiders]) {
+    for (Rider *rider in [[AppDelegate sharedDataController] allRiders]) {
         [rider refreshFromWebOnComplete:^(Rider *rider) {
             [self reloadTableData];
         } onFailure:nil];
@@ -106,7 +100,7 @@
 - (void)reloadTableData
 {
     NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
+    [[AppDelegate sharedDataController] sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
 }
@@ -127,7 +121,7 @@
         profileTableViewController.rider = rider;
     }
     else {
-        rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        rider = [[AppDelegate sharedDataController] objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         profileTableViewController.rider = rider;
     }
 }
@@ -148,7 +142,7 @@
         return [self.riderSearchResults count];
     }
     else {
-        return [self.dataController count];
+        return [[AppDelegate sharedDataController] count];
     }
 }
 
@@ -174,7 +168,7 @@
     }
     else {
         // looking at the "regular" view, so show all our information
-        rider = [self.dataController objectAtIndex:indexPath.row];
+        rider = [[AppDelegate sharedDataController] objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
@@ -223,7 +217,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the dataController
-        [self.dataController removeObjectAtIndex:indexPath.row];
+        [[AppDelegate sharedDataController] removeObjectAtIndex:indexPath.row];
         
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

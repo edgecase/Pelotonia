@@ -1,21 +1,27 @@
 PODS:
   - AAPullToRefresh (1.0.2)
+  - AFNetworking (2.1.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.1.0)
+  - AFNetworking/Security (2.1.0)
+  - AFNetworking/Serialization (2.1.0)
+  - AFNetworking/UIKit (2.1.0):
+    - AFNetworking/NSURLConnection
   - Appirater (2.0.2)
-  - ASIHTTPRequest (1.8.1):
-    - ASIHTTPRequest/ASIWebPageRequest
-    - ASIHTTPRequest/CloudFiles
-    - ASIHTTPRequest/S3
-    - Reachability
-  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
-    - Reachability
-  - ASIHTTPRequest/CloudFiles (1.8.1):
-    - Reachability
-  - ASIHTTPRequest/S3 (1.8.1):
-    - Reachability
-  - ECSlidingViewController (2.0.0)
+  - ECSlidingViewController (2.0.1)
   - hpple (0.2.0)
   - MBProgressHUD (0.8)
-  - Reachability (3.1.1)
   - SDWebImage (3.5.2):
     - SDWebImage/Core
   - SDWebImage/Core (3.5.2)
@@ -24,23 +30,21 @@ PODS:
 
 DEPENDENCIES:
   - AAPullToRefresh
+  - AFNetworking
   - Appirater (~> 2.0.2)
-  - ASIHTTPRequest (~> 1.8.1)
   - ECSlidingViewController (~> 2.0.0)
   - hpple (~> 0.2.0)
   - MBProgressHUD (~> 0.8)
-  - Reachability (~> 3.1.1)
   - SDWebImage (~> 3.5.2)
   - UIActivityIndicator-for-SDWebImage
 
 SPEC CHECKSUMS:
   AAPullToRefresh: cb06c382ebbcdd2b396e9b1b564d33e7580e44c5
+  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  ASIHTTPRequest: 162783e0cd71bdd3ff1ceed0cd5fa9505e0116a8
-  ECSlidingViewController: 9a30cf3c446e39de70128299663fde097d8f3f88
+  ECSlidingViewController: d7bb96ee5bbe261ed80ee16a513f94b9fd3c9767
   hpple: dde62f905f482bbec50186280d1a1be2c881241b
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
   UIActivityIndicator-for-SDWebImage: e712b97826395022ce7b4a4b56eb7194090c19d5
 

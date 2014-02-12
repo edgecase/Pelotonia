@@ -28,6 +28,7 @@ typedef enum {
 @protocol _SZLinkDialogViewControllerDelegate;
 
 @interface _SZLinkDialogViewController : SocializeBaseViewController<_SZUserSettingsViewControllerDelegate> {
+    UIImageView                 *topImage;
     UITableView                 *tableView;
     NSString                    *_facebookUsername;
     UIButton                    *skipButton;
@@ -35,17 +36,23 @@ typedef enum {
     BOOL boolErrorStatus;
 }
 
+@property (nonatomic, retain) IBOutlet UIImageView     *topImage;
 @property (nonatomic, retain) IBOutlet UITableView     *tableView;
 @property (nonatomic, retain) IBOutlet UIButton        *skipButton;
 @property (nonatomic, copy) void (^completionBlock)(SZSocialNetwork selectedNetwork);
 
 - (id)initWithDelegate:(id<_SZLinkDialogViewControllerDelegate>)delegate;
-+(UINavigationController*)authViewControllerInNavigationController:(id<_SZLinkDialogViewControllerDelegate>)delegate;
++ (UINavigationController*)authViewControllerInNavigationController:(id<_SZLinkDialogViewControllerDelegate>)delegate;
+- (UIImage *)facebookIcon:(BOOL)enabled;
+- (UIImage *)twitterIcon:(BOOL)enabled;
+- (UIImage *)callOutArrow;
+- (UIImage *)authorizeUserIcon;
+
 @end
 
 @protocol _SZLinkDialogViewControllerDelegate<SocializeBaseViewControllerDelegate>
 @optional
--(IBAction)skipButtonPressed:(id)sender;
--(void)authorizationSkipped;
--(void)socializeAuthViewController:(_SZLinkDialogViewController *)authViewController didAuthenticate:(id<SocializeUser>)user;
+- (IBAction)skipButtonPressed:(id)sender;
+- (void)authorizationSkipped;
+- (void)socializeAuthViewController:(_SZLinkDialogViewController *)authViewController didAuthenticate:(id<SocializeUser>)user;
 @end

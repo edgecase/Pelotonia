@@ -12,12 +12,13 @@
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 #import "NSDate+Helper.h"
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <Social/Social.h>
 #import <Socialize/Socialize.h>
@@ -430,25 +431,17 @@
     // this masks the photo to the tableviewcell
     self.nameAndRouteCell.imageView.layer.masksToBounds = YES;
     self.nameAndRouteCell.imageView.layer.cornerRadius = 5.0;
-    
+
     // now we resize the photo and the cell so that the photo looks right
-    __block UIActivityIndicatorView *activityIndicator;
-    [self.nameAndRouteCell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
-    activityIndicator.center = self.nameAndRouteCell.imageView.center;
-    [activityIndicator startAnimating];
-    
-    [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-            placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-     {
-         if (error != nil) {
-             NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-         }
-         [activityIndicator removeFromSuperview];
-         activityIndicator = nil;
-         [self.nameAndRouteCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
-         [self.nameAndRouteCell layoutSubviews];
-     }];
+    if (self.rider.riderPhotoUrl) {
+        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"pelotonia-icon"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            if (error) {
+                NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
+            }
+            [self.nameAndRouteCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
+            [self.nameAndRouteCell layoutSubviews];
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }
     
     // update the comments in section 2 of our table
     [self reloadComments];
@@ -553,7 +546,6 @@
 
 - (IBAction)shareProfile:(id)sender
 {
-//    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
     
     NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
 
@@ -561,8 +553,6 @@
     shareDialog.title = [NSString stringWithFormat:@"Share %@", self.rider.name];
     
     SZShareOptions *options = [SZShareUtils userShareOptions];
-    // when the bug is fixed in the socialize SDK, uncomment the below line
-//    options.text = txtToShare;
     
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {

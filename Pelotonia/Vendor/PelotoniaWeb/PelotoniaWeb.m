@@ -7,9 +7,9 @@
 //
 
 #import "PelotoniaWeb.h"
-#import "ASIHTTPRequest.h"
 #import "TFHpple.h"
 #import "TFHppleElement+IDSearch.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface PelotoniaWeb()
 + (NSString *)stripWhitespace:(NSString *)input;
@@ -19,15 +19,13 @@
 
 + (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId]];
-    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
-    __unsafe_unretained __block ASIHTTPRequest *request = _request;
-    
-    NSLog(@"searchForRiderWithLastName: finding %@ (%@)", lastName, riderId);
-    
-    [request setCompletionBlock:^{
+    NSString *urlString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // success
         NSLog(@"completing network call");
-        TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
+        TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
         NSString *xPath = @"//table[@id='search-results']/tr";
         NSArray *riderTableRows = [parser searchWithXPathQuery:xPath];
         
@@ -76,37 +74,27 @@
         if (completeBlock) {
             completeBlock(riders);
         }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"unable to get search URL");
     }];
     
-    [request setFailedBlock:^{
-        NSError *error = [request error];
-        NSLog(@"%@: %@", error.localizedDescription, error.localizedFailureReason);
-        
-        if (failureBlock) {
-            NSString *errstr = [NSString stringWithFormat:@"Network error: %@", error.localizedDescription];
-            failureBlock(errstr);
-        }
-    }];
-    
-    
-    [request startAsynchronous];  
 }
 
 
 + (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
-    NSURL *url = [NSURL URLWithString:rider.profileUrl];
+    //NSURL *url = [NSURL URLWithString:rider.profileUrl];
     NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
-    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
-    __unsafe_unretained __block ASIHTTPRequest *request = _request;
     
-    [request setCompletionBlock:^{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:rider.profileUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Found rider %@", rider.name);
         @try
         {
-        
-            TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-
+            TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
+            
             // figure out what type of rider we are first
             NSString *riderTypeUrlXPath = @"//*[@id='sectionheader']/img";
             NSString *riderType = [[[[parser searchWithXPathQuery:riderTypeUrlXPath] objectAtIndex:0] attributes] valueForKey:@"alt"];
@@ -131,7 +119,7 @@
                 NSLog(@"rider type not recognized");
                 rider.riderType = nil;
             }
-        
+            
             // get the photos' URLs
             NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
             NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
@@ -151,17 +139,17 @@
                 }
             }
             rider.story = storyString;
-
+            
             // get the rider's properties like how much they've raised, etc.
             NSDictionary *xpathTable = @{
-                @"raised": @"//*[@id='dashboard-rider']/div/div[2]/dl[2]/dd",
-                @"myPeloton": @"//*[@id='dashboard-rider']/div/div[2]/dl[3]/dd/a",
-                @"route": @"//*[@id='dashboard-rider']/div/div[2]/dl[1]/dd",
-                @"pelotonFundsRaised": @"//*[@id='dashboard-peloton']/div/div[2]/dl[1]/dd",
-                @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
-                @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
-                @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a"
-                };
+                                         @"raised": @"//*[@id='dashboard-rider']/div/div[2]/dl[2]/dd",
+                                         @"myPeloton": @"//*[@id='dashboard-rider']/div/div[2]/dl[3]/dd/a",
+                                         @"route": @"//*[@id='dashboard-rider']/div/div[2]/dl[1]/dd",
+                                         @"pelotonFundsRaised": @"//*[@id='dashboard-peloton']/div/div[2]/dl[1]/dd",
+                                         @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
+                                         @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
+                                         @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a"
+                                         };
             
             rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"raised"] parser:parser];
             rider.myPeloton = [self getValueAtXPath:[xpathTable objectForKey:@"myPeloton"] parser:parser];
@@ -172,29 +160,26 @@
             rider.pelotonCaptain = [self stripWhitespace:[self getValueAtXPath:[xpathTable objectForKey:@"pelotonCaptain"] parser:parser]];
             
             NSLog(@"Returning profile for rider %@", rider.name);
-
+            
         }
         @catch (NSException *exception) {
             NSLog(@"trouble parsing %@'s profile story", rider.name);
             rider.story = @"(no story on file)";
             NSLog(@"%@", [exception description]);
         }
-     
+        
         if (completeBlock) {
             completeBlock(rider);
         }
-    }];
-    
-    [request setFailedBlock:^{
-        NSError *error = [request error];
-        NSLog(@"%@", error);
-        if (failureBlock)
-        {
-            failureBlock(@"Network error");
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error description]);
+        NSLog(@"Response : %@", [operation responseString]);
+        NSLog(@"Debug Response : %@", [operation debugDescription]);
+        if (failureBlock) {
+            failureBlock([error description]);
         }
     }];
-    
-    [request startAsynchronous];
 }
 
 + (NSString *)stripWhitespace:(NSString *)input

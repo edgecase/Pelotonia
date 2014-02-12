@@ -86,6 +86,8 @@
            NSFontAttributeName: PELOTONIA_FONT(20),
            }];
     [[UINavigationBar appearance] setTintColor:PRIMARY_GREEN];
+    [[UINavigationBar appearance] setBarTintColor:PRIMARY_DARK_GRAY];
+    [[UINavigationBar appearance] setBackgroundColor:PRIMARY_DARK_GRAY];
 
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
@@ -200,13 +202,7 @@
 }
 
 - (RiderDataController *)riderDataController {
-    if (_riderDataController == nil) {
-        _riderDataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[AppDelegate riderFilePath]];
-        if (_riderDataController == nil) {
-            _riderDataController = [[RiderDataController alloc] init];
-        }
-    }
-    return _riderDataController;
+    return [AppDelegate sharedDataController];
 }
 
 - (void)archiveData
