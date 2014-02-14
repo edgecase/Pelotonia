@@ -71,7 +71,8 @@
             [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
                            placeholderImage:[UIImage imageNamed:@"profile_default"]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                [cell layoutSubviews];
+                                      [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(35, 35) interpolationQuality:kCGInterpolationDefault]];
+                                      [cell layoutSubviews];
             }];
         }
         else {

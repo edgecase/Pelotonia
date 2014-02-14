@@ -28,7 +28,7 @@
 @end
 
 @implementation UserProfileViewController {
-    AAPullToRefresh *_tv;
+//    AAPullToRefresh *_tv;
 }
 
 
@@ -54,17 +54,22 @@
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
 
     __weak UserProfileViewController *weakSelf = self;
-    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+    AAPullToRefresh *_tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshUser];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
     }];
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
+    
+    // logo in title bar
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
+    self.navigationItem.titleView = imageView;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self configureView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,6 +77,7 @@
     if ([SZUserUtils userIsAuthenticated]) {
         self.navigationController.navigationBar.topItem.title = [self.currentUser displayName];
     }
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,7 +91,6 @@
     [self setUserNameCell:nil];
     Rider *favorite = [AppDelegate sharedDataController].favoriteRider;
     [self setRiderCellValues:favorite];
-    [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
 }
 
 - (void)refreshUser
@@ -159,7 +164,7 @@
         self.riderDistance.text = self.rider.route;
         
         [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.riderPhoto setImage:[image thumbnailImage:100 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            [self.riderPhoto setImage:[image thumbnailImage:90 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
             [self.RiderCell layoutSubviews];
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
@@ -181,7 +186,7 @@
 
         // this masks the photo to the tableviewcell
         [self.userPhoto setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.userPhoto setImage:[image thumbnailImage:100 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            [self.userPhoto setImage:[image thumbnailImage:90 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
             [self.UserCell layoutSubviews];
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         
