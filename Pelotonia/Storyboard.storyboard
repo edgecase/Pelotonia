@@ -648,18 +648,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rmp-rN-3fK">
-                                                    <rect key="frame" x="125" y="28" width="49" height="22"/>
+                                                    <rect key="frame" x="78" y="28" width="49" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Pelotonia_arrow" id="mvT-TP-T2R">
-                                                    <rect key="frame" x="15" y="0.0" width="95" height="95"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="profile_default_thumb" id="mvT-TP-T2R">
+                                                    <rect key="frame" x="15" y="23" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y8k-zt-MfC">
-                                                    <rect key="frame" x="125" y="50" width="50" height="17"/>
+                                                    <rect key="frame" x="78" y="50" width="50" height="17"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -670,60 +670,38 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="bia-wF-3gI">
+                            <tableViewSection headerTitle="My Rider Profile" id="bia-wF-3gI">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="B2g-Z8-1ku" detailTextLabel="5zF-4i-CYf" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="5v8-yE-dHT">
-                                        <rect key="frame" x="0.0" y="151" width="320" height="75"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="B2g-Z8-1ku" detailTextLabel="5zF-4i-CYf" imageView="Oj0-gR-SU1" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="5v8-yE-dHT">
+                                        <rect key="frame" x="0.0" y="179" width="320" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5v8-yE-dHT" id="ojF-cQ-GTr">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B2g-Z8-1ku">
-                                                    <rect key="frame" x="15" y="19" width="34" height="22"/>
+                                                    <rect key="frame" x="78" y="19" width="34" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zF-4i-CYf">
-                                                    <rect key="frame" x="15" y="41" width="43" height="15"/>
+                                                    <rect key="frame" x="78" y="41" width="43" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="sKZ-lE-nf9" kind="push" identifier="SegueToRiderProfile" id="ZxR-GS-M2U"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="I0p-bl-d8D" rowHeight="75" style="IBUITableViewCellStyleDefault" id="fcT-NH-ldX">
-                                        <rect key="frame" x="0.0" y="226" width="320" height="75"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fcT-NH-ldX" id="Z9W-nu-NcF">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Link to Rider Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="I0p-bl-d8D">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="74"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="profile_default_thumb" id="Oj0-gR-SU1">
+                                                    <rect key="frame" x="15" y="13" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="kxB-9E-zZy" kind="push" identifier="SegueToLinkProfile" id="6Eg-If-X2F"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -743,12 +721,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="RiderCell" destination="5v8-yE-dHT" id="w6p-hr-QBC"/>
+                        <outlet property="RiderCell" destination="5v8-yE-dHT" id="jL3-Ai-I92"/>
+                        <outlet property="UserCell" destination="PjR-wh-5aG" id="8nB-XA-eHH"/>
                         <outlet property="riderDistance" destination="5zF-4i-CYf" id="Wcd-g6-g2Q"/>
                         <outlet property="riderName" destination="B2g-Z8-1ku" id="cdw-mV-ytD"/>
+                        <outlet property="riderPhoto" destination="Oj0-gR-SU1" id="ddf-Cw-Yji"/>
                         <outlet property="userName" destination="rmp-rN-3fK" id="lSb-5w-QZL"/>
-                        <outlet property="userProfileImageView" destination="mvT-TP-T2R" id="a0A-he-nbZ"/>
+                        <outlet property="userPhoto" destination="mvT-TP-T2R" id="lt9-7P-0Wu"/>
                         <outlet property="userType" destination="Y8k-zt-MfC" id="3iB-LW-TXz"/>
+                        <segue destination="sKZ-lE-nf9" kind="push" identifier="SegueToRiderProfile" id="tZz-dL-tdX"/>
+                        <segue destination="kxB-9E-zZy" kind="modal" identifier="SegueToLinkProfile" id="3uV-Ni-IJj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -756,20 +738,38 @@
             </objects>
             <point key="canvasLocation" x="916" y="-400"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Find Rider View Controller-->
         <scene sceneID="q8h-0Q-4DF">
             <objects>
-                <tableViewController id="kxB-9E-zZy" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1XG-E2-w47">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="kxB-9E-zZy" customClass="FindRiderViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="1XG-E2-w47">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexColor" red="0.63701701164245605" green="0.72903871536254883" blue="0.79776239395141602" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Last Name or RIder ID" showsScopeBar="YES" id="nAr-q3-Id4">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="barTintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Last Name</string>
+                                <string>Rider ID</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="kxB-9E-zZy" id="uGz-v5-A8h"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FL1-ag-CY8">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="62" id="FL1-ag-CY8">
+                                <rect key="frame" x="0.0" y="110" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FL1-ag-CY8" id="Ecu-9U-QwS">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -779,11 +779,30 @@
                             <outlet property="delegate" destination="kxB-9E-zZy" id="dkh-64-qPU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="e9N-qA-dbN"/>
+                    <navigationItem key="navigationItem" id="e9N-qA-dbN">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Ksa-OA-tll">
+                            <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="cancelPressed:" destination="kxB-9E-zZy" id="utf-xX-y1J"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="nAr-q3-Id4" id="onk-G8-Rei"/>
+                        <outlet property="searchDisplayController" destination="qw0-bj-iPX" id="HKu-0K-RqC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMS-qg-uIO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="qw0-bj-iPX">
+                    <connections>
+                        <outlet property="delegate" destination="kxB-9E-zZy" id="I3s-Y1-J5u"/>
+                        <outlet property="searchContentsController" destination="kxB-9E-zZy" id="wyF-zJ-C4U"/>
+                        <outlet property="searchResultsDataSource" destination="kxB-9E-zZy" id="Gt6-l1-kTg"/>
+                        <outlet property="searchResultsDelegate" destination="kxB-9E-zZy" id="M9c-xH-riL"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1495" y="-397"/>
+            <point key="canvasLocation" x="2021" y="-397"/>
         </scene>
         <!--Profile Table View Controller - Profile-->
         <scene sceneID="sul-NI-wcg">
@@ -1060,7 +1079,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFN-tP-zEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2211" y="-362"/>
+            <point key="canvasLocation" x="2737" y="-362"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="SoG-UX-0Qg">
@@ -1150,7 +1169,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkZ-H9-ApC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2219" y="245"/>
+            <point key="canvasLocation" x="2745" y="245"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
@@ -1270,10 +1289,10 @@
         <image name="259-list" width="20" height="14"/>
         <image name="28-star" width="26" height="26"/>
         <image name="46-movie-2" width="20" height="25"/>
-        <image name="Pelotonia_arrow" width="160" height="160"/>
         <image name="Pelotonia_logo_22x216" width="216" height="22"/>
         <image name="pelotonia-icon.png" width="57" height="57"/>
         <image name="pelotonia-menu-icon" width="24" height="24"/>
+        <image name="profile_default_thumb" width="48" height="48"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1284,6 +1303,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
         <segue reference="lZa-h3-ufJ"/>
-        <segue reference="ZxR-GS-M2U"/>
+        <segue reference="tZz-dL-tdX"/>
     </inferredMetricsTieBreakers>
 </document>

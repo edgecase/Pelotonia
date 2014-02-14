@@ -21,6 +21,7 @@
 #import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
+#import "FindRiderViewController.h"
 
 @interface UserProfileViewController ()
 
@@ -63,12 +64,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_tv manuallyTriggered];
+    [self configureView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.currentUser = [SZUserUtils currentUser];
-    if ([self.currentUser firstName]) {
+    if ([SZUserUtils userIsAuthenticated]) {
         self.navigationController.navigationBar.topItem.title = [self.currentUser displayName];
     }
 }
@@ -82,17 +83,31 @@
 - (void)configureView
 {
     [self setUserNameCell:nil];
-    [self setRiderCell];
+    Rider *favorite = [AppDelegate sharedDataController].favoriteRider;
+    [self setRiderCellValues:favorite];
     [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
 }
 
 - (void)refreshUser
 {
-    [self.rider refreshFromWebOnComplete:^(Rider *rider) {
-        [self configureView];
-    } onFailure:^(NSString *errorMessage) {
-        NSLog(@"Unable to refresh user");
-    }];
+    Rider *rider = [[AppDelegate sharedDataController] favoriteRider];
+    if (rider) {
+        
+        [PelotoniaWeb searchForRiderWithLastName:nil riderId:rider.riderId onComplete:^(NSArray *searchResults) {
+            if ([searchResults count] > 0) {
+                Rider *foundRider = [searchResults objectAtIndex:0];
+                [foundRider refreshFromWebOnComplete:^(Rider *rider) {
+                    [[AppDelegate sharedDataController] setFavoriteRider:rider];
+                    [self configureView];
+                } onFailure:^(NSString *errorMessage) {
+                    NSLog(@"Unable to refresh user");
+                }];
+            }
+        } onFailure:^(NSString *errorMessage) {
+            NSLog(@"Unable to refresh rider");
+        }];
+        
+    }
     [self configureView];
 }
 
@@ -103,11 +118,13 @@
     if ([[segue identifier] isEqualToString:@"SegueToRiderProfile"]) {
         // seeing a rider profile next
         ProfileTableViewController *profVC = (ProfileTableViewController *)segue.destinationViewController;
-        profVC.rider = self.rider;
+        profVC.rider = [[AppDelegate sharedDataController] favoriteRider];
     }
     
     if ([[segue identifier] isEqualToString:@"SegueToLinkProfile"]) {
         NSLog(@"linking profile...");
+        FindRiderViewController *findRiderVC = (FindRiderViewController *)segue.destinationViewController;
+        findRiderVC.delegate = self;
     }
 }
 
@@ -115,32 +132,43 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    // clicked username cell
     if (indexPath.section == 0)
     {
-        if (indexPath.row == 0) {
-            [SZUserUtils showUserSettingsInViewController:self completion:nil];
+        [SZUserUtils showUserSettingsInViewController:self completion:nil];
+    }
+    
+    // clicked a linked profile
+    if (indexPath.section == 1) {
+        if ([[AppDelegate sharedDataController] favoriteRider]) {
+            [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:cell];
+        }
+        else {
+            [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:cell];
         }
     }
 }
 
-- (void)setRiderCell
+- (void)setRiderCellValues:(Rider *)rider
 {
-    if (self.rider) {
+    if (rider) {
+        self.rider = rider;
         self.riderName.text = self.rider.name;
         self.riderDistance.text = self.rider.route;
-
-        [self.RiderCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.RiderCell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-            
+        
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.riderPhoto setImage:[image thumbnailImage:100 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
             [self.RiderCell layoutSubviews];
-
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
     }
     else {
         // let them pick a rider
         self.riderName.text = @"Choose your Rider Profile";
         self.riderDistance.text = nil;
-        [self.RiderCell.imageView setImage:nil];
+        [self.riderPhoto setImage:nil];
     }
 }
 
@@ -152,14 +180,11 @@
         self.userType.text = [self.currentUser description];
 
         // this masks the photo to the tableviewcell
-        self.userProfileImageView.layer.masksToBounds = YES;
-        self.userProfileImageView.layer.cornerRadius = 5.0;
-        [self.userProfileImageView setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]]
-                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                  [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-                                  [cell layoutSubviews];
-                              }];
+        [self.userPhoto setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self.userPhoto setImage:[image thumbnailImage:100 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            [self.UserCell layoutSubviews];
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        
     }
     else {
         self.userName.text = @"Sign In";
@@ -260,11 +285,23 @@
 - (void)viewDidUnload {
     [self setUserName:nil];
     [self setUserType:nil];
-    [self setUserProfileImageView:nil];
+    [self setUserPhoto:nil];
     [super viewDidUnload];
 }
 
+#pragma mark -
+#pragma mark -- FindRiderViewController methods
 
+- (void)findRiderViewControllerDidCancel:(FindRiderViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
+- (void)findRiderViewControllerDidSelectRider:(FindRiderViewController *)controller rider:(Rider *)rider
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    [[AppDelegate sharedDataController] setFavoriteRider:rider];
+    [self configureView];
+}
 
 @end

@@ -28,13 +28,6 @@
     return nil;
 }
 
-- (Rider *)favoriteRider
-{
-    Rider *r = [[Rider alloc] initWithName:@"Mark Harris" andId:@"MH0015"];
-    r.profileUrl = @"https://www.mypelotonia.org/riders_profile.jsp?MemberID=4111";
-    return r;
-}
-
 
 - (NSArray *)allRiders
 {

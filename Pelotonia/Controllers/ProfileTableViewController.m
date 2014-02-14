@@ -101,6 +101,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self refreshRider:nil];
+    
     [SZViewUtils viewEntity:self.entity success:^(id<SocializeView> view) {
         NSLog(@"Entity recorded another view ");
     } failure:^(NSError *error) {
@@ -121,13 +123,6 @@
 }
 
 //implementation
-
-
-- (void)setRider:(Rider *)rider
-{
-    _rider = rider;
-}
-
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -225,7 +220,9 @@
     }
     if (indexPath.section == 1) {
         // open up a commentdetailview view
-        [self manuallyShowCommentsList];
+        id<SocializeActivity> comment = [riderComments objectAtIndex:indexPath.row];
+        SocializeActivityDetailsViewController *avc = [[SocializeActivityDetailsViewController alloc] initWithActivity:comment];
+        [self.navigationController pushViewController:avc animated:YES];
     }
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -351,15 +348,10 @@
 #pragma mark -- view configuration
 - (void)manuallyShowCommentsList
 {
-    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:self.entity];
-    comments.completionBlock = ^{
-        
-        // Dismiss however you want here
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
+    SZComposeCommentViewController *commentVC = [[SZComposeCommentViewController alloc] initWithEntity:self.entity];
     
     // Present however you want here
-    [self presentViewController:comments animated:YES completion:nil];
+    [self presentViewController:commentVC animated:YES completion:nil];
 }
 
 - (void)reloadComments
@@ -376,7 +368,6 @@
 - (void)refreshRider:(AAPullToRefresh *)v
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
-        [self getLikesByEntity];
         [self configureView];
     }
     onFailure:^(NSString *error) {
@@ -495,38 +486,6 @@
 
 #pragma Socialize stuff
 
-- (void)getLikesByEntity
-{
-    [SZLikeUtils getLikesForEntity:self.entity start:nil end:nil success:^(NSArray *likes) {
-        NSLog(@"Got likes: %@", likes);
-        self.numLikes = [likes count];
-        [self configureView];
-    } failure:^(NSError *error) {
-        self.numLikes = 0;
-        NSLog(@"Failed getting likes: %@", [error localizedDescription]);
-        [self configureView];
-    }];
-}
-
-- (void)like
-{
-    [SZLikeUtils likeWithEntity:self.entity options:nil networks:SZAvailableSocialNetworks()
-    success:^(id<SZLike> like) {
-        NSLog(@"Created like: %d", [like objectID]);
-    } failure:^(NSError *error) {
-        NSLog(@"Failed creating like: %@", [error localizedDescription]);
-    }];
-}
-
-- (void)unlike
-{
-    [SZLikeUtils unlike:self.entity success:^(id<SZLike> like) {
-        NSLog(@"Deleted like: %d", [like objectID]);
-    } failure:^(NSError *error) {
-        NSLog(@"Failed deleting like: %@", [error localizedDescription]);
-    }];
-}
-
 - (IBAction)followRider:(id)sender
 {
     // add the current rider to the main list of riders
@@ -636,6 +595,10 @@
 - (void)done
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)manuallyTriggered {
+    [_tv manuallyTriggered];
 }
 
 

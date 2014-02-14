@@ -88,7 +88,6 @@
 #pragma mark -- pull to refresh view
 - (void)refresh
 {
-    
     // update all riders in the list
     for (Rider *rider in [[AppDelegate sharedDataController] allRiders]) {
         [rider refreshFromWebOnComplete:^(Rider *rider) {
@@ -321,21 +320,5 @@
     [self reloadTableData];
 }
 
-
-#pragma mark -- RiderPhotoUpdate delegates
-- (void)riderPhotoThumbDidUpdate:(UIImage *)image
-{
-    if ([self.searchDisplayController isActive]) {
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }
-    else {
-        [self reloadTableData];
-    }
-}
-
-- (void)riderPhotoDidUpdate:(UIImage *)image
-{
-    // do nothing
-}
 
 @end
