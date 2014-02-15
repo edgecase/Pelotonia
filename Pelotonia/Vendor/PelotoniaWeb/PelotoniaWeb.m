@@ -8,6 +8,7 @@
 
 #import "PelotoniaWeb.h"
 #import "TFHpple.h"
+#import "Donor.h"
 #import "TFHppleElement+IDSearch.h"
 #import <AFNetworking/AFNetworking.h>
 
@@ -158,6 +159,36 @@
             rider.pelotonTotalOfAllMembers = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonTotalOfAllMembers"] parser:parser];
             rider.pelotonGrandTotal = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonGrandTotal"] parser:parser];
             rider.pelotonCaptain = [self stripWhitespace:[self getValueAtXPath:[xpathTable objectForKey:@"pelotonCaptain"] parser:parser]];
+            
+            // get the list of donors
+            NSArray *donors = [parser searchWithXPathQuery:@"//*[@class='donor-list']/tr"];
+            if (donors) {
+                NSMutableArray *donorArray = [[NSMutableArray alloc] initWithCapacity:0];
+                // loop through the donors (represented as a TR each) & add objects with name/etc.
+                for (TFHppleElement *e in donors) {
+                    NSArray *data = [e childrenWithTagName:@"td"];
+                    if ([data count] > 0) {
+                        Donor *donor = [[Donor alloc] init];
+                        for (TFHppleElement *tf in data) {
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"amount"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.amount = tf.text;
+                            }
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"name"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.name = tf.text;
+                            }
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"date"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.date = tf.text;
+                            }
+                        }
+                        [donorArray addObject:donor];
+                    }
+                }
+                rider.donors = donorArray;
+            }
+            
             
             NSLog(@"Returning profile for rider %@", rider.name);
             

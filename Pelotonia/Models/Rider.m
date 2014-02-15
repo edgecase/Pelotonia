@@ -34,6 +34,7 @@
 @synthesize pelotonTotalOfAllMembers = _pelotonTotalOfAllMembers;
 @synthesize pelotonGrandTotal = _pelotonGrandTotal;
 @synthesize pelotonCaptain = _pelotonCaptain;
+@synthesize donors = _donors;
 
 // NSObject methods
 
@@ -162,6 +163,7 @@
     [aCoder encodeObject:_pelotonCaptain forKey:@"pelotonCaptain"];
     [aCoder encodeObject:_story forKey:@"story"];
     [aCoder encodeBool:_highRoller forKey:@"highRoller"];
+    [aCoder encodeObject:_donors forKey:@"donors"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -183,6 +185,7 @@
         _pelotonCaptain = [aDecoder decodeObjectForKey:@"pelotonCaptain"];
         _story = [aDecoder decodeObjectForKey:@"story"];
         _highRoller = [aDecoder decodeBoolForKey:@"highRoller"];
+        _donors = [aDecoder decodeObjectForKey:@"donors"];
     }
     return self;
 }
@@ -211,6 +214,7 @@
         self.pelotonTotalOfAllMembers = updatedRider.pelotonTotalOfAllMembers;
         self.pelotonGrandTotal = updatedRider.pelotonGrandTotal;
         self.pelotonCaptain = updatedRider.pelotonCaptain;
+        self.donors = updatedRider.donors;
         if (completeBlock) {
             completeBlock(self);
         }

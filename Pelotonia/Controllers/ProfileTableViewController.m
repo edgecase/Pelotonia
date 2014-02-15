@@ -17,6 +17,7 @@
 #import "NSDate+Helper.h"
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
+#import "DonorsTableViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import <AAPullToRefresh/AAPullToRefresh.h>
@@ -127,16 +128,16 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([self respondsToSelector:NSSelectorFromString(segue.identifier)]) {
-        if ([segue.identifier isEqualToString:@"showPledge:"]) {
-            [self showPledge:(SendPledgeModalViewController *)segue.destinationViewController];
-        }
-        if ([segue.identifier isEqualToString:@"showDetails:"]) {
-            [self showDetails:(ProfileDetailsTableViewController *)segue.destinationViewController];
-        }
+        [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
     }
     else {
         NSLog(@"%@ is not recognized segue", segue.identifier);
     }
+}
+
+- (void)segueToDonorList:(DonorsTableViewController *)donorViewController {
+    [TestFlight passCheckpoint:@"ShowDonorList"];
+    donorViewController.donorList = self.rider.donors;
 }
 
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController
