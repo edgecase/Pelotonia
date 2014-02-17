@@ -12,6 +12,7 @@
 @implementation RiderDataController
 
 @synthesize favoriteRider = _favoriteRider;
+@synthesize workouts = _workouts;
 
 - (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
@@ -94,6 +95,7 @@
 {
     [aCoder encodeObject:_riderList forKey:@"rider_list"];
     [aCoder encodeObject:_favoriteRider forKey:@"favorite_rider"];
+    [aCoder encodeObject:_workouts forKey:@"workouts"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -103,6 +105,7 @@
     if (self = [super init]) {
         _riderList = [aDecoder decodeObjectForKey:@"rider_list"];
         _favoriteRider = [aDecoder decodeObjectForKey:@"favorite_rider"];
+        _workouts = [aDecoder decodeObjectForKey:@"workouts"];
     }
     
     return self;

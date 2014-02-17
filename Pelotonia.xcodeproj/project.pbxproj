@@ -371,6 +371,9 @@
 		BBAA247118AFD718006BA30E /* TwitterLogo60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAA235418AFD718006BA30E /* TwitterLogo60x60.png */; };
 		BBAA247218AFD718006BA30E /* TwitterLogo76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAA235518AFD718006BA30E /* TwitterLogo76x76.png */; };
 		BBAA247318AFD718006BA30E /* Socialize.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAA235618AFD718006BA30E /* Socialize.framework */; };
+		BBAA247618B04B4C006BA30E /* Workout.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247518B04B4C006BA30E /* Workout.m */; };
+		BBAA247D18B05E93006BA30E /* WorkoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */; };
+		BBAA248018B0629A006BA30E /* NewWorkoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
@@ -781,6 +784,12 @@
 		BBAA235418AFD718006BA30E /* TwitterLogo60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo60x60.png; sourceTree = "<group>"; };
 		BBAA235518AFD718006BA30E /* TwitterLogo76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TwitterLogo76x76.png; sourceTree = "<group>"; };
 		BBAA235618AFD718006BA30E /* Socialize.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Socialize.framework; sourceTree = "<group>"; };
+		BBAA247418B04B4C006BA30E /* Workout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Workout.h; path = Models/Workout.h; sourceTree = "<group>"; };
+		BBAA247518B04B4C006BA30E /* Workout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Workout.m; path = Models/Workout.m; sourceTree = "<group>"; };
+		BBAA247B18B05E93006BA30E /* WorkoutListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkoutListTableViewController.h; path = Controllers/WorkoutListTableViewController.h; sourceTree = "<group>"; };
+		BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkoutListTableViewController.m; path = Controllers/WorkoutListTableViewController.m; sourceTree = "<group>"; };
+		BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewWorkoutTableViewController.h; path = Controllers/NewWorkoutTableViewController.h; sourceTree = "<group>"; };
+		BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewWorkoutTableViewController.m; path = Controllers/NewWorkoutTableViewController.m; sourceTree = "<group>"; };
 		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
 		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -1242,6 +1251,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		BBAA247718B04B5D006BA30E /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
+				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
+				BBAA222E18AFA0BB006BA30E /* DonorTableViewCell.h */,
+				BBAA222F18AFA0BB006BA30E /* DonorTableViewCell.m */,
+				BBAA222518AD9C2E006BA30E /* RiderTableViewCell.h */,
+				BBAA222618AD9C2E006BA30E /* RiderTableViewCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -1343,38 +1365,37 @@
 		BCE3B7CF15AE4DE000205530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */,
-				BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */,
-				4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */,
-				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
-				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
-				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
 				4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */,
 				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
-				BB9E096C171AFF360093FDD5 /* MenuViewController.h */,
-				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
-				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
-				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
 				BBA66C13172A9FD8002DE00A /* ActivityViewController.h */,
 				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
-				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
-				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
-				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
-				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
-				BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */,
-				BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */,
-				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
-				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
+				BBAA247718B04B5D006BA30E /* TableViewCells */,
+				BBAA222B18AF9F7A006BA30E /* DonorsTableViewController.h */,
+				BBAA222C18AF9F7A006BA30E /* DonorsTableViewController.m */,
 				BB22414B17F529030054F16D /* FeedbackViewController.h */,
 				BB22414C17F529030054F16D /* FeedbackViewController.m */,
 				BBAA222218AD8BB8006BA30E /* FindRiderViewController.h */,
 				BBAA222318AD8BB8006BA30E /* FindRiderViewController.m */,
-				BBAA222518AD9C2E006BA30E /* RiderTableViewCell.h */,
-				BBAA222618AD9C2E006BA30E /* RiderTableViewCell.m */,
-				BBAA222E18AFA0BB006BA30E /* DonorTableViewCell.h */,
-				BBAA222F18AFA0BB006BA30E /* DonorTableViewCell.m */,
-				BBAA222B18AF9F7A006BA30E /* DonorsTableViewController.h */,
-				BBAA222C18AF9F7A006BA30E /* DonorsTableViewController.m */,
+				BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */,
+				BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */,
+				BB9E096C171AFF360093FDD5 /* MenuViewController.h */,
+				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
+				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
+				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
+				BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */,
+				BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */,
+				4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */,
+				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
+				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
+				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
+				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
+				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
+				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
+				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
+				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
+				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
+				BBAA247B18B05E93006BA30E /* WorkoutListTableViewController.h */,
+				BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1398,6 +1419,8 @@
 				4D35C72815B116E5006E5D5D /* RiderDataController.m */,
 				BBAA222818AEEBB3006BA30E /* Donor.h */,
 				BBAA222918AEEBB4006BA30E /* Donor.m */,
+				BBAA247418B04B4C006BA30E /* Workout.h */,
+				BBAA247518B04B4C006BA30E /* Workout.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1874,10 +1897,13 @@
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
 				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,
 				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
+				BBAA247D18B05E93006BA30E /* WorkoutListTableViewController.m in Sources */,
 				BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */,
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
 				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 				BBAA222D18AF9F7A006BA30E /* DonorsTableViewController.m in Sources */,
+				BBAA247618B04B4C006BA30E /* Workout.m in Sources */,
+				BBAA248018B0629A006BA30E /* NewWorkoutTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

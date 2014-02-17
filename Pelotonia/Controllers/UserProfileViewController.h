@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ProfileTableViewController.h"
 #import "FindRiderViewController.h"
+#import "NewWorkoutTableViewController.h"
 #import <Socialize/Socialize.h>
 
-@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate> {
+@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, NewWorkoutTableViewControllerDelegate> {
 }
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
@@ -27,5 +28,7 @@
 @property (strong, nonatomic) Rider *rider;
 @property (strong, nonatomic) NSArray *recentComments;
 
+- (IBAction)addPhotoToAlbum:(id)sender;
+- (IBAction)recordWorkout:(id)sender;
 
 @end

@@ -15,6 +15,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+Alpha.h"
 #import "RiderDataController.h"
+#import "NewWorkoutTableViewController.h"
 #import "AppDelegate.h"
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -50,7 +51,6 @@
 {
     [super viewDidLoad];
     
-    self.currentUser = [SZUserUtils currentUser];
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
 
     __weak UserProfileViewController *weakSelf = self;
@@ -73,10 +73,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.currentUser = [SZUserUtils currentUser];
-    if ([SZUserUtils userIsAuthenticated]) {
-        self.navigationController.navigationBar.topItem.title = [self.currentUser displayName];
-    }
     [self configureView];
 }
 
@@ -88,7 +84,6 @@
 
 - (void)configureView
 {
-    [self setUserNameCell:nil];
     Rider *favorite = [AppDelegate sharedDataController].favoriteRider;
     [self setRiderCellValues:favorite];
 }
@@ -131,6 +126,13 @@
         FindRiderViewController *findRiderVC = (FindRiderViewController *)segue.destinationViewController;
         findRiderVC.delegate = self;
     }
+    
+    if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {
+        // open new workout dialog
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        newWorkoutVC.delegate = self;
+        newWorkoutVC.workout = [Workout defaultWorkout];
+    }
 }
 
 #pragma mark - Table view delegate
@@ -139,19 +141,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    // clicked username cell
-    if (indexPath.section == 0)
-    {
-        [SZUserUtils showUserSettingsInViewController:self completion:nil];
-    }
-    
     // clicked a linked profile
-    if (indexPath.section == 1) {
-        if ([[AppDelegate sharedDataController] favoriteRider]) {
-            [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:cell];
-        }
-        else {
-            [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:cell];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if ([[AppDelegate sharedDataController] favoriteRider]) {
+                [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:cell];
+            }
+            else {
+                [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:cell];
+            }
         }
     }
 }
@@ -177,40 +175,13 @@
     }
 }
 
-- (void)setUserNameCell:(__weak UITableViewCell *)cell
-{
-    if ([self.currentUser firstName]) {
-        
-        self.userName.text  = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
-        self.userType.text = [self.currentUser description];
-
-        // this masks the photo to the tableviewcell
-        [self.userPhoto setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.userPhoto setImage:[image thumbnailImage:90 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-            [self.UserCell layoutSubviews];
-        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        
-    }
-    else {
-        self.userName.text = @"Sign In";
-        self.userType.text = @"Support Pelotonia with your friends";
-    }
-}
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *_cell;
+    UITableViewCell *_cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
-    // only handle the dynamic section.  static cells handled in configureView
-    if (indexPath.section == 0)
-    {
-        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
-    
     // rider profile cell
-    if (indexPath.section == 1) {
+    if (indexPath.row == 0) {
         _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
         _cell.textLabel.font = PELOTONIA_FONT(21);
         _cell.detailTextLabel.font = PELOTONIA_FONT(12);
@@ -218,6 +189,22 @@
         _cell.detailTextLabel.textColor = SECONDARY_GREEN;
     }
     
+    if (indexPath.row == 2) {
+        // show details of most recent workout
+        if ([[[AppDelegate sharedDataController] workouts] count] > 0) {
+            NSArray *workouts = [[[AppDelegate sharedDataController] workouts] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                Workout *w1 = (Workout *)obj1;
+                Workout *w2 = (Workout *)obj2;
+                return [w1.date compare:w2.date];
+            }];
+            Workout *mostRecent = [workouts objectAtIndex:([workouts count] - 1)];
+            _cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %d Miles",
+                                          [mostRecent.date stringWithFormat:@"MM/dd/yyyy"], mostRecent.distanceInMiles];
+        }
+        else {
+            _cell.detailTextLabel.text = @"";
+        }
+    }
     
     return _cell;
 }
@@ -273,6 +260,9 @@
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) {
+        return YES;
+    }
     return NO;
 }
 
@@ -284,6 +274,15 @@
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleNone;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the dataController
+        [[AppDelegate sharedDataController] setFavoriteRider:nil];
+        
+    }
 }
 
 
@@ -309,4 +308,28 @@
     [self configureView];
 }
 
+- (IBAction)addPhotoToAlbum:(id)sender
+{
+}
+
+- (IBAction)recordWorkout:(id)sender
+{
+}
+
+#pragma mark -- NewWorkoutViewControllerDelegate methods
+- (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc
+{
+    if ([[AppDelegate sharedDataController] workouts] == nil) {
+        [[AppDelegate sharedDataController] setWorkouts:[[NSMutableArray alloc] initWithCapacity:0]];
+    }
+    
+    [[[AppDelegate sharedDataController] workouts] addObject:vc.workout];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    [self configureView];
+}
 @end

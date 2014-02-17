@@ -42,7 +42,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Pelotonia Stream" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ge9-yy-D9g">
                                                     <rect key="frame" x="54" y="0.0" width="251" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,15 +67,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Vw-hx-GYS">
-                                                    <rect key="frame" x="56" y="0.0" width="249" height="43"/>
+                                                    <rect key="frame" x="64" y="0.0" width="241" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="253-person" id="72C-03-Gle">
-                                                    <rect key="frame" x="15" y="9" width="26" height="24"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="13-bicycle" id="72C-03-Gle">
+                                                    <rect key="frame" x="15" y="11" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -93,10 +93,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="My Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CEG-KB-6rQ">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Riders" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CEG-KB-6rQ">
                                                     <rect key="frame" x="62" y="0.0" width="243" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -113,12 +113,36 @@
                                             <segue destination="ZpJ-uT-0fb" kind="custom" identifier="ShowMyTeam" customClass="ECSlidingSegue" id="Vbj-gi-Wcx"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="w7V-ZQ-Iva" imageView="aAZ-5l-I5I" style="IBUITableViewCellStyleDefault" id="UPZ-j6-aHs">
+                                        <rect key="frame" x="0.0" y="198" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UPZ-j6-aHs" id="j9v-hg-6gv">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w7V-ZQ-Iva">
+                                                    <rect key="frame" x="56" y="0.0" width="249" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="253-person" id="aAZ-5l-I5I">
+                                                    <rect key="frame" x="15" y="9" width="26" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Pelotonia" id="YsN-OB-eNT">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="prs-1i-qZR" imageView="iLB-Cs-tVm" style="IBUITableViewCellStyleDefault" id="mi4-If-9ni">
-                                        <rect key="frame" x="0.0" y="220" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mi4-If-9ni" id="FaA-8X-yG7">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -127,7 +151,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Register" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="prs-1i-qZR">
                                                     <rect key="frame" x="48" y="0.0" width="257" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,7 +169,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="UQs-xu-b74" imageView="ZeJ-um-VEd" style="IBUITableViewCellStyleDefault" id="nvU-Ie-1E2">
-                                        <rect key="frame" x="0.0" y="264" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="308" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nvU-Ie-1E2" id="GeE-76-36D">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -154,7 +178,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Safety Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UQs-xu-b74">
                                                     <rect key="frame" x="50" y="0.0" width="255" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -172,7 +196,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-ej-CIF" imageView="BVp-Ag-Fky" style="IBUITableViewCellStyleDefault" id="HrD-3N-1ys">
-                                        <rect key="frame" x="0.0" y="308" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="352" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HrD-3N-1ys" id="cN6-xt-3Bx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -181,7 +205,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="About Pelotonia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pN5-ej-CIF">
                                                     <rect key="frame" x="54" y="0.0" width="251" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -626,7 +650,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBX-Lf-U40" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="c8y-u1-kjc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="852" y="2344"/>
+            <point key="canvasLocation" x="890" y="2344"/>
         </scene>
         <!--User Profile View Controller - User Profile-->
         <scene sceneID="ctE-OW-v4P">
@@ -638,64 +662,124 @@
                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <sections>
-                            <tableViewSection id="XMZ-D2-Tk1">
+                            <tableViewSection id="NQO-5s-d09">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rmp-rN-3fK" detailTextLabel="Y8k-zt-MfC" imageView="mvT-TP-T2R" rowHeight="96" style="IBUITableViewCellStyleSubtitle" id="PjR-wh-5aG">
-                                        <rect key="frame" x="0.0" y="35" width="320" height="96"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PjR-wh-5aG" id="PbB-rD-E9F">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="95"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rmp-rN-3fK">
-                                                    <rect key="frame" x="78" y="28" width="49" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <color key="textColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="profile_default_thumb" id="mvT-TP-T2R">
-                                                    <rect key="frame" x="15" y="23" width="48" height="48"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y8k-zt-MfC">
-                                                    <rect key="frame" x="78" y="50" width="50" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="My Rider Profile" id="bia-wF-3gI">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="B2g-Z8-1ku" detailTextLabel="5zF-4i-CYf" imageView="Oj0-gR-SU1" rowHeight="75" style="IBUITableViewCellStyleSubtitle" id="5v8-yE-dHT">
-                                        <rect key="frame" x="0.0" y="179" width="320" height="75"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="B2g-Z8-1ku" detailTextLabel="5zF-4i-CYf" imageView="Oj0-gR-SU1" rowHeight="78" style="IBUITableViewCellStyleSubtitle" id="5v8-yE-dHT">
+                                        <rect key="frame" x="0.0" y="35" width="320" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5v8-yE-dHT" id="ojF-cQ-GTr">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="74"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B2g-Z8-1ku">
-                                                    <rect key="frame" x="78" y="19" width="34" height="22"/>
+                                                    <rect key="frame" x="78" y="20" width="34" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zF-4i-CYf">
-                                                    <rect key="frame" x="78" y="41" width="43" height="15"/>
+                                                    <rect key="frame" x="78" y="42" width="43" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="profile_default_thumb" id="Oj0-gR-SU1">
-                                                    <rect key="frame" x="15" y="13" width="48" height="48"/>
+                                                    <rect key="frame" x="15" y="14" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="70" id="dJm-HR-BI8">
+                                        <rect key="frame" x="0.0" y="113" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dJm-HR-BI8" id="2fh-cK-CGw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1U5-mr-ftO">
+                                                    <rect key="frame" x="20" y="5" width="138" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <state key="normal" image="86-camera-white">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addPhotoToAlbum:" destination="elF-Cv-4kH" eventType="touchUpInside" id="f7j-NX-8L0"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gFk-A8-4oF">
+                                                    <rect key="frame" x="166" y="5" width="138" height="60"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.22352941334247589" green="0.83529412746429443" blue="0.17647059261798859" alpha="1" colorSpace="deviceRGB"/>
+                                                    <state key="normal" image="13-bicycle">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="recordWorkout:" destination="elF-Cv-4kH" eventType="touchUpInside" id="SWJ-G4-6A4"/>
+                                                        <segue destination="tld-zD-uAB" kind="modal" identifier="SegueToNewWorkout" id="GHK-hO-tvo"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Coh-Tn-aTe" detailTextLabel="W7b-ml-uZX" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="VB7-yF-QJm">
+                                        <rect key="frame" x="0.0" y="183" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VB7-yF-QJm" id="tzb-wU-5C7">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Most Recent Ride" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Coh-Tn-aTe">
+                                                    <rect key="frame" x="15" y="14" width="145" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Date &amp; Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W7b-ml-uZX">
+                                                    <rect key="frame" x="15" y="36" width="117" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="QiU-8k-CgN" kind="push" identifier="SegueToShowWorkoutList" id="n1t-d3-2td"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="UZU-RD-q2N">
+                                        <rect key="frame" x="0.0" y="253" width="320" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UZU-RD-q2N" id="5q2-ni-4eZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="phd-Rx-WKQ">
+                                                    <rect key="frame" x="20" y="10" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="lRv-Ym-YpO">
+                                                    <rect key="frame" x="120" y="10" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="BhL-xh-58e">
+                                                    <rect key="frame" x="220" y="10" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -722,13 +806,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="RiderCell" destination="5v8-yE-dHT" id="jL3-Ai-I92"/>
-                        <outlet property="UserCell" destination="PjR-wh-5aG" id="8nB-XA-eHH"/>
                         <outlet property="riderDistance" destination="5zF-4i-CYf" id="Wcd-g6-g2Q"/>
                         <outlet property="riderName" destination="B2g-Z8-1ku" id="cdw-mV-ytD"/>
                         <outlet property="riderPhoto" destination="Oj0-gR-SU1" id="ddf-Cw-Yji"/>
-                        <outlet property="userName" destination="rmp-rN-3fK" id="lSb-5w-QZL"/>
-                        <outlet property="userPhoto" destination="mvT-TP-T2R" id="lt9-7P-0Wu"/>
-                        <outlet property="userType" destination="Y8k-zt-MfC" id="3iB-LW-TXz"/>
                         <segue destination="sKZ-lE-nf9" kind="push" identifier="SegueToRiderProfile" id="tZz-dL-tdX"/>
                         <segue destination="kxB-9E-zZy" kind="modal" identifier="SegueToLinkProfile" id="3uV-Ni-IJj"/>
                     </connections>
@@ -737,6 +817,255 @@
                 <exit id="gxJ-6o-AuJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="916" y="-400"/>
+        </scene>
+        <!--New Workout Table View Controller-->
+        <scene sceneID="XuB-n6-9Dh">
+            <objects>
+                <tableViewController id="wS1-QW-hm8" customClass="NewWorkoutTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lxi-sj-Ywn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="Description &amp; Date" id="i20-f7-DRC">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="81" id="zwC-I2-HEK">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="81"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zwC-I2-HEK" id="exq-UA-YNN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="A grueling tour of hills and gravel." id="zvP-n2-xKn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="wS1-QW-hm8" id="iSP-7i-6Lz"/>
+                                                    </connections>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="d1P-f1-fg6" detailTextLabel="QrY-Tr-dLb" rowHeight="66" style="IBUITableViewCellStyleValue1" id="aJT-94-K2W">
+                                        <rect key="frame" x="0.0" y="167" width="320" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aJT-94-K2W" id="ceB-Hr-PPQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d1P-f1-fg6">
+                                                    <rect key="frame" x="15" y="23" width="38" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="2/15/14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QrY-Tr-dLb">
+                                                    <rect key="frame" x="237" y="21" width="68" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="66" id="jb9-nI-Kbw">
+                                        <rect key="frame" x="0.0" y="233" width="320" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jb9-nI-Kbw" id="Qgc-cH-Jf2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="15" minValue="0.0" maxValue="100" id="RS1-h2-f6Y">
+                                                    <rect key="frame" x="138" y="14" width="164" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="distanceSliderChanged:" destination="wS1-QW-hm8" eventType="valueChanged" id="e11-Tc-dd2"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GWO-Or-Irn">
+                                                    <rect key="frame" x="20" y="20" width="94" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="66" id="fr7-dU-jLp">
+                                        <rect key="frame" x="0.0" y="299" width="320" height="66"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fr7-dU-jLp" id="AlG-Ni-esH">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="0.0" maxValue="480" id="VVc-D8-vti">
+                                                    <rect key="frame" x="142" y="20" width="160" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="timeSliderChanged:" destination="wS1-QW-hm8" eventType="valueChanged" id="5AF-to-Fo9"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:15 Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0we-q9-ylO">
+                                                    <rect key="frame" x="20" y="22" width="116" height="26"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="162" id="Hhk-9v-Eqk">
+                                        <rect key="frame" x="0.0" y="365" width="320" height="162"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hhk-9v-Eqk" id="YzI-Nb-AV1">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="161"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" id="DMA-fx-PKw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="wS1-QW-hm8" id="6ni-He-i0w"/>
+                                                        <outlet property="delegate" destination="wS1-QW-hm8" id="RbE-l0-eou"/>
+                                                    </connections>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="wS1-QW-hm8" id="0ke-8b-3br"/>
+                            <outlet property="delegate" destination="wS1-QW-hm8" id="NX2-Cz-UIr"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Kji-RR-uca">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="KFk-SF-guF">
+                            <connections>
+                                <action selector="cancel:" destination="wS1-QW-hm8" id="QUB-3r-s6h"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="we2-tx-XUt">
+                            <connections>
+                                <action selector="done:" destination="wS1-QW-hm8" id="50X-eL-TGC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dateLabel" destination="QrY-Tr-dLb" id="Aja-ps-hC9"/>
+                        <outlet property="descriptionTextView" destination="zvP-n2-xKn" id="8Ur-RX-e0h"/>
+                        <outlet property="distanceLabel" destination="GWO-Or-Irn" id="YA7-YM-ogc"/>
+                        <outlet property="distanceSlider" destination="RS1-h2-f6Y" id="b9J-H1-jgp"/>
+                        <outlet property="timeLabel" destination="0we-q9-ylO" id="Nge-W2-CSu"/>
+                        <outlet property="timeSlider" destination="VVc-D8-vti" id="Bww-xV-3AT"/>
+                        <outlet property="workoutTypePicker" destination="DMA-fx-PKw" id="gFZ-Sw-49H"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jf8-uo-o51" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1994" y="-954"/>
+        </scene>
+        <!--Workout List Table View Controller - Workouts-->
+        <scene sceneID="J4K-7a-ycC">
+            <objects>
+                <tableViewController id="QiU-8k-CgN" customClass="WorkoutListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="JUC-uB-ksa">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="totalDistanceCell" textLabel="nGI-Cy-5cg" detailTextLabel="ndr-ne-IO3" rowHeight="54" style="IBUITableViewCellStyleValue2" id="R1w-Wa-bhv">
+                                <rect key="frame" x="0.0" y="55" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R1w-Wa-bhv" id="TVD-8d-Kae">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Total Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nGI-Cy-5cg">
+                                            <rect key="frame" x="15" y="22" width="91" height="17"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="250 Miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ndr-ne-IO3">
+                                            <rect key="frame" x="112" y="12" width="105" height="29"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                            <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="workoutCell" textLabel="De8-R9-ZJ1" detailTextLabel="Dvb-42-5eW" imageView="cyh-n7-on1" rowHeight="54" style="IBUITableViewCellStyleValue1" id="00p-aO-GFR">
+                                <rect key="frame" x="0.0" y="109" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="00p-aO-GFR" id="FYG-Yh-lh6">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="53"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="2/14/14" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="De8-R9-ZJ1">
+                                            <rect key="frame" x="64" y="15" width="68" height="24"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="250 Miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dvb-42-5eW">
+                                            <rect key="frame" x="207" y="17" width="78" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="13-bicycle" id="cyh-n7-on1">
+                                            <rect key="frame" x="15" y="16" width="34" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="QiU-8k-CgN" id="h5B-9o-HLd"/>
+                            <outlet property="delegate" destination="QiU-8k-CgN" id="dZ5-wS-qQc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Workouts" id="gdZ-BD-pm3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tTx-zW-enl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2306" y="-202"/>
         </scene>
         <!--Find Rider View Controller-->
         <scene sceneID="q8h-0Q-4DF">
@@ -802,7 +1131,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2021" y="-397"/>
+            <point key="canvasLocation" x="2819" y="-605"/>
         </scene>
         <!--Profile Table View Controller - Profile-->
         <scene sceneID="sul-NI-wcg">
@@ -985,7 +1314,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1478" y="245"/>
+            <point key="canvasLocation" x="1845" y="121"/>
         </scene>
         <!--Donors Table View Controller - Donors-->
         <scene sceneID="FtB-4h-IjJ">
@@ -1115,7 +1444,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFN-tP-zEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="-362"/>
+            <point key="canvasLocation" x="3263" y="-362"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="SoG-UX-0Qg">
@@ -1316,18 +1645,45 @@
             </objects>
             <point key="canvasLocation" x="339" y="1584"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pVU-GE-QBR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tld-zD-uAB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9H2-Fj-nn7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wS1-QW-hm8" kind="relationship" relationship="rootViewController" id="nXN-Co-AEK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LrV-tC-AxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1468" y="-954"/>
+        </scene>
     </scenes>
     <resources>
         <image name="112-group" width="32" height="21"/>
         <image name="117-todo" width="18" height="19"/>
+        <image name="13-bicycle" width="34" height="21"/>
         <image name="211-action" width="28" height="22"/>
         <image name="253-person" width="26" height="24"/>
         <image name="259-list" width="20" height="14"/>
         <image name="28-star" width="26" height="26"/>
         <image name="46-movie-2" width="20" height="25"/>
+        <image name="86-camera-white" width="24" height="18"/>
         <image name="Pelotonia_logo_22x216" width="216" height="22"/>
         <image name="pelotonia-icon.png" width="57" height="57"/>
         <image name="pelotonia-menu-icon" width="24" height="24"/>
+        <image name="profile_default" width="300" height="222"/>
         <image name="profile_default_thumb" width="48" height="48"/>
         <image name="sandlot-logo.png" width="164" height="39"/>
     </resources>
