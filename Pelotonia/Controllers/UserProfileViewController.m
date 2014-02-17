@@ -162,7 +162,7 @@
         self.riderDistance.text = self.rider.route;
         
         [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.riderPhoto setImage:[image thumbnailImage:90 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            [self.riderPhoto setImage:[image thumbnailImage:80 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
             [self.RiderCell layoutSubviews];
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
