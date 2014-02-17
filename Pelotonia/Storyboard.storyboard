@@ -721,7 +721,6 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="recordWorkout:" destination="elF-Cv-4kH" eventType="touchUpInside" id="SWJ-G4-6A4"/>
                                                         <segue destination="tld-zD-uAB" kind="modal" identifier="SegueToNewWorkout" id="GHK-hO-tvo"/>
                                                     </connections>
                                                 </button>
@@ -806,6 +805,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="RiderCell" destination="5v8-yE-dHT" id="jL3-Ai-I92"/>
+                        <outlet property="recentImage1" destination="phd-Rx-WKQ" id="a7V-Vx-Rad"/>
+                        <outlet property="recentImage2" destination="lRv-Ym-YpO" id="eeZ-fK-ZX6"/>
+                        <outlet property="recentImage3" destination="BhL-xh-58e" id="Ljd-9U-BCA"/>
+                        <outlet property="recentWorkoutDateLabel" destination="W7b-ml-uZX" id="EmY-Do-DLL"/>
                         <outlet property="riderDistance" destination="5zF-4i-CYf" id="Wcd-g6-g2Q"/>
                         <outlet property="riderName" destination="B2g-Z8-1ku" id="cdw-mV-ytD"/>
                         <outlet property="riderPhoto" destination="Oj0-gR-SU1" id="ddf-Cw-Yji"/>

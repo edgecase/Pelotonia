@@ -17,6 +17,8 @@
 #import "RiderDataController.h"
 #import "NewWorkoutTableViewController.h"
 #import "AppDelegate.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
@@ -29,12 +31,12 @@
 @end
 
 @implementation UserProfileViewController {
-//    AAPullToRefresh *_tv;
 }
 
 
 @synthesize currentUser;
 @synthesize recentComments;
+@synthesize library;
 
 // property overloads
 
@@ -50,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.library = [[ALAssetsLibrary alloc] init];
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
 
     __weak UserProfileViewController *weakSelf = self;
@@ -73,7 +75,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self configureView];
+    [self refreshUser];
+}
+
+- (void)viewDidUnload {
+    [self setUserName:nil];
+    [self setUserType:nil];
+    [self setUserPhoto:nil];
+    self.library = nil;
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,10 +92,78 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -- regular implementation
+
 - (void)configureView
 {
     Rider *favorite = [AppDelegate sharedDataController].favoriteRider;
     [self setRiderCellValues:favorite];
+    [self configureRecentPhotos];
+    [self configureWorkoutCell];
+}
+
+- (void)configureWorkoutCell
+{
+    // show details of most recent workout
+    if ([[[AppDelegate sharedDataController] workouts] count] > 0) {
+        NSArray *workouts = [[[AppDelegate sharedDataController] workouts] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            Workout *w1 = (Workout *)obj1;
+            Workout *w2 = (Workout *)obj2;
+            return [w1.date compare:w2.date];
+        }];
+        Workout *mostRecent = [workouts objectAtIndex:([workouts count] - 1)];
+        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ - %d Miles",
+                                      [mostRecent.date stringWithFormat:@"MM/dd/yyyy"], mostRecent.distanceInMiles];
+    }
+    else {
+        self.recentWorkoutDateLabel.text = @"";
+    }
+    [self.tableView reloadData];
+}
+
+- (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
+{
+    NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
+    [[SDImageCache sharedImageCache] queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) {
+        // set image
+        NSLog(@"returned image cacheType %d", cacheType);
+        if (image == nil) {
+            // load the image from the absolute URL
+            [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+                [view setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
+            } failureBlock:^(NSError *error) {
+                NSLog(@"error loading image %@", [error localizedDescription]);
+                [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+            }];
+        }
+        else {
+            [view setImage:image];
+        }
+    }];
+}
+
+- (void)configureRecentPhotos
+{
+    NSArray *photos = [[AppDelegate sharedDataController] photoKeys];
+    photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDictionary *photoDict1 = (NSDictionary *)obj1;
+        NSDictionary *photoDict2 = (NSDictionary *)obj2;
+        NSDate *date1 = [photoDict1 objectForKey:@"date"];
+        NSDate *date2 = [photoDict2 objectForKey:@"date"];
+        return [date2 compare:date1];
+    }];
+    
+    if ([photos count] >= 1) {
+        [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
+    }
+    if ([photos count] >= 2) {
+        [self setImageView:self.recentImage2 fromPhotos:photos atIndex:1];
+    }
+    if ([photos count] >= 3) {
+        [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)refreshUser
@@ -190,20 +268,6 @@
     }
     
     if (indexPath.row == 2) {
-        // show details of most recent workout
-        if ([[[AppDelegate sharedDataController] workouts] count] > 0) {
-            NSArray *workouts = [[[AppDelegate sharedDataController] workouts] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-                Workout *w1 = (Workout *)obj1;
-                Workout *w2 = (Workout *)obj2;
-                return [w1.date compare:w2.date];
-            }];
-            Workout *mostRecent = [workouts objectAtIndex:([workouts count] - 1)];
-            _cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %d Miles",
-                                          [mostRecent.date stringWithFormat:@"MM/dd/yyyy"], mostRecent.distanceInMiles];
-        }
-        else {
-            _cell.detailTextLabel.text = @"";
-        }
     }
     
     return _cell;
@@ -286,12 +350,6 @@
 }
 
 
-- (void)viewDidUnload {
-    [self setUserName:nil];
-    [self setUserType:nil];
-    [self setUserPhoto:nil];
-    [super viewDidUnload];
-}
 
 #pragma mark -
 #pragma mark -- FindRiderViewController methods
@@ -310,11 +368,11 @@
 
 - (IBAction)addPhotoToAlbum:(id)sender
 {
+    if (NO == [self startCameraControllerFromViewController:self usingDelegate:self]) {
+        [self startMediaBrowserFromViewController:self usingDelegate:self];
+    }
 }
 
-- (IBAction)recordWorkout:(id)sender
-{
-}
 
 #pragma mark -- NewWorkoutViewControllerDelegate methods
 - (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
@@ -332,4 +390,114 @@
     [vc dismissViewControllerAnimated:YES completion:nil];
     [self configureView];
 }
+
+
+#pragma mark -- UIImagePicker methods
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+                                   usingDelegate: (id <UIImagePickerControllerDelegate,
+                                                   UINavigationControllerDelegate>) delegate {
+    
+    if (([UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeCamera] == NO)
+        || (delegate == nil)
+        || (controller == nil))
+        return NO;
+    
+    
+    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+    cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    // Displays a control that allows the user to choose picture or
+    // movie capture, if both are available:
+    if ([[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera] containsObject:(NSString *)kUTTypeImage]) {
+        cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];
+    }
+    
+    // Hides the controls for moving & scaling pictures, or for
+    // trimming movies. To instead show the controls, use YES.
+    cameraUI.allowsEditing = NO;
+    
+    cameraUI.delegate = delegate;
+    
+    [controller presentViewController:cameraUI animated:YES completion:nil];
+    return YES;
+}
+
+- (BOOL) startMediaBrowserFromViewController: (UIViewController*) controller
+                               usingDelegate: (id <UIImagePickerControllerDelegate,
+                                               UINavigationControllerDelegate>) delegate
+{
+    
+    if (([UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)
+        || (delegate == nil)
+        || (controller == nil))
+        return NO;
+    
+    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+    mediaUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    
+    // Displays saved pictures and movies, if both are available, from the
+    // Camera Roll album.
+    mediaUI.mediaTypes =
+    [UIImagePickerController availableMediaTypesForSourceType:
+     UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    
+    // Hides the controls for moving & scaling pictures, or for
+    // trimming movies. To instead show the controls, use YES.
+    mediaUI.allowsEditing = YES;
+    
+    mediaUI.delegate = delegate;
+    [controller presentViewController:mediaUI animated:YES completion:nil];
+    return YES;
+}
+
+// For responding to the user tapping Cancel.
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+// For responding to the user accepting a newly-captured picture or movie
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info {
+    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToSave;
+    
+    // Handle a still image capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
+        == kCFCompareEqualTo) {
+        
+        editedImage = (UIImage *) [info objectForKey:
+                                   UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:
+                                     UIImagePickerControllerOriginalImage];
+        
+        if (editedImage) {
+            imageToSave = editedImage;
+        } else {
+            imageToSave = originalImage;
+        }
+        
+        // Save the new image (original or edited) to the Camera Roll
+        [self.library writeImageToSavedPhotosAlbum:imageToSave.CGImage
+                                          metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                                   completionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error) {
+                NSLog(@"error writing image: %@", [error localizedDescription]);
+            }
+            else {
+                // no error, so put it in the cache, and add to our list of images
+                NSString *key = [assetURL absoluteString];
+                [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
+                [[[AppDelegate sharedDataController] photoKeys] addObject:@{@"key" : key, @"date" : [NSDate date]}];
+                
+                [picker dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
+}
+
+
 @end

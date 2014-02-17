@@ -13,6 +13,7 @@
 
 @synthesize favoriteRider = _favoriteRider;
 @synthesize workouts = _workouts;
+@synthesize photoKeys = _photoKeys;
 
 - (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
@@ -33,6 +34,20 @@
 - (NSArray *)allRiders
 {
     return _riderList;
+}
+
+- (NSMutableArray *)photoKeys {
+    if (_photoKeys == nil) {
+        _photoKeys = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return _photoKeys;
+}
+
+- (NSMutableArray *)workouts {
+    if (_workouts == nil) {
+        _workouts = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return _workouts;
 }
 
 - (unsigned)count
@@ -96,6 +111,7 @@
     [aCoder encodeObject:_riderList forKey:@"rider_list"];
     [aCoder encodeObject:_favoriteRider forKey:@"favorite_rider"];
     [aCoder encodeObject:_workouts forKey:@"workouts"];
+    [aCoder encodeObject:_photoKeys forKey:@"photos"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -106,6 +122,7 @@
         _riderList = [aDecoder decodeObjectForKey:@"rider_list"];
         _favoriteRider = [aDecoder decodeObjectForKey:@"favorite_rider"];
         _workouts = [aDecoder decodeObjectForKey:@"workouts"];
+        _photoKeys = [aDecoder decodeObjectForKey:@"photos"];
     }
     
     return self;

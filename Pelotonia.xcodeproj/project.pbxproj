@@ -374,6 +374,7 @@
 		BBAA247618B04B4C006BA30E /* Workout.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247518B04B4C006BA30E /* Workout.m */; };
 		BBAA247D18B05E93006BA30E /* WorkoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */; };
 		BBAA248018B0629A006BA30E /* NewWorkoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */; };
+		BBAA248218B251F3006BA30E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAA248118B251F3006BA30E /* AssetsLibrary.framework */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
@@ -790,6 +791,7 @@
 		BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkoutListTableViewController.m; path = Controllers/WorkoutListTableViewController.m; sourceTree = "<group>"; };
 		BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewWorkoutTableViewController.h; path = Controllers/NewWorkoutTableViewController.h; sourceTree = "<group>"; };
 		BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewWorkoutTableViewController.m; path = Controllers/NewWorkoutTableViewController.m; sourceTree = "<group>"; };
+		BBAA248118B251F3006BA30E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
 		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBAA248218B251F3006BA30E /* AssetsLibrary.framework in Frameworks */,
 				BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */,
 				BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */,
 				4D18EE15168CB0E500B1BDCD /* SystemConfiguration.framework in Frameworks */,
@@ -1286,6 +1289,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBAA248118B251F3006BA30E /* AssetsLibrary.framework */,
 				BBAA223818AFD717006BA30E /* Socialize.embeddedframework */,
 				BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */,
 				BB02D28D173B476400656E43 /* CoreTelephony.framework */,

@@ -9,6 +9,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RiderDataController.h"
+#import <SDWebImage/SDImageCache.h>
+
 #define IF_IOS60_OR_GREATER(...) \
 if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_6_0) \
 { \

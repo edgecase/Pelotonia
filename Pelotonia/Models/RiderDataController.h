@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) Rider *favoriteRider;
 @property (strong, nonatomic) NSMutableArray *workouts;
+@property (strong, nonatomic) NSMutableArray *photoKeys;
 
 - (unsigned)count;
 - (Rider *)objectAtIndex:(NSUInteger)index;

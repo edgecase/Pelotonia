@@ -11,8 +11,9 @@
 #import "FindRiderViewController.h"
 #import "NewWorkoutTableViewController.h"
 #import <Socialize/Socialize.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
-@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, NewWorkoutTableViewControllerDelegate> {
+@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, NewWorkoutTableViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 }
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;
@@ -22,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *riderPhoto;
 @property (weak, nonatomic) IBOutlet UITableViewCell *RiderCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *UserCell;
+@property (strong, nonatomic) ALAssetsLibrary *library;
+@property (weak, nonatomic) IBOutlet UILabel *recentWorkoutDateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *recentImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *recentImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *recentImage3;
 
 // non-UI properties
 @property (strong, nonatomic) id<SZFullUser> currentUser;
@@ -29,6 +35,5 @@
 @property (strong, nonatomic) NSArray *recentComments;
 
 - (IBAction)addPhotoToAlbum:(id)sender;
-- (IBAction)recordWorkout:(id)sender;
 
 @end
