@@ -818,7 +818,7 @@
             </objects>
             <point key="canvasLocation" x="916" y="-400"/>
         </scene>
-        <!--New Workout Table View Controller - New Workout-->
+        <!--New Workout Table View Controller - Workout-->
         <scene sceneID="KEF-G6-9UT">
             <objects>
                 <tableViewController id="kOK-BF-kLO" customClass="NewWorkoutTableViewController" sceneMemberID="viewController">
@@ -1009,7 +1009,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="New Workout" id="80T-9M-8h7">
+                    <navigationItem key="navigationItem" title="Workout" id="80T-9M-8h7">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="SgW-Dv-vP8">
                             <connections>
                                 <action selector="cancel:" destination="kOK-BF-kLO" id="XYe-PH-eIc"/>
@@ -1718,7 +1718,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="viy-N5-9Ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2666" y="-867"/>
+            <point key="canvasLocation" x="2656" y="-400"/>
         </scene>
     </scenes>
     <resources>

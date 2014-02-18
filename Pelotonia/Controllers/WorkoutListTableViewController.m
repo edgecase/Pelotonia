@@ -132,11 +132,15 @@
 
 - (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc workout:(Workout *)workout
 {
-    [_workouts addObject:workout];
-    NSInteger i = [_workouts indexOfObject:workout];
     [vc dismissViewControllerAnimated:YES completion:nil];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i + 1) inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSInteger i = [_workouts indexOfObject:workout];
+    if (i == NSNotFound) {
+        // new item to be added to list
+        [_workouts addObject:workout];
+        i = [_workouts indexOfObject:workout];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i + 1) inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
     [self.tableView reloadData];
 }
 
