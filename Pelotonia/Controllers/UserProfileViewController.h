@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ProfileTableViewController.h"
 #import "FindRiderViewController.h"
-#import "NewWorkoutTableViewController.h"
 #import <Socialize/Socialize.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, NewWorkoutTableViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 }
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userType;

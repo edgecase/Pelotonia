@@ -30,16 +30,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    if (self.workout == nil) {
-        self.workout = [Workout defaultWorkout];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self configureView];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,21 +44,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)configureView
-{
-    self.descriptionTextView.text = self.workout.description;
-    self.distanceSlider.value = (float)self.workout.distanceInMiles;
-    [self.workoutTypePicker selectRow:self.workout.type inComponent:0 animated:NO];
-    self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
-    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d Hours", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
-    self.timeSlider.value = (float)self.workout.timeInMinutes;
-    self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
-}
 
 #pragma mark - Table view data source
 
 - (IBAction)done:(id)sender {
-    [self.delegate userDidEnterNewWorkout:self];
+    [self.delegate userDidEnterNewWorkout:self workout:self.workout];
 }
 
 - (IBAction)cancel:(id)sender {
@@ -72,7 +58,6 @@
 - (IBAction)distanceSliderChanged:(id)sender {
     UISlider *slider = (UISlider *)sender;
     NSInteger val = floor(slider.value);
-    
     self.workout.distanceInMiles = val;
     [self configureView];
 }
@@ -82,7 +67,21 @@
     UISlider *slider = (UISlider *)sender;
     self.workout.timeInMinutes = slider.value;
     [self configureView];
-    
+}
+
+- (void)configureView
+{
+    self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
+    self.distanceSlider.value = (float)self.workout.distanceInMiles;
+    self.descriptionTextView.text = self.workout.description;
+    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d Hours", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
+    self.timeSlider.value = (float)self.workout.timeInMinutes;
+}
+
+- (NSString *)cellIDForIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *cellIDs = @[@"DescriptionCellID", @"DateCellID", @"WorkoutTypeCellID", @"DistanceCellID", @"TimeCellID"];
+    return [cellIDs objectAtIndex:indexPath.row];
 }
 
 #pragma mark -- UITableView stuff
@@ -91,6 +90,56 @@
     if (indexPath.row != 0) {
         [self.descriptionTextView resignFirstResponder];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSNumber *height;
+    if (!height) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[self cellIDForIndexPath:indexPath]];
+        height = @(cell.bounds.size.height);
+    }
+    return [height floatValue];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:[self cellIDForIndexPath:indexPath]];
+    
+    if (indexPath.row == 0) {
+        // description cell
+        self.descriptionTextView = (UITextView *)[_cell viewWithTag:100];
+        self.descriptionTextView.delegate = self;
+    }
+    else if (indexPath.row == 1) {
+        // date cell
+        _cell.detailTextLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
+    }
+    else if (indexPath.row == 2) {
+        _cell.textLabel.text = self.workout.typeDescription;
+    }
+    else if (indexPath.row == 3) {
+        // distance slider row
+        self.distanceLabel = (UILabel *)[_cell viewWithTag:100];
+        self.distanceSlider = (UISlider *)[_cell viewWithTag:101];
+        [self.distanceSlider addTarget:self action:@selector(distanceSliderChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    else if (indexPath.row == 4) {
+        // time cell
+        self.timeLabel = (UILabel *)[_cell viewWithTag:100];
+        self.timeSlider = (UISlider *)[_cell viewWithTag:101];
+        [self.timeSlider addTarget:self action:@selector(timeSliderChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    [self configureView];
+    
+    return _cell;
+    
 }
 
 #pragma mark -- UIPickerView methods

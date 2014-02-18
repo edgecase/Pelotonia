@@ -15,7 +15,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+Alpha.h"
 #import "RiderDataController.h"
-#import "NewWorkoutTableViewController.h"
+#import "WorkoutListTableViewController.h"
 #import "AppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -205,12 +205,11 @@
         findRiderVC.delegate = self;
     }
     
-    if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {
-        // open new workout dialog
-        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
-        newWorkoutVC.delegate = self;
-        newWorkoutVC.workout = [Workout defaultWorkout];
+    if ([[segue identifier] isEqualToString:@"SegueToShowWorkoutList"]) {
+        WorkoutListTableViewController *workoutVC = (WorkoutListTableViewController *)segue.destinationViewController;
+        workoutVC.navigationItem.backBarButtonItem.title = self.rider.name;
     }
+    
 }
 
 #pragma mark - Table view delegate
@@ -263,7 +262,7 @@
         _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
         _cell.textLabel.font = PELOTONIA_FONT(21);
         _cell.detailTextLabel.font = PELOTONIA_FONT(12);
-        _cell.textLabel.textColor = PRIMARY_GREEN;
+        _cell.textLabel.textColor = SECONDARY_LIGHT_GRAY;
         _cell.detailTextLabel.textColor = SECONDARY_GREEN;
     }
     
@@ -373,23 +372,6 @@
     }
 }
 
-
-#pragma mark -- NewWorkoutViewControllerDelegate methods
-- (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
-{
-    [vc dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc
-{
-    if ([[AppDelegate sharedDataController] workouts] == nil) {
-        [[AppDelegate sharedDataController] setWorkouts:[[NSMutableArray alloc] initWithCapacity:0]];
-    }
-    
-    [[[AppDelegate sharedDataController] workouts] addObject:vc.workout];
-    [vc dismissViewControllerAnimated:YES completion:nil];
-    [self configureView];
-}
 
 
 #pragma mark -- UIImagePicker methods

@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutListTableViewController.h"
+#import "Workout.h"
 #import "NSDate+Helper.h"
 
 @interface WorkoutListTableViewController () {
@@ -87,20 +88,18 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    if (indexPath.section == 1) {
-        return YES;
-    }
-    return NO;
+    return (indexPath.row != 0);
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
+    if (indexPath.row != 0) {
         if (editingStyle == UITableViewCellEditingStyleDelete) {
             // Delete the row from the data source
+            [_workouts removeObjectAtIndex:indexPath.row-1];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [_workouts removeObjectAtIndex:indexPath.row];
+            [tableView reloadData];
         }
         else if (editingStyle == UITableViewCellEditingStyleInsert) {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -124,6 +123,41 @@
     return YES;
 }
 */
+
+#pragma mark -- NewWorkoutViewControllerDelegate methods
+- (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc workout:(Workout *)workout
+{
+    [_workouts addObject:workout];
+    NSInteger i = [_workouts indexOfObject:workout];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(i + 1) inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {
+        // open new workout dialog
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        newWorkoutVC.delegate = self;
+        newWorkoutVC.workout = [Workout defaultWorkout];
+    }
+
+    if ([[segue identifier] isEqualToString:@"SegueToEditWorkout"]) {
+        // open new workout dialog
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        newWorkoutVC.delegate = self;
+        NSIndexPath *i = [self.tableView indexPathForSelectedRow];
+        newWorkoutVC.workout = [_workouts objectAtIndex:(i.row - 1)];
+    }
+}
 
 
 

@@ -19,7 +19,6 @@
 @property (strong, nonatomic) id<NewWorkoutTableViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UISlider *timeSlider;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 // values
 @property (strong, nonatomic) Workout *workout;
@@ -33,7 +32,7 @@
 
 @protocol NewWorkoutTableViewControllerDelegate <NSObject>
 
-- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc;
+- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc workout:(Workout *)workout;
 - (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc;
 
 @end
