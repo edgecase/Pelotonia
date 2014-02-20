@@ -89,6 +89,11 @@
     [[UINavigationBar appearance] setBarTintColor:PRIMARY_DARK_GRAY];
     [[UINavigationBar appearance] setBackgroundColor:PRIMARY_DARK_GRAY];
 
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = SECONDARY_LIGHT_GRAY;
+    pageControl.currentPageIndicatorTintColor = SECONDARY_GREEN;
+    pageControl.backgroundColor = PRIMARY_DARK_GRAY;
+    
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
     [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];

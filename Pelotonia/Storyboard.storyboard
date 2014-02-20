@@ -363,6 +363,54 @@
             </objects>
             <point key="canvasLocation" x="916" y="254"/>
         </scene>
+        <!--Ride Photos View Controller-->
+        <scene sceneID="4kJ-uD-hnM">
+            <objects>
+                <collectionViewController storyboardIdentifier="RidersPhotoViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lQh-ey-GF0" customClass="RidePhotosViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="7vk-PR-Lgj">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.22352941334247589" green="0.83529412746429443" blue="0.17647059261798859" alpha="1" colorSpace="deviceRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wn9-JN-Xh7">
+                            <size key="itemSize" width="150" height="150"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="riderPhotoCell" id="5em-Nt-agc" customClass="RiderPhotoCell">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="k6I-Ru-CCE">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <size key="customSize" width="150" height="150"/>
+                                <connections>
+                                    <outlet property="imageView" destination="k6I-Ru-CCE" id="q7G-Kf-Y3x"/>
+                                    <segue destination="Lq1-ST-PnY" kind="push" identifier="segueToShowPhoto" id="gBa-VN-KoX"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="lQh-ey-GF0" id="Ybg-kN-QaN"/>
+                            <outlet property="delegate" destination="lQh-ey-GF0" id="6TB-9h-vXI"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="GZr-Oz-qAi"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7BB-9s-xll" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1581" y="623"/>
+        </scene>
         <!--About Table View Controller - About-->
         <scene sceneID="IN3-sS-WWU">
             <objects>
@@ -597,7 +645,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1998" y="1936"/>
+            <point key="canvasLocation" x="2030" y="2352"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -671,14 +719,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B2g-Z8-1ku">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B2g-Z8-1ku">
                                                     <rect key="frame" x="78" y="20" width="34" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zF-4i-CYf">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zF-4i-CYf">
                                                     <rect key="frame" x="78" y="42" width="43" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -765,15 +813,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="phd-Rx-WKQ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="phd-Rx-WKQ">
                                                     <rect key="frame" x="20" y="10" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="lRv-Ym-YpO">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="lRv-Ym-YpO">
                                                     <rect key="frame" x="120" y="10" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="BhL-xh-58e">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_default" id="BhL-xh-58e">
                                                     <rect key="frame" x="220" y="10" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -782,6 +830,9 @@
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="lQh-ey-GF0" kind="push" id="Ma3-yD-ajJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1025,7 +1076,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cp-O4-brO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3292" y="-400"/>
+            <point key="canvasLocation" x="3836" y="-1072"/>
         </scene>
         <!--Workout List Table View Controller - Workouts-->
         <scene sceneID="J4K-7a-ycC">
@@ -1117,7 +1168,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tTx-zW-enl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="-400"/>
+            <point key="canvasLocation" x="2582" y="-1072"/>
         </scene>
         <!--Find Rider View Controller-->
         <scene sceneID="q8h-0Q-4DF">
@@ -1183,7 +1234,58 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2064" y="-1069"/>
+            <point key="canvasLocation" x="1936" y="-1485"/>
+        </scene>
+        <!--Photo Page View Controller-->
+        <scene sceneID="kc5-qI-U6c">
+            <objects>
+                <pageViewController storyboardIdentifier="PhotoPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="3O5-B2-wF4" customClass="PhotoPageViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="kDh-XO-P2S"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JDv-Mg-jfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2619" y="279"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="AQH-gg-DCK">
+            <objects>
+                <viewController id="Lq1-ST-PnY" customClass="PhotoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n5U-m4-JP6">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="eGo-mK-oBK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SbI-ta-9rp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2037" y="623"/>
+        </scene>
+        <!--Single Photo View Controller-->
+        <scene sceneID="iZe-Lx-1MS">
+            <objects>
+                <viewController storyboardIdentifier="SinglePhotoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IXk-D3-aWK" customClass="SinglePhotoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Um9-iq-WvJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Tjh-5G-bzV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="frb-ct-RbU"/>
+                    <connections>
+                        <outlet property="imageView" destination="Tjh-5G-bzV" id="naw-FH-s19"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l3T-f9-msa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2619" y="1083"/>
         </scene>
         <!--Profile Table View Controller - Profile-->
         <scene sceneID="sul-NI-wcg">
@@ -1366,7 +1468,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1998" y="345"/>
+            <point key="canvasLocation" x="3200" y="-202"/>
         </scene>
         <!--Donors Table View Controller - Donors-->
         <scene sceneID="FtB-4h-IjJ">
@@ -1399,7 +1501,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krj-Oh-SZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3277" y="1735"/>
+            <point key="canvasLocation" x="3857" y="1399"/>
         </scene>
         <!--Send Pledge Modal View Controller-->
         <scene sceneID="mry-ek-Boq">
@@ -1496,7 +1598,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CFN-tP-zEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3277" y="137"/>
+            <point key="canvasLocation" x="3821" y="-394"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="SoG-UX-0Qg">
@@ -1511,7 +1613,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4or-18-pZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1998" y="1209"/>
+            <point key="canvasLocation" x="1950" y="1553"/>
         </scene>
         <!--Profile Details Table View Controller-->
         <scene sceneID="zDr-6D-YPF">
@@ -1586,7 +1688,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkZ-H9-ApC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3277" y="1035"/>
+            <point key="canvasLocation" x="3821" y="504"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
@@ -1718,7 +1820,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="viy-N5-9Ug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2656" y="-400"/>
+            <point key="canvasLocation" x="3200" y="-1072"/>
         </scene>
     </scenes>
     <resources>
@@ -1747,6 +1849,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <segue reference="42R-2Z-EJ1"/>
         <segue reference="lZa-h3-ufJ"/>
         <segue reference="tZz-dL-tdX"/>
-        <segue reference="U5L-8o-ukn"/>
+        <segue reference="8kp-EY-Irn"/>
     </inferredMetricsTieBreakers>
 </document>

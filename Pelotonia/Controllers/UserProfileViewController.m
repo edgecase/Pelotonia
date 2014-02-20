@@ -130,7 +130,7 @@
         if (image == nil) {
             // load the image from the absolute URL
             [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-                [view setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
+                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
             } failureBlock:^(NSError *error) {
                 NSLog(@"error loading image %@", [error localizedDescription]);
                 [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
@@ -239,8 +239,8 @@
         self.riderDistance.text = self.rider.route;
         
         [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [self.riderPhoto setImage:[image thumbnailImage:80 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-            [self.RiderCell layoutSubviews];
+            self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
+            [self.riderPhoto setImage:[image thumbnailImage:70 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
     }

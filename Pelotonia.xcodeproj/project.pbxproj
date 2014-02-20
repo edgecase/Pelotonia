@@ -375,6 +375,11 @@
 		BBAA247D18B05E93006BA30E /* WorkoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */; };
 		BBAA248018B0629A006BA30E /* NewWorkoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */; };
 		BBAA248218B251F3006BA30E /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAA248118B251F3006BA30E /* AssetsLibrary.framework */; };
+		BBAA248518B4484B006BA30E /* RidePhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248418B4484B006BA30E /* RidePhotosViewController.m */; };
+		BBAA248818B44C67006BA30E /* RiderPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248718B44C67006BA30E /* RiderPhotoCell.m */; };
+		BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248A18B4533C006BA30E /* SinglePhotoViewController.m */; };
+		BBAA248E18B5A631006BA30E /* PhotoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */; };
+		BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA249018B5B1D5006BA30E /* PhotoViewController.m */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
@@ -792,6 +797,16 @@
 		BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewWorkoutTableViewController.h; path = Controllers/NewWorkoutTableViewController.h; sourceTree = "<group>"; };
 		BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewWorkoutTableViewController.m; path = Controllers/NewWorkoutTableViewController.m; sourceTree = "<group>"; };
 		BBAA248118B251F3006BA30E /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		BBAA248318B4484B006BA30E /* RidePhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RidePhotosViewController.h; path = Controllers/RidePhotosViewController.h; sourceTree = "<group>"; };
+		BBAA248418B4484B006BA30E /* RidePhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RidePhotosViewController.m; path = Controllers/RidePhotosViewController.m; sourceTree = "<group>"; };
+		BBAA248618B44C67006BA30E /* RiderPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiderPhotoCell.h; path = Controllers/RiderPhotoCell.h; sourceTree = "<group>"; };
+		BBAA248718B44C67006BA30E /* RiderPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RiderPhotoCell.m; path = Controllers/RiderPhotoCell.m; sourceTree = "<group>"; };
+		BBAA248918B4533C006BA30E /* SinglePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SinglePhotoViewController.h; path = Controllers/SinglePhotoViewController.h; sourceTree = "<group>"; };
+		BBAA248A18B4533C006BA30E /* SinglePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SinglePhotoViewController.m; path = Controllers/SinglePhotoViewController.m; sourceTree = "<group>"; };
+		BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoPageViewController.h; path = Controllers/PhotoPageViewController.h; sourceTree = "<group>"; };
+		BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPageViewController.m; path = Controllers/PhotoPageViewController.m; sourceTree = "<group>"; };
+		BBAA248F18B5B1D5006BA30E /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoViewController.h; path = Controllers/PhotoViewController.h; sourceTree = "<group>"; };
+		BBAA249018B5B1D5006BA30E /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoViewController.m; path = Controllers/PhotoViewController.m; sourceTree = "<group>"; };
 		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
 		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -1386,14 +1401,24 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
 				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
+				BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */,
+				BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */,
+				BBAA248F18B5B1D5006BA30E /* PhotoViewController.h */,
+				BBAA249018B5B1D5006BA30E /* PhotoViewController.m */,
 				BB2865E8176ABB05001BA804 /* ProfileDetailsTableViewController.h */,
 				BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */,
 				4DFA61DE15F8545800BD7514 /* ProfileTableViewController.h */,
 				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
+				BBAA248318B4484B006BA30E /* RidePhotosViewController.h */,
+				BBAA248418B4484B006BA30E /* RidePhotosViewController.m */,
+				BBAA248618B44C67006BA30E /* RiderPhotoCell.h */,
+				BBAA248718B44C67006BA30E /* RiderPhotoCell.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
 				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
 				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
+				BBAA248918B4533C006BA30E /* SinglePhotoViewController.h */,
+				BBAA248A18B4533C006BA30E /* SinglePhotoViewController.m */,
 				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
 				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
 				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
@@ -1874,6 +1899,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCE3B7C315AE49DA00205530 /* main.m in Sources */,
+				BBAA248E18B5A631006BA30E /* PhotoPageViewController.m in Sources */,
 				BCE3B7C715AE49DA00205530 /* AppDelegate.m in Sources */,
 				BBAA222718AD9C2E006BA30E /* RiderTableViewCell.m in Sources */,
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
@@ -1881,19 +1907,23 @@
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				BBAA222A18AEEBB4006BA30E /* Donor.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
+				BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */,
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
 				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
 				4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */,
+				BBAA248818B44C67006BA30E /* RiderPhotoCell.m in Sources */,
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
+				BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
 				BBAA223018AFA0BB006BA30E /* DonorTableViewCell.m in Sources */,
+				BBAA248518B4484B006BA30E /* RidePhotosViewController.m in Sources */,
 				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
