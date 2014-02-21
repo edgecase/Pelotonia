@@ -77,6 +77,12 @@
     [self configureView];
 }
 
+- (IBAction)rideDateChanged:(id)sender {
+    UIDatePicker *datePicker = (UIDatePicker *)sender;
+    self.workout.date = datePicker.date;
+    [self configureView];
+}
+
 - (void)configureView
 {
     self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
@@ -171,6 +177,7 @@
         [self configureView];
     }
 }
+
 
 #pragma mark -- TextViewDelegate methods
 - (void)textViewDidEndEditing:(UITextView *)textView

@@ -30,6 +30,7 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)distanceSliderChanged:(id)sender;
 - (IBAction)timeSliderChanged:(id)sender;
+- (IBAction)rideDateChanged:(id)sender;
 
 @end
 
