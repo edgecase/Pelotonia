@@ -124,22 +124,13 @@
 - (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
 {
     NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
-    [[SDImageCache sharedImageCache] queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) {
-        // set image
-        NSLog(@"returned image cacheType %d", cacheType);
-        if (image == nil) {
-            // load the image from the absolute URL
-            [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
-            } failureBlock:^(NSError *error) {
-                NSLog(@"error loading image %@", [error localizedDescription]);
-                [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-            }];
-        }
-        else {
-            [view setImage:image];
-        }
-    }];
+        // load the image from the asset library
+        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+        } failureBlock:^(NSError *error) {
+            NSLog(@"error loading image %@", [error localizedDescription]);
+            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+        }];
 }
 
 - (void)configureRecentPhotos
@@ -448,13 +439,10 @@
     UIImage *originalImage, *editedImage, *imageToSave;
     
     // Handle a still image capture
-    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
-        == kCFCompareEqualTo) {
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo) {
         
-        editedImage = (UIImage *) [info objectForKey:
-                                   UIImagePickerControllerEditedImage];
-        originalImage = (UIImage *) [info objectForKey:
-                                     UIImagePickerControllerOriginalImage];
+        editedImage = (UIImage *) [info objectForKey:UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
         
         if (editedImage) {
             imageToSave = editedImage;

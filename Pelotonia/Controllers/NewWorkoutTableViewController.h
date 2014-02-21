@@ -19,6 +19,9 @@
 @property (strong, nonatomic) id<NewWorkoutTableViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UISlider *timeSlider;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UILabel *workoutTypeLabel;
 
 // values
 @property (strong, nonatomic) Workout *workout;

@@ -9,7 +9,10 @@
 #import "NewWorkoutTableViewController.h"
 #import "NSDate+Helper.h"
 
-@interface NewWorkoutTableViewController ()
+@interface NewWorkoutTableViewController () {
+    BOOL _isEditingRideDate;
+    BOOL _isEditingWorkoutType;
+}
 
 @end
 
@@ -30,12 +33,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _isEditingRideDate = NO;
+    _isEditingWorkoutType = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+    self.distanceSlider.value = (float)self.workout.distanceInMiles;
+    self.timeSlider.value = (float)self.workout.timeInMinutes;
+
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,17 +80,13 @@
 - (void)configureView
 {
     self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
-    self.distanceSlider.value = (float)self.workout.distanceInMiles;
     self.descriptionTextView.text = self.workout.description;
     self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d Hours", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
-    self.timeSlider.value = (float)self.workout.timeInMinutes;
+    self.workoutTypeLabel.text = self.workout.typeDescription;
+    self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
+    [self.datePicker setDate:self.workout.date];
 }
 
-- (NSString *)cellIDForIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray *cellIDs = @[@"DescriptionCellID", @"DateCellID", @"WorkoutTypeCellID", @"DistanceCellID", @"TimeCellID"];
-    return [cellIDs objectAtIndex:indexPath.row];
-}
 
 #pragma mark -- UITableView stuff
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,56 +94,45 @@
     if (indexPath.row != 0) {
         [self.descriptionTextView resignFirstResponder];
     }
+    if (indexPath.section == 0 && indexPath.row == 1) { // this is my date cell above the picker cell
+        _isEditingRideDate = !_isEditingRideDate;
+        _isEditingWorkoutType = NO;
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
+        }];
+    }
+    if (indexPath.section == 0 && indexPath.row == 3) { // the cell above the workout type picker
+        _isEditingWorkoutType = !_isEditingWorkoutType;
+        _isEditingRideDate = NO;
+        [UIView animateWithDuration:.4 animations:^{
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
+        }];
+        
+    }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSNumber *height;
-    if (!height) {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:[self cellIDForIndexPath:indexPath]];
-        height = @(cell.bounds.size.height);
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 2) { // this is my date picker cell
+        if (_isEditingRideDate) {
+            return 162;
+        }
+        else {
+            return 0;
+        }
     }
-    return [height floatValue];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 5;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:[self cellIDForIndexPath:indexPath]];
-    
-    if (indexPath.row == 0) {
-        // description cell
-        self.descriptionTextView = (UITextView *)[_cell viewWithTag:100];
-        self.descriptionTextView.delegate = self;
+    else if (indexPath.section == 0 && indexPath.row == 4) {
+        if (_isEditingWorkoutType) {
+            return 162;
+        }
+        else {
+            return 0;
+        }
     }
-    else if (indexPath.row == 1) {
-        // date cell
-        _cell.detailTextLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
+    else {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
-    else if (indexPath.row == 2) {
-        _cell.textLabel.text = self.workout.typeDescription;
-    }
-    else if (indexPath.row == 3) {
-        // distance slider row
-        self.distanceLabel = (UILabel *)[_cell viewWithTag:100];
-        self.distanceSlider = (UISlider *)[_cell viewWithTag:101];
-        [self.distanceSlider addTarget:self action:@selector(distanceSliderChanged:) forControlEvents:UIControlEventValueChanged];
-    }
-    else if (indexPath.row == 4) {
-        // time cell
-        self.timeLabel = (UILabel *)[_cell viewWithTag:100];
-        self.timeSlider = (UISlider *)[_cell viewWithTag:101];
-        [self.timeSlider addTarget:self action:@selector(timeSliderChanged:) forControlEvents:UIControlEventValueChanged];
-    }
-    [self configureView];
-    
-    return _cell;
-    
 }
 
 #pragma mark -- UIPickerView methods
@@ -175,6 +168,7 @@
     [self.descriptionTextView resignFirstResponder];
     if (component == 0) {
         self.workout.type = row;
+        [self configureView];
     }
 }
 
@@ -190,7 +184,5 @@
 {
     return YES;
 }
-
-
 
 @end
