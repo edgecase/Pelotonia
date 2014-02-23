@@ -26,7 +26,9 @@
 #define SECTION_1_HEADER_HEIGHT   40.0
 
 
-@interface ProfileTableViewController ()
+@interface ProfileTableViewController () {
+    AAPullToRefresh *_tv;
+}
 
 @end
 
@@ -51,13 +53,13 @@
     [super viewDidLoad];
     
     __weak ProfileTableViewController *weakSelf = self;
-    AAPullToRefresh *tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
-        NSLog(@"fire from top");
-        [weakSelf performSelectorInBackground:@selector(refreshRider:) withObject:v];
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        [weakSelf refreshRider:v];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:2.0f];
     }];
     
-    tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
-    tv.borderColor = [UIColor whiteColor];
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
     
     // set up socialize
     if (self.entity == nil)
@@ -110,6 +112,7 @@
 {
     [self configureView];
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -378,7 +381,6 @@
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
         [self getLikesByEntity];
-        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
         [self configureView];
     }
     onFailure:^(NSString *error) {

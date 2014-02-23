@@ -14,6 +14,7 @@
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
 #import "UIImage+Alpha.h"
+#import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
@@ -22,7 +23,9 @@
 
 @end
 
-@implementation UserProfileViewController
+@implementation UserProfileViewController {
+    AAPullToRefresh *_tv;
+}
 
 
 @synthesize currentUser;
@@ -42,12 +45,16 @@
     [super viewDidLoad];
     
     self.currentUser = [SZUserUtils currentUser];
+
+    __weak UserProfileViewController *weakSelf = self;
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        [weakSelf refreshUser];
+//        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
+    }];
     
-    // for pull to refresh view
-    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
-    [pull setDelegate:self];
-    [self.tableView addSubview:pull];
-    
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
+
     self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
     if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
         self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
@@ -55,19 +62,16 @@
         [self.navigationController.navigationBar setTranslucent:NO];
         self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     }
-    
-//    [self setNeedsStatusBarAppearanceUpdate];
 
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.currentUser = [SZUserUtils currentUser];
-    [self refreshUser];
+    [_tv manuallyTriggered];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self configureView];
+    self.currentUser = [SZUserUtils currentUser];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,13 +83,12 @@
 - (void)getActionsByUserOnAllEntities
 {
     [SZCommentUtils getCommentsByUser:nil first:nil last:nil success:^(NSArray *comments) {
-        NSLog(@"found comments %@", comments);
         self.recentComments = comments;
         [self.tableView reloadData];
-        [pull finishedLoading];
+        [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
+
     } failure:^(NSError *error) {
         NSLog(@"unable to get recent comments: %@", [error localizedDescription]);
-        [pull finishedLoading];
     }];
 }
 
@@ -97,13 +100,14 @@
 - (void)refreshUser
 {
     [self getActionsByUserOnAllEntities];
+    [self configureView];
 }
 
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
+
 }
 
 
@@ -207,6 +211,7 @@
 
         
         _cell = (UITableViewCell *)cell;
+        [_cell layoutSubviews];
     }
     
     return _cell;
@@ -336,16 +341,10 @@
 
 
 #pragma mark -- PullToRefreshDelegate
-- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
-{
-    [self performSelectorInBackground:@selector(refreshUser) withObject:nil];
-}
 
 -(void)manualRefresh:(NSNotification *)notification
 {
-    self.tableView.contentOffset = CGPointMake(0, -65);
-    [pull setState:PullToRefreshViewStateLoading];
-    [self performSelectorInBackground:@selector(refreshUser) withObject:nil];
+    [_tv manuallyTriggered];
 }
 
 

@@ -14,6 +14,8 @@
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
 #import "RidersViewController.h"
+#import "InitialSlidingViewController.h"
+#import "MenuViewController.h"
 #import <Socialize/Socialize.h>
 
 @implementation AppDelegate
@@ -98,15 +100,17 @@
         rider.profileUrl = [entity key];
         
         [rider refreshFromWebOnComplete:^(Rider *rider) {
+
+            // navigate to the riders view controller & show the profile
+            InitialSlidingViewController *rvc = (InitialSlidingViewController *)self.window.rootViewController;
+            UINavigationController *nvc = (UINavigationController *)rvc.topViewController;
+            
             ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
             profileViewController.rider = rider;
-            profileViewController.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
+            
             if (navigationController == nil)
             {
-                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-                [self.window.rootViewController presentViewController:navigationController animated:YES completion:^{
-                    profileViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:profileViewController action:@selector(done)];
-                }];
+                [nvc pushViewController:profileViewController animated:YES];
             } else {
                 [navigationController pushViewController:profileViewController animated:YES];
             }
