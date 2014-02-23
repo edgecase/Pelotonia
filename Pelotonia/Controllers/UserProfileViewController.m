@@ -120,7 +120,7 @@
             return [w2.date compare:w1.date];
         }];
         Workout *mostRecent = [workoutsSorted objectAtIndex:0];
-        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ - %d Miles", [mostRecent.date stringWithFormat:@"MMM dd"], mostRecent.distanceInMiles];
+        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ (%d Miles)", [mostRecent.date stringWithFormat:@"MMM dd"], mostRecent.distanceInMiles];
         self.milesThisYearLabel.text = [NSString stringWithFormat:@"%d", [self workoutMiles]];
     }
     else {

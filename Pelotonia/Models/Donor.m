@@ -24,4 +24,22 @@
     return self;
 }
 
+#pragma mark -- NSCoding
+
+// NSCoding
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_date forKey:@"date"];
+    [aCoder encodeObject:_amount forKey:@"amount"];
+    [aCoder encodeObject:_name forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        _date = [aDecoder decodeObjectForKey:@"date"];
+        _amount = [aDecoder decodeObjectForKey:@"amount"];
+        _name = [aDecoder decodeObjectForKey:@"name"];
+    }
+    return self;
+}
+
 @end
