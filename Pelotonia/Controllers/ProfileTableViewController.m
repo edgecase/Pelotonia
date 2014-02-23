@@ -25,7 +25,7 @@
 #import <Socialize/Socialize.h>
 #import "TestFlight.h"
 
-#define SECTION_1_HEADER_HEIGHT   40.0
+#define SECTION_1_HEADER_HEIGHT   60.0
 
 
 @interface ProfileTableViewController () {
@@ -39,7 +39,6 @@
 @synthesize nameAndRouteCell;
 @synthesize riderComments;
 @synthesize entity;
-@synthesize actionBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -285,16 +284,23 @@
     if (section == 1) {
         // create a view that says "Activity"
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
+        headerView.backgroundColor = PRIMARY_DARK_GRAY;
+        
+        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width*0.60, SECTION_1_HEADER_HEIGHT)];
+        sectionLabel.text = @"Rider Wall";
+        sectionLabel.backgroundColor = SECONDARY_GREEN;
+        sectionLabel.textColor = [UIColor whiteColor];
+        sectionLabel.font = [UIFont boldSystemFontOfSize:15];
+        sectionLabel.textAlignment = NSTextAlignmentCenter;
+        [headerView addSubview:sectionLabel];
+        
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        writePostButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        [writePostButton setTitle:@"Rider Wall" forState:UIControlStateNormal];
-        NSInteger writeButtonW = tableView.bounds.size.width;
-        NSInteger writeButtonH = 35;
-        [writePostButton setFrame:CGRectMake((self.view.bounds.size.width - writeButtonW)/2,
+        NSInteger writeButtonW = (tableView.bounds.size.width * 0.40)-2;
+        NSInteger writeButtonH = SECTION_1_HEADER_HEIGHT;
+        [writePostButton setFrame:CGRectMake(sectionLabel.bounds.size.width + 2,
                                              0, writeButtonW, writeButtonH)];
         [writePostButton setBackgroundColor:PRIMARY_GREEN];
-        [writePostButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        writePostButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+        writePostButton.tintColor = [UIColor whiteColor];
         [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
         

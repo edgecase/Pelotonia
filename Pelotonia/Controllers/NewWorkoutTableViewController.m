@@ -20,6 +20,7 @@
 
 @synthesize workout;
 @synthesize delegate;
+@synthesize isNewWorkout;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,7 +43,18 @@
     [super viewWillAppear:animated];
     self.distanceSlider.value = (float)self.workout.distanceInMiles;
     self.timeSlider.value = (float)self.workout.timeInMinutes;
-
+    if (self.isNewWorkout) {
+        // set up the cancel/done buttons
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+        self.navigationItem.rightBarButtonItem = doneButton;
+    }
+    else {
+        // set up the "share" button
+        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+        self.navigationItem.rightBarButtonItem = shareButton;
+    }
     [self configureView];
 }
 
@@ -61,6 +73,10 @@
 
 - (IBAction)cancel:(id)sender {
     [self.delegate userDidCancelNewWorkout:self];
+}
+
+- (IBAction)share:(id)sender {
+    
 }
 
 - (IBAction)distanceSliderChanged:(id)sender {
@@ -87,7 +103,7 @@
 {
     self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
     self.descriptionTextView.text = self.workout.description;
-    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d Hours", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
+    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
     self.workoutTypeLabel.text = self.workout.typeDescription;
     self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
     [self.datePicker setDate:self.workout.date];

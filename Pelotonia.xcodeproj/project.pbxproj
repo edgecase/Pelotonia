@@ -77,6 +77,8 @@
 		BB78D33217FA8D3100DE639C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33117FA8D3100DE639C /* Media.xcassets */; };
 		BB78D33417FA925500DE639C /* profile_default_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = BB78D33317FA925500DE639C /* profile_default_thumb.png */; };
 		BB822A1B17FBAA8500ABCA5C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */; };
+		BB93182818B91ED3003A3AC0 /* PelotoniaProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */; };
+		BB93182B18B99F97003A3AC0 /* NSNumber+Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = BB93182A18B99F97003A3AC0 /* NSNumber+Currency.m */; };
 		BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */; };
 		BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9E096D171AFF360093FDD5 /* MenuViewController.m */; };
 		BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA66C14172A9FD9002DE00A /* ActivityViewController.m */; };
@@ -487,6 +489,10 @@
 		BB78D33117FA8D3100DE639C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		BB78D33317FA925500DE639C /* profile_default_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_default_thumb.png; sourceTree = "<group>"; };
 		BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		BB93182618B91ED3003A3AC0 /* PelotoniaProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PelotoniaProfileViewController.h; path = Controllers/PelotoniaProfileViewController.h; sourceTree = "<group>"; };
+		BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PelotoniaProfileViewController.m; path = Controllers/PelotoniaProfileViewController.m; sourceTree = "<group>"; };
+		BB93182918B99F97003A3AC0 /* NSNumber+Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Currency.h"; sourceTree = "<group>"; };
+		BB93182A18B99F97003A3AC0 /* NSNumber+Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Currency.m"; sourceTree = "<group>"; };
 		BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitialSlidingViewController.h; path = Controllers/InitialSlidingViewController.h; sourceTree = "<group>"; };
 		BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InitialSlidingViewController.m; path = Controllers/InitialSlidingViewController.m; sourceTree = "<group>"; };
 		BB9E096C171AFF360093FDD5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Controllers/MenuViewController.h; sourceTree = "<group>"; };
@@ -893,10 +899,10 @@
 		0531B93E15B24FF00015A003 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				BB78D33317FA925500DE639C /* profile_default_thumb.png */,
 				4DB6493815C60FA300980FCB /* Baksheesh */,
 				4DB6493715C60F8900980FCB /* PFDinTextPro */,
 				0531B94115B3206D0015A003 /* profile_default.jpg */,
+				BB78D33317FA925500DE639C /* profile_default_thumb.png */,
 				0531B93F15B24FF00015A003 /* profile_default_thumb.jpg */,
 			);
 			path = Assets;
@@ -1377,6 +1383,8 @@
 				BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */,
 				BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */,
 				BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */,
+				BB93182918B99F97003A3AC0 /* NSNumber+Currency.h */,
+				BB93182A18B99F97003A3AC0 /* NSNumber+Currency.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1401,6 +1409,8 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
 				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
+				BB93182618B91ED3003A3AC0 /* PelotoniaProfileViewController.h */,
+				BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */,
 				BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */,
 				BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */,
 				BBAA248F18B5B1D5006BA30E /* PhotoViewController.h */,
@@ -1912,6 +1922,7 @@
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
 				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
+				BB93182B18B99F97003A3AC0 /* NSNumber+Currency.m in Sources */,
 				4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */,
 				BBAA248818B44C67006BA30E /* RiderPhotoCell.m in Sources */,
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
@@ -1934,6 +1945,7 @@
 				BBAA247D18B05E93006BA30E /* WorkoutListTableViewController.m in Sources */,
 				BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */,
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
+				BB93182818B91ED3003A3AC0 /* PelotoniaProfileViewController.m in Sources */,
 				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 				BBAA222D18AF9F7A006BA30E /* DonorsTableViewController.m in Sources */,
 				BBAA247618B04B4C006BA30E /* Workout.m in Sources */,

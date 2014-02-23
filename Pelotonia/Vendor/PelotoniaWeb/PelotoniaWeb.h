@@ -12,4 +12,5 @@
 @interface PelotoniaWeb : NSObject
 + (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
 + (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
++ (void)getPelotoniaStatsOnComplete:(void(^)(NSString *amtRaised, NSString *numRiders))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
 @end

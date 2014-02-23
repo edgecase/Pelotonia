@@ -56,6 +56,8 @@
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;
 
++ (Rider *)pelotoniaRider;
+
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 - (id)initWithCoder:(NSCoder *)aDecoder;

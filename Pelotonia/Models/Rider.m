@@ -227,5 +227,11 @@
     }];
 }
 
++ (Rider *)pelotoniaRider
+{
+    Rider *pelotonia = [[Rider alloc] initWithName:@"Pelotonia" andId:nil];
+    pelotonia.profileUrl = @"http://www.pelotonia.org";
+    return pelotonia;
+}
 
 @end

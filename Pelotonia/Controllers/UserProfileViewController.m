@@ -31,6 +31,7 @@
 @end
 
 @implementation UserProfileViewController {
+    NSArray *_workouts;
 }
 
 
@@ -54,6 +55,7 @@
     [super viewDidLoad];
     self.library = [[ALAssetsLibrary alloc] init];
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
+    _workouts = [[AppDelegate sharedDataController] workouts];
 
     __weak UserProfileViewController *weakSelf = self;
     AAPullToRefresh *_tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
@@ -76,6 +78,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self refreshUser];
+
 }
 
 - (void)viewDidUnload {
@@ -94,31 +97,36 @@
 
 #pragma mark -- regular implementation
 
-- (void)configureView
-{
-    Rider *favorite = [AppDelegate sharedDataController].favoriteRider;
-    [self setRiderCellValues:favorite];
+- (void) configureView {
     [self configureRecentPhotos];
     [self configureWorkoutCell];
+    [self setRiderCellValues];
 }
 
+- (NSInteger)workoutMiles {
+    NSInteger sum = 0;
+    for (Workout *w in _workouts) {
+        sum += w.distanceInMiles;
+    }
+    return sum;
+}
 - (void)configureWorkoutCell
 {
     // show details of most recent workout
-    if ([[[AppDelegate sharedDataController] workouts] count] > 0) {
-        NSArray *workouts = [[[AppDelegate sharedDataController] workouts] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    if ([_workouts count] > 0) {
+        NSArray *workoutsSorted = [_workouts sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             Workout *w1 = (Workout *)obj1;
             Workout *w2 = (Workout *)obj2;
-            return [w1.date compare:w2.date];
+            return [w2.date compare:w1.date];
         }];
-        Workout *mostRecent = [workouts objectAtIndex:([workouts count] - 1)];
-        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ - %d Miles",
-                                      [mostRecent.date stringWithFormat:@"MM/dd/yyyy"], mostRecent.distanceInMiles];
+        Workout *mostRecent = [workoutsSorted objectAtIndex:0];
+        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ - %d Miles", [mostRecent.date stringWithFormat:@"MMM dd"], mostRecent.distanceInMiles];
+        self.milesThisYearLabel.text = [NSString stringWithFormat:@"%d", [self workoutMiles]];
     }
     else {
-        self.recentWorkoutDateLabel.text = @"";
+        self.recentWorkoutDateLabel.text = @"None Yet";
+        self.milesThisYearLabel.text = @"0";
     }
-    [self.tableView reloadData];
 }
 
 - (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
@@ -153,31 +161,18 @@
     if ([photos count] >= 3) {
         [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
     }
-    
-    [self.tableView reloadData];
 }
 
 - (void)refreshUser
 {
-    Rider *rider = [[AppDelegate sharedDataController] favoriteRider];
-    if (rider) {
-        
-        [PelotoniaWeb searchForRiderWithLastName:nil riderId:rider.riderId onComplete:^(NSArray *searchResults) {
-            if ([searchResults count] > 0) {
-                Rider *foundRider = [searchResults objectAtIndex:0];
-                [foundRider refreshFromWebOnComplete:^(Rider *rider) {
-                    [[AppDelegate sharedDataController] setFavoriteRider:rider];
-                    [self configureView];
-                } onFailure:^(NSString *errorMessage) {
-                    NSLog(@"Unable to refresh user");
-                }];
-            }
+    if (self.rider) {
+        [self.rider refreshFromWebOnComplete:^(Rider *rider) {
+            [[AppDelegate sharedDataController] setFavoriteRider:rider];
+            [self configureView];
         } onFailure:^(NSString *errorMessage) {
-            NSLog(@"Unable to refresh rider");
+            NSLog(@"Unable to refresh user");
         }];
-        
     }
-    [self configureView];
 }
 
 
@@ -201,39 +196,47 @@
         workoutVC.navigationItem.backBarButtonItem.title = self.rider.name;
     }
     
+    if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {
+        // create a new workout
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        newWorkoutVC.workout = [Workout defaultWorkout];
+        newWorkoutVC.delegate = self;
+        newWorkoutVC.isNewWorkout = YES;
+    }
+    
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+//    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
     // clicked a linked profile
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if ([[AppDelegate sharedDataController] favoriteRider]) {
-                [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:cell];
+            if (self.rider) {
+                [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:self];
             }
             else {
-                [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:cell];
+                [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:self];
             }
         }
     }
 }
 
-- (void)setRiderCellValues:(Rider *)rider
+- (void)setRiderCellValues
 {
-    if (rider) {
-        self.rider = rider;
+    if (self.rider) {
         self.riderName.text = self.rider.name;
         self.riderDistance.text = self.rider.route;
         
-        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
             [self.riderPhoto setImage:[image thumbnailImage:70 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+            [self.riderProfileCell layoutSubviews];
         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
+        
     }
     else {
         // let them pick a rider
@@ -241,27 +244,11 @@
         self.riderDistance.text = nil;
         [self.riderPhoto setImage:nil];
     }
+    self.riderName.font = PELOTONIA_FONT(21);
+    self.riderDistance.font = PELOTONIA_FONT(16);
+
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *_cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-
-    // rider profile cell
-    if (indexPath.row == 0) {
-        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-        _cell.textLabel.font = PELOTONIA_FONT(21);
-        _cell.detailTextLabel.font = PELOTONIA_FONT(12);
-        _cell.textLabel.textColor = SECONDARY_LIGHT_GRAY;
-        _cell.detailTextLabel.textColor = SECONDARY_GREEN;
-    }
-    
-    if (indexPath.row == 2) {
-    }
-    
-    return _cell;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -276,16 +263,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 10, 24)];
-    label.textColor = [UIColor whiteColor];
-    label.font = PELOTONIA_FONT(20);
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = [UIColor blackColor];
-    label.text = [self tableView:tableView titleForHeaderInSection:section];
-    
-    [headerView addSubview:label];
-    return headerView;
+    return [super tableView:tableView viewForHeaderInSection:section];
 }
 
 
@@ -327,6 +305,9 @@
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return UITableViewCellEditingStyleDelete;
+    }
     return UITableViewCellEditingStyleNone;
 }
 
@@ -335,7 +316,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the dataController
         [[AppDelegate sharedDataController] setFavoriteRider:nil];
-        
+        self.rider = nil;
+        [self setRiderCellValues];
+//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -353,7 +336,8 @@
 {
     [controller dismissViewControllerAnimated:YES completion:nil];
     [[AppDelegate sharedDataController] setFavoriteRider:rider];
-    [self configureView];
+    self.rider = rider;
+    [self setRiderCellValues];
 }
 
 - (IBAction)addPhotoToAlbum:(id)sender
@@ -361,6 +345,10 @@
     if (NO == [self startCameraControllerFromViewController:self usingDelegate:self]) {
         [self startMediaBrowserFromViewController:self usingDelegate:self];
     }
+}
+
+- (IBAction)signIn:(id)sender {
+    [SZUserUtils showUserSettingsInViewController:self completion:nil];
 }
 
 
@@ -467,6 +455,20 @@
             }
         }];
     }
+}
+
+#pragma mark -- NewWorkouTableViewControllerDelegate
+- (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc workout:(Workout *)workout
+{
+    [[[AppDelegate sharedDataController] workouts] addObject:workout];
+    _workouts = [[AppDelegate sharedDataController] workouts];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    [self configureWorkoutCell];
 }
 
 

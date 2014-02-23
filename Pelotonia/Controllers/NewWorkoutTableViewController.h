@@ -25,6 +25,7 @@
 
 // values
 @property (strong, nonatomic) Workout *workout;
+@property (assign, nonatomic) BOOL isNewWorkout;
 
 - (IBAction)done:(id)sender;
 - (IBAction)cancel:(id)sender;

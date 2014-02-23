@@ -18,7 +18,10 @@
 
 @implementation PelotoniaWeb
 
-+ (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
++ (void)searchForRiderWithLastName:(NSString *)lastName
+                           riderId:(NSString *)riderId
+                        onComplete:(void(^)(NSArray *searchResults))completeBlock
+                         onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     NSString *urlString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -83,7 +86,9 @@
 }
 
 
-+ (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
++ (void)profileForRider:(Rider *)rider
+             onComplete:(void(^)(Rider *rider))completeBlock
+              onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
     //NSURL *url = [NSURL URLWithString:rider.profileUrl];
     NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
@@ -228,5 +233,45 @@
     return value;
 }
 
++ (void)getPelotoniaStatsOnComplete:(void (^)(NSString *, NSString *))completeBlock
+                          onFailure:(void (^)(NSString *))failureBlock
+{
+    NSLog(@"looking for pelotonia stats on www.pelotonia.org");
+    
+    // Parse pelotonia.org's home page for the financial information
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:@"https://www.mypelotonia.org/counter_homepage.jsp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // parse the page for the amount of money being raised
+        TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
+        NSLog(@"%@", [operation responseString]);
+        NSString *raisedAmount = @"Coming Soon";
+        NSString *riders = @"Coming Soon";
+        
+        // figure out what type of rider we are first
+        NSString *raisedAmountXPath = @"//*[@id='amount-to-date']/text()";
+        
+        NSArray *nodes = [parser searchWithXPathQuery:raisedAmountXPath];
+        if ([nodes count] > 0) {
+            TFHppleElement *raisedAmountNode = [nodes objectAtIndex:0];
+            raisedAmount = [raisedAmountNode content];
+        }
+
+        NSString *ridersXPath = @"//*[@id='riders']/text()";
+        
+        nodes = [parser searchWithXPathQuery:ridersXPath];
+        if ([nodes count] > 0) {
+            TFHppleElement *ridersNode = [nodes objectAtIndex:0];
+            riders = [ridersNode content];
+        }
+
+        completeBlock(raisedAmount, riders);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Couldn't find the information on pelotonia");
+        // must be offline for a bit
+        failureBlock([error localizedDescription]);
+    }];
+}
 
 @end

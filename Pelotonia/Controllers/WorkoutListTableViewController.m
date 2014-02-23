@@ -152,14 +152,16 @@
         NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
         newWorkoutVC.delegate = self;
         newWorkoutVC.workout = [Workout defaultWorkout];
+        newWorkoutVC.isNewWorkout = YES;
     }
 
     if ([[segue identifier] isEqualToString:@"SegueToEditWorkout"]) {
         // open new workout dialog
-        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)segue.destinationViewController;
         newWorkoutVC.delegate = self;
         NSIndexPath *i = [self.tableView indexPathForSelectedRow];
         newWorkoutVC.workout = [_workouts objectAtIndex:(i.row - 1)];
+        newWorkoutVC.isNewWorkout = NO;
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import "RiderDataController.h"
 #import "PelotoniaWeb.h"
+#import "Workout.h"
 
 @implementation RiderDataController
 
@@ -47,6 +48,11 @@
     if (_workouts == nil) {
         _workouts = [[NSMutableArray alloc] initWithCapacity:0];
     }
+    [_workouts sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        Workout *w1 = (Workout *)obj1;
+        Workout *w2 = (Workout *)obj2;
+        return [w2.date compare:w1.date];
+    }];
     return _workouts;
 }
 

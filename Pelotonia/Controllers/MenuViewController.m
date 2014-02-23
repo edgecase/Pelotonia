@@ -108,13 +108,6 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == ID_USER_SETTINGS_MENU && indexPath.section == 0) {
-        // show the user settings menu
-        [SZUserUtils showUserSettingsInViewController:self completion:nil];
-    }
-}
 
 #pragma mark - preparation for segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

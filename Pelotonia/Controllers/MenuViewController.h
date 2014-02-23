@@ -17,7 +17,6 @@
 #define ID_REGISTER_MENU 0
 #define ID_SAFETY_MENU 1
 #define ID_ABOUT_PELOTONIA_MENU 2
-#define ID_USER_SETTINGS_MENU 3
 
 
 @interface MenuViewController : UITableViewController <PRPWebViewControllerDelegate>
