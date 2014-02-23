@@ -858,26 +858,6 @@
         <scene sceneID="m8a-Js-YyP">
             <objects>
                 <tableViewController id="QjF-de-6rP" customClass="ActivityViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8tp-ab-6n7">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellActivityUpdate" id="QS8-6Y-x6s">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QS8-6Y-x6s" id="nYu-ub-g1k">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="QjF-de-6rP" id="AA8-LO-jGw"/>
-                            <outlet property="delegate" destination="QjF-de-6rP" id="cNU-U6-Uex"/>
-                        </connections>
-                    </tableView>
                     <navigationItem key="navigationItem" title="Pelotonia Stream" id="VaX-jb-EiR">
                         <barButtonItem key="leftBarButtonItem" image="259-list" id="dOg-bp-OQa">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
@@ -1951,26 +1931,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0LU-A0-9lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="856" y="254"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gj7-xi-le6">
-            <objects>
-                <navigationController storyboardIdentifier="ActivityViewController" id="kEl-WH-vDA" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="2b3-yi-ylu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="QjF-de-6rP" kind="relationship" relationship="rootViewController" id="ivQ-Vi-YtH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JIv-4F-iVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="326" y="2344"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="crK-kO-1N3">
