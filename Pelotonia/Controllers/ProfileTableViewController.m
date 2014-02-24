@@ -107,7 +107,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [_tv manuallyTriggered];
+    [self refreshRider:_tv];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -358,7 +358,7 @@
 {
     [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
         self.riderComments = comments;
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
     }];

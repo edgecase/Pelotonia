@@ -74,11 +74,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self refreshUser];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [_tv manuallyTriggered];
-}
 
 - (void)viewDidUnload {
     [self setUserName:nil];
@@ -171,6 +169,9 @@
         } onFailure:^(NSString *errorMessage) {
             NSLog(@"Unable to refresh user");
         }];
+    }
+    else {
+        [self configureView];
     }
 }
 
