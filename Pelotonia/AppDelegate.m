@@ -13,6 +13,7 @@
 #import "TestFlight.h"
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
+#import "PelotoniaProfileViewController.h"
 #import "RidersViewController.h"
 #import "InitialSlidingViewController.h"
 #import "MenuViewController.h"
@@ -104,27 +105,45 @@
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
         NSDictionary *metaDict = [NSDictionary dictionaryWithContentsOfJSONString:[entity meta]];
         NSString *riderID = [metaDict objectForKey:@"riderID"];
-        Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
-        rider.profileUrl = [entity key];
         
-        [rider refreshFromWebOnComplete:^(Rider *rider) {
-
+        if ([riderID isEqualToString:@"PELOTONIA"]) {
+            // this is the pelotonia entity
             // navigate to the riders view controller & show the profile
             InitialSlidingViewController *rvc = (InitialSlidingViewController *)self.window.rootViewController;
             UINavigationController *nvc = (UINavigationController *)rvc.topViewController;
             
-            ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
-            profileViewController.rider = rider;
+            PelotoniaProfileViewController *pelotoniaVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"PelotoniaProfileViewController"];
             
             if (navigationController == nil)
             {
-                [nvc pushViewController:profileViewController animated:YES];
+                [nvc pushViewController:pelotoniaVC animated:YES];
             } else {
-                [navigationController pushViewController:profileViewController animated:YES];
+                [navigationController pushViewController:pelotoniaVC animated:YES];
             }
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
-        }];
+        }
+        else {
+            Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
+            rider.profileUrl = [entity key];
+            
+            [rider refreshFromWebOnComplete:^(Rider *rider) {
+
+                // navigate to the riders view controller & show the profile
+                InitialSlidingViewController *rvc = (InitialSlidingViewController *)self.window.rootViewController;
+                UINavigationController *nvc = (UINavigationController *)rvc.topViewController;
+                
+                ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
+                profileViewController.rider = rider;
+                
+                if (navigationController == nil)
+                {
+                    [nvc pushViewController:profileViewController animated:YES];
+                } else {
+                    [navigationController pushViewController:profileViewController animated:YES];
+                }
+            } onFailure:^(NSString *errorMessage) {
+                NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
+            }];
+        }
     }];
     
     // Handle Socialize notification at launch

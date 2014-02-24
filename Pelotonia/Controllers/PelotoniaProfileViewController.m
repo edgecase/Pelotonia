@@ -50,16 +50,16 @@
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
     
+    self.entity = [SZEntity entityWithKey:@"http://www.pelotonia.org" name:@"Pelotonia"];
     // set up socialize
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             pelotoniaStory, @"szsd_description",
                             @"http://pelotonia.org/wp-content/themes/pelotonia-2012/images/logo-pelotonia.png", @"szsd_thumb",
+                            @"PELOTONIA", @"riderID",
                             nil];
     
     NSString *jsonString = [params toJSONString];
     self.entity.meta = jsonString;
-
-    self.entity = [SZEntity entityWithKey:@"http://www.pelotonia.org" name:@"Pelotonia"];
     [SZEntityUtils addEntity:self.entity success:^(id<SZEntity> serverEntity) {
         NSLog(@"Successfully updated entity meta for Pelotonia");
     } failure:^(NSError *error) {
