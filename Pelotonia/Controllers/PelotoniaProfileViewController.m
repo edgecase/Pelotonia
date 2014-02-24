@@ -12,8 +12,11 @@
 #import "CommentTableViewCell.h"
 #import "TestFlight.h"
 #import "NSNumber+Currency.h"
+#import "NSDictionary+JSONConversion.h"
+
 
 #define SECTION_1_HEADER_HEIGHT 50.0
+#define PELOTONIA_TARGET_AMOUNT 15000000.0
 
 @interface PelotoniaProfileViewController () {
     AAPullToRefresh *_tv;
@@ -38,15 +41,24 @@
     
     // get the pull to refresh working
     __weak PelotoniaProfileViewController *weakSelf = self;
-    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
-        [weakSelf refresh];
-        [weakSelf reloadComments];
-        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
-    }];
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop
+                                     ActionHandler:^(AAPullToRefresh *v) {
+                                         [weakSelf refreshPelotonia];
+                                         [v performSelector:@selector(stopIndicatorAnimation)
+                                                 withObject:nil afterDelay:1.5f];
+                                     }];
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
     
     // set up socialize
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            pelotoniaStory, @"szsd_description",
+                            @"http://pelotonia.org/wp-content/themes/pelotonia-2012/images/logo-pelotonia.png", @"szsd_thumb",
+                            nil];
+    
+    NSString *jsonString = [params toJSONString];
+    self.entity.meta = jsonString;
+
     self.entity = [SZEntity entityWithKey:@"http://www.pelotonia.org" name:@"Pelotonia"];
     [SZEntityUtils addEntity:self.entity success:^(id<SZEntity> serverEntity) {
         NSLog(@"Successfully updated entity meta for Pelotonia");
@@ -54,7 +66,6 @@
         NSLog(@"Failure: %@", [error localizedDescription]);
     }];
     
-    [self refresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,23 +74,37 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_tv manuallyTriggered];
+}
+
+
 #pragma mark - Implementation
-- (void) refresh {
+- (void) refreshPelotonia {
     // get the updated amount of $$ raised
     [PelotoniaWeb getPelotoniaStatsOnComplete:^(NSString *amtRaised, NSString *numRiders) {
-        NSLog(@"got stats back. amtRaised $%@.  Riders: %@", amtRaised, numRiders);
         self.numberRidersLabel.text = numRiders;
         self.amountRaisedLabel.text = amtRaised;
-        NSLog(@"progress is %@%%", amtRaised);
         NSNumber *amtRaisedNumber = [NSNumber asString:amtRaised];
-        self.amountRaisedProgressView.progress = ([amtRaisedNumber floatValue]/15000000.0);
+        self.amountRaisedProgressView.progress = ([amtRaisedNumber floatValue]/PELOTONIA_TARGET_AMOUNT);
+        [self reloadComments];
     } onFailure:^(NSString *errorMessage) {
         NSLog(@"failed");
     }];
 }
 
 #pragma mark - Table view data source
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        // in the comment section - get the comment & view it
+        id<SocializeActivity> activity = [self.pelotoniaActivities objectAtIndex:indexPath.row];
+        SocializeActivityDetailsViewController *avc = [[SocializeActivityDetailsViewController alloc] initWithActivity:activity];
+        [self.navigationController pushViewController:avc animated:YES];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -116,6 +141,7 @@
     }
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -164,58 +190,6 @@
 }
 
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
 #pragma mark -- implementation
 
 - (void)manuallyShowCommentsList
@@ -230,7 +204,7 @@
 {
     [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
         self.pelotoniaActivities = comments;
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
     }];
@@ -257,7 +231,7 @@
         } else if (network == SZSocialNetworkFacebook) {
             SZShareOptions *fboptions = (SZShareOptions *)postData.options;
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"facebook"] objectForKey:@"entity_url"];
-            NSString *displayName = [postData.entity displayName];
+            NSString *displayName = @"Pelotonia";
             NSString *customMessage = [NSString stringWithFormat:@"%@", fboptions.text];
             
             [postData.params setObject:customMessage forKey:@"caption"];

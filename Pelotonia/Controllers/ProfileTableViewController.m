@@ -6,6 +6,11 @@
 //
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
+#import <Social/Social.h>
+#import <Socialize/Socialize.h>
 #import "ProfileTableViewController.h"
 #import "AppDelegate.h"
 #import "RiderDataController.h"
@@ -18,11 +23,6 @@
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
 #import "DonorsTableViewController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
-#import <AAPullToRefresh/AAPullToRefresh.h>
-#import <Social/Social.h>
-#import <Socialize/Socialize.h>
 #import "TestFlight.h"
 
 #define SECTION_1_HEADER_HEIGHT   60.0
@@ -34,7 +34,8 @@
 
 @end
 
-@implementation ProfileTableViewController 
+@implementation ProfileTableViewController
+
 @synthesize donationProgress;
 @synthesize nameAndRouteCell;
 @synthesize riderComments;
@@ -79,11 +80,6 @@
     } failure:^(NSError *error) {
         NSLog(@"Failure: %@", [error localizedDescription]);
     }];
-
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidUnload
@@ -101,25 +97,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self refreshRider:nil];
-    
     [SZViewUtils viewEntity:self.entity success:^(id<SocializeView> view) {
         NSLog(@"Entity recorded another view ");
     } failure:^(NSError *error) {
         NSLog(@"Unable to view entity %@", [self.entity displayName]);
     }];
 
-    [self configureView];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_tv manuallyTriggered];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)dealloc
-{
 }
 
 //implementation
@@ -230,7 +223,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return [super numberOfSectionsInTableView:tableView];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -375,7 +368,11 @@
 - (void)refreshRider:(AAPullToRefresh *)v
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
+        self.rider = updatedRider;
         [self configureView];
+
+        // update the comments in section 2 of our table
+        [self reloadComments];
     }
     onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
@@ -432,17 +429,18 @@
 
     // now we resize the photo and the cell so that the photo looks right
     if (self.rider.riderPhotoUrl) {
-        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"pelotonia-icon"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            if (error) {
-                NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-            }
-            [self.nameAndRouteCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
-            [self.nameAndRouteCell layoutSubviews];
-        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.nameAndRouteCell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
+                                        placeholderImage:[UIImage imageNamed:@"speedy_arrow"]
+                                                 options:SDWebImageRefreshCached
+                                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                                   if (error) {
+                                                       NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
+                                                   }
+                                                   [self.nameAndRouteCell layoutSubviews];
+                                               } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
     
-    // update the comments in section 2 of our table
-    [self reloadComments];
 }
 
 - (void)postAlert:(NSString *)msg {

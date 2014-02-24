@@ -32,6 +32,7 @@
 
 @implementation UserProfileViewController {
     NSArray *_workouts;
+    AAPullToRefresh *_tv;
 }
 
 
@@ -58,7 +59,7 @@
     _workouts = [[AppDelegate sharedDataController] workouts];
 
     __weak UserProfileViewController *weakSelf = self;
-    AAPullToRefresh *_tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshUser];
         [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
     }];
@@ -69,7 +70,6 @@
     // logo in title bar
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
     self.navigationItem.titleView = imageView;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,8 +77,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self refreshUser];
-
+    [_tv manuallyTriggered];
 }
 
 - (void)viewDidUnload {
@@ -100,7 +99,7 @@
 - (void) configureView {
     [self configureRecentPhotos];
     [self configureWorkoutCell];
-    [self setRiderCellValues];
+    [self configureRiderCell];
 }
 
 - (NSInteger)workoutMiles {
@@ -210,7 +209,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
     // clicked a linked profile
     if (indexPath.section == 0) {
@@ -225,24 +223,25 @@
     }
 }
 
-- (void)setRiderCellValues
+- (void)configureRiderCell
 {
     if (self.rider) {
         self.riderName.text = self.rider.name;
         self.riderDistance.text = self.rider.route;
         
-        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"profile_default_thumb"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
-            [self.riderPhoto setImage:[image thumbnailImage:70 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-            [self.riderProfileCell layoutSubviews];
-        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
+        self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]
+                        placeholderImage:[UIImage imageNamed:@"speedy_arrow"]
+                                 options:SDWebImageRefreshCached
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                   [self.riderProfileCell layoutSubviews];
+                               } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
     else {
         // let them pick a rider
-        self.riderName.text = @"Choose your Rider Profile";
+        self.riderName.text = @"Your Rider Profile";
         self.riderDistance.text = nil;
-        [self.riderPhoto setImage:nil];
+        [self.riderPhoto setImage:[UIImage imageNamed:@"speedy_arrow"]];
     }
     self.riderName.font = PELOTONIA_FONT(21);
     self.riderDistance.font = PELOTONIA_FONT(16);
@@ -317,8 +316,7 @@
         // Delete the row from the dataController
         [[AppDelegate sharedDataController] setFavoriteRider:nil];
         self.rider = nil;
-        [self setRiderCellValues];
-//        [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self configureRiderCell];
     }
 }
 
@@ -337,7 +335,7 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
     [[AppDelegate sharedDataController] setFavoriteRider:rider];
     self.rider = rider;
-    [self setRiderCellValues];
+    [self configureRiderCell];
 }
 
 - (IBAction)addPhotoToAlbum:(id)sender
@@ -363,7 +361,6 @@
         || (delegate == nil)
         || (controller == nil))
         return NO;
-    
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;

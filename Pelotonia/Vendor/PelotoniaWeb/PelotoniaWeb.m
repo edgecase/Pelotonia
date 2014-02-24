@@ -244,7 +244,6 @@
     [manager GET:@"https://www.mypelotonia.org/counter_homepage.jsp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // parse the page for the amount of money being raised
         TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
-        NSLog(@"%@", [operation responseString]);
         NSString *raisedAmount = @"Coming Soon";
         NSString *riders = @"Coming Soon";
         

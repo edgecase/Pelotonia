@@ -7,8 +7,14 @@
 //
 
 #import "PhotoViewController.h"
+#import "TestFlight.h"
+#import <Socialize/Socialize.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Social/Social.h>
 
-@interface PhotoViewController ()
+@interface PhotoViewController () {
+    ALAssetsLibrary *library;
+}
 
 @end
 
@@ -16,7 +22,7 @@
 
 @synthesize pageViewController = _pageViewController;
 @synthesize photos;
-@synthesize currentPhotoIndex;
+@synthesize initialPhotoIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +39,9 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoPageViewController"];
     self.pageViewController.delegate = self;
     self.pageViewController.dataSource = self;
+    library = [[ALAssetsLibrary alloc] init];
     
-    SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:currentPhotoIndex];
+    SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:self.initialPhotoIndex];
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
@@ -86,8 +93,8 @@
     return [self viewControllerAtIndex:index];
 }
 
-- (UIViewController *)pageViewController:
-(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
+       viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSUInteger index = [self indexOfViewController:(SinglePhotoViewController *)viewController];
     if (index == NSNotFound) {
@@ -108,8 +115,73 @@
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
 {
-    return self.currentPhotoIndex;
+    return self.initialPhotoIndex;
 }
 
 
+- (IBAction)sharePhoto:(id)sender {
+    // prompt for which service to share with (FB/Twitter/etc)
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Facebook", @"Twitter", nil];
+    [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        if (buttonIndex == 0) {
+            [self shareCurrentPhotoWithFacebook];
+        }
+        if (buttonIndex == 1) {
+            [self shareCurrentPhotoWithTwitter];
+        }
+    }
+}
+
+- (void)shareCurrentPhotoWithFacebook
+{
+    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
+    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
+    
+    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
+        // success - share the photo via facebook
+        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            
+            [controller setInitialText:@"Another great time with Pelotonia"];
+            [controller addURL:[NSURL URLWithString:@"http://www.pelotonia.org"]];
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            CGImageRef image = [rep fullScreenImage];
+            [controller addImage:[UIImage imageWithCGImage:image]];
+            [self presentViewController:controller animated:YES completion:Nil];
+        }
+    } failureBlock:^(NSError *error) {
+        // failure
+        NSLog(@"An error occurred: %@", [error localizedDescription]);
+    }];
+}
+
+- (void)shareCurrentPhotoWithTwitter
+{
+    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
+    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
+    
+    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
+        // success - share the photo via twitter
+        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+        {
+            SLComposeViewController *controller = [SLComposeViewController
+                                                   composeViewControllerForServiceType:SLServiceTypeTwitter];
+            [controller setInitialText:@"Another great time with Pelotonia!"];
+            [controller addURL:[NSURL URLWithString:@"http://www.pelotonia.org"]];
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            CGImageRef image = [rep fullScreenImage];
+            [controller addImage:[UIImage imageWithCGImage:image]];
+            [self presentViewController:controller animated:YES completion:nil];
+        }
+    } failureBlock:^(NSError *error) {
+        // failure
+        NSLog(@"An error occurred: %@", [error localizedDescription]);
+    }];
+
+}
 @end
