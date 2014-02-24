@@ -134,6 +134,12 @@
     }
     
     // call the Appirater class
+    [Appirater setAppId:@"550038050"];
+    [Appirater setDaysUntilPrompt:5];
+    [Appirater setUsesUntilPrompt:3];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
 
     return YES;

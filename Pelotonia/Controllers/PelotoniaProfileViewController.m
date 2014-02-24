@@ -117,6 +117,9 @@
     }
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -188,6 +191,50 @@
         return [super tableView:tableView heightForHeaderInSection:section];
     }
 }
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    }
+    else {
+        id<SZComment> riderComment = [self.pelotoniaActivities objectAtIndex:indexPath.row];
+        NSString *comment = [riderComment text];
+        NSString *title = @"title";
+        return [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // if dynamic section make all rows the same indentation level as row 0
+    if (indexPath.section == 1) {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]];
+    } else {
+        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
+    }
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 
 
 #pragma mark -- implementation
