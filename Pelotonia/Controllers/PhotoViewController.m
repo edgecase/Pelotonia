@@ -8,6 +8,7 @@
 
 #import "PhotoViewController.h"
 #import "TestFlight.h"
+#import "AppDelegate.h"
 #import <Socialize/Socialize.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Social/Social.h>
@@ -121,7 +122,7 @@
 
 - (IBAction)sharePhoto:(id)sender {
     // prompt for which service to share with (FB/Twitter/etc)
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Facebook", @"Twitter", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"Twitter", nil];
     [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
 }
 
@@ -137,6 +138,7 @@
     }
 }
 
+
 - (void)shareCurrentPhotoWithFacebook
 {
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
@@ -147,8 +149,7 @@
         if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
             SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
             
-            [controller setInitialText:@"Another great time with Pelotonia"];
-            [controller addURL:[NSURL URLWithString:@"http://www.pelotonia.org"]];
+            [controller setInitialText:@""];
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             CGImageRef image = [rep fullScreenImage];
             [controller addImage:[UIImage imageWithCGImage:image]];
@@ -171,8 +172,7 @@
         {
             SLComposeViewController *controller = [SLComposeViewController
                                                    composeViewControllerForServiceType:SLServiceTypeTwitter];
-            [controller setInitialText:@"Another great time with Pelotonia!"];
-            [controller addURL:[NSURL URLWithString:@"http://www.pelotonia.org"]];
+            [controller setInitialText:@""];
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             CGImageRef image = [rep fullScreenImage];
             [controller addImage:[UIImage imageWithCGImage:image]];

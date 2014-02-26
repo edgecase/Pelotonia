@@ -149,6 +149,10 @@
         return [date2 compare:date1];
     }];
     
+    [self.recentImage1 setImage:[UIImage imageNamed:@"profile_default_thumb"]];
+    [self.recentImage2 setImage:nil];
+    [self.recentImage3 setImage:nil];
+    
     if ([photos count] >= 1) {
         [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
     }
@@ -194,6 +198,7 @@
     if ([[segue identifier] isEqualToString:@"SegueToShowWorkoutList"]) {
         WorkoutListTableViewController *workoutVC = (WorkoutListTableViewController *)segue.destinationViewController;
         workoutVC.navigationItem.backBarButtonItem.title = self.rider.name;
+        workoutVC.rider = self.rider;
     }
     
     if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {

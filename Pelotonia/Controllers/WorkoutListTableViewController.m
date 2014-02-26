@@ -18,6 +18,8 @@
 
 @implementation WorkoutListTableViewController
 
+@synthesize rider;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -162,6 +164,7 @@
         NSIndexPath *i = [self.tableView indexPathForSelectedRow];
         newWorkoutVC.workout = [_workouts objectAtIndex:(i.row - 1)];
         newWorkoutVC.isNewWorkout = NO;
+        newWorkoutVC.rider = self.rider;
     }
 }
 

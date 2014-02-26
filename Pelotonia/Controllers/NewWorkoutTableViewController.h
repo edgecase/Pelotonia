@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Workout.h"
+#import "Rider.h"
 
 @protocol NewWorkoutTableViewControllerDelegate;
 
-@interface NewWorkoutTableViewController : UITableViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
+@interface NewWorkoutTableViewController : UITableViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (strong, nonatomic) IBOutlet UIPickerView *workoutTypePicker;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
@@ -24,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *workoutTypeLabel;
 
 // values
+@property (strong, nonatomic) Rider *rider;
 @property (strong, nonatomic) Workout *workout;
 @property (assign, nonatomic) BOOL isNewWorkout;
 

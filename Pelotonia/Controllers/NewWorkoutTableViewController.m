@@ -6,8 +6,12 @@
 //
 //
 
+#import <Social/Social.h>
+#import <SDWebImage/SDImageCache.h>
+#import <SDWebImage/SDWebImageManager.h>
 #import "NewWorkoutTableViewController.h"
 #import "NSDate+Helper.h"
+#import "Rider.h"
 
 @interface NewWorkoutTableViewController () {
     BOOL _isEditingRideDate;
@@ -18,6 +22,7 @@
 
 @implementation NewWorkoutTableViewController
 
+@synthesize rider;
 @synthesize workout;
 @synthesize delegate;
 @synthesize isNewWorkout;
@@ -76,6 +81,55 @@
 }
 
 - (IBAction)share:(id)sender {
+    // share the workout details over facebook or twitter
+
+    // prompt for which service to share with (FB/Twitter/etc)
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share workout to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Facebook", @"Twitter", nil];
+    [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        if (buttonIndex == 0) {
+            [self shareCurrentWorkoutWithFacebook];
+        }
+        if (buttonIndex == 1) {
+            [self shareCurrentWorkoutWithTwitter];
+        }
+    }
+}
+
+- (void)shareCurrentWorkoutWithFacebook
+{
+    
+    // success - share the Workout via facebook
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %d miles, %@", self.workout.distanceInMiles, self.workout.description]];
+
+        if (self.rider) {
+            [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
+        }
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)shareCurrentWorkoutWithTwitter
+{
+    
+    // success - share the Workout via twitter
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *controller = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %d miles, %@", self.workout.distanceInMiles, self.workout.description]];
+        if (self.rider) {
+            [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
+        }
+        [self presentViewController:controller animated:YES completion:nil];
+    }
     
 }
 
