@@ -1,1 +1,1 @@
-include ':Pelotonia'
+include ':Pelotonia', ':socialize-sdk', ':android-ioc', ':facebook-android-sdk'

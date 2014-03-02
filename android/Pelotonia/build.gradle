@@ -1,16 +1,4 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.+'
-    }
-}
 apply plugin: 'android'
-
-repositories {
-    mavenCentral()
-}
 
 android {
     compileSdkVersion 19
@@ -22,7 +10,16 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-	compile 'com.android.support:appcompat-v7:+'
-	compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'org.jsoup:jsoup:1.7.3'
+    compile 'com.android.support:support-v4:+'
+    compile 'com.squareup.picasso:picasso:+'
+    compile project(':socialize-sdk')
+    compile project(':android-ioc')
+    compile project(':facebook-android-sdk')
 }
