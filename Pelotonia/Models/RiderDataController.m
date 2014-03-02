@@ -8,8 +8,13 @@
 
 #import "RiderDataController.h"
 #import "PelotoniaWeb.h"
+#import "Workout.h"
 
 @implementation RiderDataController
+
+@synthesize favoriteRider = _favoriteRider;
+@synthesize workouts = _workouts;
+@synthesize photoKeys = _photoKeys;
 
 - (void)initializeDefaultList {
     NSMutableArray *defaultList = [[NSMutableArray alloc] initWithCapacity:1];
@@ -30,6 +35,25 @@
 - (NSArray *)allRiders
 {
     return _riderList;
+}
+
+- (NSMutableArray *)photoKeys {
+    if (_photoKeys == nil) {
+        _photoKeys = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return _photoKeys;
+}
+
+- (NSMutableArray *)workouts {
+    if (_workouts == nil) {
+        _workouts = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    [_workouts sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        Workout *w1 = (Workout *)obj1;
+        Workout *w2 = (Workout *)obj2;
+        return [w2.date compare:w1.date];
+    }];
+    return _workouts;
 }
 
 - (unsigned)count
@@ -91,6 +115,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_riderList forKey:@"rider_list"];
+    [aCoder encodeObject:_favoriteRider forKey:@"favorite_rider"];
+    [aCoder encodeObject:_workouts forKey:@"workouts"];
+    [aCoder encodeObject:_photoKeys forKey:@"photos"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -99,6 +126,9 @@
     // and pass it to the setters.
     if (self = [super init]) {
         _riderList = [aDecoder decodeObjectForKey:@"rider_list"];
+        _favoriteRider = [aDecoder decodeObjectForKey:@"favorite_rider"];
+        _workouts = [aDecoder decodeObjectForKey:@"workouts"];
+        _photoKeys = [aDecoder decodeObjectForKey:@"photos"];
     }
     
     return self;

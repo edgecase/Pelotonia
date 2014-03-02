@@ -38,8 +38,7 @@
 @property (strong, nonatomic) NSArray *riderComments;
 
 // for the Socialize Action Bar
-@property (nonatomic, retain) SZActionBar *actionBar;
-@property (nonatomic, retain) id<SZEntity> entity;
+@property (nonatomic, strong) id<SZEntity> entity;
 @property (nonatomic, assign) NSInteger numLikes;
 
 // UI actions

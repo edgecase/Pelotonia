@@ -15,6 +15,9 @@
 #import "PelotoniaWeb.h"
 #import "UIImage+Resize.h"
 #import "MenuViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
 
 
 @interface RidersViewController ()
@@ -24,21 +27,12 @@
 @end
 
 
-@implementation RidersViewController
-
-@synthesize dataController = _dataController;
-@synthesize riderTableView = _riderTableView;
-@synthesize riderSearchResults = _riderSearchResults;
-
-// property overloads
-- (RiderDataController *)dataController {
-    if (_dataController == nil) {
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        _dataController = appDelegate.riderDataController;
-    }
-    return _dataController;
+@implementation RidersViewController {
+    AAPullToRefresh *_tv;
 }
 
+@synthesize riderTableView = _riderTableView;
+@synthesize riderSearchResults = _riderSearchResults;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,28 +46,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // set the colors appropriately
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        [self.navigationController.navigationBar setTranslucent:NO];
-    }
-    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
-    self.tableView.opaque = YES;
     
+    // set up pull to refresh
+    __weak RidersViewController *weakSelf = self;
+    _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
+        [weakSelf refresh];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
+    }];
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
+
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
     
     // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
     self.navigationItem.titleView = imageView;
-    
-    // update all riders in the list
-    for (Rider *rider in [self.dataController allRiders]) {
-        [rider refreshFromWebOnComplete:nil onFailure:nil];
-    }
     
 }
 
@@ -98,10 +86,20 @@
 }
 
 #pragma mark -- pull to refresh view
+- (void)refresh
+{
+    // update all riders in the list
+    for (Rider *rider in [[AppDelegate sharedDataController] allRiders]) {
+        [rider refreshFromWebOnComplete:^(Rider *rider) {
+            [self reloadTableData];
+        } onFailure:nil];
+    }
+}
+
 - (void)reloadTableData
 {
     NSSortDescriptor* desc = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    [self.dataController sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
+    [[AppDelegate sharedDataController] sortRidersUsingDescriptors:[NSArray arrayWithObject:desc]];
     [self.tableView reloadData];
     [self.tableView setNeedsDisplay];
 }
@@ -122,7 +120,7 @@
         profileTableViewController.rider = rider;
     }
     else {
-        rider = [self.dataController objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+        rider = [[AppDelegate sharedDataController] objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         profileTableViewController.rider = rider;
     }
 }
@@ -143,7 +141,7 @@
         return [self.riderSearchResults count];
     }
     else {
-        return [self.dataController count];
+        return [[AppDelegate sharedDataController] count];
     }
 }
 
@@ -169,39 +167,28 @@
     }
     else {
         // looking at the "regular" view, so show all our information
-        rider = [self.dataController objectAtIndex:indexPath.row];
+        rider = [[AppDelegate sharedDataController] objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
-
-    // __block keyword lets ARC know we're using activityIndicator in a block, so don't gc it
-    __block UIActivityIndicatorView *activityIndicator;
-    [cell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
-    activityIndicator.center = cell.imageView.center;
-    [activityIndicator startAnimating];
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
-                                    placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
-                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-     {
-         if (error != nil) {
+                   placeholderImage:[UIImage imageNamed:@"profile_default"]
+                            options:SDWebImageRefreshCached
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+         if (error) {
              NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
          }
-         [activityIndicator removeFromSuperview];
-         activityIndicator = nil;
          [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
 
          [cell layoutSubviews];
-     }];
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+     } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(12);   
     cell.textLabel.textColor = PRIMARY_GREEN;
     cell.detailTextLabel.textColor = SECONDARY_GREEN;
     
-    [cell layoutSubviews];
     return cell;
 }
 
@@ -229,7 +216,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the dataController
-        [self.dataController removeObjectAtIndex:indexPath.row];
+        [[AppDelegate sharedDataController] removeObjectAtIndex:indexPath.row];
         
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -333,21 +320,5 @@
     [self reloadTableData];
 }
 
-
-#pragma mark -- RiderPhotoUpdate delegates
-- (void)riderPhotoThumbDidUpdate:(UIImage *)image
-{
-    if ([self.searchDisplayController isActive]) {
-        [self.searchDisplayController.searchResultsTableView reloadData];
-    }
-    else {
-        [self reloadTableData];
-    }
-}
-
-- (void)riderPhotoDidUpdate:(UIImage *)image
-{
-    // do nothing
-}
 
 @end

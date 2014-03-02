@@ -10,6 +10,8 @@
 #import "PRPWebViewController.h"
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
+#import "AppDelegate.h"
+#import "Rider.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 #import "TestFlight.h"
@@ -35,10 +37,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // set the colors appropriately
-    self.tableView.backgroundColor = PRIMARY_DARK_GRAY;
-    self.tableView.opaque = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,24 +63,26 @@
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
     if (indexPath.row == ID_PROFILE_MENU && indexPath.section == 0)
     {
-        id<SZFullUser> currentUser = [SZUserUtils currentUser];
-        if ([currentUser firstName]) {
+        Rider *myProfile;
+        if ((myProfile = [[AppDelegate sharedDataController] favoriteRider])) {
             
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentUser firstName], [currentUser lastName]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", myProfile.name];
             cell.imageView.layer.masksToBounds = YES;
             cell.imageView.layer.cornerRadius = 5.0;
 
-            [cell.imageView setImageWithURL:[NSURL URLWithString:[currentUser smallImageUrl]]
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]
+            [cell.imageView setImageWithURL:[NSURL URLWithString:[myProfile riderPhotoThumbUrl]]
+                           placeholderImage:[UIImage imageNamed:@"profile_default"]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                [cell layoutSubviews];
+                                      [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(35, 35) interpolationQuality:kCGInterpolationDefault]];
+                                      [cell layoutSubviews];
             }];
         }
         else {
-            cell.textLabel.text = @"Sign In";
-            [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon.png"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
+            cell.textLabel.text = @"My Rider Profile";
+            [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
         }
     }
+        
     return cell;
 }
 
@@ -108,9 +108,6 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-}
 
 #pragma mark - preparation for segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -155,6 +152,7 @@
 - (BOOL)shouldAutorotate {
     return YES;
 }
+
 
 
 

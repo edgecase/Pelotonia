@@ -7,9 +7,10 @@
 //
 
 #import "PelotoniaWeb.h"
-#import "ASIHTTPRequest.h"
 #import "TFHpple.h"
+#import "Donor.h"
 #import "TFHppleElement+IDSearch.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface PelotoniaWeb()
 + (NSString *)stripWhitespace:(NSString *)input;
@@ -17,17 +18,18 @@
 
 @implementation PelotoniaWeb
 
-+ (void)searchForRiderWithLastName:(NSString *)lastName riderId:(NSString *)riderId onComplete:(void(^)(NSArray *searchResults))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
++ (void)searchForRiderWithLastName:(NSString *)lastName
+                           riderId:(NSString *)riderId
+                        onComplete:(void(^)(NSArray *searchResults))completeBlock
+                         onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId]];
-    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
-    __unsafe_unretained __block ASIHTTPRequest *request = _request;
-    
-    NSLog(@"searchForRiderWithLastName: finding %@ (%@)", lastName, riderId);
-    
-    [request setCompletionBlock:^{
+    NSString *urlString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // success
         NSLog(@"completing network call");
-        TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
+        TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
         NSString *xPath = @"//table[@id='search-results']/tr";
         NSArray *riderTableRows = [parser searchWithXPathQuery:xPath];
         
@@ -76,37 +78,29 @@
         if (completeBlock) {
             completeBlock(riders);
         }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"unable to get search URL");
     }];
     
-    [request setFailedBlock:^{
-        NSError *error = [request error];
-        NSLog(@"%@: %@", error.localizedDescription, error.localizedFailureReason);
-        
-        if (failureBlock) {
-            NSString *errstr = [NSString stringWithFormat:@"Network error: %@", error.localizedDescription];
-            failureBlock(errstr);
-        }
-    }];
-    
-    
-    [request startAsynchronous];  
 }
 
 
-+ (void)profileForRider:(Rider *)rider onComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock
++ (void)profileForRider:(Rider *)rider
+             onComplete:(void(^)(Rider *rider))completeBlock
+              onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
-    NSURL *url = [NSURL URLWithString:rider.profileUrl];
+    //NSURL *url = [NSURL URLWithString:rider.profileUrl];
     NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
-    ASIHTTPRequest *_request = [ASIHTTPRequest requestWithURL:url];
-    __unsafe_unretained __block ASIHTTPRequest *request = _request;
     
-    [request setCompletionBlock:^{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:rider.profileUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Found rider %@", rider.name);
         @try
         {
-        
-            TFHpple *parser = [TFHpple hppleWithHTMLData:[request responseData]];
-
+            TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
+            
             // figure out what type of rider we are first
             NSString *riderTypeUrlXPath = @"//*[@id='sectionheader']/img";
             NSString *riderType = [[[[parser searchWithXPathQuery:riderTypeUrlXPath] objectAtIndex:0] attributes] valueForKey:@"alt"];
@@ -131,7 +125,7 @@
                 NSLog(@"rider type not recognized");
                 rider.riderType = nil;
             }
-        
+            
             // get the photos' URLs
             NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
             NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
@@ -151,17 +145,17 @@
                 }
             }
             rider.story = storyString;
-
+            
             // get the rider's properties like how much they've raised, etc.
             NSDictionary *xpathTable = @{
-                @"raised": @"//*[@id='dashboard-rider']/div/div[2]/dl[2]/dd",
-                @"myPeloton": @"//*[@id='dashboard-rider']/div/div[2]/dl[3]/dd/a",
-                @"route": @"//*[@id='dashboard-rider']/div/div[2]/dl[1]/dd",
-                @"pelotonFundsRaised": @"//*[@id='dashboard-peloton']/div/div[2]/dl[1]/dd",
-                @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
-                @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
-                @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a"
-                };
+                                         @"raised": @"//*[@id='dashboard-rider']/div/div[2]/dl[2]/dd",
+                                         @"myPeloton": @"//*[@id='dashboard-rider']/div/div[2]/dl[3]/dd/a",
+                                         @"route": @"//*[@id='dashboard-rider']/div/div[2]/dl[1]/dd",
+                                         @"pelotonFundsRaised": @"//*[@id='dashboard-peloton']/div/div[2]/dl[1]/dd",
+                                         @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
+                                         @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
+                                         @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a"
+                                         };
             
             rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"raised"] parser:parser];
             rider.myPeloton = [self getValueAtXPath:[xpathTable objectForKey:@"myPeloton"] parser:parser];
@@ -171,30 +165,57 @@
             rider.pelotonGrandTotal = [self getValueAtXPath:[xpathTable objectForKey:@"pelotonGrandTotal"] parser:parser];
             rider.pelotonCaptain = [self stripWhitespace:[self getValueAtXPath:[xpathTable objectForKey:@"pelotonCaptain"] parser:parser]];
             
+            // get the list of donors
+            NSArray *donors = [parser searchWithXPathQuery:@"//*[@class='donor-list']/tr"];
+            if (donors) {
+                NSMutableArray *donorArray = [[NSMutableArray alloc] initWithCapacity:0];
+                // loop through the donors (represented as a TR each) & add objects with name/etc.
+                for (TFHppleElement *e in donors) {
+                    NSArray *data = [e childrenWithTagName:@"td"];
+                    if ([data count] > 0) {
+                        Donor *donor = [[Donor alloc] init];
+                        for (TFHppleElement *tf in data) {
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"amount"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.amount = tf.text;
+                            }
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"name"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.name = tf.text;
+                            }
+                            if ([[tf objectForKey:@"class"] isEqualToString:@"date"]) {
+                                NSLog(@"Found donor amount %@", tf.text);
+                                donor.date = tf.text;
+                            }
+                        }
+                        [donorArray addObject:donor];
+                    }
+                }
+                rider.donors = donorArray;
+            }
+            
+            
             NSLog(@"Returning profile for rider %@", rider.name);
-
+            
         }
         @catch (NSException *exception) {
             NSLog(@"trouble parsing %@'s profile story", rider.name);
             rider.story = @"(no story on file)";
             NSLog(@"%@", [exception description]);
         }
-     
+        
         if (completeBlock) {
             completeBlock(rider);
         }
-    }];
-    
-    [request setFailedBlock:^{
-        NSError *error = [request error];
-        NSLog(@"%@", error);
-        if (failureBlock)
-        {
-            failureBlock(@"Network error");
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", [error description]);
+        NSLog(@"Response : %@", [operation responseString]);
+        NSLog(@"Debug Response : %@", [operation debugDescription]);
+        if (failureBlock) {
+            failureBlock([error description]);
         }
     }];
-    
-    [request startAsynchronous];
 }
 
 + (NSString *)stripWhitespace:(NSString *)input
@@ -212,5 +233,44 @@
     return value;
 }
 
++ (void)getPelotoniaStatsOnComplete:(void (^)(NSString *, NSString *))completeBlock
+                          onFailure:(void (^)(NSString *))failureBlock
+{
+    NSLog(@"looking for pelotonia stats on www.pelotonia.org");
+    
+    // Parse pelotonia.org's home page for the financial information
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:@"https://www.mypelotonia.org/counter_homepage.jsp" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // parse the page for the amount of money being raised
+        TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
+        NSString *raisedAmount = @"Coming Soon";
+        NSString *riders = @"Coming Soon";
+        
+        // figure out what type of rider we are first
+        NSString *raisedAmountXPath = @"//*[@id='amount-to-date']/text()";
+        
+        NSArray *nodes = [parser searchWithXPathQuery:raisedAmountXPath];
+        if ([nodes count] > 0) {
+            TFHppleElement *raisedAmountNode = [nodes objectAtIndex:0];
+            raisedAmount = [raisedAmountNode content];
+        }
+
+        NSString *ridersXPath = @"//*[@id='riders']/text()";
+        
+        nodes = [parser searchWithXPathQuery:ridersXPath];
+        if ([nodes count] > 0) {
+            TFHppleElement *ridersNode = [nodes objectAtIndex:0];
+            riders = [ridersNode content];
+        }
+
+        completeBlock(raisedAmount, riders);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Couldn't find the information on pelotonia");
+        // must be offline for a bit
+        failureBlock([error localizedDescription]);
+    }];
+}
 
 @end
