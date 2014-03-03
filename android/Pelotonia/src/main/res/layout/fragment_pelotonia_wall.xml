@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:id="@+id/comment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@android:color/white"
+            android:layout_alignParentBottom="true"
+            >
+            <EditText
+                android:id="@+id/pelotonia_wall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".85"
+                android:hint="Add a comment" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".15"
+                android:src="@drawable/arrow"
+                />
+        </LinearLayout>
+        <View
+            android:id="@+id/commentLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/pelotonia_green"
+            android:layout_above="@id/comment_layout"
+            android:layout_marginBottom="5dp"/>
+        <ListView
+            android:id="@+id/wall_comment_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/commentLine" />
+        <ViewStub
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/commentLine" />
+    </RelativeLayout>
+</merge>

@@ -1,16 +1,16 @@
 package org.pelotonia.android.fragments;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +31,6 @@ import com.squareup.picasso.Picasso;
 import org.pelotonia.android.PelotoniaApplication;
 import org.pelotonia.android.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -370,14 +369,14 @@ public class NavigationDrawerFragment extends Fragment {
 
     public List<NavItem> getNavList() {
         List<NavItem> navItems = new ArrayList<NavItem>();
-        navItems.add(new NavItem(getString(R.string.nav_all_activity), R.drawable.icon_facebook));
+        navItems.add(new NavItem(getString(R.string.pelotonia), R.drawable.icon_facebook));
         User user = ((PelotoniaApplication)getActivity().getApplication()).getUser();
         if (user == null) {
-            navItems.add(new NavItem(getString(R.string.nav_sign_in), R.drawable.icon_googleplus));
+            navItems.add(new NavItem(getString(R.string.nav_my_profile), R.drawable.icon_googleplus));
         } else {
             navItems.add(new NavItem(user.getDisplayName(), user.getSmallImageUri()));
         }
-        navItems.add(new NavItem(getString(R.string.nav_team), R.drawable.icon_twitter));
+        navItems.add(new NavItem(getString(R.string.nav_riders), R.drawable.icon_twitter));
         return navItems;
     }
 }

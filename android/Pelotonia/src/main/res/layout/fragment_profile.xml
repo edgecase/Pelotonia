@@ -4,38 +4,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.pelotonia.android.fragments.ProfileFragment">
-    <RelativeLayout
-        android:id="@+id/profileLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/avatarImageView"
-            android:padding="10dp"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/avatarImageView"
+        android:padding="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/nameTextView"
-            android:layout_toRightOf="@+id/avatarImageView"
-            android:paddingTop="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/nameTextView"
+        android:layout_toRightOf="@+id/avatarImageView"
+        android:paddingTop="10dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/titleTextView"
-            android:layout_toRightOf="@+id/avatarImageView"
-            android:layout_below="@+id/nameTextView"
-            android:paddingTop="5dp" />
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/titleTextView"
+        android:layout_toRightOf="@+id/avatarImageView"
+        android:layout_below="@+id/nameTextView"
+        android:paddingTop="5dp" />
 
-    <ListView
-        android:id="@+id/commentsList"
+    <LinearLayout
+        android:id="@+id/layout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profileLayout" />
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:background="@color/pelotonia_green"
+        android:gravity="center_vertical"
+        android:layout_below="@id/titleTextView">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_email"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/recent_ride"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_button">
+        <include layout="@layout/rider_item" />
+    </LinearLayout>
+    <View
+        android:id="@+id/greenLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/pelotonia_green"
+        android:layout_below="@id/recent_ride"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
 </RelativeLayout>

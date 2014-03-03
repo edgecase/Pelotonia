@@ -18,6 +18,7 @@ import com.socialize.listener.user.UserGetListener;
 
 import org.pelotonia.android.PelotoniaApplication;
 import org.pelotonia.android.fragments.AboutFragment;
+import org.pelotonia.android.fragments.PelotoniaFragment;
 import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.NavigationDrawerFragment;
 import org.pelotonia.android.R;
@@ -103,12 +104,16 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position) {
             case 1:
+                fragmentManager.beginTransaction()
+                    .replace(R.id.container, new PelotoniaFragment())
+                    .addToBackStack("pelotonia")
+                    .commit();
                 break;
             case 2:
                 if (user != null) {
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, new ProfileFragment())
-                            .addToBackStack("user")
+                            .addToBackStack("profile")
                             .commit();
                 } else {
                     UserUtils.showUserSettingsForResult(this, 100);
@@ -117,7 +122,7 @@ public class MainActivity extends ActionBarActivity
             case 3:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new TeamFragment())
-                        .addToBackStack("team")
+                        .addToBackStack("riders")
                         .commit();
                 break;
             case 4:
