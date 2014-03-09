@@ -10,16 +10,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.socialize.CommentUtils;
 import com.socialize.UserUtils;
-import com.socialize.entity.Comment;
-import com.socialize.entity.ListResult;
 import com.socialize.entity.User;
 import com.socialize.error.SocializeException;
-import com.socialize.listener.comment.CommentListListener;
 import com.squareup.picasso.Picasso;
 
-import org.pelotonia.android.adapter.CommentAdapter;
 import org.pelotonia.android.R;
 
 public class ProfileFragment extends Fragment {
@@ -55,31 +50,31 @@ public class ProfileFragment extends Fragment {
         ImageView avatarImage = (ImageView) view.findViewById(R.id.avatarImageView);
         Picasso.with(getActivity()).load(user.getSmallImageUri()).into(avatarImage);
 
-        View profileLayout = view.findViewById(R.id.profileLayout);
-        profileLayout.setClickable(true);
-        profileLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserUtils.showUserSettings(getActivity());
-            }
-        });
+//        View profileLayout = view.findViewById(R.id.profileLayout);
+//        profileLayout.setClickable(true);
+//        profileLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                UserUtils.showUserSettings(getActivity());
+//            }
+//        });
 
-        commentList = (ListView) view.findViewById(R.id.commentsList);
+        //commentList = (ListView) view.findViewById(R.id.comment);
 
-        CommentUtils.getCommentsByUser(getActivity(), user,0,0,new CommentListListener() {
-            @Override
-            public void onList(ListResult<Comment> result) {
-
-                commentList.setAdapter(new CommentAdapter(getActivity(), R.layout.comment_layout,
-                        R.id.commentListItemText,
-                        result.getItems()));
-            }
-
-            @Override
-            public void onError(SocializeException error) {
-
-            }
-        });
+//        CommentUtils.getCommentsByUser(getActivity(), user,0,0,new CommentListListener() {
+//            @Override
+//            public void onList(ListResult<Comment> result) {
+//
+//                commentList.setAdapter(new CommentAdapter(getActivity(), R.layout.comment_layout,
+//                        R.id.commentListItemText,
+//                        result.getItems()));
+//            }
+//
+//            @Override
+//            public void onError(SocializeException error) {
+//
+//            }
+//        });
 
         return view;
     }
