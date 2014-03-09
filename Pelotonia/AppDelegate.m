@@ -93,7 +93,8 @@
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = SECONDARY_LIGHT_GRAY;
     pageControl.currentPageIndicatorTintColor = SECONDARY_GREEN;
-    pageControl.backgroundColor = PRIMARY_DARK_GRAY;
+    pageControl.backgroundColor = [UIColor clearColor];
+    
     
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
@@ -160,7 +161,7 @@
     [Appirater setTimeBeforeReminding:2];
     [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
-
+        
     return YES;
 }
 

@@ -385,6 +385,9 @@
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
+		BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */; };
+		BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */; };
+		BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E818CCD99300CAFFF7 /* IntroViewController.m */; };
 		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
@@ -820,6 +823,12 @@
 		BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreenViewController.m; path = Controllers/SplashScreenViewController.m; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
+		BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroContentViewController.h; path = Controllers/IntroContentViewController.h; sourceTree = "<group>"; };
+		BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroContentViewController.m; path = Controllers/IntroContentViewController.m; sourceTree = "<group>"; };
+		BBC012E418CCD83500CAFFF7 /* IntroPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroPageViewController.h; path = Controllers/IntroPageViewController.h; sourceTree = "<group>"; };
+		BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroPageViewController.m; path = Controllers/IntroPageViewController.m; sourceTree = "<group>"; };
+		BBC012E718CCD99300CAFFF7 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = Controllers/IntroViewController.h; sourceTree = "<group>"; };
+		BBC012E818CCD99300CAFFF7 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Controllers/IntroViewController.m; sourceTree = "<group>"; };
 		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
 		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1288,6 +1297,15 @@
 			name = TableViewCells;
 			sourceTree = "<group>";
 		};
+		BBC012DE18CCC8DD00CAFFF7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BBAA247718B04B5D006BA30E /* TableViewCells */,
+				BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -1353,9 +1371,9 @@
 				BCE3B7CF15AE4DE000205530 /* Controllers */,
 				BCE3B7C515AE49DA00205530 /* AppDelegate.h */,
 				BCE3B7C615AE49DA00205530 /* AppDelegate.m */,
+				BBC012DE18CCC8DD00CAFFF7 /* Views */,
 				BCE3B7DC15AE511F00205530 /* Vendor */,
 				BCE3B7BD15AE49DA00205530 /* Supporting Files */,
-				BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */,
 			);
 			path = Pelotonia;
 			sourceTree = "<group>";
@@ -1392,11 +1410,16 @@
 		BCE3B7CF15AE4DE000205530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */,
+				BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */,
+				BBC012E418CCD83500CAFFF7 /* IntroPageViewController.h */,
+				BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */,
+				BBC012E718CCD99300CAFFF7 /* IntroViewController.h */,
+				BBC012E818CCD99300CAFFF7 /* IntroViewController.m */,
 				4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */,
 				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
 				BBA66C13172A9FD8002DE00A /* ActivityViewController.h */,
 				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
-				BBAA247718B04B5D006BA30E /* TableViewCells */,
 				BBAA222B18AF9F7A006BA30E /* DonorsTableViewController.h */,
 				BBAA222C18AF9F7A006BA30E /* DonorsTableViewController.m */,
 				BB22414B17F529030054F16D /* FeedbackViewController.h */,
@@ -1912,10 +1935,12 @@
 				BBAA248E18B5A631006BA30E /* PhotoPageViewController.m in Sources */,
 				BCE3B7C715AE49DA00205530 /* AppDelegate.m in Sources */,
 				BBAA222718AD9C2E006BA30E /* RiderTableViewCell.m in Sources */,
+				BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */,
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
 				BBAA222A18AEEBB4006BA30E /* Donor.m in Sources */,
+				BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 				BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */,
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
@@ -1927,6 +1952,7 @@
 				BBAA248818B44C67006BA30E /* RiderPhotoCell.m in Sources */,
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
+				BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
@@ -2133,7 +2159,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/Pelotonia/TestFlightSDK2",
 				);
-				OTHER_CFLAGS = "";
+				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
