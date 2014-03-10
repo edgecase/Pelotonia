@@ -4,7 +4,7 @@ package org.pelotonia.android.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,13 +46,13 @@ import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.ViewDelegate;
  * A simple {@link android.support.v4.app.Fragment} subclass.
  *
  */
-public class PelotoniaFragment extends Fragment implements
+public class PelotoniaFragment extends ListFragment implements
         OnRefreshListener, ViewDelegate {
     private final Entity entity = new Entity("https://www.mypelotonia.org/riders_profile.jsp?MemberID=4111&SearchStart=0&PAGING", "Pelotonia");
-    private ListView commentListView;
     private List<Comment> commentList = new ArrayList<Comment>();
     private CommentAdapter adapter;
     private PullToRefreshLayout mPullToRefreshLayout;
+    private View headerView;
 
     public PelotoniaFragment() {
         // Required empty public constructor
@@ -61,13 +61,15 @@ public class PelotoniaFragment extends Fragment implements
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         adapter = new CommentAdapter(getActivity(), R.layout.comment_layout,
                 R.id.commentListItemText, commentList);
 
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_pelotonia, container, false);
+        final View view = inflater.inflate(R.layout.fragment_pelotonia_wall, container, false);
+
+        headerView = inflater.inflate(R.layout.fragment_pelotonia, null);
+
         if (view != null) {
             mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
 
@@ -78,13 +80,13 @@ public class PelotoniaFragment extends Fragment implements
                     .setup(mPullToRefreshLayout);
 
 
-            commentListView = (ListView)view.findViewById(R.id.wall_comment_list);
-            commentListView.setAdapter(adapter);
-    //        commentListView.setEmptyView(view.findViewById(R.id.empty));
+            ListView commentListView = (ListView) view.findViewById(android.R.id.list);
+            commentListView.addHeaderView(headerView);
+
             commentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Comment comment = (Comment)commentListView.getAdapter().getItem(position);
+                    Comment comment = (Comment)adapter.getItem(position);
                     SocializeUserUtils utils = new SocializeUserUtils();
                     utils.showUserProfileView(getActivity(), comment.getUser(), comment, null);
                 }
@@ -128,6 +130,7 @@ public class PelotoniaFragment extends Fragment implements
 
             new PelotoniaTask().execute("https://www.mypelotonia.org/counter_homepage.jsp");
         }
+        setListAdapter(adapter);
         return view;
     }
 
@@ -138,7 +141,7 @@ public class PelotoniaFragment extends Fragment implements
 
     @Override
     public boolean isReadyForPull(View view, float v, float v2) {
-        return (commentListView.getFirstVisiblePosition() == 0 && (commentListView.getChildCount() == 0 || commentListView.getChildAt(0).getTop() == 0));
+        return (getListView().getFirstVisiblePosition() == 0 && (getListView().getChildCount() == 0 || getListView().getChildAt(0).getTop() == 0));
     }
 
     private class PelotoniaTask extends AsyncTask<String, Void, Document> {
@@ -179,11 +182,11 @@ public class PelotoniaFragment extends Fragment implements
         protected void onPostExecute(Document doc) {
             if (doc != null) {
                 int targetAmount = 15000000;
-                View view = getView();
+
                 Element amountRaisedElement = doc.getElementById("amount-to-date");
                 Element riderCountElement = doc.getElementById("riders");
                 String amountRaisedText = amountRaisedElement.text();
-                TextView raised = (TextView)view.findViewById(R.id.raised_amount);
+                TextView raised = (TextView)headerView.findViewById(R.id.raised_amount);
                 Double raisedInt;
                 if (amountRaisedText.startsWith("$")) {
                     raisedInt = Double.valueOf(amountRaisedText.substring(1));
@@ -191,17 +194,8 @@ public class PelotoniaFragment extends Fragment implements
                     raisedInt = Double.valueOf(amountRaisedText);
                 }
                 DecimalFormat formatter = new DecimalFormat("##,###,###");
-
-                ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-                progressBar.setMax(targetAmount);
-                progressBar.setProgress(raisedInt.intValue());
-
-                TextView progressPercent = (TextView) view.findViewById(R.id.progressBar_text);
-                int percent =  (int) ((raisedInt/targetAmount) * 100);
-                progressPercent.setText(percent + "%");
-
                 raised.setText("$" + formatter.format(raisedInt));
-                TextView riders = (TextView)view.findViewById(R.id.riders_count);
+                TextView riders = (TextView)headerView.findViewById(R.id.riders_count);
                 riders.setText(riderCountElement.text());
 
                 pelotoniaComplete = true;
