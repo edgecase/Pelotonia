@@ -22,4 +22,5 @@ dependencies {
     compile project(':socialize-sdk')
     compile project(':android-ioc')
     compile project(':facebook-android-sdk')
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
 }

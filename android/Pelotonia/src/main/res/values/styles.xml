@@ -23,4 +23,8 @@
 
     <style name="ButtonBarButton" />
 
+    <style name="EditText" parent="android:Theme.Holo.Light">
+        <item name="android:background">@drawable/pelotonia_edit_text</item>
+    </style>
+
 </resources>

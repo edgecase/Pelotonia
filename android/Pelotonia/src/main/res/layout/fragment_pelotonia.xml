@@ -1,111 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:padding="10dp">
+<uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ptr_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id ="@+id/icon"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:src="@drawable/ic_launcher"
-        android:layout_alignParentTop="true"
-    />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/icon"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@id/icon"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        >
-        <TextView
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pelotonia 2014"
-            android:textSize="24sp"
-            />
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/sub_header"
+        <ImageView
+            android:id ="@+id/icon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentTop="true"
+        />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="END CANCER"
-            android:textColor="@color/pelotonia_green"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/icon"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@id/icon"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            >
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pelotonia 2014"
+                android:textSize="24sp"
+                />
+
+            <TextView
+                android:id="@+id/sub_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="END CANCER"
+                android:textColor="@color/pelotonia_green"
+                android:textSize="18sp"
+            />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/raised"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Raised"
             android:textSize="18sp"
-        />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/raised"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Raised"
-        android:textSize="18sp"
-        android:layout_below="@id/icon"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PLACEHOLDER"
-        android:layout_below="@id/icon"
-        android:textSize="18sp"
-        android:layout_alignParentRight="true"/>
-
-    <ProgressBar
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_weight="1"
-        android:layout_below="@id/raised"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-
-        />
-    <TextView
-        android:id="@+id/progressBar_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/raised"
-        android:text="%%"
-        android:layout_alignBaseline="@id/progressBar"
-        android:layout_alignParentRight="true"
-        android:layout_weight="1"
-       />
-
-    <TextView
-        android:id="@+id/riders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Riders"
-        android:textSize="18sp"
-        android:layout_below="@id/progressBar"
-        />
-    <TextView
-        android:id="@+id/riders_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PLACEHOLDER"
-        android:textSize="18sp"
-        android:layout_below="@id/progressBar"
-        android:layout_alignParentRight="true"/>
-    <View
-        android:id="@+id/greenLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/pelotonia_green"
-        android:layout_below="@id/riders"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/greenLine">
-        <include
-            layout="@layout/fragment_pelotonia_wall"
+            android:layout_below="@id/icon"
             />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/raised_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/icon"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"/>
 
-</RelativeLayout>
+        <ProgressBar
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_weight="1"
+            android:layout_below="@id/raised"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:progressDrawable="@drawable/green_progress"
+
+            />
+        <TextView
+            android:id="@+id/progressBar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/raised"
+            android:layout_alignBaseline="@id/progressBar"
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/white"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp" />
+
+        <TextView
+            android:id="@+id/riders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riders"
+            android:textSize="18sp"
+            android:layout_below="@id/progressBar"
+            />
+        <TextView
+            android:id="@+id/riders_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_below="@id/progressBar"
+            android:layout_alignParentRight="true"/>
+        <View
+            android:id="@+id/greenLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/pelotonia_green"
+            android:layout_below="@id/riders"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/greenLine">
+            <include
+                layout="@layout/fragment_pelotonia_wall"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>

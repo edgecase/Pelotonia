@@ -13,12 +13,16 @@
             android:layout_alignParentBottom="true"
             >
             <EditText
-                android:id="@+id/pelotonia_wall"
+                style="@style/EditText"
+                android:id="@+id/commentEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".85"
-                android:hint="Add a comment" />
+                android:hint="Add a comment"
+
+                />
             <ImageButton
+                android:id="@+id/commentButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".15"

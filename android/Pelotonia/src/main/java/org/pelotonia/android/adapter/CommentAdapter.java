@@ -47,7 +47,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
         textView.setText(comment.getDisplayText());
 
         TextView titleView = (TextView) view.findViewById(R.id.commentListItemTitle);
-        titleView.setText(comment.getUser().getDisplayName() + " " + dateUtils.getTimeString(comment.getDate()));
+        titleView.setText(comment.getUser().getDisplayName() + ", " + dateUtils.getTimeString(System.currentTimeMillis() - comment.getDate()));
 
         return view;
     }
