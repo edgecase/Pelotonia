@@ -27,6 +27,10 @@
 #import "FindRiderViewController.h"
 #import "IntroViewController.h"
 
+#ifndef DEBUG
+#define DEBUG   0
+#endif
+
 @interface UserProfileViewController ()
 
 @end
