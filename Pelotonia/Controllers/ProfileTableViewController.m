@@ -437,7 +437,10 @@
                                                    if (error) {
                                                        NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
                                                    }
-                                                   [self.nameAndRouteCell layoutSubviews];
+                                                   else {
+                                                       self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
+                                                       [self.nameAndRouteCell layoutSubviews];
+                                                   }
                                                } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
     

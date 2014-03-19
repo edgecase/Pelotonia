@@ -50,6 +50,7 @@
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
     
+    
     self.entity = [SZEntity entityWithKey:@"http://www.pelotonia.org" name:@"Pelotonia"];
     // set up socialize
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:

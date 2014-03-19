@@ -25,6 +25,11 @@
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 #import "FindRiderViewController.h"
+#import "IntroViewController.h"
+
+#ifndef DEBUG
+#define DEBUG   0
+#endif
 
 @interface UserProfileViewController ()
 
@@ -70,6 +75,18 @@
     // logo in title bar
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
     self.navigationItem.titleView = imageView;
+    
+    // if this is our first time loading, pop up the "this is how you use me" screen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults objectForKey:@"firstRun"] || DEBUG) {
+        NSLog(@"popping up the 'intro' screens");
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        IntroViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
+        [self presentViewController:ivc animated:YES completion:nil];
+    }
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
