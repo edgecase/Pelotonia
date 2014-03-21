@@ -18,10 +18,11 @@ import com.socialize.listener.user.UserGetListener;
 
 import org.pelotonia.android.PelotoniaApplication;
 import org.pelotonia.android.fragments.AboutFragment;
-import org.pelotonia.android.fragments.PelotoniaFragment;
 import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.NavigationDrawerFragment;
 import org.pelotonia.android.R;
+import org.pelotonia.android.fragments.RiderFragment;
+import org.pelotonia.android.fragments.SearchFragment;
 import org.pelotonia.android.fragments.TeamFragment;
 import org.pelotonia.android.fragments.WebFragment;
 
@@ -37,6 +38,16 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    private SearchFragment.RiderClickListener riderListener = new SearchFragment.RiderClickListener() {
+        @Override
+        public void onRiderClick(String riderJson) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, RiderFragment.newRiderInstance(riderJson))
+                    .addToBackStack("riders")
+                    .commit();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +116,7 @@ public class MainActivity extends ActionBarActivity
         switch (position) {
             case 1:
                 fragmentManager.beginTransaction()
-                    .replace(R.id.container, new PelotoniaFragment())
+                    .replace(R.id.container, RiderFragment.newPelotoniaInstance())
                     .addToBackStack("pelotonia")
                     .commit();
                 break;
@@ -121,7 +132,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new TeamFragment())
+                        .replace(R.id.container, SearchFragment.newInstance(riderListener))
                         .addToBackStack("riders")
                         .commit();
                 break;
@@ -141,7 +152,9 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
         }
+
     }
+
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -213,5 +226,4 @@ public class MainActivity extends ActionBarActivity
 
         super.onDestroy();
     }
-
 }
