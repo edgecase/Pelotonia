@@ -2,7 +2,7 @@ apply plugin: 'android'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         minSdkVersion 11
@@ -19,8 +19,8 @@ dependencies {
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.android.support:support-v4:+'
     compile 'com.squareup.picasso:picasso:+'
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
     compile project(':socialize-sdk')
     compile project(':android-ioc')
     compile project(':facebook-android-sdk')
-    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
 }
