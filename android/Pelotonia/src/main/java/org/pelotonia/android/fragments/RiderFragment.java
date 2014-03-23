@@ -65,7 +65,7 @@ public class RiderFragment extends ListFragment implements
 
     public static RiderFragment newPelotoniaInstance() {
         RiderFragment fragment = new RiderFragment();
-        fragment.entity = new Entity("https://www.pelotonia.org/", "Pelotonia");
+        fragment.entity = new Entity("http://www.pelotonia.org", "Pelotonia");
         return fragment;
     }
 
