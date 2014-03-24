@@ -14,6 +14,7 @@ import com.socialize.Socialize;
 import com.socialize.UserUtils;
 import com.socialize.entity.User;
 import com.socialize.error.SocializeException;
+import com.socialize.google.gson.Gson;
 import com.socialize.listener.user.UserGetListener;
 
 import org.pelotonia.android.PelotoniaApplication;
@@ -24,6 +25,8 @@ import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.RiderFragment;
 import org.pelotonia.android.fragments.SearchFragment;
 import org.pelotonia.android.fragments.WebFragment;
+import org.pelotonia.android.objects.Rider;
+import org.pelotonia.android.util.PelotonUtil;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -41,6 +44,19 @@ public class MainActivity extends ActionBarActivity
     private SearchFragment.RiderClickListener riderListener = new SearchFragment.RiderClickListener() {
         @Override
         public void onRiderClick(String riderJson) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, RiderFragment.newRiderInstance(riderJson))
+                    .addToBackStack("riders")
+                    .commit();
+        }
+    };
+
+    private SearchFragment.RiderClickListener profileListener = new SearchFragment.RiderClickListener(){
+        @Override
+        public void onRiderClick(String riderJson) {
+            Rider r = new Gson().fromJson(riderJson, Rider.class);
+            // Save the rider
+            PelotonUtil.saveRider(getApplicationContext(),r);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, RiderFragment.newRiderInstance(riderJson))
                     .addToBackStack("riders")
@@ -120,10 +136,19 @@ public class MainActivity extends ActionBarActivity
                     .commit();
                 break;
             case 2:
-                fragmentManager.beginTransaction()
+
+                if (PelotonUtil.getRider(getApplicationContext()) == null){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, SearchFragment.newInstance(profileListener))
+                            .addToBackStack("riders")
+                            .commit();
+                }
+                else {
+                    fragmentManager.beginTransaction()
                         .replace(R.id.container, ProfileFragment.newInstance())
                         .addToBackStack("profile")
                         .commit();
+                }
 
                 break;
             case 3:

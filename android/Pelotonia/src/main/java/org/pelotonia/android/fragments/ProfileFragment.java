@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import org.pelotonia.android.R;
 import org.pelotonia.android.adapter.ImageAdapter;
 import org.pelotonia.android.objects.Rider;
+import org.pelotonia.android.objects.WorkOut;
 import org.pelotonia.android.util.PelotonUtil;
 
 import java.io.File;
@@ -31,7 +33,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class ProfileFragment extends Fragment {
-
+     //TODO: remove simba log
     private static final int MAX_IMG=3;
     public ProfileFragment() {
         // Required empty public constructor
@@ -43,22 +45,33 @@ public class ProfileFragment extends Fragment {
         return f;
     }
 
+    SearchFragment searchFragment;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        Rider r = PelotonUtil.getRider(getActivity().getApplicationContext());
+        user = PelotonUtil.getRider(getActivity().getApplicationContext());
+        //TODO: get the fragment Argument to survive creation & destoyed
         // TODO: handle the case when there is no rider has been selected yet
-        if (r == null){
-            user = new Rider();
-            user.amountRaised= "100.00";
-            user.name = "Test Mark Harris";
-            user.route= "Columbus to Gambier and Back";
-            user.riderPhotoThumbUrl="https://www.mypelotonia.org/images/RiderPics/4111.jpg";
-            user.story ="I am a user story Meooowth meow";
-        }
+        // TODO: Nested Fragment
+
+//            user = new Rider();
+//            user.amountRaised= "100.00";
+//            user.name = "Test Mark Harris";
+//            user.route= "Columbus to Gambier and Back";
+//            user.riderPhotoThumbUrl="https://www.mypelotonia.org/images/RiderPics/4111.jpg";
+//            user.story ="I am a user story Meooowth meow";
+        //}
     }
 
+    private SearchFragment.RiderClickListener riderListener = new SearchFragment.RiderClickListener() {
+        @Override
+        public void onRiderClick(String riderJson) {
+            getFragmentManager().beginTransaction()
+                    .remove(searchFragment)
+                    .commit();
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +85,7 @@ public class ProfileFragment extends Fragment {
         descView.setText(user.getRoute());
 
         ImageView avatarImage = (ImageView) view.findViewById(R.id.avatarImageView);
-        Picasso.with(getActivity()).load(user.getRiderPhotoThumbUrl()).into(avatarImage);
+        Picasso.with(getActivity()).load(PelotonUtil.URL_PREFIX+user.getRiderPhotoThumbUrl()).into(avatarImage);
 
         return view;
     }
@@ -105,7 +118,7 @@ public class ProfileFragment extends Fragment {
 
         g = (GridView) getActivity().findViewById(R.id.rider_gallery);
         imgAdapter= new ImageAdapter(getActivity(),imgList);
-        Log.d("Simba", "Setting adapter");
+
         g.setAdapter(imgAdapter);
 
         g.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,6 +131,21 @@ public class ProfileFragment extends Fragment {
                 startActivity(photoIntent);
            }
         });
+
+        /*
+            Workout Section
+         */
+        //TODO: deal with no workout records
+        // Mock for now
+        WorkOut latestWorkout = new WorkOut( WorkOut.Excercise.RIDING, System.currentTimeMillis() , 100, 4000);
+        TextView dateText = (TextView) view.findViewById(R.id.rider_date);
+        dateText.setText(DateUtils.formatDateTime(getActivity(),latestWorkout.date,DateUtils.FORMAT_SHOW_DATE));
+        TextView milesText = (TextView) view.findViewById(R.id.rider_miles);
+        milesText.setText(String.valueOf(latestWorkout.miles));
+        TextView duration = (TextView) view.findViewById(R.id.rider_duration);
+        //TODO: Convert to proper date Time format
+        duration.setText(DateUtils.formatElapsedTime(new StringBuilder("H:MM"),latestWorkout.elapsedTime));
+        Log.d("Simba", "Duration: " +duration.getText().toString());
     }
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -134,7 +162,7 @@ public class ProfileFragment extends Fragment {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                imagePath = /*"file: " +*/photoFile.getAbsolutePath();
+                imagePath = photoFile.getAbsolutePath();
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile)); 
 
@@ -161,12 +189,12 @@ public class ProfileFragment extends Fragment {
     private ImageAdapter imgAdapter = null;
     private String mCurrentPhotoPath=null;
     private void displayImage(){
+
         if(imgList.size()>= MAX_IMG){
             imgList.removeLast();
         }
         imgList.addFirst(imagePath);
         PelotonUtil.savedImageList(getActivity(), imgList);
-        Log.d("Simba", "notify data set CHanged");
         imgAdapter.notifyDataSetChanged();
     }
 
