@@ -2,13 +2,13 @@ package org.pelotonia.android.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
 
 import com.socialize.Socialize;
 import com.socialize.UserUtils;
@@ -17,13 +17,12 @@ import com.socialize.error.SocializeException;
 import com.socialize.listener.user.UserGetListener;
 
 import org.pelotonia.android.PelotoniaApplication;
-import org.pelotonia.android.fragments.AboutFragment;
-import org.pelotonia.android.fragments.ProfileFragment;
-import org.pelotonia.android.fragments.NavigationDrawerFragment;
 import org.pelotonia.android.R;
+import org.pelotonia.android.fragments.AboutFragment;
+import org.pelotonia.android.fragments.NavigationDrawerFragment;
+import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.RiderFragment;
 import org.pelotonia.android.fragments.SearchFragment;
-import org.pelotonia.android.fragments.TeamFragment;
 import org.pelotonia.android.fragments.WebFragment;
 
 public class MainActivity extends ActionBarActivity
@@ -121,14 +120,11 @@ public class MainActivity extends ActionBarActivity
                     .commit();
                 break;
             case 2:
-                if (user != null) {
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.container, new ProfileFragment())
-                            .addToBackStack("profile")
-                            .commit();
-                } else {
-                    UserUtils.showUserSettingsForResult(this, 100);
-                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, ProfileFragment.newInstance())
+                        .addToBackStack("profile")
+                        .commit();
+
                 break;
             case 3:
                 fragmentManager.beginTransaction()
@@ -169,6 +165,12 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -226,4 +228,6 @@ public class MainActivity extends ActionBarActivity
 
         super.onDestroy();
     }
+
+
 }

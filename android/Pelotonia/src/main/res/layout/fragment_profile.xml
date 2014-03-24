@@ -4,29 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.pelotonia.android.fragments.ProfileFragment">
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/avatarImageView"
-        android:padding="10dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/nameTextView"
-        android:layout_toRightOf="@+id/avatarImageView"
-        android:paddingTop="10dp"/>
+    <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/rider_header">
+       <ImageView
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:id="@+id/avatarImageView"
+           android:padding="10dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/titleTextView"
-        android:layout_toRightOf="@+id/avatarImageView"
-        android:layout_below="@+id/nameTextView"
-        android:paddingTop="5dp" />
-
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textAppearance="?android:attr/textAppearanceLarge"
+           android:id="@+id/nameTextView"
+           android:layout_alignTop="@id/avatarImageView"
+           android:layout_toRightOf="@id/avatarImageView"
+           android:paddingTop="15dp"
+           />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/titleTextView"
+            android:layout_toRightOf="@id/avatarImageView"
+            android:layout_below="@id/nameTextView"
+            android:paddingTop="10dp" />
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/layout_button"
         android:layout_width="match_parent"
@@ -35,11 +41,12 @@
         android:orientation="horizontal"
         android:background="@color/pelotonia_green"
         android:gravity="center_vertical"
-        android:layout_below="@id/titleTextView">
+        android:layout_below="@id/rider_header">
         <ImageButton
+            android:id="@+id/takePic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@android:drawable/ic_menu_camera"
             android:layout_weight="1"/>
         <ImageButton
             android:layout_width="0dp"
@@ -63,5 +70,17 @@
         android:layout_below="@id/recent_ride"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"/>
+
+    <GridView
+        android:id="@+id/rider_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/greenLine"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="3"
+        android:listSelector="@drawable/pelotonia_arrow_green"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
 
 </RelativeLayout>
