@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.socialize.Socialize;
 
+import org.pelotonia.android.PelotoniaApplication;
 import org.pelotonia.android.R;
 import org.pelotonia.android.fragments.AboutFragment;
 import org.pelotonia.android.fragments.NavigationDrawerFragment;
@@ -67,8 +68,8 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new ProfileFragment())
-                        .addToBackStack(null)
+                        .replace(R.id.container, ProfileFragment.newInstance())
+                        .addToBackStack("profile")
                         .commit();
                 break;
             case 3:
@@ -150,4 +151,6 @@ public class MainActivity extends ActionBarActivity
 
         super.onDestroy();
     }
+
+
 }
