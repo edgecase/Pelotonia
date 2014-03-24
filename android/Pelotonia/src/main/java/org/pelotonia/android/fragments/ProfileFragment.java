@@ -51,7 +51,7 @@ public class ProfileFragment extends Fragment {
         // TODO: handle the case when there is no rider has been selected yet
         if (r == null){
             user = new Rider();
-            user.amountRaised= "100.00";
+            user.amountRaised= 100.00;
             user.name = "Test Mark Harris";
             user.route= "Columbus to Gambier and Back";
             user.riderPhotoThumbUrl="https://www.mypelotonia.org/images/RiderPics/4111.jpg";
