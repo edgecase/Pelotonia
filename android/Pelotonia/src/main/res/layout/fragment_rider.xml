@@ -3,55 +3,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:padding="10dp">
-
-    <ImageView
-        android:id ="@+id/rider_avatar"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:src="@drawable/ic_launcher"
-        android:layout_alignParentTop="true"
-    />
-
-    <LinearLayout
+    <RelativeLayout android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/rider_avatar"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@id/rider_avatar"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        >
-        <TextView
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rider Name"
-            android:textSize="24sp"
-            />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id ="@+id/rider_avatar"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentTop="true" />
 
-        <TextView
-            android:id="@+id/sub_header"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Rider Route"
-        />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/rider_avatar"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@id/rider_avatar"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp">
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rider Name"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/sub_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Rider Route" />
+        </LinearLayout>
+    </RelativeLayout>
     <TextView
-        android:id="@+id/raised"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Raised"
         android:textSize="18sp"
-        android:layout_below="@id/rider_avatar"
-        />
+        android:layout_below="@id/header_layout" />
     <TextView
+        android:id="@+id/raised"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="%1$s of %2$s"
         android:textSize="18sp"
-        android:layout_below="@id/rider_avatar"
+        android:layout_below="@id/header_layout"
         android:layout_alignParentRight="true"/>
 
     <ProgressBar
@@ -59,9 +57,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
         android:layout_below="@id/raised"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-
-        />
+        android:progressDrawable="@drawable/green_progress"
+        style="@android:style/Widget.ProgressBar.Horizontal" />
     <TextView
         android:id="@+id/progressBar_text"
         android:layout_width="wrap_content"
@@ -70,8 +67,7 @@
         android:text="%1$d"
         android:textSize="18sp"
         android:layout_alignBaseline="@id/progressBar"
-        android:layout_alignParentRight="true"
-       />
+        android:layout_alignParentRight="true" />
     <LinearLayout
         android:id="@+id/profileButtons"
         android:layout_width="match_parent"
