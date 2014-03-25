@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/dialog_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:background="@color/nav_header_bg"
+        android:textColor="@color/pelotonia_green"
+        android:padding="15dp"
+        android:text="Support a Rider"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:hint="Donation Amount"
+        android:id="@+id/donate_amount"
+        android:layout_below="@id/dialog_header"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/email_address"
+        android:hint="Email Address"
+        android:layout_below="@id/donate_amount"/>
+    <TextView
+        android:id="@+id/dialog_subtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_address"
+        android:padding="15dp"
+        android:textSize="18dp"
+        android:text="Enter a donation amount and email address to send a reminder"/>
+
+</RelativeLayout>

@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.socialize.entity.Comment;
 import com.socialize.i18n.DefaultLocalizationService;
 import com.socialize.ui.util.DateUtils;
 import com.socialize.util.ResourceLocator;

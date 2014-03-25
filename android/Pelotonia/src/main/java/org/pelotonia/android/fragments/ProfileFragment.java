@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,27 +51,8 @@ public class ProfileFragment extends Fragment {
         super.onAttach(activity);
 
         user = PelotonUtil.getRider(getActivity().getApplicationContext());
-        //TODO: get the fragment Argument to survive creation & destoyed
-        // TODO: handle the case when there is no rider has been selected yet
-        // TODO: Nested Fragment
-
-//            user = new Rider();
-//            user.amountRaised= "100.00";
-//            user.name = "Test Mark Harris";
-//            user.route= "Columbus to Gambier and Back";
-//            user.riderPhotoThumbUrl="https://www.mypelotonia.org/images/RiderPics/4111.jpg";
-//            user.story ="I am a user story Meooowth meow";
-        //}
     }
 
-    private SearchFragment.RiderClickListener riderListener = new SearchFragment.RiderClickListener() {
-        @Override
-        public void onRiderClick(String riderJson) {
-            getFragmentManager().beginTransaction()
-                    .remove(searchFragment)
-                    .commit();
-        }
-    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -132,12 +114,6 @@ public class ProfileFragment extends Fragment {
            }
         });
 
-
-        /*
-            Workout Section
-         */
-        //TODO: deal with no workout records
-
         // Mock for now
         WorkOut latestWorkout = new WorkOut( WorkOut.Excercise.RIDING, System.currentTimeMillis() , 100, 4000);
         TextView dateText = (TextView) view.findViewById(R.id.rider_date);
@@ -162,6 +138,9 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //TODO: Convert to proper date Time format
+        duration.setText(DateUtils.formatElapsedTime(new StringBuilder("H:MM"),latestWorkout.elapsedTime));
+        Log.d("Simba", "Duration: " +duration.getText().toString());
     }
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;

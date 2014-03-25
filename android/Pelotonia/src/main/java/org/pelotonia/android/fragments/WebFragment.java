@@ -1,10 +1,9 @@
 package org.pelotonia.android.fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -15,14 +14,24 @@ import org.pelotonia.android.R;
 public class WebFragment extends Fragment {
 
     String url;
+    String title;
 
-    public WebFragment(String url) {
-        this.url = url;
+
+    public static WebFragment newInstance(String url, String title) {
+        WebFragment f = new WebFragment();
+        f.url = url;
+        f.title = title;
+        return f;
+    }
+
+    public WebFragment() {
+
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(title);
     }
 
     @Override

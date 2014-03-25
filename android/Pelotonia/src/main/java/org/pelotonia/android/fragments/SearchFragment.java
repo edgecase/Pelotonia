@@ -1,38 +1,30 @@
 package org.pelotonia.android.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.socialize.google.gson.Gson;
-import com.socialize.google.gson.GsonBuilder;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.pelotonia.android.R;
-import org.pelotonia.android.adapter.CommentAdapter;
+import org.pelotonia.android.activity.MainActivity;
 import org.pelotonia.android.adapter.SearchAdapter;
-
 import org.pelotonia.android.objects.Rider;
 import org.pelotonia.android.util.JsoupUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +32,7 @@ import java.util.List;
 public class SearchFragment extends ListFragment {
 
 
-    public static SearchFragment newInstance(RiderClickListener listener) {
+    public static SearchFragment newInstance(MainActivity.FragmentChangeCallback listener) {
         SearchFragment fragment = new SearchFragment();
         fragment.mCallbackListener = listener;
         return fragment;
@@ -53,6 +45,11 @@ public class SearchFragment extends ListFragment {
     public SearchFragment() {
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Find Riders");
+    }
 
     SearchAdapter adapter;
     List<Rider> searchList= new ArrayList<Rider>();
@@ -164,30 +161,17 @@ public class SearchFragment extends ListFragment {
         }
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    MainActivity.FragmentChangeCallback mCallbackListener;
 
-        super.onCreate(savedInstanceState);
-
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    RiderClickListener mCallbackListener;
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Rider r = adapter.getItem(position);
-        Gson gson = new Gson();
-        mCallbackListener.onRiderClick(gson.toJson(r));
+        mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r));
     }
 
     public interface RiderClickListener {
-        public void onRiderClick(String riderJson);
+        public void onRiderClick(Rider rider);
     }
 
 }

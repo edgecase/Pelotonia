@@ -3,6 +3,7 @@ package org.pelotonia.android.fragments;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -121,14 +122,25 @@ public class NavigationDrawerFragment extends Fragment {
 
         RelativeLayout mDrawerRelativeLayout = (RelativeLayout) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Baksheesh-Regular.ttf");
 
         mDrawerListView1 = (ListView) mDrawerRelativeLayout.findViewById(R.id.listView1);
         TextView header1 = new TextView(getActivity());
+        header1.setTextSize(22);
+        header1.setTypeface(font);
+        header1.setBackgroundColor(getResources().getColor(R.color.nav_header_bg));
+        header1.setPadding(10,10,10,10);
+        header1.setTextColor(getResources().getColor(R.color.pelotonia_green));
         header1.setText("Participate");
         mDrawerListView1.addHeaderView(header1, null, false);
 
         mDrawerListView2 = (ListView) mDrawerRelativeLayout.findViewById(R.id.listView2);
         TextView header2 = new TextView(getActivity());
+        header2.setTextSize(22);
+        header2.setTypeface(font);
+        header2.setBackgroundColor(getResources().getColor(R.color.nav_header_bg));
+        header2.setTextColor(getResources().getColor(R.color.pelotonia_green));
+        header2.setPadding(10,10,10,10);
         header2.setText("Pelotonia");
         mDrawerListView2.addHeaderView(header2, null, false);
 
@@ -165,9 +177,9 @@ public class NavigationDrawerFragment extends Fragment {
                 R.layout.nav_item,
                 R.id.labelView,
                 new NavItem[]{
-                        new NavItem(getString(R.string.nav_register), R.drawable.icon_facebook),
-                        new NavItem(getString(R.string.nav_safety), R.drawable.icon_googleplus),
-                        new NavItem(getString(R.string.nav_about), R.drawable.icon_twitter),
+                        new NavItem(getString(R.string.nav_register), R.drawable.ic_register),
+                        new NavItem(getString(R.string.nav_safety), R.drawable.ic_action_video),
+                        new NavItem(getString(R.string.nav_about), R.drawable.ic_pelotonia),
                 }){
                     public View getView (int position, View convertView, ViewGroup parent) {
                         View view = super.getView(position, convertView, parent);
@@ -369,14 +381,14 @@ public class NavigationDrawerFragment extends Fragment {
 
     public List<NavItem> getNavList() {
         List<NavItem> navItems = new ArrayList<NavItem>();
-        navItems.add(new NavItem(getString(R.string.pelotonia), R.drawable.icon_facebook));
+        navItems.add(new NavItem(getString(R.string.pelotonia), R.drawable.ic_pelotonia));
         User user = ((PelotoniaApplication)getActivity().getApplication()).getUser();
         if (user == null) {
-            navItems.add(new NavItem(getString(R.string.nav_my_profile), R.drawable.icon_googleplus));
+            navItems.add(new NavItem(getString(R.string.nav_my_profile), R.drawable.ic_action_person));
         } else {
             navItems.add(new NavItem(user.getDisplayName(), user.getSmallImageUri()));
         }
-        navItems.add(new NavItem(getString(R.string.nav_riders), R.drawable.icon_twitter));
+        navItems.add(new NavItem(getString(R.string.nav_riders), R.drawable.ic_action_group));
         return navItems;
     }
 }

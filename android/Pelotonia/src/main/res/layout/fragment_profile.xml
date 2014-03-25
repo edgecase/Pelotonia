@@ -86,5 +86,5 @@
         android:listSelector="@drawable/pelotonia_arrow_green"
         android:stretchMode="columnWidth"
         android:gravity="center" />
-</RelativeLayout>>
+</RelativeLayout>
 

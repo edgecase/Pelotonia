@@ -2,9 +2,7 @@ package org.pelotonia.android;
 
 import android.app.Application;
 
-import com.socialize.UserUtils;
 import com.socialize.entity.User;
-import com.socialize.error.SocializeException;
 
 /**
  * Created by ckasek on 2/23/14.

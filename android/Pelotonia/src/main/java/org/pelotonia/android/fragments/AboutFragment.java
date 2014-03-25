@@ -2,27 +2,31 @@ package org.pelotonia.android.fragments;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.pelotonia.android.R;
-import org.pelotonia.android.activity.WebActivity;
+import org.pelotonia.android.activity.MainActivity;
 
 public class AboutFragment extends Fragment {
 
+    MainActivity.FragmentChangeCallback mCallback;
 
-    public AboutFragment() {
-        // Required empty public constructor
+    public static AboutFragment newInstance(MainActivity.FragmentChangeCallback callback) {
+        AboutFragment f = new AboutFragment();
+        f.mCallback = callback;
+        return f;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("About Pelotonia");
     }
 
     @Override
@@ -52,30 +56,25 @@ public class AboutFragment extends Fragment {
         websiteText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url","http://www.pelotonia.org/");
-                intent.putExtra("title","Pelotonia");
-                startActivity(intent);
+                WebFragment f = WebFragment.newInstance("http://www.pelotonia.org/", "Pelotonia");
+                mCallback.changeFragment(f);
             }
         });
         TextView faqText = (TextView) view.findViewById(R.id.faq_text);
         faqText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url","http://www.pelotonia.org/ride/faq");
-                intent.putExtra("title","Frequently Asked Questions");
-                startActivity(intent);
+                WebFragment f = WebFragment.newInstance("http://www.pelotonia.org/ride/faq", "F.A.Q.");
+                mCallback.changeFragment(f);
             }
         });
         TextView sandlotText = (TextView) view.findViewById(R.id.credit_text);
         sandlotText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url","http://www.isandlot.com/about-us");
-                intent.putExtra("title","Sandlot Software");
-                startActivity(intent);
+                WebFragment f = WebFragment.newInstance("http://www.isandlot.com/about-us", "Sandlot Software");
+                mCallback.changeFragment(f);
+
             }
         });
 

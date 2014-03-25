@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="10dp">
+    <ImageView
+        android:id ="@+id/rider_avatar"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_launcher"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/rider_avatar"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/rider_avatar"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp">
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rider Name"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/sub_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Rider Route" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rider_avatar">
+    <TextView
+        android:id="@+id/rider_story"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rider Story"
+        android:textSize="18sp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"/>
+    </ScrollView>
+</RelativeLayout>
