@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PelotonUtil {
+    public final static String URL_PREFIX ="https://www.mypelotonia.org/";
     private final static String KEY="pelotonia_settings";
     private final static String RIDER_KEY ="rider";
     private static final String IMG_KEY = "image";
@@ -25,7 +26,7 @@ public class PelotonUtil {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 KEY, Context.MODE_PRIVATE);
         String riderString = sharedPref.getString(RIDER_KEY,"");
-        if(riderString.isEmpty())
+        if(!riderString.isEmpty())
             return new Gson().fromJson(riderString,Rider.class);
         else
             return null;

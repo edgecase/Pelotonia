@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.socialize.Socialize;
+import com.socialize.google.gson.Gson;
+
+import org.pelotonia.android.fragments.NavigationDrawerFragment;
 
 import org.pelotonia.android.PelotoniaApplication;
 import org.pelotonia.android.R;
@@ -21,6 +24,8 @@ import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.RiderFragment;
 import org.pelotonia.android.fragments.SearchFragment;
 import org.pelotonia.android.fragments.WebFragment;
+import org.pelotonia.android.objects.Rider;
+import org.pelotonia.android.util.PelotonUtil;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -39,6 +44,8 @@ public class MainActivity extends ActionBarActivity
                     .commit();
         }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +74,20 @@ public class MainActivity extends ActionBarActivity
                     .commit();
                 break;
             case 2:
-                fragmentManager.beginTransaction()
+
+                if (PelotonUtil.getRider(getApplicationContext()) == null){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, SearchFragment.newInstance(new FragmentChangeCallback()))
+                            .addToBackStack("riders")
+                            .commit();
+                }
+                else {
+                    fragmentManager.beginTransaction()
                         .replace(R.id.container, ProfileFragment.newInstance())
                         .addToBackStack("profile")
                         .commit();
+                }
+
                 break;
             case 3:
                 fragmentManager.beginTransaction()
