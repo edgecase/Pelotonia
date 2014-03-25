@@ -128,6 +128,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         switch (position) {
             case 1:
                 fragmentManager.beginTransaction()

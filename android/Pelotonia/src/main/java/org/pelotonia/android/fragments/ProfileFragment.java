@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,7 +110,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        imgList = PelotonUtil.getImageList(getActivity());
+        //TODO: uncomment me once nested work
+        //imgList = PelotonUtil.getImageList(getActivity());
 
         if (imgList == null)
             imgList= new LinkedList<String>();
@@ -132,10 +132,12 @@ public class ProfileFragment extends Fragment {
            }
         });
 
+
         /*
             Workout Section
          */
         //TODO: deal with no workout records
+
         // Mock for now
         WorkOut latestWorkout = new WorkOut( WorkOut.Excercise.RIDING, System.currentTimeMillis() , 100, 4000);
         TextView dateText = (TextView) view.findViewById(R.id.rider_date);
@@ -143,9 +145,23 @@ public class ProfileFragment extends Fragment {
         TextView milesText = (TextView) view.findViewById(R.id.rider_miles);
         milesText.setText(String.valueOf(latestWorkout.miles));
         TextView duration = (TextView) view.findViewById(R.id.rider_duration);
-        //TODO: Convert to proper date Time format
         duration.setText(DateUtils.formatElapsedTime(new StringBuilder("H:MM"),latestWorkout.elapsedTime));
-        Log.d("Simba", "Duration: " +duration.getText().toString());
+        //TODO: Set the proper image type on imageview workout!
+
+        /*
+            Go to workout History Fragment
+            TODO: Use nested Fragment ??
+         */
+
+        ImageButton workOutHistory = (ImageButton) view.findViewById(R.id.workOutHistory);
+        workOutHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO:
+                // call the right delegate
+            }
+        });
+
     }
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -209,18 +225,4 @@ public class ProfileFragment extends Fragment {
         return new File(storeDir, imageFileName);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        public void onFragmentInteraction(Uri uri);
-//    }
 }

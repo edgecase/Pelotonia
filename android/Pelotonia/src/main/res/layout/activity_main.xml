@@ -27,4 +27,5 @@
         android:layout_gravity="start"
         android:name="org.pelotonia.android.fragments.NavigationDrawerFragment" />
 
+
 </android.support.v4.widget.DrawerLayout>
