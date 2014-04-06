@@ -134,8 +134,8 @@
             return [w2.date compare:w1.date];
         }];
         Workout *mostRecent = [workoutsSorted objectAtIndex:0];
-        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ (%d Miles)", [mostRecent.date stringWithFormat:@"MMM dd"], mostRecent.distanceInMiles];
-        self.milesThisYearLabel.text = [NSString stringWithFormat:@"%d", [self workoutMiles]];
+        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ (%ld Miles)", [mostRecent.date stringWithFormat:@"MMM dd"], (long)mostRecent.distanceInMiles];
+        self.milesThisYearLabel.text = [NSString stringWithFormat:@"%ld", (long)[self workoutMiles]];
     }
     else {
         self.recentWorkoutDateLabel.text = @"None Yet";

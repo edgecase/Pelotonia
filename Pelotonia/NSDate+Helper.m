@@ -79,10 +79,10 @@
         text = @"Last Week";
     }
     else if ([self isEarlierThanDate:[NSDate date]]) {
-        text = [NSString stringWithFormat:@"%d days ago", daysAgo];
+        text = [NSString stringWithFormat:@"%ld days ago", (long)daysAgo];
     }
     else {
-        text = [NSString stringWithFormat:@"%d days from now", daysAgo];
+        text = [NSString stringWithFormat:@"%ld days from now", (long)daysAgo];
     }
     
 	return text;

@@ -60,7 +60,7 @@
 {
     RiderPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"riderPhotoCell" forIndexPath:indexPath];
     NSString *key = [[_photos objectAtIndex:indexPath.row] objectForKey:@"key"];
-    NSLog(@"loading cell %d", indexPath.row);
+    NSLog(@"loading cell %ld", (long)indexPath.row);
     
     // load the image from the absolute URL
     [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {

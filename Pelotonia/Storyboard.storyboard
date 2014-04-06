@@ -8,7 +8,7 @@
         <!--Menu View Controller-->
         <scene sceneID="DV7-WZ-QZh">
             <objects>
-                <tableViewController storyboardIdentifier="MenuViewController" id="q5i-fe-bS2" customClass="MenuViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q5i-fe-bS2" customClass="MenuViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5yo-Ej-QtD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,7 +216,7 @@
         <scene sceneID="xLT-Q7-w5r">
             <objects>
                 <viewController storyboardIdentifier="IntroViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="R6E-qa-gmV" customClass="IntroViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mxs-oF-XsG">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="introviewcontroller" id="mxs-oF-XsG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -542,7 +542,7 @@
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
             <objects>
-                <viewController storyboardIdentifier="InitialSlidingViewController" modalTransitionStyle="crossDissolve" id="61J-5L-bDV" customClass="InitialSlidingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialSlidingViewController" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="61J-5L-bDV" customClass="InitialSlidingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QII-Lx-UbJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -943,7 +943,7 @@
         <!--Activity View Controller - Pelotonia Stream-->
         <scene sceneID="m8a-Js-YyP">
             <objects>
-                <tableViewController id="QjF-de-6rP" customClass="ActivityViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QjF-de-6rP" customClass="ActivityViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Pelotonia Stream" id="VaX-jb-EiR">
                         <barButtonItem key="leftBarButtonItem" image="259-list" id="dOg-bp-OQa">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
@@ -2152,9 +2152,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
-        <segue reference="lZa-h3-ufJ"/>
         <segue reference="tZz-dL-tdX"/>
-        <segue reference="sBj-i1-1JD"/>
+        <segue reference="9TX-11-9gW"/>
         <segue reference="s56-AL-OFT"/>
+        <segue reference="lZa-h3-ufJ"/>
     </inferredMetricsTieBreakers>
 </document>

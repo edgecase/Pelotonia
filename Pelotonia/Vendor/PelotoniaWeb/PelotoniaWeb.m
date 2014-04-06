@@ -58,7 +58,7 @@
                     rider.route = [self stripWhitespace:[[riderAttributeColumn firstChild] content]];
                 } else if ([classAttribute isEqualToString:@"high-roller"]) {
                     // if the high-roller class is non-empty, we have a high roller
-                    NSLog(@"content: %d", [[riderAttributeColumn children] count]);
+                    NSLog(@"content: %lu", (unsigned long)[[riderAttributeColumn children] count]);
                     if ([[riderAttributeColumn children] count] > 1) {
                         rider.highRoller = YES;
                     }

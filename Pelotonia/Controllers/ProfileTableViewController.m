@@ -192,7 +192,7 @@
     if (section == 1)
     {
         NSInteger num = [self.riderComments count];
-        NSLog(@"Section 1 has %d cells", num);
+        NSLog(@"Section 1 has %ld cells", (long)num);
         return num;
     }
     else
@@ -261,7 +261,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     
     // if dynamic section make all rows the same indentation level as row 0
     if (section == 1) {

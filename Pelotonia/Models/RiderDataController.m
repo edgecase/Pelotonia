@@ -56,7 +56,7 @@
     return _workouts;
 }
 
-- (unsigned)count
+- (NSInteger)count
 {
     return [_riderList count];
 }
