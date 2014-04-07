@@ -10,6 +10,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Find Riders</string>
     <string name="pelotonia">Pelotonia</string>
     <string name="nav_my_profile">My Rider Profile</string>
     <string name="nav_riders">Riders</string>

@@ -1,5 +1,6 @@
 package org.pelotonia.android.objects;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,6 +18,7 @@ public class Rider {
     public String story;
     public Double amountRaised;
     public Double amountPledged;
+    public Calendar lastUpdated = null;
 
     private List<Donor> donors = new Vector<Donor>();
 

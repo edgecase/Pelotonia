@@ -1,9 +1,12 @@
 package org.pelotonia.android.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +36,12 @@ import org.pelotonia.android.activity.MainActivity;
 import org.pelotonia.android.adapter.CommentAdapter;
 import org.pelotonia.android.objects.Rider;
 import org.pelotonia.android.util.JsoupUtils;
+import org.pelotonia.android.util.PelotonUtil;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,6 +59,7 @@ public class RiderFragment extends ListFragment implements
     private View headerView;
     private Entity entity;
     private MainActivity.FragmentChangeCallback mRiderStoryListener;
+    private boolean following = false;
 
     public static RiderFragment newRiderInstance(MainActivity.FragmentChangeCallback listener, Rider rider) {
         RiderFragment fragment = new RiderFragment();
@@ -73,7 +79,7 @@ public class RiderFragment extends ListFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Profile");
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Rider Profile");
     }
 
     @Override
@@ -95,6 +101,26 @@ public class RiderFragment extends ListFragment implements
                     f.show(getActivity().getSupportFragmentManager(), "Donate");
                 }
             });
+            following = PelotonUtil.isFollowing(getActivity(), rider);
+            final Button follow = (Button) headerView.findViewById(R.id.follow_button);
+            follow.setText(following ? "Unfollow" : "Follow");
+            follow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (following) {
+                        if (PelotonUtil.unfollowRider(getActivity(), rider)) {
+                            following = false;
+                            follow.setText("Follow");
+                        }
+                    } else {
+                        if (PelotonUtil.followRider(getActivity(), rider)) {
+                            following = true;
+                            follow.setText("Unfollow");
+                        }
+                    }
+                }
+            });
+
         }
         View hLayout = headerView.findViewById(R.id.header_layout);
         hLayout.setClickable(true);
@@ -165,6 +191,8 @@ public class RiderFragment extends ListFragment implements
         if (rider == null) {
             new PelotoniaTask().execute("https://www.mypelotonia.org/counter_homepage.jsp");
         } else {
+            rider.lastUpdated = Calendar.getInstance();
+            rider.lastUpdated.add(Calendar.DAY_OF_MONTH, -2);
             new PelotoniaTask().execute("https://www.mypelotonia.org/" + rider.profileUrl);
         }
     }
@@ -179,8 +207,28 @@ public class RiderFragment extends ListFragment implements
         private boolean pelotoniaComplete = false;
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (rider != null && rider.lastUpdated == null) {
+                Rider tmpRider = PelotonUtil.getRiderById(getActivity(), rider.getRiderId());
+                if (tmpRider != null) {
+                    rider = tmpRider;
+                }
+            }
+        }
+
+        @Override
         protected Document doInBackground(String... urls) {
-            Document doc = JsoupUtils.getDocument(urls[0]);
+            Document doc = null;
+            Calendar refreshTime = Calendar.getInstance();
+            refreshTime.add(Calendar.DAY_OF_MONTH, -1);
+
+            if (rider == null || rider.lastUpdated == null || rider.lastUpdated.getTime().before(refreshTime.getTime())) {
+                doc = JsoupUtils.getDocument(urls[0]);
+                Log.d("Chuck", "Not Cached");
+            }else {
+                Log.d("Chuck", "Cached Rider");
+            }
             CommentUtils.getCommentsByEntity(getActivity(), entity.getKey(), 0, 0, new CommentListListener() {
                 @Override
                 public void onList(ListResult<Comment> result) {
@@ -269,21 +317,30 @@ public class RiderFragment extends ListFragment implements
                             rider.addDonor(donor);
                         }
                     }
-
-                    TextView tv = (TextView) headerView.findViewById(R.id.raised);
-                    NumberFormat formatter = NumberFormat.getCurrencyInstance();
+                    rider.lastUpdated = Calendar.getInstance();
+                    PelotonUtil.saveRiderById(getActivity(), rider);
+                }
+            }
+            pelotoniaComplete = true;
+            if (socializeComplete) {
+                mPullToRefreshLayout.setRefreshComplete();
+            }
+            if (rider != null) {
+                TextView tv = (TextView) headerView.findViewById(R.id.raised);
+                TextView tv2 = (TextView) headerView.findViewById(R.id.progressBar_text);
+                ProgressBar progress = (ProgressBar) headerView.findViewById(R.id.progressBar);
+                NumberFormat formatter = NumberFormat.getCurrencyInstance();
+                if (rider.amountPledged > 0) {
                     tv.setText(formatter.format(rider.amountRaised) + " of " + formatter.format(rider.amountPledged));
-
-                    ProgressBar progress = (ProgressBar) headerView.findViewById(R.id.progressBar);
                     progress.setProgress(rider.amountRaised.intValue());
                     progress.setMax(rider.amountPledged.intValue());
-
-                    TextView tv2 = (TextView) headerView.findViewById(R.id.progressBar_text);
                     tv2.setText(NumberFormat.getPercentInstance().format(rider.amountRaised / rider.amountPledged));
-                }
-                pelotoniaComplete = true;
-                if (socializeComplete) {
-                    mPullToRefreshLayout.setRefreshComplete();
+                    progress.setVisibility(View.VISIBLE);
+                    tv2.setVisibility(View.VISIBLE);
+                } else {
+                    tv.setText(formatter.format(rider.amountRaised));
+                    progress.setVisibility(View.INVISIBLE);
+                    tv2.setVisibility(View.GONE);
                 }
             }
         }

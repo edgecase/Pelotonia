@@ -1,5 +1,6 @@
 package org.pelotonia.android.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.pelotonia.android.R;
 import org.pelotonia.android.activity.MainActivity;
-import org.pelotonia.android.adapter.SearchAdapter;
+import org.pelotonia.android.adapter.RiderListAdapter;
 import org.pelotonia.android.objects.Rider;
 import org.pelotonia.android.util.JsoupUtils;
 
@@ -51,11 +52,11 @@ public class SearchFragment extends ListFragment {
         ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Find Riders");
     }
 
-    SearchAdapter adapter;
+    RiderListAdapter adapter;
     List<Rider> searchList= new ArrayList<Rider>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        adapter = new SearchAdapter(getActivity(), R.layout.comment_layout,
+        adapter = new RiderListAdapter(getActivity(), R.layout.comment_layout,
                 R.id.commentListItemText, searchList);
         setListAdapter(adapter);
 
@@ -97,8 +98,20 @@ public class SearchFragment extends ListFragment {
 
     private class SearchTask extends AsyncTask <String, Void, List<Rider>> {
 
-        final String url = "https://www.mypelotonia.org/riders_searchresults.jsp?RideDistance=&LastName=";
+        final String url = "https://www.mypelotonia.org/riders_searchresults.jsp?Rider&RIDERS&RideDistance=&LastName=";
         //TODO: Progressbar UI show busy search
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Searching...");
+            progressDialog.show();
+        }
+
         @Override
         protected List<Rider> doInBackground(String... name) {
            Document doc = JsoupUtils.getDocument(url + name[0]);
@@ -158,6 +171,7 @@ public class SearchFragment extends ListFragment {
             }
 
             adapter.notifyDataSetChanged();
+            progressDialog.dismiss();
         }
     }
 
@@ -169,9 +183,4 @@ public class SearchFragment extends ListFragment {
         Rider r = adapter.getItem(position);
         mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r));
     }
-
-    public interface RiderClickListener {
-        public void onRiderClick(Rider rider);
-    }
-
 }

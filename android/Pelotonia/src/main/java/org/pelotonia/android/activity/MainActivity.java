@@ -19,6 +19,7 @@ import org.pelotonia.android.fragments.NavigationDrawerFragment;
 import org.pelotonia.android.fragments.ProfileFragment;
 import org.pelotonia.android.fragments.RiderFragment;
 import org.pelotonia.android.fragments.SearchFragment;
+import org.pelotonia.android.fragments.TeamFragment;
 import org.pelotonia.android.fragments.WebFragment;
 import org.pelotonia.android.util.PelotonUtil;
 
@@ -29,6 +30,7 @@ public class MainActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private FragmentChangeCallback callback = new FragmentChangeCallback();
 
     public class FragmentChangeCallback {
         public void changeFragment(Fragment f) {
@@ -63,7 +65,7 @@ public class MainActivity extends ActionBarActivity
         switch (position) {
             case 1:
                 fragmentManager.beginTransaction()
-                    .replace(R.id.container, RiderFragment.newPelotoniaInstance(new FragmentChangeCallback()))
+                    .replace(R.id.container, RiderFragment.newPelotoniaInstance(callback))
                     .addToBackStack(null)
                     .commit();
                 break;
@@ -72,7 +74,7 @@ public class MainActivity extends ActionBarActivity
                 if (PelotonUtil.getRider(getApplicationContext()) == null){
                     fragmentManager.beginTransaction()
 
-                            .replace(R.id.container, SearchFragment.newInstance(new FragmentChangeCallback()))
+                            .replace(R.id.container, SearchFragment.newInstance(callback))
                             .addToBackStack("riders")
                             .commit();
                 }
@@ -85,10 +87,17 @@ public class MainActivity extends ActionBarActivity
 
                 break;
             case 3:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, SearchFragment.newInstance(new FragmentChangeCallback()))
-                        .addToBackStack(null)
-                        .commit();
+                if (PelotonUtil.getFollowedRidersCount(getApplicationContext()) > 0) {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, TeamFragment.newInstance(callback))
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, SearchFragment.newInstance(callback))
+                            .addToBackStack(null)
+                            .commit();
+                }
                 break;
             case 4:
                 fragmentManager.beginTransaction()
@@ -101,7 +110,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 6:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, AboutFragment.newInstance(new FragmentChangeCallback()))
+                        .replace(R.id.container, AboutFragment.newInstance(callback))
                         .addToBackStack(null)
                         .commit();
                 break;
