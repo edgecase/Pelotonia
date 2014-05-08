@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-
+        onNavigationDrawerItemSelected(2);
     }
 
     @Override
@@ -72,10 +72,8 @@ public class MainActivity extends ActionBarActivity
                     .commit();
                 break;
             case 2:
-
                 if (PelotonUtil.getRider(getApplicationContext()) == null){
                     fragmentManager.beginTransaction()
-
                             .replace(R.id.container, SearchFragment.newInstance(callback,true))
                             .addToBackStack("riders")
                             .commit();
@@ -86,7 +84,6 @@ public class MainActivity extends ActionBarActivity
                         .addToBackStack("riders")
                         .commit();
                 }
-
                 break;
             case 3:
                 if (PelotonUtil.getFollowedRidersCount(getApplicationContext()) > 0) {
@@ -117,7 +114,6 @@ public class MainActivity extends ActionBarActivity
                         .commit();
                 break;
         }
-
     }
 
     public void restoreActionBar() {
