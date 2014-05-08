@@ -33,8 +33,7 @@ import java.util.List;
 
 public class SearchFragment extends ListFragment {
 
-
-    private static boolean saveProfile =false;
+    private static boolean saveProfile = false;
 
     public static SearchFragment newInstance(MainActivity.FragmentChangeCallback listener, boolean setProfile) {
         saveProfile = setProfile;
@@ -185,9 +184,9 @@ public class SearchFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Rider r = adapter.getItem(position);
-        if(saveProfile)
-            PelotonUtil.saveRider(getActivity().getApplicationContext(),r);
-
-        mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r));
+        if(saveProfile) {
+            PelotonUtil.saveRider(getActivity().getApplicationContext(), r);
+        }
+        mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r), !saveProfile);
     }
 }

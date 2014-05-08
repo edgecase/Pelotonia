@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -33,12 +34,14 @@ public class MainActivity extends ActionBarActivity
     private FragmentChangeCallback callback = new FragmentChangeCallback();
 
     public class FragmentChangeCallback {
-        public void changeFragment(Fragment f) {
-            getSupportFragmentManager().beginTransaction()
+        public void changeFragment(Fragment f, boolean addToBackStack) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out, R.anim.slide_right_in, R.anim.slide_right_out)
-                    .replace(R.id.container, f)
-                    .addToBackStack(null)
-                    .commit();
+                    .replace(R.id.container, f);
+            if (addToBackStack) {
+                transaction.addToBackStack(null);
+            }
+            transaction.commit();
         }
     }
 
@@ -57,7 +60,17 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        onNavigationDrawerItemSelected(2);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (PelotonUtil.getRider(getApplicationContext()) == null){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchFragment.newInstance(callback, true))
+                    .commit();
+        }
+        else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, RiderFragment.newRiderInstance(callback, PelotonUtil.getRider(this)))
+                    .commit();
+        }
     }
 
     @Override
@@ -74,8 +87,7 @@ public class MainActivity extends ActionBarActivity
             case 2:
                 if (PelotonUtil.getRider(getApplicationContext()) == null){
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, SearchFragment.newInstance(callback,true))
-                            .addToBackStack("riders")
+                            .replace(R.id.container, SearchFragment.newInstance(callback, true))
                             .commit();
                 }
                 else {
