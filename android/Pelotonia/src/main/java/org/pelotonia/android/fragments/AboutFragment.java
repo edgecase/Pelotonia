@@ -57,7 +57,7 @@ public class AboutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 WebFragment f = WebFragment.newInstance("http://www.pelotonia.org/", "Pelotonia");
-                mCallback.changeFragment(f);
+                mCallback.changeFragment(f, true);
             }
         });
         TextView faqText = (TextView) view.findViewById(R.id.faq_text);
@@ -65,7 +65,7 @@ public class AboutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 WebFragment f = WebFragment.newInstance("http://www.pelotonia.org/ride/faq", "F.A.Q.");
-                mCallback.changeFragment(f);
+                mCallback.changeFragment(f, true);
             }
         });
         TextView sandlotText = (TextView) view.findViewById(R.id.credit_text);
@@ -73,7 +73,7 @@ public class AboutFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 WebFragment f = WebFragment.newInstance("http://www.isandlot.com/about-us", "Sandlot Software");
-                mCallback.changeFragment(f);
+                mCallback.changeFragment(f, true);
 
             }
         });

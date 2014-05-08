@@ -59,7 +59,7 @@ public class TeamFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Rider r = adapter.getItem(position);
-        mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r));
+        mCallbackListener.changeFragment(RiderFragment.newRiderInstance(mCallbackListener, r), true);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class TeamFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_search: {
-                mCallbackListener.changeFragment(SearchFragment.newInstance(mCallbackListener,false));
+                mCallbackListener.changeFragment(SearchFragment.newInstance(mCallbackListener,false), true);
                 return true;
             }
         }

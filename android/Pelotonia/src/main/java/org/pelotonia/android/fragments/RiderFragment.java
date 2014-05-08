@@ -134,7 +134,7 @@ public class RiderFragment extends ListFragment implements
             @Override
             public void onClick(View v) {
                 if (mRiderStoryListener != null) {
-                    mRiderStoryListener.changeFragment(RiderStoryFragment.newRiderInstance(rider));
+                    mRiderStoryListener.changeFragment(RiderStoryFragment.newRiderInstance(rider), true);
                 }
             }
         });
@@ -146,7 +146,7 @@ public class RiderFragment extends ListFragment implements
                 @Override
                 public void onClick(View v) {
                     if (mRiderStoryListener != null) {
-                        mRiderStoryListener.changeFragment(RiderDonationsFragment.newInstance(rider));
+                        mRiderStoryListener.changeFragment(RiderDonationsFragment.newInstance(rider), true);
                     }
                 }
             });
