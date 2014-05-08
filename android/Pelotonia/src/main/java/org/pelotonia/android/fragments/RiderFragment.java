@@ -58,7 +58,7 @@ public class RiderFragment extends ListFragment implements
     private Entity entity;
     private MainActivity.FragmentChangeCallback mRiderStoryListener;
     private boolean following = false;
-
+    private static PelotoniaTask task;
     public static RiderFragment newRiderInstance(MainActivity.FragmentChangeCallback listener, Rider rider) {
         RiderFragment fragment = new RiderFragment();
         fragment.rider = rider;
@@ -190,10 +190,11 @@ public class RiderFragment extends ListFragment implements
                     }
                 }
             });
+            task = new PelotoniaTask();
             if (rider == null) {
-                new PelotoniaTask().execute("https://www.mypelotonia.org/counter_homepage.jsp");
+                task.execute("https://www.mypelotonia.org/counter_homepage.jsp");
             } else {
-                new PelotoniaTask().execute("https://www.mypelotonia.org/" + rider.profileUrl);
+                task.execute("https://www.mypelotonia.org/" + rider.profileUrl);
                 ImageView avatar = (ImageView) headerView.findViewById(R.id.rider_avatar);
                 Picasso.with(getActivity()).load("https://www.mypelotonia.org/" + rider.getRiderPhotoThumbUrl()).into(avatar);
                 TextView headerText = (TextView) headerView.findViewById(R.id.header);
@@ -207,13 +208,24 @@ public class RiderFragment extends ListFragment implements
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(task != null)
+            task.cancel(true);
+    }
+
+    @Override
     public void onRefreshStarted(View view) {
+
+        task = new PelotoniaTask();
+
         if (rider == null) {
-            new PelotoniaTask().execute("https://www.mypelotonia.org/counter_homepage.jsp");
+
+            task.execute("https://www.mypelotonia.org/counter_homepage.jsp");
         } else {
             rider.lastUpdated = Calendar.getInstance();
             rider.lastUpdated.add(Calendar.DAY_OF_MONTH, -2);
-            new PelotoniaTask().execute("https://www.mypelotonia.org/" + rider.profileUrl);
+            task.execute("https://www.mypelotonia.org/" + rider.profileUrl);
         }
     }
 
@@ -226,6 +238,7 @@ public class RiderFragment extends ListFragment implements
         private boolean socializeComplete = false;
         private boolean pelotoniaComplete = false;
 
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -237,6 +250,7 @@ public class RiderFragment extends ListFragment implements
             }
         }
 
+
         @Override
         protected Document doInBackground(String... urls) {
             Document doc = null;
@@ -246,11 +260,17 @@ public class RiderFragment extends ListFragment implements
             if (rider == null || rider.lastUpdated == null || rider.lastUpdated.getTime().before(refreshTime.getTime())) {
                 doc = JsoupUtils.getDocument(urls[0]);
             }
+
+            if(isCancelled())
+                return null;
             CommentUtils.getCommentsByEntity(getActivity(), entity.getKey(), 0, 0, new CommentListListener() {
                 @Override
                 public void onList(ListResult<Comment> result) {
-                    socializeComplete = true;
 
+                    if(isCancelled())
+                    return;
+
+                    socializeComplete = true;
                     commentList.clear();
                     commentList.addAll(result.getItems());
                     adapter.notifyDataSetChanged();
