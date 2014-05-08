@@ -93,33 +93,39 @@ public class RiderFragment extends ListFragment implements
             headerView = inflater.inflate(R.layout.fragment_pelotonia, null);
         } else {
             headerView = inflater.inflate(R.layout.fragment_rider, null);
-            Button button = (Button) headerView.findViewById(R.id.support_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DonateDialogFragment f = new DonateDialogFragment();
-                    f.show(getActivity().getSupportFragmentManager(), "Donate");
-                }
-            });
-            following = PelotonUtil.isFollowing(getActivity(), rider);
-            final Button follow = (Button) headerView.findViewById(R.id.follow_button);
-            follow.setText(following ? "Unfollow" : "Follow");
-            follow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (following) {
-                        if (PelotonUtil.unfollowRider(getActivity(), rider)) {
-                            following = false;
-                            follow.setText("Follow");
-                        }
-                    } else {
-                        if (PelotonUtil.followRider(getActivity(), rider)) {
-                            following = true;
-                            follow.setText("Unfollow");
-                        }
+            final Button support = (Button) headerView.findViewById(R.id.support_button);
+                support.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DonateDialogFragment f = new DonateDialogFragment();
+                        f.show(getActivity().getSupportFragmentManager(), "Donate");
                     }
+                });
+                following = PelotonUtil.isFollowing(getActivity(), rider);
+
+                final Button follow = (Button) headerView.findViewById(R.id.follow_button);
+                if(rider.getRiderId().equals(PelotonUtil.getRider(getActivity().getApplicationContext()).getRiderId())){
+                    follow.setEnabled(false);
+                    follow.setVisibility(View.INVISIBLE);
+                } else {
+                    follow.setText(following ? "Unfollow" : "Follow");
+                    follow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (following) {
+                                if (PelotonUtil.unfollowRider(getActivity(), rider)) {
+                                    following = false;
+                                    follow.setText("Follow");
+                                }
+                            } else {
+                                if (PelotonUtil.followRider(getActivity(), rider)) {
+                                    following = true;
+                                    follow.setText("Unfollow");
+                                }
+                            }
+                        }
+                    });
                 }
-            });
 
         }
         View hLayout = headerView.findViewById(R.id.header_layout);

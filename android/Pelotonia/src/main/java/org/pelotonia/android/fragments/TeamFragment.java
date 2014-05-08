@@ -71,7 +71,7 @@ public class TeamFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_search: {
-                mCallbackListener.changeFragment(SearchFragment.newInstance(mCallbackListener));
+                mCallbackListener.changeFragment(SearchFragment.newInstance(mCallbackListener,false));
                 return true;
             }
         }
