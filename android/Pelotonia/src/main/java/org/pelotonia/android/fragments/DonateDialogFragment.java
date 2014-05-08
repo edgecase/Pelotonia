@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import org.pelotonia.android.R;
+import org.pelotonia.android.objects.Rider;
 
 public class DonateDialogFragment extends DialogFragment{
+    Rider rider;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -26,22 +28,30 @@ public class DonateDialogFragment extends DialogFragment{
         final View v = inflater.inflate(R.layout.donate_dialog, null);
         builder.setView(v)
                 // Add action buttons
-                .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.send), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         EditText amount = (EditText) v.findViewById(R.id.donate_amount);
                         EditText email = (EditText) v.findViewById(R.id.email_address);
+                        EditText name = (EditText) v.findViewById(R.id.email_name);
                         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                                 "mailto", email.getText().toString(), null));
-                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "GIMME THAT MONEY!");
-                        emailIntent.putExtra(Intent.EXTRA_TEXT, amount.getText().toString());
-                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
+                        String message = getString(R.string.email_message, name.getText().toString(), amount.getText().toString(), rider.name, rider.donateUrl, rider.name);
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+                        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DonateDialogFragment.this.getDialog().cancel();
                     }
                 });
         return builder.create();
-    }}
+    }
+
+    public void setRider(Rider rider) {
+        this.rider = rider;
+
+    }
+}

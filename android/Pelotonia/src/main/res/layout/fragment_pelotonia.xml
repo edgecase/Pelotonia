@@ -48,7 +48,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/icon"
-        android:text="$15,499,891"
         android:textSize="24sp"/>
 
     <TextView
@@ -65,7 +64,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="2081"
         android:layout_below="@id/icon"
         android:layout_alignParentRight="true"/>
 

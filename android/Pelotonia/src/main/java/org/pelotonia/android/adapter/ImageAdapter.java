@@ -39,7 +39,6 @@ public class ImageAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.d("Simba", "getView");
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
             imageView = new ImageView(context);
@@ -62,7 +61,6 @@ public class ImageAdapter extends BaseAdapter {
     private Bitmap getPic(int width, int height, String imagePath) {
 
         int maxWidth = context.getResources().getDisplayMetrics().widthPixels;
-        Log.d("Simba", imagePath + " Max Width of  " + maxWidth);
 
         // Get the dimensions of the View
         int targetW = (maxWidth/3)-10;

@@ -140,7 +140,6 @@ public class ProfileFragment extends Fragment {
 
         //TODO: Convert to proper date Time format
         duration.setText(DateUtils.formatElapsedTime(new StringBuilder("H:MM"),latestWorkout.elapsedTime));
-        Log.d("Simba", "Duration: " +duration.getText().toString());
     }
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;

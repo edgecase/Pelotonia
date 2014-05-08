@@ -25,5 +25,10 @@
     <string name="about_sandlot">Created for Pelotonia by</string>
     <string name="workout_blank_fragment">No past workout found</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send_email">Send Email</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="email_subject">Thank you for your support of Pelotonia</string>
+    <string name="email_message">Hello %1$s,\n\nYou have pledged to donate $%2$s to %3$s\'s Pelotonia fund. Please use the following link to complete your pledge: https://www.mypelotonia.org/%4$s\n\nThanks!\n%5$s and Pelotonia</string>
 
 </resources>

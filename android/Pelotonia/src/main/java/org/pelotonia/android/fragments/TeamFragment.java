@@ -82,7 +82,6 @@ public class TeamFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Followed Riders");
-        Log.d("Chuck", ((ActionBarActivity) getActivity()).getSupportActionBar().getTitle().toString());
         riderList.clear();
         riderList.addAll(PelotonUtil.getFollowedRiders(getActivity()));
         adapter.notifyDataSetChanged();

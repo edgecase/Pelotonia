@@ -1,7 +1,5 @@
 package org.pelotonia.android.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -98,15 +96,17 @@ public class RiderFragment extends ListFragment implements
                     @Override
                     public void onClick(View v) {
                         DonateDialogFragment f = new DonateDialogFragment();
+                        f.setRider(rider);
                         f.show(getActivity().getSupportFragmentManager(), "Donate");
+
                     }
                 });
                 following = PelotonUtil.isFollowing(getActivity(), rider);
 
                 final Button follow = (Button) headerView.findViewById(R.id.follow_button);
-                if(rider.getRiderId().equals(PelotonUtil.getRider(getActivity().getApplicationContext()).getRiderId())){
+                if(!following && rider.getRiderId().equals(PelotonUtil.getRider(getActivity().getApplicationContext()).getRiderId())){
                     follow.setEnabled(false);
-                    follow.setVisibility(View.INVISIBLE);
+                    follow.setVisibility(View.GONE);
                 } else {
                     follow.setText(following ? "Unfollow" : "Follow");
                     follow.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +138,19 @@ public class RiderFragment extends ListFragment implements
                 }
             }
         });
+
+        View dLayout = headerView.findViewById(R.id.donation_progress);
+        if (dLayout != null) {
+            dLayout.setClickable(true);
+            dLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mRiderStoryListener != null) {
+                        mRiderStoryListener.changeFragment(RiderDonationsFragment.newInstance(rider));
+                    }
+                }
+            });
+        }
 
         if (view != null) {
             mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.ptr_layout);
@@ -171,6 +184,7 @@ public class RiderFragment extends ListFragment implements
                             @Override
                             public void onError(SocializeException error) {
                                 //TODO display error?
+                                Log.e("Chuck", error.toString());
                             }
                         });
                     }
@@ -231,9 +245,6 @@ public class RiderFragment extends ListFragment implements
 
             if (rider == null || rider.lastUpdated == null || rider.lastUpdated.getTime().before(refreshTime.getTime())) {
                 doc = JsoupUtils.getDocument(urls[0]);
-                Log.d("Chuck", "Not Cached");
-            }else {
-                Log.d("Chuck", "Cached Rider");
             }
             CommentUtils.getCommentsByEntity(getActivity(), entity.getKey(), 0, 0, new CommentListListener() {
                 @Override
@@ -250,6 +261,7 @@ public class RiderFragment extends ListFragment implements
 
                 @Override
                 public void onError(SocializeException error) {
+                    Log.e("Chuck", error.toString());
                     socializeComplete = true;
                     if (pelotoniaComplete) {
                         mPullToRefreshLayout.setRefreshComplete();
@@ -281,6 +293,16 @@ public class RiderFragment extends ListFragment implements
                     TextView riders = (TextView) headerView.findViewById(R.id.riders_count);
                     riders.setText(riderCountElement.text());
                 } else {
+                    Element participantDash = doc.select("div.dashboard-participant").first();
+                    if (participantDash != null) {
+                        Elements years = participantDash.getElementsByTag("img");
+                        Iterator<Element> i = years.iterator();
+                        rider.riderYears.clear();
+                        while (i.hasNext()) {
+                            Element year = i.next();
+                            rider.riderYears.add(year.attr("alt"));
+                        }
+                    }
                     Element dash = doc.select("div.dashboard-status").first();
                     if (dash != null) {
                         String tmp1 = dash.select("dd").get(1).text();
@@ -290,16 +312,19 @@ public class RiderFragment extends ListFragment implements
                     } else {
                         rider.setAmountRaised(0);
                     }
-
-                    Element meter = doc.getElementsByClass("meter-inner").first();
-                    if (meter != null) {
-                        Elements meterRows = meter.select("td.label");
-                        String tmp = meterRows.get(1).text();
-                        tmp = tmp.substring(tmp.indexOf("$"));
-                        tmp = tmp.replaceAll(",","");
-                        rider.setAmountPledged(Double.parseDouble(tmp.substring(1)));
+                    if (rider.isHighRoller()) {
+                        rider.setAmountPledged(4000);
                     } else {
-                        rider.setAmountPledged(0);
+                        Element meter = doc.getElementsByClass("meter-inner").first();
+                        if (meter != null) {
+                            Elements meterRows = meter.select("td.label");
+                            String tmp = meterRows.get(1).text();
+                            tmp = tmp.substring(tmp.indexOf("$"));
+                            tmp = tmp.replaceAll(",", "");
+                            rider.setAmountPledged(Double.parseDouble(tmp.substring(1)));
+                        } else {
+                            rider.setAmountPledged(0);
+                        }
                     }
 
                     Element storyElement = doc.select("div.story").first();
@@ -308,6 +333,7 @@ public class RiderFragment extends ListFragment implements
                     }
 
                     Element donorTable = doc.select("table.donor-list").first();
+                    rider.getDonors().clear();
                     if (donorTable != null) {
                         Elements donorRows = donorTable.getElementsByTag("tr");
 
@@ -338,8 +364,8 @@ public class RiderFragment extends ListFragment implements
                 NumberFormat formatter = NumberFormat.getCurrencyInstance();
                 if (rider.amountPledged > 0) {
                     tv.setText(formatter.format(rider.amountRaised) + " of " + formatter.format(rider.amountPledged));
-                    progress.setProgress(rider.amountRaised.intValue());
                     progress.setMax(rider.amountPledged.intValue());
+                    progress.setProgress(rider.amountRaised.intValue());
                     tv2.setText(NumberFormat.getPercentInstance().format(rider.amountRaised / rider.amountPledged));
                     progress.setVisibility(View.VISIBLE);
                     tv2.setVisibility(View.VISIBLE);
@@ -347,6 +373,36 @@ public class RiderFragment extends ListFragment implements
                     tv.setText(formatter.format(rider.amountRaised));
                     progress.setVisibility(View.INVISIBLE);
                     tv2.setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2009")) {
+                    headerView.findViewById(R.id.rider_2009).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2009).setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2010")) {
+                    headerView.findViewById(R.id.rider_2010).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2010).setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2011")) {
+                    headerView.findViewById(R.id.rider_2011).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2011).setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2012")) {
+                    headerView.findViewById(R.id.rider_2012).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2012).setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2013")) {
+                    headerView.findViewById(R.id.rider_2013).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2013).setVisibility(View.GONE);
+                }
+                if (rider.riderYears.contains("2014")) {
+                    headerView.findViewById(R.id.rider_2014).setVisibility(View.VISIBLE);
+                } else {
+                    headerView.findViewById(R.id.rider_2014).setVisibility(View.GONE);
                 }
             }
         }

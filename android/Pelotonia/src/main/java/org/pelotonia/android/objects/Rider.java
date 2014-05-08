@@ -1,5 +1,6 @@
 package org.pelotonia.android.objects;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
@@ -19,6 +20,7 @@ public class Rider {
     public Double amountRaised;
     public Double amountPledged;
     public Calendar lastUpdated = null;
+    public List<String> riderYears = new Vector<String>();
 
     private List<Donor> donors = new Vector<Donor>();
 
@@ -130,10 +132,5 @@ public class Rider {
         public String date;
         public String name;
         public String amount;
-
-        @Override
-        public String toString() {
-            return name + " donated " + amount + " on " + date;
-        }
     }
 }

@@ -83,13 +83,10 @@ public class PelotonUtil {
         List<Rider> following = new ArrayList<Rider>();
         Set<String> followed = sharedPref.getStringSet("following", new HashSet<String>());
         for (String id : followed) {
-            Log.d("Chuck", id);
             Rider r = getRiderById(ctx, id);
             if (r != null) {
-                Log.d("Chuck", "Rider found: " + r.name);
                 following.add(r);
             } else {
-                Log.d("Chuck", "Rider not found");
             }
         }
         return following;
@@ -113,7 +110,6 @@ public class PelotonUtil {
     public static boolean saveRiderById(Context ctx, Rider r) {
         SharedPreferences sharedPref = ctx.getApplicationContext().getSharedPreferences(
                 KEY, Context.MODE_PRIVATE);
-        Log.d("Chuck", "save rider: " + r.getRiderId() + " " + r.getName());
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(r.riderId, new Gson().toJson(r));
         return editor.commit();

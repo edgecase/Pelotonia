@@ -32,11 +32,25 @@
         android:layout_marginRight="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/email_name"
+        android:hint="Your Name"
+        android:layout_below="@id/donate_amount"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email_address"
         android:hint="Email Address"
-        android:layout_below="@id/donate_amount"/>
+        android:layout_below="@id/email_name"/>
+
     <TextView
         android:id="@+id/dialog_subtext"
         android:layout_width="match_parent"
