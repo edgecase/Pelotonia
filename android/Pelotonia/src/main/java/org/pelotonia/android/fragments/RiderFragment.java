@@ -340,8 +340,15 @@ public class RiderFragment extends ListFragment implements
                             Elements meterRows = meter.select("td.label");
                             String tmp = meterRows.get(1).text();
                             tmp = tmp.substring(tmp.indexOf("$"));
-                            tmp = tmp.replaceAll(",", "");
-                            rider.setAmountPledged(Double.parseDouble(tmp.substring(1)));
+                            //tmp = tmp.replaceAll(",", "");
+                            tmp = tmp.replaceAll("[^\\d]","");
+                           try {
+                               rider.setAmountPledged(Double.parseDouble(tmp.substring(1)));
+                           }
+                           catch(NumberFormatException nfe){
+                               //fallback to  0
+                               rider.setAmountPledged(0);
+                           }
                         } else {
                             rider.setAmountPledged(0);
                         }
