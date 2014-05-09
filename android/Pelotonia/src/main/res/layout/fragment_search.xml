@@ -25,7 +25,7 @@
             android:background="@drawable/pelotonia_edit_text"
             android:layout_toLeftOf="@id/search_button"
             android:layout_alignBottom="@id/search_button"
-            android:hint="Enter Peloton or Last Name"
+            android:hint="Enter Last Name"
             android:inputType="text"
             android:imeOptions="actionSearch"
             android:lines="1" />
@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/search_text"
+            android:gravity="center_horizontal|center_vertical"
             android:textAppearance="@android:style/TextAppearance.Large" />
 
     </RelativeLayout>
