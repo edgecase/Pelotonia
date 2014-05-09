@@ -184,7 +184,6 @@ public class RiderFragment extends ListFragment implements
                             @Override
                             public void onError(SocializeException error) {
                                 //TODO display error?
-                                Log.e("Chuck", error.toString());
                             }
                         });
                     }
@@ -281,7 +280,6 @@ public class RiderFragment extends ListFragment implements
 
                 @Override
                 public void onError(SocializeException error) {
-                    Log.e("Chuck", error.toString());
                     socializeComplete = true;
                     if (pelotoniaComplete) {
                         mPullToRefreshLayout.setRefreshComplete();
