@@ -6,6 +6,9 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.socialize.CommentUtils;
+import com.socialize.UserUtils;
 import com.socialize.entity.Comment;
 import com.socialize.entity.Entity;
 import com.socialize.entity.ListResult;
@@ -92,41 +96,41 @@ public class RiderFragment extends ListFragment implements
         } else {
             headerView = inflater.inflate(R.layout.fragment_rider, null);
             final Button support = (Button) headerView.findViewById(R.id.support_button);
-                support.setOnClickListener(new View.OnClickListener() {
+            support.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DonateDialogFragment f = new DonateDialogFragment();
+                    f.setRider(rider);
+                    f.show(getActivity().getSupportFragmentManager(), "Donate");
+                }
+            });
+            boolean activeRider = rider.getRiderId().equals(PelotonUtil.getRider(getActivity().getApplicationContext()).getRiderId());
+            setHasOptionsMenu(activeRider);
+
+            following = PelotonUtil.isFollowing(getActivity(), rider);
+            final Button follow = (Button) headerView.findViewById(R.id.follow_button);
+            if(!following && activeRider){
+                follow.setEnabled(false);
+                follow.setVisibility(View.GONE);
+            } else {
+                follow.setText(following ? "Unfollow" : "Follow");
+                follow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DonateDialogFragment f = new DonateDialogFragment();
-                        f.setRider(rider);
-                        f.show(getActivity().getSupportFragmentManager(), "Donate");
-
-                    }
-                });
-                following = PelotonUtil.isFollowing(getActivity(), rider);
-
-                final Button follow = (Button) headerView.findViewById(R.id.follow_button);
-                if(!following && rider.getRiderId().equals(PelotonUtil.getRider(getActivity().getApplicationContext()).getRiderId())){
-                    follow.setEnabled(false);
-                    follow.setVisibility(View.GONE);
-                } else {
-                    follow.setText(following ? "Unfollow" : "Follow");
-                    follow.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (following) {
-                                if (PelotonUtil.unfollowRider(getActivity(), rider)) {
-                                    following = false;
-                                    follow.setText("Follow");
-                                }
-                            } else {
-                                if (PelotonUtil.followRider(getActivity(), rider)) {
-                                    following = true;
-                                    follow.setText("Unfollow");
-                                }
+                        if (following) {
+                            if (PelotonUtil.unfollowRider(getActivity(), rider)) {
+                                following = false;
+                                follow.setText("Follow");
+                            }
+                        } else {
+                            if (PelotonUtil.followRider(getActivity(), rider)) {
+                                following = true;
+                                follow.setText("Unfollow");
                             }
                         }
-                    });
-                }
-
+                    }
+                });
+            }
         }
         View hLayout = headerView.findViewById(R.id.header_layout);
         hLayout.setClickable(true);
@@ -233,6 +237,22 @@ public class RiderFragment extends ListFragment implements
         return (getListView().getFirstVisiblePosition() == 0 && (getListView().getChildCount() == 0 || getListView().getChildAt(0).getTop() == 0));
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.settings, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_socialize: {
+                UserUtils.showUserSettings(getActivity());
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private class PelotoniaTask extends AsyncTask<String, Void, Document> {
         private boolean socializeComplete = false;
         private boolean pelotoniaComplete = false;
@@ -248,7 +268,6 @@ public class RiderFragment extends ListFragment implements
                 }
             }
         }
-
 
         @Override
         protected Document doInBackground(String... urls) {
