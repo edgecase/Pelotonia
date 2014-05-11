@@ -46,6 +46,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // these have to be here to avoid stuttering when we configureView
+    // as the user moves the slider around
     self.distanceSlider.value = (float)self.workout.distanceInMiles;
     self.timeSlider.value = (float)self.workout.timeInMinutes;
     if (self.isNewWorkout) {
@@ -132,19 +135,26 @@
     }
     
 }
+- (void)setDistanceLabelText {
+    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
+}
+
+- (void)setTimeLabelText {
+    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
+}
 
 - (IBAction)distanceSliderChanged:(id)sender {
     UISlider *slider = (UISlider *)sender;
     NSInteger val = floor(slider.value);
     self.workout.distanceInMiles = val;
-    [self configureView];
+    [self setDistanceLabelText];
 }
 
 - (IBAction)timeSliderChanged:(id)sender
 {
     UISlider *slider = (UISlider *)sender;
     self.workout.timeInMinutes = slider.value;
-    [self configureView];
+    [self setTimeLabelText];
 }
 
 - (IBAction)rideDateChanged:(id)sender {
@@ -155,60 +165,66 @@
 
 - (void)configureView
 {
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
+    [self setTimeLabelText];
+    [self setDistanceLabelText];
     self.descriptionTextView.text = self.workout.description;
-    self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
     self.workoutTypeLabel.text = self.workout.typeDescription;
     self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
     [self.datePicker setDate:self.workout.date];
+    
+    // hide pickers if not editing them
+    [self.datePicker setHidden:!_isEditingRideDate];
+    [self.workoutTypePicker setHidden:!_isEditingWorkoutType];
 }
+
+#define TEXT_VIEW_CELL      0
+#define DATE_CELL           1
+#define WORKOUT_TYPE_CELL   3
 
 
 #pragma mark -- UITableView stuff
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row != 0) {
-        [self.descriptionTextView resignFirstResponder];
-    }
-    if (indexPath.section == 0 && indexPath.row == 1) { // this is my date cell above the picker cell
-        _isEditingRideDate = !_isEditingRideDate;
-        _isEditingWorkoutType = NO;
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView reloadData];
-        }];
-    }
-    if (indexPath.section == 0 && indexPath.row == 3) { // the cell above the workout type picker
-        _isEditingWorkoutType = !_isEditingWorkoutType;
-        _isEditingRideDate = NO;
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView reloadData];
-        }];
+    if (indexPath.section == 0) {
         
+        if (indexPath.row != 0) {
+            [self.descriptionTextView resignFirstResponder];
+        }
+        if (indexPath.row == DATE_CELL) { // this is my date cell above the picker cell
+            _isEditingRideDate = !_isEditingRideDate;
+            _isEditingWorkoutType = NO;
+            [self.datePicker setHidden:!_isEditingRideDate];
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadData];
+            }];
+        }
+        if (indexPath.row == WORKOUT_TYPE_CELL) { // the cell above the workout type picker
+            _isEditingWorkoutType = !_isEditingWorkoutType;
+            _isEditingRideDate = NO;
+            [self.workoutTypePicker setHidden:!_isEditingWorkoutType];
+            [UIView animateWithDuration:.4 animations:^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadData];
+            }];
+        }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 2) { // this is my date picker cell
-        if (_isEditingRideDate) {
-            return 162;
+    CGFloat retval = 0.0;
+    if (indexPath.section == 0) {
+        if (indexPath.row == (DATE_CELL+1)) { // this is my date picker cell
+            retval =  _isEditingRideDate ? 162.0 : 0.0;
+        }
+        else if (indexPath.row == (WORKOUT_TYPE_CELL+1)) {
+            retval =  _isEditingWorkoutType ? 162.0 : 0.0;
         }
         else {
-            return 0;
+            retval = [super tableView:tableView heightForRowAtIndexPath:indexPath];
         }
     }
-    else if (indexPath.section == 0 && indexPath.row == 4) {
-        if (_isEditingWorkoutType) {
-            return 162;
-        }
-        else {
-            return 0;
-        }
-    }
-    else {
-        return [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
+    return retval;
 }
 
 #pragma mark -- UIPickerView methods

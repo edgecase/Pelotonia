@@ -19,7 +19,7 @@
 
 
 +(NSArray *)workoutTypes {
-    return @[@"cycling", @"indoor training", @"running"];
+    return @[@"cycling tour", @"cycling race", @"spinning", @"running", @"walking"];
 }
 
 +(Workout *)defaultWorkout

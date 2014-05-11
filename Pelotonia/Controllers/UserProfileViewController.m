@@ -148,7 +148,12 @@
     NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
         // load the image from the asset library
         [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+            if (asset) {
+                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+            }
+            else {
+                NSLog(@"couldn't find image");
+            }
         } failureBlock:^(NSError *error) {
             NSLog(@"error loading image %@", [error localizedDescription]);
             [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
@@ -158,6 +163,7 @@
 - (void)configureRecentPhotos
 {
     NSArray *photos = [[AppDelegate sharedDataController] photoKeys];
+    
     photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSDictionary *photoDict1 = (NSDictionary *)obj1;
         NSDictionary *photoDict2 = (NSDictionary *)obj2;
@@ -170,13 +176,14 @@
     [self.recentImage2 setImage:nil];
     [self.recentImage3 setImage:nil];
     
-    if ([photos count] >= 1) {
+    int numPhotos = [photos count];
+    if (numPhotos >= 1) {
         [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
     }
-    if ([photos count] >= 2) {
+    if (numPhotos >= 2) {
         [self setImageView:self.recentImage2 fromPhotos:photos atIndex:1];
     }
-    if ([photos count] >= 3) {
+    if (numPhotos >= 3) {
         [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
     }
 }
