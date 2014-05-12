@@ -75,7 +75,7 @@
         UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell"];
         _cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)w.distanceInMiles];
         _cell.textLabel.text = [w.date stringWithFormat:@"MM/dd/yyyy"];
-        if ((w.type == ID_INDOOR) || (w.type == ID_CYCLING)) {
+        if ((w.type == ID_INDOOR) || (w.type == ID_CYCLING_RACE) || (w.type == ID_CYCLING_TOUR)) {
             [_cell.imageView setImage:[UIImage imageNamed:@"13-bicycle"]];
         }
         else {
@@ -110,21 +110,6 @@
 
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark -- NewWorkoutViewControllerDelegate methods
 - (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc

@@ -15,14 +15,14 @@
 @interface NewWorkoutTableViewController : UITableViewController<UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (strong, nonatomic) IBOutlet UIPickerView *workoutTypePicker;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (weak, nonatomic) IBOutlet UISlider *distanceSlider;
 @property (strong, nonatomic) id<NewWorkoutTableViewControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UISlider *timeSlider;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UILabel *workoutTypeLabel;
+@property (weak, nonatomic) IBOutlet UIPickerView *workoutDistancePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *workoutLengthPicker;
+@property (weak, nonatomic) IBOutlet UITableViewCell *workoutDistanceCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *workoutTimeLengthCell;
 
 // values
 @property (strong, nonatomic) Rider *rider;
@@ -31,9 +31,8 @@
 
 - (IBAction)done:(id)sender;
 - (IBAction)cancel:(id)sender;
-- (IBAction)distanceSliderChanged:(id)sender;
-- (IBAction)timeSliderChanged:(id)sender;
 - (IBAction)rideDateChanged:(id)sender;
+- (IBAction)workoutTimeLengthChanged:(id)sender;
 
 @end
 

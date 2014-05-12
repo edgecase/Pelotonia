@@ -26,7 +26,7 @@
 {
     Workout *w = [[Workout alloc] init];
     w.description = @"";
-    w.type = ID_CYCLING;
+    w.type = ID_CYCLING_TOUR;
     w.distanceInMiles = 0;
     w.date = [NSDate date];
     return w;

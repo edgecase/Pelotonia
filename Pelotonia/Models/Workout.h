@@ -10,9 +10,11 @@
 
 @interface Workout : NSObject <NSCoding>
 
-#define ID_CYCLING      0
-#define ID_INDOOR       1
-#define ID_RUNNING      2
+#define ID_CYCLING_RACE 0
+#define ID_CYCLING_TOUR 1
+#define ID_INDOOR       2
+#define ID_RUNNING      3
+#define ID_WALKING      4
 
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, assign) NSInteger distanceInMiles;
