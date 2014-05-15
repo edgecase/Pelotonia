@@ -1222,7 +1222,7 @@
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="hhp-tn-oTB">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="414639526.277668">
                                                         <!--2014-02-21 01:38:46 +0000-->
                                                     </date>
@@ -1262,15 +1262,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideTypeCell" textLabel="kzl-yj-KLk" rowHeight="70" style="IBUITableViewCellStyleDefault" id="slN-6r-XXB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideTypeCell" textLabel="kzl-yj-KLk" detailTextLabel="IfA-00-8fd" rowHeight="70" style="IBUITableViewCellStyleValue1" id="slN-6r-XXB">
                                         <rect key="frame" x="0.0" y="420" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="slN-6r-XXB" id="rho-rC-ihN">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Cycling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kzl-yj-KLk">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="69"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Workout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kzl-yj-KLk">
+                                                    <rect key="frame" x="15" y="26" width="65" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Cycling" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IfA-00-8fd">
+                                                    <rect key="frame" x="239" y="23" width="66" height="24"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
@@ -1291,7 +1298,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <pickerView contentMode="scaleToFill" id="fth-Ng-Gwu">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.63701701164245605" green="0.72903871536254883" blue="0.79776239395141602" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="MxZ-EQ-0gl" id="CcJ-Ps-CiS"/>
@@ -1303,18 +1310,25 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideDistanceCell" textLabel="v8X-Kg-pMe" rowHeight="70" style="IBUITableViewCellStyleDefault" id="NHh-Ui-Ecv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideDistanceCell" textLabel="v8X-Kg-pMe" detailTextLabel="Vx1-Af-49g" rowHeight="70" style="IBUITableViewCellStyleValue1" id="NHh-Ui-Ecv">
                                         <rect key="frame" x="0.0" y="652" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NHh-Ui-Ecv" id="caT-Zg-lZa">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="20 Miles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v8X-Kg-pMe">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="69"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v8X-Kg-pMe">
+                                                    <rect key="frame" x="15" y="26" width="67" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="20 Miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vx1-Af-49g">
+                                                    <rect key="frame" x="231" y="23" width="74" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="0.22352941334247589" green="0.83529412746429443" blue="0.17647059261798859" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1332,7 +1346,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <pickerView contentMode="scaleToFill" id="iwW-Rl-cyN">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="MxZ-EQ-0gl" id="n8s-RD-qd9"/>
@@ -1344,17 +1358,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideTimeCell" textLabel="Vkg-qO-NwU" rowHeight="70" style="IBUITableViewCellStyleDefault" id="24p-CE-3JU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="rideTimeCell" textLabel="Vkg-qO-NwU" detailTextLabel="ZSx-oh-Gxz" rowHeight="70" style="IBUITableViewCellStyleValue1" id="24p-CE-3JU">
                                         <rect key="frame" x="0.0" y="884" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="24p-CE-3JU" id="CnQ-Cw-Ebx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="1:00 hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vkg-qO-NwU">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="69"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vkg-qO-NwU">
+                                                    <rect key="frame" x="15" y="26" width="38" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="1:00 hours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZSx-oh-Gxz">
+                                                    <rect key="frame" x="211" y="23" width="94" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1373,7 +1394,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" countDownDuration="360" minuteInterval="5" id="wRP-s1-x9E">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.63701701160000002" green="0.72903871539999998" blue="0.79776239400000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="421514486.442554">
                                                         <!--2014-05-11 15:21:26 +0000-->
@@ -1425,7 +1446,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="workoutDistancePicker" destination="iwW-Rl-cyN" id="anY-uB-3na"/>
                         <outlet property="workoutLengthPicker" destination="wRP-s1-x9E" id="y0r-36-8bB"/>
                         <outlet property="workoutTimeLengthCell" destination="24p-CE-3JU" id="TIP-gn-2A1"/>
-                        <outlet property="workoutTypeLabel" destination="kzl-yj-KLk" id="qpH-du-diJ"/>
+                        <outlet property="workoutTypeLabel" destination="IfA-00-8fd" id="xlg-78-kBD"/>
                         <outlet property="workoutTypePicker" destination="fth-Ng-Gwu" id="RYa-H5-Gfu"/>
                     </connections>
                 </tableViewController>
