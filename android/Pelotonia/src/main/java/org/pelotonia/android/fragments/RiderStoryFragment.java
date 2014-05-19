@@ -3,6 +3,7 @@ package org.pelotonia.android.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class RiderStoryFragment extends Fragment {
             routeText.setText(rider.route);
 
             TextView storyText = (TextView) view.findViewById(R.id.rider_story);
-            storyText.setText(rider.story);
+            storyText.setText(Html.fromHtml(rider.story));
         }
         return view;
     }

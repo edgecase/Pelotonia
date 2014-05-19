@@ -339,11 +339,13 @@ public class RiderFragment extends ListFragment implements
                         if (meter != null) {
                             Elements meterRows = meter.select("td.label");
                             String tmp = meterRows.get(1).text();
-                            tmp = tmp.substring(tmp.indexOf("$"));
+                            //tmp = tmp.substring(tmp.indexOf("$"));
                             //tmp = tmp.replaceAll(",", "");
+                            tmp= tmp.replace(".00","");
                             tmp = tmp.replaceAll("[^\\d]","");
+
                            try {
-                               rider.setAmountPledged(Double.parseDouble(tmp.substring(1)));
+                               rider.setAmountPledged(Double.parseDouble(tmp));
                            }
                            catch(NumberFormatException nfe){
                                //fallback to  0
