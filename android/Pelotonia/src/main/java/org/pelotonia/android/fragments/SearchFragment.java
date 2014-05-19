@@ -52,7 +52,14 @@ public class SearchFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Find Riders");
+        TextView tv = (TextView) getView().findViewById(android.R.id.empty);
+        if (saveProfile) {
+            ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Find your profile");
+            tv.setText("You have not set your rider profile yet.  Use the search box to find your profile.");
+        } else {
+            ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Find Riders");
+            tv.setText("You aren't following any riders.  Use the search box to find some riders to follow.");
+        }
     }
 
     RiderListAdapter adapter;

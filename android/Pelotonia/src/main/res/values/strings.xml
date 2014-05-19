@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Pelotonia</string>
-    <string name="app_version">2014.1.1</string>
+    <string name="app_version">2014.1.2</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
