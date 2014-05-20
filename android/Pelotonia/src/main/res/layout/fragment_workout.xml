@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.pelotonia.android.fragments.WorkoutFragment"
+    tools:context="org.pelotonia.pelotonia.fragments.WorkoutFragment"
     >
     <FrameLayout
         android:id="@+id/workout"

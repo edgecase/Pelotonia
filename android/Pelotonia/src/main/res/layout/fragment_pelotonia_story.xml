@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.pelotonia.android.fragments.AboutFragment">
+    tools:context="org.pelotonia.pelotonia.fragments.AboutFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context="org.pelotonia.android.fragments.AboutFragment">
+        tools:context="org.pelotonia.pelotonia.fragments.AboutFragment">
 
         <ImageView
             android:src="@drawable/pelotonia_logo_white"

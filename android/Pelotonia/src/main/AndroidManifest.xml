@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.pelotonia.android"
+    package="org.pelotonia.pelotonia"
     android:versionCode="2"
     android:versionName="@string/app_version" >
 
@@ -25,12 +25,12 @@
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="org.pelotonia.android" />
+                <category android:name="org.pelotonia.pelotonia" />
             </intent-filter>
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <category android:name="org.pelotonia.android" />
+                <category android:name="org.pelotonia.pelotonia" />
             </intent-filter>
         </receiver>
 
@@ -66,10 +66,10 @@
     <!-- Permissions required for Push Notifications -->
     <!-- Replace your_package_name with your app package name -->
     <permission
-        android:name="org.pelotonia.android.permission.C2D_MESSAGE"
+        android:name="org.pelotonia.pelotonia.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="org.pelotonia.android.permission.C2D_MESSAGE" />
+    <uses-permission android:name="org.pelotonia.pelotonia.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />

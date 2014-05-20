@@ -4,5 +4,5 @@
     android:id="@+id/webview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="org.pelotonia.android.fragments.WebFragment"
+    tools:context="org.pelotonia.pelotonia.fragments.WebFragment"
     />

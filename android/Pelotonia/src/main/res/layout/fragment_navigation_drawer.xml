@@ -12,7 +12,7 @@
         android:divider="@color/nav_text"
         android:dividerHeight="1dp"
         android:headerDividersEnabled="false"
-        tools:context="org.pelotonia.android.fragments.NavigationDrawerFragment" />
+        tools:context="org.pelotonia.pelotonia.fragments.NavigationDrawerFragment" />
     <ListView
         android:id="@+id/listView2"
         android:layout_below="@id/listView1"
@@ -22,5 +22,5 @@
         android:divider="@color/nav_text"
         android:headerDividersEnabled="false"
         android:dividerHeight="1dp"
-        tools:context="org.pelotonia.android.fragments.NavigationDrawerFragment" />
+        tools:context="org.pelotonia.pelotonia.fragments.NavigationDrawerFragment" />
 </RelativeLayout>
