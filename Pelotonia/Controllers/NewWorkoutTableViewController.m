@@ -163,7 +163,7 @@
 
 - (void)configureView
 {
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
+    self.workoutDistanceCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
     self.descriptionTextView.text = self.workout.description;
     self.workoutTypeLabel.text = self.workout.typeDescription;
     self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];
@@ -171,6 +171,7 @@
     self.datePicker.backgroundColor = SECONDARY_LIGHT_GRAY;
     [self.workoutLengthPicker setCountDownDuration:(self.workout.timeInMinutes * 60)];
     self.workoutLengthPicker.backgroundColor = SECONDARY_LIGHT_GRAY;
+    self.workoutTimeLengthCell.detailTextLabel.text = [NSString stringWithFormat:@"%2ld:%02ld", (long)self.workout.timeInMinutes/60, (long)self.workout.timeInMinutes%60];
     
     // hide pickers if not editing them
     [self.datePicker setHidden:![[_editingCell objectAtIndex:DATE_CELL] boolValue]];
