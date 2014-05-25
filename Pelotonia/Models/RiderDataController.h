@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSMutableArray *workouts;
 @property (strong, nonatomic) NSMutableArray *photoKeys;
 
-- (unsigned)count;
+- (NSInteger)count;
 - (Rider *)objectAtIndex:(NSUInteger)index;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)addObject:(Rider *)object;

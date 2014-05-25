@@ -63,7 +63,7 @@
         for (Workout *w in _workouts) {
             distance += w.distanceInMiles;
         }
-        _cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Miles", distance];
+        _cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)distance];
         _cell.textLabel.text = @"Total";
         [_cell.imageView setImage:[UIImage imageNamed:@"13-bicycle"]];
         return _cell;
@@ -73,7 +73,7 @@
         // create a workout record cell & return that
         Workout *w = [_workouts objectAtIndex:indexPath.row-1];
         UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:@"workoutCell"];
-        _cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Miles", w.distanceInMiles];
+        _cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)w.distanceInMiles];
         _cell.textLabel.text = [w.date stringWithFormat:@"MM/dd/yyyy"];
         if ((w.type == ID_INDOOR) || (w.type == ID_CYCLING)) {
             [_cell.imageView setImage:[UIImage imageNamed:@"13-bicycle"]];

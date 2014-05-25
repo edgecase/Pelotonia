@@ -107,7 +107,7 @@
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %d miles, %@", self.workout.distanceInMiles, self.workout.description]];
+        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %ld miles, %@", (long)self.workout.distanceInMiles, self.workout.description]];
 
         if (self.rider) {
             [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
@@ -124,7 +124,7 @@
     {
         SLComposeViewController *controller = [SLComposeViewController
                                                composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %d miles, %@", self.workout.distanceInMiles, self.workout.description]];
+        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %ld miles, %@", (long)self.workout.distanceInMiles, self.workout.description]];
         if (self.rider) {
             [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
         }
@@ -155,7 +155,7 @@
 
 - (void)configureView
 {
-    self.distanceLabel.text = [NSString stringWithFormat:@"%d Miles", self.workout.distanceInMiles];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
     self.descriptionTextView.text = self.workout.description;
     self.timeLabel.text = [NSString stringWithFormat:@"%d:%02d", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
     self.workoutTypeLabel.text = self.workout.typeDescription;
