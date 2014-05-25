@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="5dp">
+
+    <ImageView
+        android:id ="@+id/icon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/speedy_arrow"
+    />
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/icon"
+        android:gravity="center_vertical"
+        android:paddingLeft="5dp"
+        >
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pelotonia 2014"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:id="@+id/sub_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="END CANCER"
+            android:textColor="@color/pelotonia_green"
+            android:textSize="18sp"
+        />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/raised_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/icon"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/raised"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raised"
+        android:textSize="18sp"
+        android:layout_below="@id/raised_amount"
+        />
+
+    <TextView
+        android:id="@+id/riders_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_below="@id/icon"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/riders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Riders"
+        android:textSize="18sp"
+        android:layout_below="@id/riders_count"
+        android:layout_alignParentRight="true"
+        />
+
+    <View
+        android:id="@+id/greenLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/pelotonia_green"
+        android:layout_below="@id/riders"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+</RelativeLayout>

@@ -163,8 +163,7 @@
 
 - (void)configureView
 {
-    [self setTimeLabelText];
-    [self setDistanceLabelText];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Miles", (long)self.workout.distanceInMiles];
     self.descriptionTextView.text = self.workout.description;
     self.workoutTypeLabel.text = self.workout.typeDescription;
     self.dateLabel.text = [self.workout.date stringWithFormat:@"MM/dd/yyyy"];

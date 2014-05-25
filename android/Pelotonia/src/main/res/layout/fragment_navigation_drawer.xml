@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nav_list_bg"
+    >
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:divider="@color/nav_text"
+        android:dividerHeight="1dp"
+        android:headerDividersEnabled="false"
+        tools:context="org.pelotonia.pelotonia.fragments.NavigationDrawerFragment" />
+    <ListView
+        android:id="@+id/listView2"
+        android:layout_below="@id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:divider="@color/nav_text"
+        android:headerDividersEnabled="false"
+        android:dividerHeight="1dp"
+        tools:context="org.pelotonia.pelotonia.fragments.NavigationDrawerFragment" />
+</RelativeLayout>
