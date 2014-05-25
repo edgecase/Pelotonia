@@ -122,22 +122,35 @@
 
 - (IBAction)sharePhoto:(id)sender {
     // prompt for which service to share with (FB/Twitter/etc)
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"Twitter", nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Photo" otherButtonTitles:@"Facebook", @"Twitter", nil];
     [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != actionSheet.cancelButtonIndex) {
-        if (buttonIndex == 0) {
-            [self shareCurrentPhotoWithFacebook];
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
+            [self removeCurrentPhotoFromList];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         if (buttonIndex == 1) {
+            [self shareCurrentPhotoWithFacebook];
+        }
+        if (buttonIndex == 2) {
             [self shareCurrentPhotoWithTwitter];
         }
     }
 }
 
+- (void)removeCurrentPhotoFromList
+{
+    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
+
+    NSMutableArray *photosArray = [[AppDelegate sharedDataController] photoKeys];
+    [photosArray removeObjectAtIndex:currentIndex];
+    self.photos = [[AppDelegate sharedDataController] photoKeys];
+    
+}
 
 - (void)shareCurrentPhotoWithFacebook
 {

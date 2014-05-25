@@ -56,7 +56,12 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self performSegueWithIdentifier:@"fadeToInitial:" sender:self];
+    [self performSelector:@selector(transitionToMainView) withObject:nil afterDelay:3];
+}
+
+- (void)transitionToMainView
+{
+    [self performSegueWithIdentifier:@"fadetToInitial:" sender:self];
 }
 
 

@@ -33,13 +33,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _photos = [[AppDelegate sharedDataController] photoKeys];
     self.library = [[ALAssetsLibrary alloc] init];
 }
 
 - (void)viewDidUnload
 {
     self.library = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    _photos = [[AppDelegate sharedDataController] photoKeys];
 }
 
 - (void)didReceiveMemoryWarning

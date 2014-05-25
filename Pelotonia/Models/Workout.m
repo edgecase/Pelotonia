@@ -19,14 +19,14 @@
 
 
 +(NSArray *)workoutTypes {
-    return @[@"cycling", @"indoor training", @"running"];
+    return @[@"cycling tour", @"cycling race", @"spinning", @"running", @"walking"];
 }
 
 +(Workout *)defaultWorkout
 {
     Workout *w = [[Workout alloc] init];
     w.description = @"";
-    w.type = ID_CYCLING;
+    w.type = ID_CYCLING_TOUR;
     w.distanceInMiles = 0;
     w.date = [NSDate date];
     return w;
