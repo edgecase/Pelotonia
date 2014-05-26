@@ -138,7 +138,7 @@
             cell.commentString = [activity text];
             
             [cell.imageView setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]]
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+                           placeholderImage:[UIImage imageNamed:@"profile_default"]];
         }
         [cell layoutSubviews];
         return cell;
@@ -150,26 +150,18 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
-        // create a view that says "Activity"
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
         headerView.backgroundColor = PRIMARY_DARK_GRAY;
         
-        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width*0.60, SECTION_1_HEADER_HEIGHT)];
-        sectionLabel.text = @"Pelotonia Wall";
-        sectionLabel.backgroundColor = SECONDARY_GREEN;
-        sectionLabel.textColor = [UIColor whiteColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:15];
-        sectionLabel.textAlignment = NSTextAlignmentCenter;
-        [headerView addSubview:sectionLabel];
-        
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSInteger writeButtonW = (tableView.bounds.size.width * 0.40)-2;
+        NSInteger writeButtonW = (tableView.bounds.size.width);
         NSInteger writeButtonH = SECTION_1_HEADER_HEIGHT;
-        [writePostButton setFrame:CGRectMake(sectionLabel.bounds.size.width + 2,
-                                             0, writeButtonW, writeButtonH)];
+        [writePostButton setFrame:CGRectMake(0, 0, writeButtonW, writeButtonH)];
+        [writePostButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+        [writePostButton setTitle:@"Post to Wall" forState:UIControlStateNormal];
         [writePostButton setBackgroundColor:PRIMARY_GREEN];
         writePostButton.tintColor = [UIColor whiteColor];
-        [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
+        [writePostButton setImage:[UIImage imageNamed:@"08-chat"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:writePostButton];

@@ -73,7 +73,7 @@
     _tv.borderColor = [UIColor whiteColor];
     
     // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
     self.navigationItem.titleView = imageView;
     
     // if this is our first time loading, pop up the "this is how you use me" screen
@@ -91,7 +91,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self refreshUser];
+    [self configureView];
 }
 
 

@@ -28,12 +28,12 @@
 
 - (void)loadView
 {
-    UIImage *bgImage = [UIImage imageNamed:@"default.png"];
+    UIImage *bgImage = [UIImage imageNamed:@"default"];
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     if (screenHeight > 480)
     {
         // we're on iPhone 5
-        bgImage = [UIImage imageNamed:@"default-568h.png"];
+        bgImage = [UIImage imageNamed:@"default-568h"];
     }
     UIImageView *iv = [[UIImageView alloc] initWithImage:bgImage];
     iv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

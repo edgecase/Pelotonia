@@ -82,7 +82,7 @@
         [activityIndicator startAnimating];
         
         [cell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
+                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon"]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
          {
              if (error != nil) {

@@ -102,11 +102,12 @@
     } failure:^(NSError *error) {
         NSLog(@"Unable to view entity %@", [self.entity displayName]);
     }];
-
+    [self configureView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self refreshRider:_tv];
 }
 
@@ -179,7 +180,7 @@
             cell.commentString = [self getTextFromComment:comment];
             
             [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+                           placeholderImage:[UIImage imageNamed:@"profile_default"]];
         }
         [cell layoutSubviews];
         return cell;
@@ -279,22 +280,15 @@
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
         headerView.backgroundColor = PRIMARY_DARK_GRAY;
         
-        UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width*0.60, SECTION_1_HEADER_HEIGHT)];
-        sectionLabel.text = @"Rider Wall";
-        sectionLabel.backgroundColor = SECONDARY_GREEN;
-        sectionLabel.textColor = [UIColor whiteColor];
-        sectionLabel.font = [UIFont boldSystemFontOfSize:15];
-        sectionLabel.textAlignment = NSTextAlignmentCenter;
-        [headerView addSubview:sectionLabel];
-        
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSInteger writeButtonW = (tableView.bounds.size.width * 0.40)-2;
+        NSInteger writeButtonW = (tableView.bounds.size.width);
         NSInteger writeButtonH = SECTION_1_HEADER_HEIGHT;
-        [writePostButton setFrame:CGRectMake(sectionLabel.bounds.size.width + 2,
-                                             0, writeButtonW, writeButtonH)];
+        [writePostButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+        [writePostButton setFrame:CGRectMake(0, 0, writeButtonW, writeButtonH)];
         [writePostButton setBackgroundColor:PRIMARY_GREEN];
         writePostButton.tintColor = [UIColor whiteColor];
-        [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
+        [writePostButton setTitle:@"Post To Wall" forState:UIControlStateNormal];
+        [writePostButton setImage:[UIImage imageNamed:@"08-chat"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:writePostButton];
@@ -415,12 +409,12 @@
     if (self.following)
     {
         [self.starFollowButton setTitle:[NSString stringWithFormat:@"Following"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star.png"] forState:UIControlStateNormal];
+        [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star"] forState:UIControlStateNormal];
     }
     else
     {
         [self.starFollowButton setTitle:[NSString stringWithFormat:@"Follow"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-star.png"] forState:UIControlStateNormal];
+        [self.starFollowButton setImage:[UIImage imageNamed:@"28-star"] forState:UIControlStateNormal];
     }
     
     // this masks the photo to the tableviewcell

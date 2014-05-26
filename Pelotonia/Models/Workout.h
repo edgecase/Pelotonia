@@ -10,8 +10,8 @@
 
 @interface Workout : NSObject <NSCoding>
 
-#define ID_CYCLING_RACE 0
-#define ID_CYCLING_TOUR 1
+#define ID_CYCLING_RACE 1
+#define ID_CYCLING_TOUR 0
 #define ID_INDOOR       2
 #define ID_RUNNING      3
 #define ID_WALKING      4
