@@ -103,6 +103,14 @@
     [super viewDidUnload];
 }
 
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

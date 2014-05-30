@@ -90,16 +90,18 @@
              onComplete:(void(^)(Rider *rider))completeBlock
               onFailure:(void(^)(NSString *errorMessage))failureBlock
 {
-    //NSURL *url = [NSURL URLWithString:rider.profileUrl];
     NSLog(@"looking for rider profile %@, %@", rider.name, rider.profileUrl);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.stringEncoding = NSUTF8StringEncoding;
     [manager GET:rider.profileUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Found rider %@", rider.name);
         @try
         {
-            TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
+//            NSLog(@"%@", [operation responseString]);
+//            NSLog(@"%@", responseObject);
+            TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
             
             // figure out what type of rider we are first
             NSString *riderTypeUrlXPath = @"//*[@id='sectionheader']/img";
@@ -136,6 +138,7 @@
             // this query gets all text from all descendant nodes of the div of class 'story'
             // the query is formatted like this to catch text that's embedded in embedded HTML
             NSArray *div = [parser searchWithXPathQuery:@"//div[@class='story']/descendant-or-self::*/text()"];
+            
             NSString *storyString = @"";
             for (TFHppleElement *story in div)
             {

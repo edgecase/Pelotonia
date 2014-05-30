@@ -80,6 +80,14 @@
     [self reloadTableData];
 }
 
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

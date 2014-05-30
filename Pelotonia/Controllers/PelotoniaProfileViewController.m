@@ -80,6 +80,14 @@
     [_tv manuallyTriggered];
 }
 
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
+
 
 #pragma mark - Implementation
 - (void) refreshPelotonia {

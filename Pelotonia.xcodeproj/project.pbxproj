@@ -380,11 +380,14 @@
 		BBAA248E18B5A631006BA30E /* PhotoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */; };
 		BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA249018B5B1D5006BA30E /* PhotoViewController.m */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
-		BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
 		BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */; };
 		BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */; };
 		BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E818CCD99300CAFFF7 /* IntroViewController.m */; };
+		BBF496F019392F84007D7D67 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496E919392F84007D7D67 /* TFHpple.m */; };
+		BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496EB19392F84007D7D67 /* TFHppleElement.m */; };
+		BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496ED19392F84007D7D67 /* XPathQuery.m */; };
+		BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF496F319393050007D7D67 /* libxml2.2.dylib */; };
 		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
 		BCE3B7B915AE49DA00205530 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B815AE49DA00205530 /* Foundation.framework */; };
@@ -813,8 +816,6 @@
 		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
 		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
-		BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashScreenViewController.h; path = Controllers/SplashScreenViewController.h; sourceTree = "<group>"; };
-		BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashScreenViewController.m; path = Controllers/SplashScreenViewController.m; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
 		BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroContentViewController.h; path = Controllers/IntroContentViewController.h; sourceTree = "<group>"; };
@@ -823,6 +824,13 @@
 		BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroPageViewController.m; path = Controllers/IntroPageViewController.m; sourceTree = "<group>"; };
 		BBC012E718CCD99300CAFFF7 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = Controllers/IntroViewController.h; sourceTree = "<group>"; };
 		BBC012E818CCD99300CAFFF7 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Controllers/IntroViewController.m; sourceTree = "<group>"; };
+		BBF496E819392F84007D7D67 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		BBF496E919392F84007D7D67 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		BBF496EA19392F84007D7D67 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		BBF496EB19392F84007D7D67 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		BBF496EC19392F84007D7D67 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		BBF496ED19392F84007D7D67 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		BBF496F319393050007D7D67 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
 		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
 		BCE3B7B215AE49DA00205530 /* Pelotonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pelotonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -853,6 +861,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */,
 				BBAA248218B251F3006BA30E /* AssetsLibrary.framework in Frameworks */,
 				BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */,
 				BB02D28E173B476400656E43 /* CoreTelephony.framework in Frameworks */,
@@ -1297,6 +1306,20 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		BBF496E519392F84007D7D67 /* hpple */ = {
+			isa = PBXGroup;
+			children = (
+				BBF496E819392F84007D7D67 /* TFHpple.h */,
+				BBF496E919392F84007D7D67 /* TFHpple.m */,
+				BBF496EA19392F84007D7D67 /* TFHppleElement.h */,
+				BBF496EB19392F84007D7D67 /* TFHppleElement.m */,
+				BBF496EC19392F84007D7D67 /* XPathQuery.h */,
+				BBF496ED19392F84007D7D67 /* XPathQuery.m */,
+			);
+			name = hpple;
+			path = Vendor/hpple;
+			sourceTree = "<group>";
+		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -1319,6 +1342,7 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBF496F319393050007D7D67 /* libxml2.2.dylib */,
 				BBAA248118B251F3006BA30E /* AssetsLibrary.framework */,
 				BBAA223818AFD717006BA30E /* Socialize.embeddedframework */,
 				BB822A1A17FBAA8500ABCA5C /* FacebookSDK.framework */,
@@ -1443,8 +1467,6 @@
 				BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */,
 				BBAA248918B4533C006BA30E /* SinglePhotoViewController.h */,
 				BBAA248A18B4533C006BA30E /* SinglePhotoViewController.m */,
-				BBABDD80174B2B27004B64D5 /* SplashScreenViewController.m */,
-				BBABDD7F174B2B27004B64D5 /* SplashScreenViewController.h */,
 				BBA66C37172AA00D002DE00A /* UserProfileViewController.h */,
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
 				BBAA247B18B05E93006BA30E /* WorkoutListTableViewController.h */,
@@ -1456,6 +1478,7 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BBF496E519392F84007D7D67 /* hpple */,
 				BB78D32217F925F600DE639C /* TestFlightSDK2 */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
@@ -1942,6 +1965,7 @@
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
+				BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */,
@@ -1952,7 +1976,7 @@
 				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
-				BBABDD81174B2B27004B64D5 /* SplashScreenViewController.m in Sources */,
+				BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */,
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
 				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,
 				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
@@ -1960,6 +1984,7 @@
 				BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */,
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
 				BB93182818B91ED3003A3AC0 /* PelotoniaProfileViewController.m in Sources */,
+				BBF496F019392F84007D7D67 /* TFHpple.m in Sources */,
 				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 				BBAA222D18AF9F7A006BA30E /* DonorsTableViewController.m in Sources */,
 				BBAA247618B04B4C006BA30E /* Workout.m in Sources */,
@@ -2025,9 +2050,21 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 					"$(SRCROOT)/Socialize.embeddedframework/**",
+					"\"$(SDK_DIR)\"/usr/include/libxml2/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AAPullToRefresh\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Appirater\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/UIActivityIndicator-for-SDWebImage\"",
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -2128,6 +2165,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 					"$(SRCROOT)/Socialize.embeddedframework/**",
+					"\"$(SDK_DIR)\"/usr/include/libxml2/**",
 				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
@@ -2137,6 +2175,17 @@
 					"TESTING=1",
 					"DEBUG=1",
 					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AAPullToRefresh\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Appirater\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/UIActivityIndicator-for-SDWebImage\"",
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2171,9 +2220,21 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 					"$(SRCROOT)/Socialize.embeddedframework/**",
+					"\"$(SDK_DIR)\"/usr/include/libxml2/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Pelotonia/Pelotonia-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/AAPullToRefresh\"",
+					"\"${PODS_ROOT}/Headers/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Appirater\"",
+					"\"${PODS_ROOT}/Headers/ECSlidingViewController\"",
+					"\"${PODS_ROOT}/Headers/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/UIActivityIndicator-for-SDWebImage\"",
+					"\"$(SDK_DIR)\"/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
