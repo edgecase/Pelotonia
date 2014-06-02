@@ -244,16 +244,7 @@
 {
     CGFloat sz = 40;
     
-    if (indexPath.section == 0 && indexPath.row == 2)
-    {
-        // progress row -- hide if we're a volunteer rider
-        if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
-            [self.rider.riderType isEqualToString:@"Volunteer"])
-        {
-            sz = 0;
-        }
-    }
-    else if (indexPath.section == 1)
+    if (indexPath.section == 1)
     {
         id<SZComment> riderComment = [self.riderComments objectAtIndex:indexPath.row];
         NSString *comment = [self getTextFromComment:riderComment];
@@ -401,7 +392,9 @@
         [self.rider.riderType isEqualToString:@"Peloton"]) {
         self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
         self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
-        self.donationProgress.hidden = YES;
+
+        // Riders and Pelotons are the only ones who get progress
+        self.donationProgress.progress = 1.0;
     }
     else
     {
