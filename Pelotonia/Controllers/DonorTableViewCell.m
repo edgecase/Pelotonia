@@ -27,14 +27,14 @@
 {
     if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID])
     {
-        self.backgroundColor = PRIMARY_DARK_GRAY;
+//        self.backgroundColor = PRIMARY_DARK_GRAY;
         self.textLabel.font = PELOTONIA_FONT(21);
-        self.textLabel.textColor = SECONDARY_LIGHT_GRAY;
+        self.textLabel.textColor = PRIMARY_GREEN;
         self.textLabel.backgroundColor = [UIColor clearColor];
         
         self.detailTextLabel.font = PELOTONIA_FONT(18);
         self.detailTextLabel.backgroundColor = [UIColor clearColor];
-        self.detailTextLabel.textColor = SECONDARY_GREEN;
+        self.detailTextLabel.textColor = PRIMARY_DARK_GRAY;
 
     }
     return self;
