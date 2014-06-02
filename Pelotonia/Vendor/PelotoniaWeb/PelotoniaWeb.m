@@ -156,12 +156,19 @@
                                          @"pelotonTotalOfAllMembers": @"//*[@id='dashboard-peloton']/div/div[2]/dl[2]/dd",
                                          @"pelotonGrandTotal": @"//*[@id='dashboard-peloton']/div/div[2]/dl[3]/dd",
                                          @"pelotonCaptain": @"//*[@id='dashboard-peloton']/div/div[2]/dl[4]/dd/a",
-                                         @"virtualRiderRaised": @"//*[@id='dashboard-virtual-rider']/div/div[2]/dl[1]/dd"
+                                         @"virtualRiderRaised": @"//*[@id='dashboard-virtual-rider']/div/div[2]/dl[1]/dd",
+                                         @"volunteerRaised": @"//*[@id='dashboard-volunteer']/div/div[2]/dl[1]/dd"
                                          };
             
+            // rider
             rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"raised"] parser:parser];
             if ([rider.amountRaised length] == 0 ) {
+                // virtual rider
                 rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"virtualRiderRaised"] parser:parser];
+                if ([rider.amountRaised length] == 0) {
+                    // volunteer
+                    rider.amountRaised = [self getValueAtXPath:[xpathTable objectForKey:@"volunteerRaised"] parser:parser];
+                }
             }
             rider.myPeloton = [self getValueAtXPath:[xpathTable objectForKey:@"myPeloton"] parser:parser];
             rider.route = [self getValueAtXPath:[xpathTable objectForKey:@"route"] parser:parser];
