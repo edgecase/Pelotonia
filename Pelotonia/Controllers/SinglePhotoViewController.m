@@ -41,6 +41,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+//iOS 6+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+//iOS 6+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return (UIInterfaceOrientationMaskAllButUpsideDown);
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     NSString *key = [self.imageData objectForKey:@"key"];
@@ -49,6 +62,7 @@
             [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
                 // success, so set the image appropriately
                 self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+                self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
                 ALAssetRepresentation *rep = [asset defaultRepresentation];
                 CGImageRef image = [rep fullScreenImage];
                 [self.imageView setImage:[UIImage imageWithCGImage:image]];
@@ -63,5 +77,21 @@
             [self.imageView setImage:image];
         }
     }];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self orientStartImageView];
+}
+
+- (void) orientStartImageView
+{
+    UIInterfaceOrientation curOrientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (curOrientation == UIInterfaceOrientationPortrait || curOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        [self.imageView setFrame:CGRectMake(0, 0, 320, 475)];
+    }else{
+        [self.imageView setFrame:CGRectMake(0, 0, 475, 320)];
+    }
 }
 @end

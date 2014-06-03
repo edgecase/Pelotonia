@@ -58,6 +58,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)shouldAutorotate
+
+{
+    return NO;
+    
+}
+
 #pragma mark -- UI Actions
 - (IBAction)startWalkthrough:(id)sender
 {

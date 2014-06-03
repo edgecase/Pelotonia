@@ -118,6 +118,13 @@
     [self.tableView removeObserver:_tv forKeyPath:@"frame"];
 }
 
+-(BOOL)shouldAutorotate
+
+{
+    return NO;
+    
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

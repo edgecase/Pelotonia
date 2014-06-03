@@ -60,7 +60,7 @@
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
     
     // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pelotonia_logo_22x216"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
     self.navigationItem.titleView = imageView;
     
 }
@@ -193,9 +193,7 @@
      } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
     cell.textLabel.font = PELOTONIA_FONT(21);
-    cell.detailTextLabel.font = PELOTONIA_FONT(12);   
-    cell.textLabel.textColor = PRIMARY_GREEN;
-    cell.detailTextLabel.textColor = SECONDARY_GREEN;
+    cell.detailTextLabel.font = PELOTONIA_FONT(15);
     
     return cell;
 }

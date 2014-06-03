@@ -45,6 +45,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)shouldAutorotate
+
+{
+    return YES;
+    
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
 #pragma mark - Table view data source
 // static tables don't need all this
 
@@ -149,9 +161,6 @@
     return [self shouldAutorotate];
 }
 
-- (BOOL)shouldAutorotate {
-    return YES;
-}
 
 
 
