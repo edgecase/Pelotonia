@@ -65,9 +65,9 @@
     // Configure the cell...
     if (indexPath.section == 0 && indexPath.row == 0) {
         // name/id cell
-        cell.textLabel.font = PELOTONIA_FONT(21);
-        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
-        cell.textLabel.textColor = PRIMARY_GREEN;
+//        cell.textLabel.font = PELOTONIA_FONT(21);
+//        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
+        cell.detailTextLabel.textColor = PRIMARY_GREEN;
         cell.textLabel.text = self.rider.name;
         cell.detailTextLabel.text = self.rider.route;
         

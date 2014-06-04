@@ -1425,12 +1425,6 @@
 		BCE3B7CF15AE4DE000205530 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */,
-				BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */,
-				BBC012E418CCD83500CAFFF7 /* IntroPageViewController.h */,
-				BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */,
-				BBC012E718CCD99300CAFFF7 /* IntroViewController.h */,
-				BBC012E818CCD99300CAFFF7 /* IntroViewController.m */,
 				4D18B2D715FD0B90003F8416 /* AboutTableViewController.h */,
 				4D18B2D815FD0B90003F8416 /* AboutTableViewController.m */,
 				BBA66C13172A9FD8002DE00A /* ActivityViewController.h */,
@@ -1443,6 +1437,12 @@
 				BBAA222318AD8BB8006BA30E /* FindRiderViewController.m */,
 				BB9E0969171AFCCD0093FDD5 /* InitialSlidingViewController.h */,
 				BB9E096A171AFCCD0093FDD5 /* InitialSlidingViewController.m */,
+				BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */,
+				BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */,
+				BBC012E418CCD83500CAFFF7 /* IntroPageViewController.h */,
+				BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */,
+				BBC012E718CCD99300CAFFF7 /* IntroViewController.h */,
+				BBC012E818CCD99300CAFFF7 /* IntroViewController.m */,
 				BB9E096C171AFF360093FDD5 /* MenuViewController.h */,
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
