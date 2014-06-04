@@ -65,8 +65,8 @@
     // Configure the cell...
     if (indexPath.section == 0 && indexPath.row == 0) {
         // name/id cell
-//        cell.textLabel.font = PELOTONIA_FONT(21);
-//        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
+        cell.textLabel.font = PELOTONIA_FONT(21);
+        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(18);
         cell.detailTextLabel.textColor = PRIMARY_GREEN;
         cell.textLabel.text = self.rider.name;
         cell.detailTextLabel.text = self.rider.route;
@@ -97,8 +97,10 @@
         
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
-        self.riderStoryTextView.text = self.rider.story;
         self.riderStoryTextView.textColor = PRIMARY_DARK_GRAY;
+        [self.riderStoryTextView setFont:PELOTONIA_SECONDARY_FONT(18)]; //    [UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+        [self.riderStoryTextView setScrollEnabled:YES];
+        self.riderStoryTextView.text = self.rider.story;
     }
     
     return cell;
@@ -109,7 +111,7 @@
     if (indexPath.section == 0)
     {
         if (indexPath.row == 1) {
-            UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            UIFont *font = PELOTONIA_SECONDARY_FONT(18); //  [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
             CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, CGFLOAT_MAX);
             
             NSAttributedString *attributedText =
@@ -119,7 +121,7 @@
             CGRect rect = [attributedText boundingRectWithSize:initialSize
                                                        options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                                        context:nil];
-            return ceilf(rect.size.height/2);
+            return ceilf(rect.size.height);
         }
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

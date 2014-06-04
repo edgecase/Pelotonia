@@ -52,6 +52,7 @@
     
     
     self.entity = [SZEntity entityWithKey:@"http://www.pelotonia.org" name:@"Pelotonia"];
+    
     // set up socialize
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             pelotoniaStory, @"szsd_description",
