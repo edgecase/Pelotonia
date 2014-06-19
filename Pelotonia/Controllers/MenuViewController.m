@@ -14,6 +14,7 @@
 #import "Rider.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
+#import "EventsTableViewController.h"
 #import "TestFlight.h"
 #import "UIColor+LightAndDark.h"
 
@@ -143,6 +144,11 @@
         webVC.showsDoneButton = NO;
         webVC.delegate = self;
         webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    }
+    
+    if ([segue.identifier isEqualToString:@"SegueToEvents"]) {
+        // update events database ...
+        EventsTableViewController *eventsVC = (EventsTableViewController *)[segue.destinationViewController visibleViewController];
     }
 
 }

@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Appirater (2.0.2)
   - ECSlidingViewController (2.0.2)
+  - MagicalRecord/Shorthand (2.2)
   - MBProgressHUD (0.8)
   - SDWebImage (3.5.4):
     - SDWebImage/Core
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - AFNetworking
   - Appirater (~> 2.0.2)
   - ECSlidingViewController (~> 2.0.0)
+  - MagicalRecord/Shorthand
   - MBProgressHUD (~> 0.8)
   - SDWebImage (~> 3.5.2)
   - UIActivityIndicator-for-SDWebImage
@@ -42,6 +44,7 @@ SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   Appirater: a5e00fb01d47a9a6acf4b2f22323b4ccf4f23fbb
   ECSlidingViewController: 6c11fadb10d720c2d48bc577962332bdd4264c9f
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
   SDWebImage: 571295c8acbb699505a0f68e54506147c3de9ea7
   UIActivityIndicator-for-SDWebImage: d9e46f1592d04cfbeda67bb6d7bba5348558697b

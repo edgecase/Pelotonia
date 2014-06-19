@@ -7,5 +7,5 @@ pod 'SDWebImage', '~>3.5.2'
 pod 'UIActivityIndicator-for-SDWebImage'
 pod 'ECSlidingViewController', '~>2.0.0'
 pod 'AAPullToRefresh'
-
+pod 'MagicalRecord/Shorthand'
 

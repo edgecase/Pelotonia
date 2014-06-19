@@ -11,6 +11,10 @@
 #import "Donor.h"
 #import "TFHppleElement+IDSearch.h"
 #import <AFNetworking/AFNetworking.h>
+#import "Event.h"
+#import "EventCategory.h"
+#import "NSDate+Helper.h"
+
 
 @interface PelotoniaWeb()
 + (NSString *)stripWhitespace:(NSString *)input;
@@ -282,6 +286,106 @@
         NSLog(@"Couldn't find the information on pelotonia");
         // must be offline for a bit
         failureBlock([error localizedDescription]);
+    }];
+}
+
++ (void)getPelotoniaEventsOnComplete:(void (^)(void))completeBlock onFailure:(void (^)(NSString *))failureBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:@"http://pelotonia.org/events/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // parse the page for the amount of money being raised
+        TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
+        NSString *pelotoniaEventsPath =  @"//*[@id='article']/div/table/tr";
+        
+        NSArray *nodes = [parser searchWithXPathQuery:pelotoniaEventsPath];
+        for (TFHppleElement *node in nodes) {
+            
+            // each TR is an event.  There are 3 columns in each row, for events
+            NSArray *columns = [node childrenWithTagName:@"td"];
+            
+            if ([columns count] == 3) {
+                
+                Event *event = [Event createEntity];
+                
+                TFHppleElement *td = [columns objectAtIndex:0];
+                // td[0] is the image
+                /*
+                <td class='event-image'>
+                    <img src=''>
+                </td>
+                */
+                TFHppleElement *imgNode = [[td childrenWithTagName:@"img"] objectAtIndex:0];
+                NSString *imgSrc = [[imgNode attributes] objectForKey:@"src"];
+                event.imageLink = imgSrc;
+                
+                // td class='events-namevenue' has the name & address
+                /*
+                 <td class='events-namevenue'>
+                 <div class='event-name'>
+                    <a href='http to details'>event name</a>
+                 </div>
+                 "name and address of venue"
+                 </td>
+                 */
+                TFHppleElement *tdEvent = [[node childrenWithClassName:@"events-namevenue"] objectAtIndex:0];
+                event.address = tdEvent.text;
+                
+                TFHppleElement *divEventName = [[[tdEvent childrenWithClassName:@"event-name"] objectAtIndex:0] firstChild];
+                event.title = divEventName.text;
+                NSString *eventDetailsURL = [NSString stringWithFormat:@"http://www.pelotonia.org%@", [[divEventName attributes] objectForKey:@"href"]];
+                event.detailsLink = eventDetailsURL;
+                
+                // td class='events-datetime', in format:
+                /*
+                 <td class='events-datetime'>
+                    <strong>Mon dd, yyyy- Mon dd, yyyy</strong>
+                    <br>
+                    "hh:mm p to hh:mm p"
+                 </td>
+                 */
+                TFHppleElement *tdEventsDateTime = [[node childrenWithClassName:@"events-datetime"] objectAtIndex:0];
+                NSString *datetime = [[tdEventsDateTime firstChild] text];
+                NSArray *dates = [datetime componentsSeparatedByString:@"- "];
+                NSString *startDate = [dates objectAtIndex:0];
+                NSString *endDate = [dates objectAtIndex:1];
+                
+                NSString *time = [[[tdEventsDateTime children] objectAtIndex:3] content];
+                NSArray *times = [time componentsSeparatedByString:@" to "];
+                NSString *startTime = [times objectAtIndex:0];
+                NSString *endTime = [times objectAtIndex:1];
+                
+                NSString *eventStartDateTime = [NSString stringWithFormat:@"%@ %@", startDate, startTime];
+                NSDate *eventStart = [NSDate dateFromString:eventStartDateTime withFormat:@"MMM d, yyyy h:mm a"];
+
+                NSString *eventEndDateTime = [NSString stringWithFormat:@"%@ %@", endDate, endTime];
+                NSDate *eventEnd = [NSDate dateFromString:eventEndDateTime withFormat:@"MMM d, yyyy h:mm a"];
+
+                NSLog(@"%@", [eventStart stringWithFormat:@"MM/dd/Y h:mm a"]);
+                NSLog(@"%@", [eventEnd stringWithFormat:@"MM/dd/Y h:mm a"]);
+                
+                event.startDateTime = eventStart;
+                event.endDateTime = eventEnd;
+                
+            }
+        }
+
+        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+
+        if (completeBlock) {
+            completeBlock();
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"couldn't find events");
+        if (failureBlock) {
+            failureBlock([error localizedDescription]);
+        }
     }];
 }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Event" representedClassName="Event" syncable="YES">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="detailsLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="imageLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="title" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventCategory" inverseName="events" inverseEntity="EventCategory" syncable="YES"/>
+    </entity>
+    <entity name="EventCategory" representedClassName="EventCategory" syncable="YES">
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="category" inverseEntity="Event" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Event" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="EventCategory" positionX="288" positionY="170" width="128" height="73"/>
+    </elements>
+</model>
