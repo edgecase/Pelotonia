@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventsTableViewController : UITableViewController
+@interface EventsTableViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSArray *events;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end

@@ -22,7 +22,7 @@
     AAPullToRefresh *_tv;
 }
 
-@synthesize events;
+@synthesize fetchedResultsController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -74,7 +74,8 @@
 - (void)fetchAllEvents
 {
     // 3. Fetch entities with MagicalRecord
-    self.events = [[Event findAllSortedBy:@"category,startDateTime" ascending:NO] mutableCopy];
+    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+
 }
 
 #pragma mark - Table view data source
@@ -82,13 +83,14 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.events count];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 
@@ -96,7 +98,7 @@
 {
     EventTableViewCell *cell = [EventTableViewCell cellForTableView:tableView];
     
-    cell.event = [self.events objectAtIndex:indexPath.row];
+    cell.event = (Event *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     
     return cell;
 }
@@ -105,7 +107,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return NO;
+    return YES;
 }
 
 // Override to support editing the table view.
@@ -114,6 +116,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [event deleteEntity];
     }
 }
 

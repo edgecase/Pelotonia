@@ -289,87 +289,195 @@
     }];
 }
 
++ (NSString *)getEventImageFromRow:(TFHppleElement *)tr
+{
+    /*
+     <td class='event-image'>
+     <img src=''>
+     </td>
+     */
+    TFHppleElement *td = [[tr childrenWithClassName:@"event-image"] objectAtIndex:0];
+    TFHppleElement *imgNode = [[td childrenWithTagName:@"img"] objectAtIndex:0];
+    NSString *imgSrc = [[imgNode attributes] objectForKey:@"src"];
+    return imgSrc;
+}
+
++ (NSString *)getEventAddressFromRow:(TFHppleElement *)tr
+{
+    /*
+     <td class='events-namevenue'>
+     <div class='event-name'>
+     <a href='http to details'>event name</a>
+     </div>
+     "name and address of venue"
+     </td>
+     */
+    TFHppleElement *td = [[tr childrenWithClassName:@"events-namevenue"] objectAtIndex:0];
+    return td.text;
+}
+
++ (NSString *)getEventNameFromRow:(TFHppleElement *)tr
+{
+    /*
+     <td class='events-namevenue'>
+     <div class='event-name'>
+     <a href='http to details'>event name</a>
+     </div>
+     "name and address of venue"
+     </td>
+     */
+    TFHppleElement *anchor = [[[[tr childrenWithClassName:@"events-namevenue"] objectAtIndex:0] firstChild] firstChild];
+    return anchor.text;
+}
+
++ (NSString *)getDetailsLinkFromRow:(TFHppleElement *)tr
+{
+    /*
+     <td class='events-namevenue'>
+     <div class='event-name'>
+     <a href='http to details'>event name</a>
+     </div>
+     "name and address of venue"
+     </td>
+     */
+    TFHppleElement *anchor = [[[[tr childrenWithClassName:@"events-namevenue"] objectAtIndex:0] firstChild] firstChild];
+    return [NSString stringWithFormat:@"http://www.pelotonia.org%@", [[anchor attributes] objectForKey:@"href"]];
+}
+
++ (NSDate *)getStartTimeFromRow:(TFHppleElement *)tr
+{
+    // td class='events-datetime', in format:
+    /*
+     <td class='events-datetime'>
+     <strong>Mon dd, yyyy- Mon dd, yyyy</strong>
+     <br>
+     "hh:mm p to hh:mm p"
+     </td>
+     */
+    TFHppleElement *tdEventsDateTime = [[tr childrenWithClassName:@"events-datetime"] objectAtIndex:0];
+    NSString *datetime = [[tdEventsDateTime firstChild] text];
+    NSArray *dates = [datetime componentsSeparatedByString:@"- "];
+    NSString *startDate = [dates objectAtIndex:0];
+    
+    NSString *time = [[[tdEventsDateTime children] objectAtIndex:3] content];
+    NSArray *times = [time componentsSeparatedByString:@" to "];
+    NSString *startTime = [times objectAtIndex:0];
+    
+    NSString *eventStartDateTime = [NSString stringWithFormat:@"%@ %@", startDate, startTime];
+    NSDate *eventStart = [NSDate dateFromString:eventStartDateTime withFormat:@"MMM d, yyyy h:mm a"];
+    
+    NSLog(@"%@", [eventStart stringWithFormat:@"MM/dd/Y h:mm a"]);
+    
+    return eventStart;
+}
+
++ (NSDate *)getEndTimeFromRow:(TFHppleElement *)tr
+{
+    // td class='events-datetime', in format:
+    /*
+     <td class='events-datetime'>
+     <strong>Mon dd, yyyy- Mon dd, yyyy</strong>
+     <br>
+     "hh:mm p to hh:mm p"
+     </td>
+     */
+    TFHppleElement *tdEventsDateTime = [[tr childrenWithClassName:@"events-datetime"] objectAtIndex:0];
+    NSString *datetime = [[tdEventsDateTime firstChild] text];
+    NSArray *dates = [datetime componentsSeparatedByString:@"- "];
+    NSString *endDate = [dates objectAtIndex:1];
+    
+    NSString *time = [[[tdEventsDateTime children] objectAtIndex:3] content];
+    NSArray *times = [time componentsSeparatedByString:@" to "];
+    NSString *endTime = [times objectAtIndex:1];
+    
+    
+    NSString *eventEndDateTime = [NSString stringWithFormat:@"%@ %@", endDate, endTime];
+    NSDate *eventEnd = [NSDate dateFromString:eventEndDateTime withFormat:@"MMM d, yyyy h:mm a"];
+    
+    NSLog(@"%@", [eventEnd stringWithFormat:@"MM/dd/Y h:mm a"]);
+    
+    return eventEnd;
+}
+
++ (void)parseEventRow:(TFHppleElement *)row forCategory:(EventCategory *)category
+{
+    NSString *title = [self getEventNameFromRow:row];
+    Event *existing_event = [Event findFirstByAttribute:@"title" withValue:title];
+    
+    if (existing_event == nil) {
+        Event *event = [Event createEntity];
+        
+        event.title = title;
+        
+        // td.events-namevenue div.event-name is the anchor to the event name
+        event.title = [self getEventNameFromRow:row];
+
+        // td[0] is the image
+        event.imageLink = [self getEventImageFromRow:row];
+        
+        // td class='events-namevenue' has the name & address
+        event.address = [self getEventAddressFromRow:row];
+        
+
+        event.detailsLink = [self getDetailsLinkFromRow:row];
+        
+        event.startDateTime = [self getStartTimeFromRow:row];
+        
+        event.endDateTime = [self getEndTimeFromRow:row];
+        
+        event.category = category;
+    }
+}
+
 + (void)getPelotoniaEventsOnComplete:(void (^)(void))completeBlock onFailure:(void (^)(NSString *))failureBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:@"http://pelotonia.org/events/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // parse the page for the amount of money being raised
         TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
         NSString *pelotoniaEventsPath =  @"//*[@id='article']/div/table/tr";
         
+        // first parse out the pelotonia events
         NSArray *nodes = [parser searchWithXPathQuery:pelotoniaEventsPath];
+        EventCategory *category = [EventCategory findFirstByAttribute:@"name" withValue:@"Pelotonia"];
         for (TFHppleElement *node in nodes) {
             
             // each TR is an event.  There are 3 columns in each row, for events
             NSArray *columns = [node childrenWithTagName:@"td"];
             
             if ([columns count] == 3) {
-                
-                Event *event = [Event createEntity];
-                
-                TFHppleElement *td = [columns objectAtIndex:0];
-                // td[0] is the image
-                /*
-                <td class='event-image'>
-                    <img src=''>
-                </td>
-                */
-                TFHppleElement *imgNode = [[td childrenWithTagName:@"img"] objectAtIndex:0];
-                NSString *imgSrc = [[imgNode attributes] objectForKey:@"src"];
-                event.imageLink = imgSrc;
-                
-                // td class='events-namevenue' has the name & address
-                /*
-                 <td class='events-namevenue'>
-                 <div class='event-name'>
-                    <a href='http to details'>event name</a>
-                 </div>
-                 "name and address of venue"
-                 </td>
-                 */
-                TFHppleElement *tdEvent = [[node childrenWithClassName:@"events-namevenue"] objectAtIndex:0];
-                event.address = tdEvent.text;
-                
-                TFHppleElement *divEventName = [[[tdEvent childrenWithClassName:@"event-name"] objectAtIndex:0] firstChild];
-                event.title = divEventName.text;
-                NSString *eventDetailsURL = [NSString stringWithFormat:@"http://www.pelotonia.org%@", [[divEventName attributes] objectForKey:@"href"]];
-                event.detailsLink = eventDetailsURL;
-                
-                // td class='events-datetime', in format:
-                /*
-                 <td class='events-datetime'>
-                    <strong>Mon dd, yyyy- Mon dd, yyyy</strong>
-                    <br>
-                    "hh:mm p to hh:mm p"
-                 </td>
-                 */
-                TFHppleElement *tdEventsDateTime = [[node childrenWithClassName:@"events-datetime"] objectAtIndex:0];
-                NSString *datetime = [[tdEventsDateTime firstChild] text];
-                NSArray *dates = [datetime componentsSeparatedByString:@"- "];
-                NSString *startDate = [dates objectAtIndex:0];
-                NSString *endDate = [dates objectAtIndex:1];
-                
-                NSString *time = [[[tdEventsDateTime children] objectAtIndex:3] content];
-                NSArray *times = [time componentsSeparatedByString:@" to "];
-                NSString *startTime = [times objectAtIndex:0];
-                NSString *endTime = [times objectAtIndex:1];
-                
-                NSString *eventStartDateTime = [NSString stringWithFormat:@"%@ %@", startDate, startTime];
-                NSDate *eventStart = [NSDate dateFromString:eventStartDateTime withFormat:@"MMM d, yyyy h:mm a"];
-
-                NSString *eventEndDateTime = [NSString stringWithFormat:@"%@ %@", endDate, endTime];
-                NSDate *eventEnd = [NSDate dateFromString:eventEndDateTime withFormat:@"MMM d, yyyy h:mm a"];
-
-                NSLog(@"%@", [eventStart stringWithFormat:@"MM/dd/Y h:mm a"]);
-                NSLog(@"%@", [eventEnd stringWithFormat:@"MM/dd/Y h:mm a"]);
-                
-                event.startDateTime = eventStart;
-                event.endDateTime = eventEnd;
-                
+                [self parseEventRow:node forCategory:category];
+            }
+        }
+        
+        // now get the rider events
+        NSString *riderEventsPath = @"//*[@id='events-rider-events']/table/tr";
+        NSArray *riderEvents = [parser searchWithXPathQuery:riderEventsPath];
+        category = [EventCategory findFirstByAttribute:@"name" withValue:@"Rider Events"];
+        for (TFHppleElement *node in riderEvents) {
+            
+            // each TR is an event.  There are 3 columns in each row, for events
+            NSArray *columns = [node childrenWithTagName:@"td"];
+            
+            if ([columns count] == 3) {
+                [self parseEventRow:node forCategory:category];
             }
         }
 
+        // now get the rider events
+        NSString *trainingRidesPath = @"//*[@id='events-training-rides']/table/tr";
+        NSArray *trainingRides = [parser searchWithXPathQuery:trainingRidesPath];
+        category = [EventCategory findFirstByAttribute:@"name" withValue:@"Training Rides"];
+        for (TFHppleElement *node in trainingRides) {
+            
+            // each TR is an event.  There are 3 columns in each row, for events
+            NSArray *columns = [node childrenWithTagName:@"td"];
+            
+            if ([columns count] == 3) {
+                [self parseEventRow:node forCategory:category];
+            }
+        }
+        
         [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
