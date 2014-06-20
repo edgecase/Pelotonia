@@ -12,6 +12,7 @@
 #import "Event.h"
 #import "EventCategory.h"
 #import "PelotoniaWeb.h"
+#import "EventDetailsTableViewController.h"
 
 @interface EventsTableViewController ()
 - (void)refresh;
@@ -74,7 +75,7 @@
 - (void)fetchAllEvents
 {
     // 3. Fetch entities with MagicalRecord
-    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:NO withPredicate:nil groupBy:@"category" delegate:self];
 
 }
 
@@ -84,6 +85,14 @@
 {
     // Return the number of sections.
     return [[self.fetchedResultsController sections] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    NSArray *objects = [sectionInfo objects];
+    Event *object = [objects objectAtIndex:0];
+    return object.category.name;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -101,6 +110,29 @@
     cell.event = (Event *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    // section title
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 60.0)];
+    headerView.backgroundColor = PRIMARY_GREEN;
+
+    // white text on green background
+    UILabel *sectionTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width-10, 60.0)];
+    sectionTitleLabel.textColor = [UIColor whiteColor];
+    sectionTitleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
+    sectionTitleLabel.backgroundColor = [UIColor clearColor];
+    sectionTitleLabel.font = PELOTONIA_SECONDARY_FONT(21);
+    
+    [headerView addSubview:sectionTitleLabel];
+    return headerView;
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 60.0;
 }
 
 // Override to support conditional editing of the table view.
@@ -136,6 +168,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"SegueToEventDetails"]) {
+        // pass the current event to the new screen
+        EventDetailsTableViewController *eventDetailsVC = (EventDetailsTableViewController *) segue.destinationViewController;
+        Event *selectedEvent = (Event *)[self.fetchedResultsController objectAtIndexPath:[self.tableView indexPathForSelectedRow]];
+        eventDetailsVC.event = selectedEvent;
+    }
 }
 
 @end

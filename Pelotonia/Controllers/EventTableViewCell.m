@@ -7,6 +7,9 @@
 //
 
 #import "EventTableViewCell.h"
+#import "NSDate+Helper.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @implementation EventTableViewCell
 
@@ -24,7 +27,15 @@
 - (void)setEvent:(Event *)event {
     _event = event;
     self.textLabel.text = _event.title;
-    self.detailTextLabel.text = _event.address;
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", [_event.startDateTime stringWithFormat:@"MMM dd h:mm a"], [_event.endDateTime stringWithFormat:@"h:mm a"]];
+    __weak EventTableViewCell *wself = self;
+    [self.imageView setImageWithURL:[NSURL URLWithString:_event.imageLink] placeholderImage:[UIImage imageNamed:@"83-calendar-gray"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        if (error) {
+            NSLog(@"error setting event image: %@", [error localizedDescription]);
+            [wself.imageView layoutSubviews];
+        }
+    }];
+    
 }
 
 @end

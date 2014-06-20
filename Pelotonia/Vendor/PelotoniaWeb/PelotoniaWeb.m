@@ -366,8 +366,6 @@
     NSString *eventStartDateTime = [NSString stringWithFormat:@"%@ %@", startDate, startTime];
     NSDate *eventStart = [NSDate dateFromString:eventStartDateTime withFormat:@"MMM d, yyyy h:mm a"];
     
-    NSLog(@"%@", [eventStart stringWithFormat:@"MM/dd/Y h:mm a"]);
-    
     return eventStart;
 }
 
@@ -394,23 +392,20 @@
     NSString *eventEndDateTime = [NSString stringWithFormat:@"%@ %@", endDate, endTime];
     NSDate *eventEnd = [NSDate dateFromString:eventEndDateTime withFormat:@"MMM d, yyyy h:mm a"];
     
-    NSLog(@"%@", [eventEnd stringWithFormat:@"MM/dd/Y h:mm a"]);
-    
     return eventEnd;
 }
 
 + (void)parseEventRow:(TFHppleElement *)row forCategory:(EventCategory *)category
 {
     NSString *title = [self getEventNameFromRow:row];
-    Event *existing_event = [Event findFirstByAttribute:@"title" withValue:title];
+    Event *event = [Event findFirstByAttribute:@"title" withValue:title];
     
-    if (existing_event == nil) {
-        Event *event = [Event createEntity];
-        
-        event.title = title;
+    if (event == nil) {
+        // not already in database, so create it
+        event = [Event createEntity];
         
         // td.events-namevenue div.event-name is the anchor to the event name
-        event.title = [self getEventNameFromRow:row];
+        event.title = title;
 
         // td[0] is the image
         event.imageLink = [self getEventImageFromRow:row];
@@ -424,7 +419,7 @@
         event.startDateTime = [self getStartTimeFromRow:row];
         
         event.endDateTime = [self getEndTimeFromRow:row];
-        
+        [category addEventsObject:event];
         event.category = category;
     }
 }
@@ -440,6 +435,10 @@
         // first parse out the pelotonia events
         NSArray *nodes = [parser searchWithXPathQuery:pelotoniaEventsPath];
         EventCategory *category = [EventCategory findFirstByAttribute:@"name" withValue:@"Pelotonia"];
+        if (category == nil) {
+            category = [EventCategory createEntity];
+            category.name = @"Pelotonia";
+        }
         for (TFHppleElement *node in nodes) {
             
             // each TR is an event.  There are 3 columns in each row, for events
@@ -454,6 +453,10 @@
         NSString *riderEventsPath = @"//*[@id='events-rider-events']/table/tr";
         NSArray *riderEvents = [parser searchWithXPathQuery:riderEventsPath];
         category = [EventCategory findFirstByAttribute:@"name" withValue:@"Rider Events"];
+        if (category == nil) {
+            category = [EventCategory createEntity];
+            category.name = @"Rider Events";
+        }
         for (TFHppleElement *node in riderEvents) {
             
             // each TR is an event.  There are 3 columns in each row, for events
@@ -468,6 +471,10 @@
         NSString *trainingRidesPath = @"//*[@id='events-training-rides']/table/tr";
         NSArray *trainingRides = [parser searchWithXPathQuery:trainingRidesPath];
         category = [EventCategory findFirstByAttribute:@"name" withValue:@"Training Rides"];
+        if (category == nil) {
+            category = [EventCategory createEntity];
+            category.name = @"Training Rides";
+        }
         for (TFHppleElement *node in trainingRides) {
             
             // each TR is an event.  There are 3 columns in each row, for events
@@ -481,14 +488,17 @@
         [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
+                if (completeBlock) {
+                    completeBlock();
+                }
             } else if (error) {
                 NSLog(@"Error saving context: %@", error.description);
+                if (failureBlock) {
+                    failureBlock([error localizedDescription]);
+                }
             }
         }];
 
-        if (completeBlock) {
-            completeBlock();
-        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"couldn't find events");
         if (failureBlock) {

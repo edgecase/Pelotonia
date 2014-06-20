@@ -82,17 +82,17 @@
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     shadow.shadowBlurRadius = 0.0;
-    shadow.shadowOffset = CGSizeMake(0.0, -1.0);
+    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-           NSForegroundColorAttributeName: PRIMARY_GREEN,
+           NSForegroundColorAttributeName: [UIColor whiteColor],
            NSShadowAttributeName: shadow,
-           NSFontAttributeName: PELOTONIA_FONT(20),
+           NSFontAttributeName: PELOTONIA_SECONDARY_FONT_BOLD(0),
            }];
-    [[UINavigationBar appearance] setTintColor:PRIMARY_GREEN];
+    [[UINavigationBar appearance] setTintColor: PRIMARY_GREEN];
     [[UINavigationBar appearance] setBarTintColor:PRIMARY_DARK_GRAY];
     [[UINavigationBar appearance] setBackgroundColor:PRIMARY_DARK_GRAY];
-
+        
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = SECONDARY_LIGHT_GRAY;
     pageControl.currentPageIndicatorTintColor = SECONDARY_GREEN;

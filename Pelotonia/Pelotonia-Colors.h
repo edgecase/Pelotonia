@@ -23,5 +23,6 @@
 #define PELOTONIA_FONT(s) [UIFont fontWithName:@"Baksheesh-Regular" size:s]
 #define PELOTONIA_SECONDARY_FONT(s) [UIFont fontWithName:@"PFDinTextPro-Regular" size:s]
 #define PELOTONIA_FONT_NAME [UIFont fontWithFamilyName:@"Baksheesh-Regular"]
+#define PELOTONIA_SECONDARY_FONT_BOLD(s) [UIFont fontWithName:@"Baksheesh-Bold" size:s]
 
 #endif
