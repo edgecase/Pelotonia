@@ -395,6 +395,43 @@
     return eventEnd;
 }
 
+
++ (void)getEventDescription:(Event *)event
+                 onComplete:(void (^)(Event *e))completeBlock
+                  onFailure:(void (^)(NSString *))failureBlock
+{
+    // given an event, fill it out with details & call back
+    if (event.detailsLink) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [manager GET:event.detailsLink parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
+            NSString *eventDescriptionpath =  @"//*[@id='article']/div/p/text()";
+
+            // parse out the paragraphs
+            NSArray *nodes = [parser searchWithXPathQuery:eventDescriptionpath];
+            NSString *description = @"";
+            for (int i = 0; ([nodes count] > 0) && (i < [nodes count]-1); i++) {
+                TFHppleElement *paragraph = [nodes objectAtIndex:i];
+                description = [description stringByAppendingString:[[paragraph content] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]];
+                description = [description stringByAppendingString:@"\n\n"];
+            }
+            event.eventDesc = description;
+            if (completeBlock) {
+                completeBlock(event);
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error parsing event description %@", [error localizedDescription]);
+            if (failureBlock) {
+                failureBlock([error localizedDescription]);
+            }
+        }];
+    }
+
+}
+
 + (void)parseEventRow:(TFHppleElement *)row forCategory:(EventCategory *)category
 {
     NSString *title = [self getEventNameFromRow:row];
@@ -403,25 +440,28 @@
     if (event == nil) {
         // not already in database, so create it
         event = [Event createEntity];
-        
-        // td.events-namevenue div.event-name is the anchor to the event name
-        event.title = title;
 
-        // td[0] is the image
-        event.imageLink = [self getEventImageFromRow:row];
-        
-        // td class='events-namevenue' has the name & address
-        event.address = [self getEventAddressFromRow:row];
-        
-
-        event.detailsLink = [self getDetailsLinkFromRow:row];
-        
-        event.startDateTime = [self getStartTimeFromRow:row];
-        
-        event.endDateTime = [self getEndTimeFromRow:row];
+        // category
         [category addEventsObject:event];
         event.category = category;
     }
+
+    // td.events-namevenue div.event-name is the anchor to the event name
+    event.title = title;
+
+    // td[0] is the image
+    event.imageLink = [self getEventImageFromRow:row];
+    
+    // td class='events-namevenue' has the name & address
+    event.address = [self getEventAddressFromRow:row];
+
+    // link to details
+    event.detailsLink = [self getDetailsLinkFromRow:row];
+    
+    // start date & time
+    event.startDateTime = [self getStartTimeFromRow:row];
+    event.endDateTime = [self getEndTimeFromRow:row];
+
 }
 
 + (void)getPelotoniaEventsOnComplete:(void (^)(void))completeBlock onFailure:(void (^)(NSString *))failureBlock
@@ -467,7 +507,7 @@
             }
         }
 
-        // now get the rider events
+        // now get the training rides
         NSString *trainingRidesPath = @"//*[@id='events-training-rides']/table/tr";
         NSArray *trainingRides = [parser searchWithXPathQuery:trainingRidesPath];
         category = [EventCategory findFirstByAttribute:@"name" withValue:@"Training Rides"];
@@ -485,6 +525,7 @@
             }
         }
         
+        // save the database
         [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
@@ -506,5 +547,6 @@
         }
     }];
 }
+
 
 @end

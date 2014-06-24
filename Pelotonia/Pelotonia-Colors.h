@@ -20,9 +20,10 @@
 #define SECONDARY_GREEN PRIMARY_GREEN
 #define PRIMARY_GREEN_ALPHA(a) [UIColor colorWithRed:57/255.0 green:213/255.0 blue:45/255.0 alpha:a]
 
-#define PELOTONIA_FONT(s) [UIFont fontWithName:@"Baksheesh-Regular" size:s]
-#define PELOTONIA_SECONDARY_FONT(s) [UIFont fontWithName:@"PFDinTextPro-Regular" size:s]
 #define PELOTONIA_FONT_NAME [UIFont fontWithFamilyName:@"Baksheesh-Regular"]
-#define PELOTONIA_SECONDARY_FONT_BOLD(s) [UIFont fontWithName:@"Baksheesh-Bold" size:s]
+#define PELOTONIA_FONT(s) [UIFont fontWithName:@"Baksheesh-Regular" size:s]
+#define PELOTONIA_FONT_BOLD(s) [UIFont fontWithName:@"Baksheesh-Bold" size:s]
+#define PELOTONIA_SECONDARY_FONT(s) [UIFont fontWithName:@"PFDinTextPro-Regular" size:s]
+#define PELOTONIA_SECONDARY_FONT_BOLD(s) [UIFont fontWithName:@"PFDinTextPro-Bold" size:s]
 
 #endif

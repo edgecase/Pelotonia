@@ -68,7 +68,6 @@
 #pragma mark -- UI Actions
 - (IBAction)startWalkthrough:(id)sender
 {
-    NSLog(@"we're done!");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

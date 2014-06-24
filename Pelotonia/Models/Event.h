@@ -2,7 +2,7 @@
 //  Event.h
 //  Pelotonia
 //
-//  Created by Mark Harris on 6/19/14.
+//  Created by Mark Harris on 6/22/14.
 //
 //
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * detailsLink;
 @property (nonatomic, retain) NSString * imageLink;
+@property (nonatomic, retain) NSString * eventDesc;
 @property (nonatomic, retain) EventCategory *category;
 
 @end

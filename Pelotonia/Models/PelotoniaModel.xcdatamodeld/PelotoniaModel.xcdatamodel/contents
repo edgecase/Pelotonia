@@ -4,6 +4,7 @@
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="detailsLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="eventDesc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageLink" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDateTime" attributeType="Date" syncable="YES"/>
         <attribute name="title" attributeType="String" indexed="YES" syncable="YES"/>
@@ -14,7 +15,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="category" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Event" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="EventCategory" positionX="288" positionY="170" width="128" height="73"/>
     </elements>
 </model>

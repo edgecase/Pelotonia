@@ -387,9 +387,9 @@
 		BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062A19524F9800FEED39 /* EventsTableViewController.m */; };
 		BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062D19524FCA00FEED39 /* EventTableViewCell.m */; };
 		BBDF0631195253C300FEED39 /* PelotoniaModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */; };
-		BBDF0646195298C200FEED39 /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF0645195298C200FEED39 /* EventCategory.m */; };
-		BBDF0649195298C200FEED39 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF0648195298C200FEED39 /* Event.m */; };
 		BBDF064C1953CDF000FEED39 /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */; };
+		BBDF064F1957D7C000FEED39 /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF064E1957D7C000FEED39 /* EventCategory.m */; };
+		BBDF06521957D7C100FEED39 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF06511957D7C100FEED39 /* Event.m */; };
 		BBF496F019392F84007D7D67 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496E919392F84007D7D67 /* TFHpple.m */; };
 		BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496EB19392F84007D7D67 /* TFHppleElement.m */; };
 		BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496ED19392F84007D7D67 /* XPathQuery.m */; };
@@ -835,12 +835,12 @@
 		BBDF062C19524FCA00FEED39 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewCell.h; path = Controllers/EventTableViewCell.h; sourceTree = "<group>"; };
 		BBDF062D19524FCA00FEED39 /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTableViewCell.m; path = Controllers/EventTableViewCell.m; sourceTree = "<group>"; };
 		BBDF0630195253C300FEED39 /* PelotoniaModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PelotoniaModel.xcdatamodel; sourceTree = "<group>"; };
-		BBDF0644195298C200FEED39 /* EventCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCategory.h; path = Models/EventCategory.h; sourceTree = "<group>"; };
-		BBDF0645195298C200FEED39 /* EventCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCategory.m; path = Models/EventCategory.m; sourceTree = "<group>"; };
-		BBDF0647195298C200FEED39 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
-		BBDF0648195298C200FEED39 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Models/Event.m; sourceTree = "<group>"; };
 		BBDF064A1953CDF000FEED39 /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = Controllers/EventDetailsTableViewController.h; sourceTree = "<group>"; };
 		BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = Controllers/EventDetailsTableViewController.m; sourceTree = "<group>"; };
+		BBDF064D1957D7C000FEED39 /* EventCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventCategory.h; path = Models/EventCategory.h; sourceTree = "<group>"; };
+		BBDF064E1957D7C000FEED39 /* EventCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCategory.m; path = Models/EventCategory.m; sourceTree = "<group>"; };
+		BBDF06501957D7C100FEED39 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
+		BBDF06511957D7C100FEED39 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Models/Event.m; sourceTree = "<group>"; };
 		BBF496E819392F84007D7D67 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
 		BBF496E919392F84007D7D67 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
 		BBF496EA19392F84007D7D67 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
@@ -1450,6 +1450,8 @@
 				BBA66C14172A9FD9002DE00A /* ActivityViewController.m */,
 				BBAA222B18AF9F7A006BA30E /* DonorsTableViewController.h */,
 				BBAA222C18AF9F7A006BA30E /* DonorsTableViewController.m */,
+				BBDF064A1953CDF000FEED39 /* EventDetailsTableViewController.h */,
+				BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */,
 				BBDF062919524F9800FEED39 /* EventsTableViewController.h */,
 				BBDF062A19524F9800FEED39 /* EventsTableViewController.m */,
 				BB22414B17F529030054F16D /* FeedbackViewController.h */,
@@ -1492,8 +1494,6 @@
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
 				BBAA247B18B05E93006BA30E /* WorkoutListTableViewController.h */,
 				BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */,
-				BBDF064A1953CDF000FEED39 /* EventDetailsTableViewController.h */,
-				BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1513,10 +1513,10 @@
 			isa = PBXGroup;
 			children = (
 				BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */,
-				BBDF0647195298C200FEED39 /* Event.h */,
-				BBDF0648195298C200FEED39 /* Event.m */,
-				BBDF0644195298C200FEED39 /* EventCategory.h */,
-				BBDF0645195298C200FEED39 /* EventCategory.m */,
+				BBDF06501957D7C100FEED39 /* Event.h */,
+				BBDF06511957D7C100FEED39 /* Event.m */,
+				BBDF064D1957D7C000FEED39 /* EventCategory.h */,
+				BBDF064E1957D7C000FEED39 /* EventCategory.m */,
 				BCE3B81C15AE5B6F00205530 /* Rider.h */,
 				BCE3B81D15AE5B6F00205530 /* Rider.m */,
 				4D35C72715B116E5006E5D5D /* RiderDataController.h */,
@@ -1985,8 +1985,8 @@
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
+				BBDF064F1957D7C000FEED39 /* EventCategory.m in Sources */,
 				4D18B2D915FD0B90003F8416 /* AboutTableViewController.m in Sources */,
-				BBDF0649195298C200FEED39 /* Event.m in Sources */,
 				BB93182B18B99F97003A3AC0 /* NSNumber+Currency.m in Sources */,
 				4D15DDDC1621C9140050DB17 /* UIImage+Alpha.m in Sources */,
 				BBAA248818B44C67006BA30E /* RiderPhotoCell.m in Sources */,
@@ -1994,6 +1994,7 @@
 				4D15DDDD1621C9140050DB17 /* UIImage+Resize.m in Sources */,
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */,
+				BBDF06521957D7C100FEED39 /* Event.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 				BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
@@ -2008,7 +2009,6 @@
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 				BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */,
-				BBDF0646195298C200FEED39 /* EventCategory.m in Sources */,
 				BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */,
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
 				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,

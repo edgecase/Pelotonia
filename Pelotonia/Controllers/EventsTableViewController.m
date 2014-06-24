@@ -75,7 +75,7 @@
 - (void)fetchAllEvents
 {
     // 3. Fetch entities with MagicalRecord
-    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:NO withPredicate:nil groupBy:@"category" delegate:self];
+    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:nil groupBy:@"category" delegate:self];
 
 }
 
