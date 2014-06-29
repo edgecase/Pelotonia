@@ -12,6 +12,7 @@
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
 #import "TestFlight.h"
+#import <Social/Social.h>
 
 @interface AboutTableViewController ()
 
@@ -99,6 +100,41 @@
 
 
 #pragma mark -- Custom Functionality
+- (IBAction)twitterButtonClicked:(id)sender {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        if(granted) {
+            // Get the list of Twitter accounts.
+            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+            
+            // For the sake of brevity, we'll assume there is only one Twitter account present.
+            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+            if ([accountsArray count] > 0) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                                
+                NSDictionary *values = @{@"screen_name": @"Pelotonia", @"follow": @"true"};
+                
+                //requestForServiceType
+                
+                SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                            requestMethod:SLRequestMethodPOST
+                                                                      URL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"] parameters:values];
+                [postRequest setAccount:twitterAccount];
+                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i Error %d",
+                                        [urlResponse statusCode],error.code];
+                    NSLog(@"%@error %@", output,error.description);
+                }];
+            }
+            
+        }
+    }];
+}
+
 - (IBAction)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

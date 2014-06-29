@@ -145,6 +145,17 @@
         webVC.delegate = self;
         webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     }
+
+    if ([segue.identifier isEqualToString:@"SegueToBlog"]) {
+        [TestFlight passCheckpoint:@"ShowBlog"];
+        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
+        
+        // see the registration form
+        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/the-blog/"];
+        webVC.showsDoneButton = NO;
+        webVC.delegate = self;
+        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+    }
     
     if ([segue.identifier isEqualToString:@"SegueToEvents"]) {
         // update events database ...

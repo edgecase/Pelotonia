@@ -32,7 +32,7 @@
                         <sections>
                             <tableViewSection headerTitle="Participate" id="99k-1X-GZf">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="8Vw-hx-GYS" imageView="72C-03-Gle" style="IBUITableViewCellStyleDefault" id="YEp-uB-gmK">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="8Vw-hx-GYS" imageView="72C-03-Gle" style="IBUITableViewCellStyleDefault" id="YEp-uB-gmK">
                                         <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YEp-uB-gmK" id="dLn-fx-KAe">
@@ -59,7 +59,7 @@
                                             <segue destination="aoi-70-fZE" kind="custom" customClass="ECSlidingSegue" id="3UN-hs-Uvu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="CEG-KB-6rQ" imageView="Hc1-i3-KSh" style="IBUITableViewCellStyleDefault" id="YZQ-30-SKW">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="CEG-KB-6rQ" imageView="Hc1-i3-KSh" style="IBUITableViewCellStyleDefault" id="YZQ-30-SKW">
                                         <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YZQ-30-SKW" id="06c-Bw-LLq">
@@ -90,7 +90,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Pelotonia" id="YsN-OB-eNT">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ge9-yy-D9g" imageView="ISH-2T-veh" style="IBUITableViewCellStyleDefault" id="D4j-zs-NS8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ge9-yy-D9g" imageView="ISH-2T-veh" style="IBUITableViewCellStyleDefault" id="D4j-zs-NS8">
                                         <rect key="frame" x="0.0" y="176" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D4j-zs-NS8" id="ij4-gz-Pr1">
@@ -117,7 +117,7 @@
                                             <segue destination="EIq-WY-nQn" kind="custom" customClass="ECSlidingSegue" id="nIi-r3-cr2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="prs-1i-qZR" imageView="iLB-Cs-tVm" style="IBUITableViewCellStyleDefault" id="mi4-If-9ni">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="prs-1i-qZR" imageView="iLB-Cs-tVm" style="IBUITableViewCellStyleDefault" id="mi4-If-9ni">
                                         <rect key="frame" x="0.0" y="220" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mi4-If-9ni" id="FaA-8X-yG7">
@@ -144,7 +144,7 @@
                                             <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToRegister" customClass="ECSlidingSegue" id="0mA-u6-zGO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="UQs-xu-b74" imageView="ZeJ-um-VEd" style="IBUITableViewCellStyleDefault" id="nvU-Ie-1E2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="UQs-xu-b74" imageView="ZeJ-um-VEd" style="IBUITableViewCellStyleDefault" id="nvU-Ie-1E2">
                                         <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nvU-Ie-1E2" id="GeE-76-36D">
@@ -171,7 +171,7 @@
                                             <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToVideo" customClass="ECSlidingSegue" id="42R-2Z-EJ1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="IXX-mr-QaB" imageView="x8E-8x-ikN" style="IBUITableViewCellStyleDefault" id="uk7-di-3hb">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="IXX-mr-QaB" imageView="x8E-8x-ikN" style="IBUITableViewCellStyleDefault" id="uk7-di-3hb">
                                         <rect key="frame" x="0.0" y="308" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uk7-di-3hb" id="npH-5x-Hen">
@@ -198,8 +198,35 @@
                                             <segue destination="BcX-CK-XIS" kind="custom" customClass="ECSlidingSegue" id="X0d-JG-vfl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-ej-CIF" imageView="BVp-Ag-Fky" style="IBUITableViewCellStyleDefault" id="HrD-3N-1ys">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7fa-kJ-gGh" imageView="LEd-Ft-WBD" style="IBUITableViewCellStyleDefault" id="BB6-m7-LoJ">
                                         <rect key="frame" x="0.0" y="352" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BB6-m7-LoJ" id="rs3-m3-kr2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="The Rider Blog" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7fa-kJ-gGh">
+                                                    <rect key="frame" x="53" y="0.0" width="252" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="216-compose" id="LEd-Ft-WBD">
+                                                    <rect key="frame" x="15" y="12" width="23" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="6HY-Nt-L96" kind="custom" identifier="SegueToBlog" customClass="ECSlidingSegue" id="uHP-Lq-co9"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-ej-CIF" imageView="BVp-Ag-Fky" style="IBUITableViewCellStyleDefault" id="HrD-3N-1ys">
+                                        <rect key="frame" x="0.0" y="396" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HrD-3N-1ys" id="cN6-xt-3Bx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -237,7 +264,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEV-Fu-w1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1688" y="925"/>
+            <point key="canvasLocation" x="-2106" y="900"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="xLT-Q7-w5r">
@@ -269,7 +296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQD-co-odq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2154" y="1634"/>
+            <point key="canvasLocation" x="-1402" y="1818"/>
         </scene>
         <!--Intro Page View Controller-->
         <scene sceneID="E8J-gM-hqo">
@@ -279,7 +306,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GL9-8O-cBr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1603" y="1632"/>
+            <point key="canvasLocation" x="-779" y="1818"/>
         </scene>
         <!--Events Table View Controller - Events-->
         <scene sceneID="o2N-xs-NwA">
@@ -343,7 +370,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ks8-Dy-iJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xKS-0e-jWV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-431" y="1350"/>
+            <point key="canvasLocation" x="-1433" y="3062"/>
         </scene>
         <!--Event Details Table View Controller - Event Details-->
         <scene sceneID="TGx-Yi-ZRC">
@@ -465,7 +492,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZh-rT-lYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="1350"/>
+            <point key="canvasLocation" x="-793" y="3062"/>
         </scene>
         <!--Intro Content View Controller-->
         <scene sceneID="aj2-lj-E7I">
@@ -508,7 +535,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EBt-PM-exD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1603" y="2324"/>
+            <point key="canvasLocation" x="-219" y="1828"/>
         </scene>
         <!--Pelotonia Profile View Controller - Pelotonia-->
         <scene sceneID="xxc-lL-uMq">
@@ -666,7 +693,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zl6-ic-aI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HfE-VP-F3I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-402" y="512"/>
+            <point key="canvasLocation" x="-1156" y="-2008"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="gFg-bq-AUq">
@@ -727,12 +754,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIQ-ZY-AXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="512"/>
+            <point key="canvasLocation" x="-621" y="-2008"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="0nN-M1-RyW">
             <objects>
-                <viewController storyboardIdentifier="RegistrationViewController" id="Ty3-fs-mIs" customClass="PRPWebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ty3-fs-mIs" customClass="PRPWebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eAb-cR-7a0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -769,7 +796,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J63-ME-rxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2522" y="909"/>
+            <point key="canvasLocation" x="-2846" y="900"/>
+        </scene>
+        <!--Web View Controller - The Rider-->
+        <scene sceneID="GzU-Wj-8a2">
+            <objects>
+                <viewController title="The Rider" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iPq-SH-xf0" customClass="PRPWebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WPS-OQ-Gno">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="5Fu-eG-gtD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="hfz-Jo-Psc">
+                        <barButtonItem key="leftBarButtonItem" image="259-list" id="O8m-SK-zNH"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dXl-AT-3Bu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="796" y="-1695"/>
         </scene>
         <!--Riders View Controller - Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
@@ -854,7 +906,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1442" y="254"/>
+            <point key="canvasLocation" x="770" y="358"/>
         </scene>
         <!--Ride Photos View Controller-->
         <scene sceneID="4kJ-uD-hnM">
@@ -902,18 +954,19 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7BB-9s-xll" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2107" y="623"/>
+            <point key="canvasLocation" x="2633" y="623"/>
         </scene>
         <!--About Table View Controller - About-->
         <scene sceneID="IN3-sS-WWU">
             <objects>
                 <tableViewController storyboardIdentifier="AboutTableViewController" title="About" modalTransitionStyle="flipHorizontal" id="KrS-bT-Crh" customClass="AboutTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SEf-tL-Ilh">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SEf-tL-Ilh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="separatorColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="pkT-z8-3Cb">
                                 <cells>
@@ -937,16 +990,44 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="60" id="Kvd-WR-yq9">
+                                        <rect key="frame" x="0.0" y="149" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kvd-WR-yq9" id="WIa-cd-sdm">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IQu-Re-8UJ">
+                                                    <rect key="frame" x="205" y="0.0" width="77" height="59"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="210-twitterbird">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="twitterButtonClicked:" destination="KrS-bT-Crh" eventType="touchUpInside" id="eKz-Lp-Znh"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow @Pelotonia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ceb-kK-7Fs">
+                                                    <rect key="frame" x="42" y="1" width="155" height="58"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rbo-OO-CVK" rowHeight="60" style="IBUITableViewCellStyleDefault" id="cjQ-90-wt0">
-                                        <rect key="frame" x="0.0" y="149" width="320" height="60"/>
+                                        <rect key="frame" x="0.0" y="209" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjQ-90-wt0" id="vNl-LS-u0O">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Do You Like this App?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rbo-OO-CVK">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="How can we improve the app?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rbo-OO-CVK">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="59"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -961,7 +1042,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
-                                        <rect key="frame" x="0.0" y="209" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="269" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eUX-am-qsE" id="4MM-d5-ljR">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="52"/>
@@ -981,7 +1062,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="428" id="B5r-Td-5PN">
-                                        <rect key="frame" x="0.0" y="262" width="320" height="428"/>
+                                        <rect key="frame" x="0.0" y="322" width="320" height="428"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B5r-Td-5PN" id="dW2-vz-MCr">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
@@ -1001,7 +1082,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cTo-5s-Ikw" rowHeight="53" style="IBUITableViewCellStyleDefault" id="ADM-7i-HpY">
-                                        <rect key="frame" x="0.0" y="690" width="320" height="53"/>
+                                        <rect key="frame" x="0.0" y="750" width="320" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ADM-7i-HpY" id="VPi-0E-MgF">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="52"/>
@@ -1021,7 +1102,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="114" id="sT8-JP-aMg">
-                                        <rect key="frame" x="0.0" y="743" width="320" height="114"/>
+                                        <rect key="frame" x="0.0" y="803" width="320" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sT8-JP-aMg" id="eAE-q1-tIC">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="113"/>
@@ -1071,13 +1152,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="storyTextView" destination="tvQ-OG-bvb" id="9ow-Be-dse"/>
+                        <outlet property="twitterButton" destination="IQu-Re-8UJ" id="xvr-ip-k22"/>
                         <outlet property="versionLabel" destination="E81-3A-9gN" id="LRh-mw-ecC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i39-Ln-7pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dn4-h4-Aam" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="900"/>
+            <point key="canvasLocation" x="1767" y="876"/>
         </scene>
         <!--Feedback View Controller-->
         <scene sceneID="Qij-r6-qB5">
@@ -1137,7 +1219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2030" y="2352"/>
+            <point key="canvasLocation" x="3002" y="2416"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -1371,7 +1453,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gxJ-6o-AuJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="933" y="-415"/>
+            <point key="canvasLocation" x="525" y="-623"/>
         </scene>
         <!--New Workout Table View Controller - Workout-->
         <scene sceneID="Dif-Vk-6YK">
@@ -1845,7 +1927,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JDv-Mg-jfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3639" y="1531"/>
+            <point key="canvasLocation" x="4165" y="1531"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="AQH-gg-DCK">
@@ -1868,7 +1950,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbI-ta-9rp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2563" y="623"/>
+            <point key="canvasLocation" x="3089" y="623"/>
         </scene>
         <!--Single Photo View Controller-->
         <scene sceneID="iZe-Lx-1MS">
@@ -1897,7 +1979,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3T-f9-msa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3105" y="623"/>
+            <point key="canvasLocation" x="3631" y="623"/>
         </scene>
         <!--Profile Table View Controller - Profile-->
         <scene sceneID="sul-NI-wcg">
@@ -2107,7 +2189,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krj-Oh-SZL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4865" y="1389"/>
+            <point key="canvasLocation" x="5391" y="1389"/>
         </scene>
         <!--Send Pledge Modal View Controller-->
         <scene sceneID="mry-ek-Boq">
@@ -2219,7 +2301,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4or-18-pZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2476" y="1553"/>
+            <point key="canvasLocation" x="3002" y="1553"/>
         </scene>
         <!--Profile Details Table View Controller-->
         <scene sceneID="zDr-6D-YPF">
@@ -2296,7 +2378,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EkZ-H9-ApC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4420" y="398"/>
+            <point key="canvasLocation" x="4946" y="398"/>
         </scene>
         <!--Navigation Controller - Pelotonia-->
         <scene sceneID="de9-z0-TWw">
@@ -2317,7 +2399,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0LU-A0-9lG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856" y="254"/>
+            <point key="canvasLocation" x="184" y="358"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="crK-kO-1N3">
@@ -2340,7 +2422,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2O-MU-OL0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="339" y="-400"/>
+            <point key="canvasLocation" x="-69" y="-608"/>
         </scene>
         <!--Navigation Controller - About-->
         <scene sceneID="OTL-Q0-hmp">
@@ -2362,7 +2444,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vH3-82-zce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1379" y="888"/>
+            <point key="canvasLocation" x="1185" y="864"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eh8-Lx-hEY">
@@ -2427,7 +2509,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btn-gc-3xN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1112" y="512"/>
+            <point key="canvasLocation" x="-1866" y="-2008"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cle-qa-O7O">
@@ -2452,12 +2534,34 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9W-Q5-MD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-957" y="1350"/>
+            <point key="canvasLocation" x="-1959" y="3062"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4gn-75-4IF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6HY-Nt-L96" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ego-WT-avI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iPq-SH-xf0" kind="relationship" relationship="rootViewController" id="4hf-03-pPY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EXq-6n-AUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="79" y="-1688"/>
         </scene>
     </scenes>
     <resources>
         <image name="117-todo" width="18" height="19"/>
         <image name="13-bicycle" width="34" height="21"/>
+        <image name="210-twitterbird" width="22" height="22"/>
+        <image name="216-compose" width="23" height="18"/>
         <image name="259-list" width="20" height="14"/>
         <image name="28-star" width="26" height="26"/>
         <image name="46-movie-2" width="20" height="25"/>
@@ -2481,8 +2585,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
         <segue reference="lZa-h3-ufJ"/>
+        <segue reference="Af6-8I-wY6"/>
         <segue reference="sBj-i1-1JD"/>
-        <segue reference="tZz-dL-tdX"/>
         <segue reference="s56-AL-OFT"/>
     </inferredMetricsTieBreakers>
 </document>
