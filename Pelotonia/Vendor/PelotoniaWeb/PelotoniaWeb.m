@@ -13,6 +13,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "Event.h"
 #import "EventCategory.h"
+#import "NewsItem.h"
 #import "NSDate+Helper.h"
 
 
@@ -557,6 +558,117 @@
             failureBlock([error localizedDescription]);
         }
     }];
+}
+
++ (void)parseNewsDiv:(TFHppleElement *)newsItemNode {
+    // title is in the H3
+    TFHppleElement *titleNode = [[newsItemNode firstChildWithTagName:@"h3"] firstChildWithTagName:@"a"];
+    NSString *title = [[[newsItemNode firstChildWithTagName:@"h3"] firstChildWithTagName:@"a"] text];
+    NewsItem *newsItem = [NewsItem findFirstByAttribute:@"title" withValue:title];
+    
+    if (newsItem != nil) {
+        // not already in database, so create it
+        [newsItem deleteEntity];
+        newsItem = [NewsItem createEntity];
+    }
+    newsItem.title = title;
+    
+    // detail link is also in the H3
+    NSString *link = [[titleNode attributes] valueForKey:@"href"];
+    newsItem.detailLink = link;
+    
+    // date is in div[@id='news-entity-meta'] in format "MMMM dd, yyyy"
+    NSString *dateTimeString = [[newsItemNode firstChildWithClass:@"news-entry-meta"] text];
+    NSDate *dateTime = [NSDate dateFromString:dateTimeString withFormat:@"MMM dd, yyyy"];
+    newsItem.dateTime = dateTime;
+    
+    // leader is in the <P> tag
+    TFHppleElement *pNode = [newsItemNode firstChildWithTagName:@"p"];
+    NSString *leader = [pNode text];
+    newsItem.leader = leader;
+    
+    
+}
+
+
++ (void)getPelotoniaNewsOnComplete:(void(^)(void))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:@"http://www.pelotonia.org/news" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
+        NSString *pelotoniaNewsPath =  @"//*[@id='news-posts']/div";
+        // first parse out the pelotonia events
+        NSArray *nodes = [parser searchWithXPathQuery:pelotoniaNewsPath];
+        for (TFHppleElement *node in nodes) {
+            
+            // each DIV is a news element.
+            [self parseNewsDiv:node];
+        }
+
+        // save the database
+        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+                if (completeBlock) {
+                    completeBlock();
+                }
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+                if (failureBlock) {
+                    failureBlock([error localizedDescription]);
+                }
+            }
+        }];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed to get news: %@", [error localizedDescription]);
+        if (failureBlock) {
+            failureBlock([error localizedDescription]);
+        }
+    }];
+
+}
+
++ (void)getPelotoniaNewsDetailOnComplete:(NewsItem *)item
+                              onComplete:(void (^)(NewsItem *i))completeBlock
+                               onFailure:(void (^)(NSString *))failureBlock
+{
+    // get detail from page
+    //  //*[@id="article"]/div/p[1]
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:item.detailLink parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
+        NSString *detailPath = @"//*[@id='article']/div/p";
+        NSArray *nodes = [parser searchWithXPathQuery:detailPath];
+        NSString *detailString = @"";
+        for (TFHppleElement *paragraph in nodes) {
+            if ([paragraph.text isEqualToString:@"###"]) {
+                break;
+            }
+            detailString = [detailString stringByAppendingString:paragraph.text];
+        }
+        item.detail = detailString;
+        // save the database
+        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+                if (completeBlock) {
+                    completeBlock(item);
+                }
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+                if (failureBlock) {
+                    failureBlock([error localizedDescription]);
+                }
+            }
+        }];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"unable to get detail for event: %@", [error localizedDescription]);
+        item.detail = @"Unable to retrieve detail for this item";
+    }];
+
 }
 
 

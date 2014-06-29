@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Rider.h"
 #import "Event.h"
+#import "NewsItem.h"
 
 static NSString *pelotoniaStory = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.";
 
@@ -25,6 +26,11 @@ static NSString *pelotoniaStory = @"Pelotonia is a grassroots bike tour with one
 + (void)getEventDescription:(Event *)event
                  onComplete:(void (^)(Event *e))completeBlock
                   onFailure:(void (^)(NSString *))failureBlock;
+
++ (void)getPelotoniaNewsOnComplete:(void(^)(void))onComplete onFailure:(void(^)(NSString *errorMessage))failureBlock;
++ (void)getPelotoniaNewsDetailOnComplete:(NewsItem *)item
+                              onComplete:(void (^)(NewsItem *i))completeBlock
+                               onFailure:(void (^)(NSString *))failureBlock;
 
 
 @end

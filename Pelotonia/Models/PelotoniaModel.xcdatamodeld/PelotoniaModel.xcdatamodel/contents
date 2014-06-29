@@ -14,8 +14,16 @@
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="category" inverseEntity="Event" syncable="YES"/>
     </entity>
+    <entity name="NewsItem" representedClassName="NewsItem" syncable="YES">
+        <attribute name="dateTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detailLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="leader" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Event" positionX="-63" positionY="-18" width="128" height="163"/>
         <element name="EventCategory" positionX="288" positionY="170" width="128" height="73"/>
+        <element name="NewsItem" positionX="117" positionY="99" width="128" height="120"/>
     </elements>
 </model>

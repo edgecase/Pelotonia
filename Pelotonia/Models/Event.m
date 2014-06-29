@@ -2,7 +2,7 @@
 //  Event.m
 //  Pelotonia
 //
-//  Created by Mark Harris on 6/22/14.
+//  Created by Mark Harris on 6/29/14.
 //
 //
 
@@ -12,13 +12,13 @@
 
 @implementation Event
 
-@dynamic startDateTime;
-@dynamic endDateTime;
-@dynamic title;
 @dynamic address;
 @dynamic detailsLink;
-@dynamic imageLink;
+@dynamic endDateTime;
 @dynamic eventDesc;
+@dynamic imageLink;
+@dynamic startDateTime;
+@dynamic title;
 @dynamic category;
 
 @end

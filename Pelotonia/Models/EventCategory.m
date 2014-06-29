@@ -2,7 +2,7 @@
 //  EventCategory.m
 //  Pelotonia
 //
-//  Created by Mark Harris on 6/22/14.
+//  Created by Mark Harris on 6/29/14.
 //
 //
 
