@@ -49,8 +49,16 @@
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
 
+    // get the events from local database
     [self fetchAllEvents];
-    [self.tableView reloadData];
+    
+    // on first load, there will be nothing in the local database, so we have to go to the network
+    if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
+        [self refresh];
+    }
+    else {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,7 +92,7 @@
     NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)",
                              dateBegOfYear, dateEndOfYear];
     self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
-
+    
 }
 
 #pragma mark - Table view data source
