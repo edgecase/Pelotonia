@@ -8,4 +8,5 @@ pod 'UIActivityIndicator-for-SDWebImage'
 pod 'ECSlidingViewController', '~>2.0.0'
 pod 'AAPullToRefresh'
 pod 'MagicalRecord/Shorthand'
+pod 'TTTAttributedLabel'
 

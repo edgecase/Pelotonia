@@ -418,9 +418,20 @@
                 description = [description stringByAppendingString:@"\n\n"];
             }
             event.eventDesc = description;
-            if (completeBlock) {
-                completeBlock(event);
-            }
+            // save the database
+            [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                if (success) {
+                    NSLog(@"You successfully saved your context.");
+                    if (completeBlock) {
+                        completeBlock(event);
+                    }
+                } else if (error) {
+                    NSLog(@"Error saving context: %@", error.description);
+                    if (failureBlock) {
+                        failureBlock([error localizedDescription]);
+                    }
+                }
+            }];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"error parsing event description %@", [error localizedDescription]);

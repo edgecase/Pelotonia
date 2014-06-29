@@ -381,6 +381,8 @@
 		BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA249018B5B1D5006BA30E /* PhotoViewController.m */; };
 		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
+		BBB399A6195FB9F5009B1FDF /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB399A4195FB9F5009B1FDF /* EventKit.framework */; };
+		BBB399A7195FB9F5009B1FDF /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB399A5195FB9F5009B1FDF /* EventKitUI.framework */; };
 		BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */; };
 		BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */; };
 		BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E818CCD99300CAFFF7 /* IntroViewController.m */; };
@@ -824,6 +826,8 @@
 		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
+		BBB399A4195FB9F5009B1FDF /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		BBB399A5195FB9F5009B1FDF /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		BBC012E118CCD72500CAFFF7 /* IntroContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroContentViewController.h; path = Controllers/IntroContentViewController.h; sourceTree = "<group>"; };
 		BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroContentViewController.m; path = Controllers/IntroContentViewController.m; sourceTree = "<group>"; };
 		BBC012E418CCD83500CAFFF7 /* IntroPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroPageViewController.h; path = Controllers/IntroPageViewController.h; sourceTree = "<group>"; };
@@ -878,6 +882,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB399A6195FB9F5009B1FDF /* EventKit.framework in Frameworks */,
+				BBB399A7195FB9F5009B1FDF /* EventKitUI.framework in Frameworks */,
 				BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */,
 				BBAA248218B251F3006BA30E /* AssetsLibrary.framework in Frameworks */,
 				BB78D32C17F926C700DE639C /* libTestFlight.a in Frameworks */,
@@ -1361,6 +1367,8 @@
 		BCE3B7B515AE49DA00205530 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBB399A4195FB9F5009B1FDF /* EventKit.framework */,
+				BBB399A5195FB9F5009B1FDF /* EventKitUI.framework */,
 				BBF496F319393050007D7D67 /* libxml2.2.dylib */,
 				BBAA248118B251F3006BA30E /* AssetsLibrary.framework */,
 				BBAA223818AFD717006BA30E /* Socialize.embeddedframework */,
