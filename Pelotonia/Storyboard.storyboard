@@ -435,7 +435,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Descriptions" lineBreakMode="wordWrap" numberOfLines="50" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" id="3b5-5c-7Cl">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Descriptions" lineBreakMode="wordWrap" numberOfLines="200" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" id="3b5-5c-7Cl">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="235"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
