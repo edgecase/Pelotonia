@@ -128,11 +128,29 @@
                     NSString *output = [NSString stringWithFormat:@"HTTP response status: %i Error %d",
                                         [urlResponse statusCode],error.code];
                     NSLog(@"%@error %@", output,error.description);
+                    if ([urlResponse statusCode] == 200) {
+                        [self performSelectorOnMainThread:@selector(successTwitter) withObject:nil waitUntilDone:NO];
+                    }
+                    else {
+                        [self performSelectorOnMainThread:@selector(failTwitter) withObject:nil waitUntilDone:NO];
+                    }
                 }];
             }
             
         }
     }];
+}
+
+- (void)successTwitter
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"You are now following @pelotonia" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+
+- (void)failTwitter
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Unable to follow Pelotonia at this time.  Please try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 - (IBAction)done:(id)sender {
