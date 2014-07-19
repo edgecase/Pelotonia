@@ -1492,6 +1492,10 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
 				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
+				BBEA1E3019607981008B933E /* NewsTableViewController.h */,
+				BBEA1E3119607981008B933E /* NewsTableViewController.m */,
+				BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */,
+				BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */,
 				BB93182618B91ED3003A3AC0 /* PelotoniaProfileViewController.h */,
 				BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */,
 				BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */,
@@ -1516,10 +1520,6 @@
 				BBA66C38172AA00E002DE00A /* UserProfileViewController.m */,
 				BBAA247B18B05E93006BA30E /* WorkoutListTableViewController.h */,
 				BBAA247C18B05E93006BA30E /* WorkoutListTableViewController.m */,
-				BBEA1E3019607981008B933E /* NewsTableViewController.h */,
-				BBEA1E3119607981008B933E /* NewsTableViewController.m */,
-				BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */,
-				BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

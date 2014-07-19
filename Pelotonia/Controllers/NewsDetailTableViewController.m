@@ -56,6 +56,7 @@
     self.dateLabel.font = PELOTONIA_SECONDARY_FONT(18);
     self.detailLabel.text = self.item.detail;
     self.detailLabel.font = PELOTONIA_SECONDARY_FONT(18);
+    [self.tableView reloadData];
 }
 
 - (CGFloat) calculateTableRowSizeForString:(NSString *)string usingFont:(UIFont *)font forWidth:(CGFloat)width

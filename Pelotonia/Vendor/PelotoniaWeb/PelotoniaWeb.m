@@ -145,7 +145,6 @@
             NSString *storyString = @"";
             for (TFHppleElement *story in div)
             {
-                NSLog(@"Story = %@", story.content);
                 if (story.content) {
                     storyString = [storyString stringByAppendingString:story.content];
                 }
@@ -567,7 +566,7 @@
     NewsItem *newsItem = [NewsItem findFirstByAttribute:@"title" withValue:title];
     
     if (newsItem != nil) {
-        // not already in database, so create it
+        // already in database, so delete it & replace
         [newsItem deleteEntity];
         newsItem = [NewsItem createEntity];
     }
@@ -584,7 +583,8 @@
     
     // leader is in the <P> tag
     TFHppleElement *pNode = [newsItemNode firstChildWithTagName:@"p"];
-    NSString *leader = [pNode text];
+    NSString *leader = [[NSString alloc] initWithData:[pNode.text dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:YES]  encoding:NSUTF8StringEncoding];
+
     newsItem.leader = leader;
     
     
@@ -594,6 +594,7 @@
 + (void)getPelotoniaNewsOnComplete:(void(^)(void))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.stringEncoding = NSUTF8StringEncoding;
     [manager GET:@"http://www.pelotonia.org/news" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
         NSString *pelotoniaNewsPath =  @"//*[@id='news-posts']/div";
@@ -636,16 +637,42 @@
     //  //*[@id="article"]/div/p[1]
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.stringEncoding = NSUTF8StringEncoding;
     [manager GET:item.detailLink parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         TFHpple *parser = [TFHpple hppleWithHTMLData:(NSData *)responseObject];
         NSString *detailPath = @"//*[@id='article']/div/p";
         NSArray *nodes = [parser searchWithXPathQuery:detailPath];
-        NSString *detailString = @"";
+        NSString *detailString = [NSString stringWithFormat:@""];
         for (TFHppleElement *paragraph in nodes) {
+            // ### marks the beginning of the boilerplate text
             if ([paragraph.text isEqualToString:@"###"]) {
                 break;
             }
-            detailString = [detailString stringByAppendingString:paragraph.text];
+            
+            // pull out the text content of each P element
+            NSString *elemText = [[NSString alloc] initWithFormat:@""];
+            for (TFHppleElement *elem in paragraph.children) {
+                
+                // text content of a P node is stored in "content"
+                NSString *text = elem.content;
+                
+                // get text representation of Anchor tags
+                if ([elem.tagName isEqualToString:@"a"]) {
+                    text = elem.text;
+                }
+                if (text) {
+                    elemText = [elemText stringByAppendingString:text];
+                }
+            }
+            
+            // have to do this weirdness b/c of smart quotes and special dashes in the Pelotonia CMS db
+            elemText = [elemText stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
+            elemText = [elemText stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            // sometimes we have null nodes
+            if (elemText && ([elemText length] > 0)) {
+                detailString = [detailString stringByAppendingString:[NSString stringWithFormat:@"%@\n\n", elemText]];
+            }
         }
         item.detail = detailString;
         // save the database

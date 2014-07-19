@@ -98,7 +98,7 @@
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
         self.riderStoryTextView.textColor = PRIMARY_DARK_GRAY;
-        [self.riderStoryTextView setFont:PELOTONIA_SECONDARY_FONT(18)]; //    [UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+        [self.riderStoryTextView setFont:PELOTONIA_SECONDARY_FONT(21)]; //    [UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
         [self.riderStoryTextView setScrollEnabled:YES];
         self.riderStoryTextView.text = self.rider.story;
     }

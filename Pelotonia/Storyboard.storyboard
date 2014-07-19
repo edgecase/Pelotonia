@@ -364,7 +364,7 @@
                         <sections>
                             <tableViewSection id="Xow-Ow-uGm">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Jxz-ZW-mEi" rowHeight="115" style="IBUITableViewCellStyleDefault" id="uzP-kJ-yDm">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Jxz-ZW-mEi" rowHeight="115" style="IBUITableViewCellStyleDefault" id="uzP-kJ-yDm">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uzP-kJ-yDm" id="8LG-re-wqV">
@@ -382,7 +382,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="qbV-jq-ArQ" rowHeight="60" style="IBUITableViewCellStyleDefault" id="jww-qo-wMx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="qbV-jq-ArQ" rowHeight="60" style="IBUITableViewCellStyleDefault" id="jww-qo-wMx">
                                         <rect key="frame" x="0.0" y="115" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jww-qo-wMx" id="WMf-Wv-UDa">
@@ -400,14 +400,14 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="4V8-Zr-yXr" rowHeight="336" style="IBUITableViewCellStyleDefault" id="xTK-ta-Fy7">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="4V8-Zr-yXr" rowHeight="336" style="IBUITableViewCellStyleDefault" id="xTK-ta-Fy7">
                                         <rect key="frame" x="0.0" y="175" width="320" height="336"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xTK-ta-Fy7" id="ky1-A0-n6T">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="335"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="News Detail" lineBreakMode="tailTruncation" numberOfLines="250" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4V8-Zr-yXr">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="News Detail" lineBreakMode="wordWrap" numberOfLines="1000" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4V8-Zr-yXr">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="335"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

@@ -41,7 +41,6 @@ NSDictionary *DictionaryForNode(xmlNodePtr currentNode, NSMutableDictionary *par
                 return nil;
             }
             [resultForNode setObject:currentNodeContent forKey:@"nodeContent"];
-//            NSLog(@"content: %@",currentNodeContent);
             return resultForNode;
 
         }
@@ -63,7 +62,6 @@ NSDictionary *DictionaryForNode(xmlNodePtr currentNode, NSMutableDictionary *par
             [NSString stringWithCString:(const char *)attribute->name encoding:NSUTF8StringEncoding];
           if (attributeName)
             {
-//                NSLog(@"Attribute Name Set: %@",attributeName);
               [attributeDictionary setObject:attributeName forKey:@"attributeName"];
             }
 
