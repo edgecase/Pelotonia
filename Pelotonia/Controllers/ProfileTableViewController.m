@@ -74,7 +74,6 @@
     NSString *jsonString = [params toJSONString];
     entity.meta = jsonString;
     [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
-        NSLog(@"Successfully updated entity meta");
         NSLog(@"it has %d likes, %d comments, %d shares, %d views", [serverEntity likes], [serverEntity comments], [serverEntity shares], [serverEntity views]);
 
     } failure:^(NSError *error) {
@@ -122,7 +121,6 @@
 
 {
     return NO;
-    
 }
 
 

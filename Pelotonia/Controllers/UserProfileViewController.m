@@ -154,18 +154,19 @@
 - (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
 {
     NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
-        // load the image from the asset library
-        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-            if (asset) {
-                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
-            }
-            else {
-                NSLog(@"couldn't find image");
-            }
-        } failureBlock:^(NSError *error) {
-            NSLog(@"error loading image %@", [error localizedDescription]);
-            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-        }];
+    // load the image from the asset library
+    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+        if (asset) {
+            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+        }
+        else {
+            NSLog(@"couldn't find image");
+            [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
+        }
+    } failureBlock:^(NSError *error) {
+        NSLog(@"error loading image %@", [error localizedDescription]);
+        [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+    }];
 }
 
 - (void)configureRecentPhotos
@@ -179,10 +180,6 @@
         NSDate *date2 = [photoDict2 objectForKey:@"date"];
         return [date2 compare:date1];
     }];
-    
-    [self.recentImage1 setImage:[UIImage imageNamed:@"profile_default_thumb"]];
-    [self.recentImage2 setImage:nil];
-    [self.recentImage3 setImage:nil];
     
     int numPhotos = [photos count];
     if (numPhotos >= 1) {

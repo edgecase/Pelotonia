@@ -192,15 +192,12 @@
                         Donor *donor = [[Donor alloc] init];
                         for (TFHppleElement *tf in data) {
                             if ([[tf objectForKey:@"class"] isEqualToString:@"amount"]) {
-                                NSLog(@"Found donor amount %@", tf.text);
                                 donor.amount = tf.text;
                             }
                             if ([[tf objectForKey:@"class"] isEqualToString:@"name"]) {
-                                NSLog(@"Found donor amount %@", tf.text);
                                 donor.name = tf.text;
                             }
                             if ([[tf objectForKey:@"class"] isEqualToString:@"date"]) {
-                                NSLog(@"Found donor amount %@", tf.text);
                                 donor.date = tf.text;
                             }
                         }

@@ -64,6 +64,13 @@
     [super viewWillAppear:animated];
 }
 
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
 #pragma mark -- pull to refresh view
 - (void)refresh
 {

@@ -1538,19 +1538,19 @@
 		BCE3B81B15AE5B4F00205530 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */,
+				BBAA222818AEEBB3006BA30E /* Donor.h */,
+				BBAA222918AEEBB4006BA30E /* Donor.m */,
 				BBEA1E3619607B5F008B933E /* Event.h */,
+				BBEA1E3719607B5F008B933E /* Event.m */,
 				BBEA1E3C19607B60008B933E /* NewsItem.h */,
 				BBEA1E3D19607B60008B933E /* NewsItem.m */,
 				BBEA1E3919607B5F008B933E /* EventCategory.h */,
 				BBEA1E3A19607B5F008B933E /* EventCategory.m */,
-				BBEA1E3719607B5F008B933E /* Event.m */,
-				BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */,
 				BCE3B81C15AE5B6F00205530 /* Rider.h */,
 				BCE3B81D15AE5B6F00205530 /* Rider.m */,
 				4D35C72715B116E5006E5D5D /* RiderDataController.h */,
 				4D35C72815B116E5006E5D5D /* RiderDataController.m */,
-				BBAA222818AEEBB3006BA30E /* Donor.h */,
-				BBAA222918AEEBB4006BA30E /* Donor.m */,
 				BBAA247418B04B4C006BA30E /* Workout.h */,
 				BBAA247518B04B4C006BA30E /* Workout.m */,
 			);
@@ -2110,7 +2110,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2143,7 +2143,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D52D81C0-5A00-4E1F-A210-F71142987927";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D52D81C0-5A00-4E1F-A210-F71142987927";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
@@ -2227,6 +2227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2267,6 +2268,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s";
@@ -2282,7 +2284,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
