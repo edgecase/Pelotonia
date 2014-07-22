@@ -49,15 +49,10 @@
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
 
-    // get the events from local database
-    [self fetchAllEvents];
     
     // on first load, there will be nothing in the local database, so we have to go to the network
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
         [self refresh];
-    }
-    else {
-        [self.tableView reloadData];
     }
 }
 
@@ -67,6 +62,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self fetchAllEvents];
+    [self.tableView reloadData];
+    [super viewWillAppear:animated];
+}
 
 #pragma mark -- pull to refresh view
 - (void)refresh

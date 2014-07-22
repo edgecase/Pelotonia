@@ -90,20 +90,21 @@
     self.venueLabel.autoresizingMask =  UIViewAutoresizingFlexibleHeight;
     self.venueLabel.delegate = self;
 
-    self.descriptionCell.textLabel.font = PELOTONIA_SECONDARY_FONT(15);
+    self.descriptionCell.textLabel.font = PELOTONIA_SECONDARY_FONT(16);
 
     if (self.event.eventDesc == nil) {
         [PelotoniaWeb getEventDescription:self.event onComplete:^(Event *e) {
             self.descriptionCell.textLabel.text = self.event.eventDesc;
+            [self.tableView reloadData];
         } onFailure:^(NSString *errorText) {
             self.descriptionCell.textLabel.text = @"Unable to load event description";
+            [self.tableView reloadData];
         }];
     }
     else {
         self.descriptionCell.textLabel.text = self.event.eventDesc;
+        [self.tableView reloadData];
     }
-    
-    [self.tableView reloadData];
 }
 
 - (CGFloat) calculateTableRowSizeForString:(NSString *)string usingFont:(UIFont *)font forWidth:(CGFloat)width
@@ -132,7 +133,7 @@
     }
     else if (indexPath.row == 2) {
         height = [self calculateTableRowSizeForString:self.event.address
-                                            usingFont:PELOTONIA_SECONDARY_FONT(18)
+                                            usingFont:self.descriptionCell.textLabel.font
                                              forWidth:self.tableView.bounds.size.width];
         height += 10.0;
     }

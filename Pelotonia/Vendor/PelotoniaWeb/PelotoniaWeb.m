@@ -565,9 +565,9 @@
     NSString *title = [[[newsItemNode firstChildWithTagName:@"h3"] firstChildWithTagName:@"a"] text];
     NewsItem *newsItem = [NewsItem findFirstByAttribute:@"title" withValue:title];
     
-    if (newsItem != nil) {
-        // already in database, so delete it & replace
-        [newsItem deleteEntity];
+    if (newsItem == nil) {
+        // not in database, so delete it & replace
+//        [newsItem deleteEntity];
         newsItem = [NewsItem createEntity];
     }
     newsItem.title = title;

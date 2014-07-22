@@ -35,24 +35,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // set up pull to refresh view
-    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
-    _tv.borderColor = [UIColor whiteColor];
     __weak NewsTableViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refresh];
         [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
     }];
-    
-    // get the events from local database
-    [self fetchAllEvents];
+    _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
+    _tv.borderColor = [UIColor whiteColor];
     
     // on first load, there will be nothing in the local database, so we have to go to the network
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
         [self refresh];
-    }
-    else {
-        [self.tableView reloadData];
     }
 }
 
@@ -60,6 +55,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self fetchAllEvents];
+    [self.tableView reloadData];
+    [super viewWillAppear:animated];
 }
 
 #pragma mark -- pull to refresh view
