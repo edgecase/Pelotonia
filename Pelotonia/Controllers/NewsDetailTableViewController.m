@@ -95,7 +95,6 @@
 }
 - (IBAction)actionButtonPressed:(id)sender {
     NSString *dash = [NSString stringWithUTF8String:"\xe2\x80\x93"];
-    NSString *string = self.item.detail;
     NSRange range = [self.item.detail rangeOfString:dash];
     NSString *teaser;
     if (range.location == NSNotFound) {

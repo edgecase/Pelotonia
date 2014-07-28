@@ -187,7 +187,6 @@
                 evc.editViewDelegate = self;
                 [self presentViewController:evc animated:YES completion:nil];
             }
-            
         }];
         
     }
