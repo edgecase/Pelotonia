@@ -12,6 +12,7 @@
 #import "NSDate+Helper.h"
 #import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Social/Social.h>
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 #import "UIImageExtras/UIImage+Resize.h"
@@ -192,6 +193,15 @@
     }
 }
 
+- (IBAction)actionButtonPressed:(id)sender
+{
+    NSArray* dataToShare = @[self.event.title, self.event.startDateTime, [[self.event.eventDesc substringToIndex:100] stringByAppendingString:@"..."] , [NSURL URLWithString:self.event.detailsLink]];
+    
+    UIActivityViewController* activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                      applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
 
 #pragma mark -- EKEventEditViewDelegate methods
 - (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action

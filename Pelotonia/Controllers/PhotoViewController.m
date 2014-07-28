@@ -120,27 +120,28 @@
 }
 
 
-- (IBAction)sharePhoto:(id)sender {
-    // prompt for which service to share with (FB/Twitter/etc)
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share photo to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Remove Photo" otherButtonTitles:@"Facebook", @"Twitter", nil];
-    [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
+- (IBAction)sharePhoto:(id)sender
+{
+    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
+    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
+
+    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
+        // success - share the photo via facebook
+        ALAssetRepresentation *rep = [asset defaultRepresentation];
+        CGImageRef image = [rep fullScreenImage];
+        NSArray* dataToShare = @[[UIImage imageWithCGImage:image]];
+
+        UIActivityViewController* activityViewController =
+        [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                          applicationActivities:nil];
+        [self presentViewController:activityViewController animated:YES completion:nil];
+        
+    } failureBlock:^(NSError *error) {
+        // failure
+        NSLog(@"An error occurred: %@", [error localizedDescription]);
+    }];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        if (buttonIndex == actionSheet.destructiveButtonIndex) {
-            [self removeCurrentPhotoFromList];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        if (buttonIndex == 1) {
-            [self shareCurrentPhotoWithFacebook];
-        }
-        if (buttonIndex == 2) {
-            [self shareCurrentPhotoWithTwitter];
-        }
-    }
-}
 
 - (void)removeCurrentPhotoFromList
 {
@@ -152,49 +153,4 @@
     
 }
 
-- (void)shareCurrentPhotoWithFacebook
-{
-    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
-    
-    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
-        // success - share the photo via facebook
-        if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-            SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-            
-            [controller setInitialText:@""];
-            ALAssetRepresentation *rep = [asset defaultRepresentation];
-            CGImageRef image = [rep fullScreenImage];
-            [controller addImage:[UIImage imageWithCGImage:image]];
-            [self presentViewController:controller animated:YES completion:Nil];
-        }
-    } failureBlock:^(NSError *error) {
-        // failure
-        NSLog(@"An error occurred: %@", [error localizedDescription]);
-    }];
-}
-
-- (void)shareCurrentPhotoWithTwitter
-{
-    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
-    
-    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
-        // success - share the photo via twitter
-        if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-        {
-            SLComposeViewController *controller = [SLComposeViewController
-                                                   composeViewControllerForServiceType:SLServiceTypeTwitter];
-            [controller setInitialText:@""];
-            ALAssetRepresentation *rep = [asset defaultRepresentation];
-            CGImageRef image = [rep fullScreenImage];
-            [controller addImage:[UIImage imageWithCGImage:image]];
-            [self presentViewController:controller animated:YES completion:nil];
-        }
-    } failureBlock:^(NSError *error) {
-        // failure
-        NSLog(@"An error occurred: %@", [error localizedDescription]);
-    }];
-
-}
 @end

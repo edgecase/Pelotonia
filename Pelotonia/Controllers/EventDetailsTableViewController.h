@@ -25,4 +25,6 @@
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *venueLabel;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *descriptionCell;
+
+- (IBAction)actionButtonPressed:(id)sender;
 @end

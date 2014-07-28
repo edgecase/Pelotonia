@@ -375,16 +375,26 @@
 
 - (IBAction)addPhotoToAlbum:(id)sender
 {
-    if (NO == [self startCameraControllerFromViewController:self usingDelegate:self]) {
-        [self startMediaBrowserFromViewController:self usingDelegate:self];
+    // show action sheet allowing picking or taking image
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Photo", @"Take Picture", nil];
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        if (buttonIndex == 0) {
+            [self startMediaBrowserFromViewController:self usingDelegate:self];
+        }
+        if (buttonIndex == 1) {
+            [self startCameraControllerFromViewController:self usingDelegate:self];
+        }
     }
 }
 
 - (IBAction)signIn:(id)sender {
     [SZUserUtils showUserSettingsInViewController:self completion:nil];
 }
-
-
 
 #pragma mark -- UIImagePicker methods
 - (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
@@ -408,7 +418,7 @@
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    cameraUI.allowsEditing = NO;
+    cameraUI.allowsEditing = YES;
     
     cameraUI.delegate = delegate;
     

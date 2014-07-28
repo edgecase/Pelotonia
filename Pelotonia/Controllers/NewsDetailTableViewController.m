@@ -93,4 +93,22 @@
     }
     return height;
 }
+- (IBAction)actionButtonPressed:(id)sender {
+    NSString *dash = [NSString stringWithUTF8String:"\xe2\x80\x93"];
+    NSString *string = self.item.detail;
+    NSRange range = [self.item.detail rangeOfString:dash];
+    NSString *teaser;
+    if (range.location == NSNotFound) {
+        teaser = [[self.item.detail substringToIndex:70] stringByAppendingString:@"..."];
+    }
+    else {
+        teaser = [[[self.item.detail substringFromIndex:range.location+1] substringToIndex:70] stringByAppendingString:@"..."];
+    }
+    NSArray* dataToShare = @[self.item.title, teaser, [NSURL URLWithString:self.item.detailLink]];
+    
+    UIActivityViewController* activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+                                      applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
 @end

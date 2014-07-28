@@ -13,7 +13,7 @@
 #import <Socialize/Socialize.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NewWorkoutTableViewControllerDelegate> {
+@interface UserProfileViewController : UITableViewController<FindRiderViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NewWorkoutTableViewControllerDelegate, UIActionSheetDelegate> {
 }
 @property (weak, nonatomic) IBOutlet UITableViewCell *riderProfileCell;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
