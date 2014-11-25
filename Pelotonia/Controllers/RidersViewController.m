@@ -180,18 +180,15 @@
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
     
-    [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
-                   placeholderImage:[UIImage imageNamed:@"profile_default"]
-                            options:SDWebImageRefreshCached
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-         if (error) {
-             NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
-         }
-         [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-
-         [cell layoutSubviews];
-     } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
+    [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"profile_default"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
+        }
+        [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+        
+        [cell layoutSubviews];
+    } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(15);
     

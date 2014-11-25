@@ -181,7 +181,7 @@
         return [date2 compare:date1];
     }];
     
-    int numPhotos = [photos count];
+    NSUInteger numPhotos = [photos count];
     if (numPhotos >= 1) {
         [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
     }
@@ -265,12 +265,11 @@
         self.riderDistance.text = self.rider.route;
         
         self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
-        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]
-                        placeholderImage:[UIImage imageNamed:@"speedy_arrow"]
-                                 options:SDWebImageRefreshCached
-                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                   [self.riderProfileCell layoutSubviews];
-                               } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self.riderProfileCell layoutSubviews];
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
     }
     else {
         // let them pick a rider

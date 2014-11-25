@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Menu View Controller-->
@@ -293,7 +293,7 @@
             </objects>
             <point key="canvasLocation" x="-2106" y="900"/>
         </scene>
-        <!--News Table View Controller - News-->
+        <!--News-->
         <scene sceneID="Vd0-xw-R7F">
             <objects>
                 <tableViewController storyboardIdentifier="NewsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l3X-my-2Tf" customClass="NewsTableViewController" sceneMemberID="viewController">
@@ -351,7 +351,7 @@
             </objects>
             <point key="canvasLocation" x="-954" y="-917"/>
         </scene>
-        <!--News Detail Table View Controller - News-->
+        <!--News-->
         <scene sceneID="uJz-V2-mon">
             <objects>
                 <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="rfV-ZC-FFj" customClass="NewsDetailTableViewController" sceneMemberID="viewController">
@@ -485,7 +485,7 @@
             </objects>
             <point key="canvasLocation" x="-779" y="1818"/>
         </scene>
-        <!--Events Table View Controller - Events-->
+        <!--Events-->
         <scene sceneID="o2N-xs-NwA">
             <objects>
                 <tableViewController storyboardIdentifier="EventsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bb0-WR-2fE" customClass="EventsTableViewController" sceneMemberID="viewController">
@@ -549,7 +549,7 @@
             </objects>
             <point key="canvasLocation" x="-1433" y="3062"/>
         </scene>
-        <!--Event Details Table View Controller - Event Details-->
+        <!--Event Details-->
         <scene sceneID="TGx-Yi-ZRC">
             <objects>
                 <tableViewController storyboardIdentifier="EventDetailsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dm8-Dc-rTZ" customClass="EventDetailsTableViewController" sceneMemberID="viewController">
@@ -720,7 +720,7 @@
             </objects>
             <point key="canvasLocation" x="-219" y="1828"/>
         </scene>
-        <!--Pelotonia Profile View Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="xxc-lL-uMq">
             <objects>
                 <tableViewController storyboardIdentifier="PelotoniaProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g1b-TM-wyi" customClass="PelotoniaProfileViewController" sceneMemberID="viewController">
@@ -981,7 +981,7 @@
             </objects>
             <point key="canvasLocation" x="-2846" y="900"/>
         </scene>
-        <!--Web View Controller - The Rider-->
+        <!--The Rider-->
         <scene sceneID="GzU-Wj-8a2">
             <objects>
                 <viewController title="The Rider" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iPq-SH-xf0" customClass="PRPWebViewController" sceneMemberID="viewController">
@@ -1011,7 +1011,7 @@
             </objects>
             <point key="canvasLocation" x="796" y="-1695"/>
         </scene>
-        <!--Riders View Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
                 <tableViewController storyboardIdentifier="RidersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
@@ -1144,7 +1144,7 @@
             </objects>
             <point key="canvasLocation" x="2633" y="623"/>
         </scene>
-        <!--About Table View Controller - About-->
+        <!--About-->
         <scene sceneID="IN3-sS-WWU">
             <objects>
                 <tableViewController storyboardIdentifier="AboutTableViewController" title="About" modalTransitionStyle="flipHorizontal" id="KrS-bT-Crh" customClass="AboutTableViewController" sceneMemberID="viewController">
@@ -1423,7 +1423,7 @@
             </objects>
             <point key="canvasLocation" x="1380" y="2344"/>
         </scene>
-        <!--Activity View Controller - Pelotonia Stream-->
+        <!--Pelotonia Stream-->
         <scene sceneID="m8a-Js-YyP">
             <objects>
                 <tableViewController storyboardIdentifier="ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QjF-de-6rP" customClass="ActivityViewController" sceneMemberID="viewController">
@@ -1442,7 +1442,7 @@
             </objects>
             <point key="canvasLocation" x="890" y="2344"/>
         </scene>
-        <!--User Profile View Controller - Rider-->
+        <!--Rider-->
         <scene sceneID="ctE-OW-v4P">
             <objects>
                 <tableViewController id="elF-Cv-4kH" customClass="UserProfileViewController" sceneMemberID="viewController">
@@ -1643,7 +1643,7 @@
             </objects>
             <point key="canvasLocation" x="1051" y="-623"/>
         </scene>
-        <!--New Workout Table View Controller - Workout-->
+        <!--Workout-->
         <scene sceneID="Dif-Vk-6YK">
             <objects>
                 <tableViewController id="MxZ-EQ-0gl" customClass="NewWorkoutTableViewController" sceneMemberID="viewController">
@@ -1727,27 +1727,6 @@
                                                     <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
                                                         <!--2030-12-31 11:00:00 +0000-->
                                                     </date>
-                                                    <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                                    </timeZone>
                                                     <connections>
                                                         <action selector="rideDateChanged:" destination="MxZ-EQ-0gl" eventType="valueChanged" id="wY7-nT-0nr"/>
                                                     </connections>
@@ -1894,27 +1873,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <date key="date" timeIntervalSinceReferenceDate="421514486.442554">
                                                         <!--2014-05-11 15:21:26 +0000-->
                                                     </date>
-                                                    <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                                    </timeZone>
                                                     <connections>
                                                         <action selector="workoutTimeLengthChanged:" destination="MxZ-EQ-0gl" eventType="valueChanged" id="GDD-K4-OEp"/>
                                                     </connections>
@@ -1949,7 +1907,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4282" y="-1072"/>
         </scene>
-        <!--Workout List Table View Controller - Workouts-->
+        <!--Workouts-->
         <scene sceneID="J4K-7a-ycC">
             <objects>
                 <tableViewController id="QiU-8k-CgN" customClass="WorkoutListTableViewController" sceneMemberID="viewController">
@@ -2169,7 +2127,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3631" y="623"/>
         </scene>
-        <!--Profile Table View Controller - Profile-->
+        <!--Profile-->
         <scene sceneID="sul-NI-wcg">
             <objects>
                 <tableViewController storyboardIdentifier="ProfileTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sKZ-lE-nf9" customClass="ProfileTableViewController" sceneMemberID="viewController">
@@ -2346,7 +2304,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3718" y="-50"/>
         </scene>
-        <!--Donors Table View Controller - Donors-->
+        <!--Donors-->
         <scene sceneID="FtB-4h-IjJ">
             <objects>
                 <tableViewController storyboardIdentifier="DonorsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lcc-VX-nqL" customClass="DonorsTableViewController" sceneMemberID="viewController">
@@ -2417,7 +2375,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </items>
                         </navigationBar>
                         <sections>
-                            <tableViewSection headerTitle="Support &lt;rider>" id="q78-pQ-0Et">
+                            <tableViewSection headerTitle="Support &lt;rider&gt;" id="q78-pQ-0Et">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2ps-zj-8ql">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
@@ -2568,7 +2526,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4946" y="398"/>
         </scene>
-        <!--Navigation Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="de9-z0-TWw">
             <objects>
                 <navigationController storyboardIdentifier="RidersNavViewController" title="Pelotonia" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
@@ -2612,7 +2570,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="457" y="-608"/>
         </scene>
-        <!--Navigation Controller - About-->
+        <!--About-->
         <scene sceneID="OTL-Q0-hmp">
             <objects>
                 <navigationController storyboardIdentifier="AboutNavViewController" title="About" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dbJ-Hy-gcq" sceneMemberID="viewController">
@@ -2791,9 +2749,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
-        <segue reference="lZa-h3-ufJ"/>
+        <segue reference="Af6-8I-wY6"/>
         <segue reference="sBj-i1-1JD"/>
-        <segue reference="tZz-dL-tdX"/>
         <segue reference="s56-AL-OFT"/>
+        <segue reference="lZa-h3-ufJ"/>
     </inferredMetricsTieBreakers>
 </document>

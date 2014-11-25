@@ -7,7 +7,6 @@
 //
 
 #import "FeedbackViewController.h"
-#import "TestFlight.h"
 
 @interface FeedbackViewController ()
 
@@ -45,8 +44,7 @@
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
-    NSString *feedback = self.feedbackText.text;
-    [TestFlight submitFeedback:feedback];
+//    NSString *feedback = self.feedbackText.text;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

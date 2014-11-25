@@ -23,7 +23,6 @@
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
 #import "DonorsTableViewController.h"
-#import "TestFlight.h"
 
 #define SECTION_1_HEADER_HEIGHT   60.0
 
@@ -142,20 +141,17 @@
 }
 
 - (void)segueToDonorList:(DonorsTableViewController *)donorViewController {
-    [TestFlight passCheckpoint:@"ShowDonorList"];
     donorViewController.donorList = self.rider.donors;
 }
 
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController
 {
-    [TestFlight passCheckpoint:@"ShowPledgeMailDialog"];
     pledgeViewController.rider = self.rider;
     pledgeViewController.delegate = self;
 }
 
 - (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController
 {
-    [TestFlight passCheckpoint:@"ShowRiderStory"];
     profileDetailsViewController.rider = self.rider;
 }
 
@@ -192,7 +188,7 @@
             cell.titleString = [self getTitleFromComment:comment];
             cell.commentString = [self getTextFromComment:comment];
             
-            [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
+            [cell.imageView sd_setImageWithURL:[self getImageURLFromComment:comment]
                            placeholderImage:[UIImage imageNamed:@"profile_default"]];
         }
         [cell layoutSubviews];
@@ -430,19 +426,20 @@
     // now we resize the photo and the cell so that the photo looks right
     if (self.rider.riderPhotoUrl) {
         self.nameAndRouteCell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-                                        placeholderImage:[UIImage imageNamed:@"speedy_arrow"]
-                                                 options:SDWebImageRefreshCached
-                                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                                   if (error) {
-                                                       NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
-                                                   }
-                                                   else {
-                                                       self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
-                                                       [self.nameAndRouteCell layoutSubviews];
-                                                   }
-                                               } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    }
+        
+        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                                                                                         if (error) {
+                                                                                                                             NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
+                                                                                                                         }
+                                                                                                                         else {
+                                                                                                                             self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
+                                                                                                                             [self.nameAndRouteCell layoutSubviews];
+                                                                                                                         }
+
+                                                                                                                         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        
+            }
     
 }
 
@@ -485,7 +482,6 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
 {
-    [TestFlight passCheckpoint:@"SentPledgeMail"];
     if(error) {
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
     }
@@ -500,11 +496,9 @@
     RiderDataController *dataController = [AppDelegate sharedDataController];
     
     if (self.following) {
-        [TestFlight passCheckpoint:@"UnfollowRider"];
         [dataController removeObject:self.rider];
     }
     else {
-        [TestFlight passCheckpoint:@"FollowRider"];
         [dataController addObject:self.rider];
     }
     [self configureView];
@@ -557,7 +551,6 @@
     
     shareDialog.completionBlock = ^(NSArray *shares) {
         // Dismiss however you want here
-        [TestFlight passCheckpoint:@"ShareRiderProfile"];
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     

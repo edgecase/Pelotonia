@@ -34,10 +34,7 @@
     
     __weak EventTableViewCell *wself = self;
     
-    [self.imageView setImageWithURL:[NSURL URLWithString:_event.imageLink]
-                   placeholderImage:[UIImage imageNamed:@"83-calendar-gray"]
-                            options:SDWebImageRefreshCached
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:_event.imageLink] placeholderImage:[UIImage imageNamed:@"83-calendar-gray"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             NSLog(@"error setting event image: %@", [error localizedDescription]);
         }

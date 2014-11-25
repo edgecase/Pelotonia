@@ -1,4 +1,4 @@
-#import <BlocksKit/BlocksKit.h>
+#import <SZBlocksKit/BlocksKit.h>
 
 #import "StringHelper.h"
 #import "SocializePrivateDefinitions.h"
@@ -14,11 +14,5 @@
 #import "UIBarButtonItem+Socialize.h"
 #import "UIButton+Socialize.h"
 #import "SZNavigationController.h"
-#import "NSOperationQueue+Socialize.h"
-#import "UIViewController+Display.h"
-
-#import "SocializeObjects.h"
 #import "SocializeCommonDefinitions.h"
-#import "SZAPIClientHelpers.h"
-#import "Facebook+Socialize.h"
-#import "ASIdentifierManager+Utilities.h"
+#import "SocializeObjects.h"

@@ -14,7 +14,6 @@
 #import "NSDate-Utilities.h"
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "TestFlight.h"
 
 @interface ActivityViewController ()
 
@@ -57,7 +56,6 @@
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
 
-    [TestFlight passCheckpoint:@"ViewAllActivity"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -147,8 +145,8 @@
 {
     CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
     id<SZActivity> activity = [self.recentActivity objectAtIndex:indexPath.row];
-
-    [cell.imageView setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]] placeholderImage:[UIImage imageNamed:@"profile_default"]];
+    
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]] placeholderImage:[UIImage imageNamed:@"profile_default"]];
     
     if ([activity isMemberOfClass:[SocializeShare class]])
     {

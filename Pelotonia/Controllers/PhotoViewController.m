@@ -7,7 +7,6 @@
 //
 
 #import "PhotoViewController.h"
-#import "TestFlight.h"
 #import "AppDelegate.h"
 #import <Socialize/Socialize.h>
 #import <AssetsLibrary/AssetsLibrary.h>

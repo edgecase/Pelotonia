@@ -11,8 +11,8 @@
 #import "ECSlidingViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"
-#import "TestFlight.h"
 #import <Social/Social.h>
+#import <Accounts/Accounts.h>
 
 @interface AboutTableViewController ()
 
@@ -125,8 +125,8 @@
                                                                       URL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"] parameters:values];
                 [postRequest setAccount:twitterAccount];
                 [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
-                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %i Error %d",
-                                        [urlResponse statusCode],error.code];
+                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %li Error %ld",
+                                        (long)[urlResponse statusCode],(long)error.code];
                     NSLog(@"%@error %@", output,error.description);
                     if ([urlResponse statusCode] == 200) {
                         [self performSelectorOnMainThread:@selector(successTwitter) withObject:nil waitUntilDone:NO];

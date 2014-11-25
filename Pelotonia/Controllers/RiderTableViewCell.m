@@ -50,17 +50,14 @@
     self.textLabel.text = rider.name;
     __weak RiderTableViewCell *weakSelf = self;
     
-    [self.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
-                   placeholderImage:[UIImage imageNamed:@"profile_default"]
-                            options:SDWebImageRefreshCached
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                              if (error) {
-                                  NSLog(@"error: %@", error.localizedDescription);
-                              }
-                              [weakSelf.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-                              
-                              [weakSelf layoutSubviews];
-                          } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"profile_default"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            NSLog(@"error: %@", error.localizedDescription);
+        }
+        [weakSelf.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+        
+        [weakSelf layoutSubviews];
+    } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
 }
 

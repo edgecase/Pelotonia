@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Socialize, Inc. All rights reserved.
 //
 
+#import "SocializeFacebook.h"
 #import "SocializeThirdParty.h"
-#import <FBConnect/FBConnect.h>
 
 @class SocializeFacebook;
 
@@ -22,6 +22,6 @@
 + (void)storeLocalCredentialsWithAccessToken:(NSString*)accessToken
                               expirationDate:(NSDate*)expirationDate;
 
-+ (Facebook*)createFacebookClient;
++ (SocializeFacebook*)createFacebookClient;
 
 @end
