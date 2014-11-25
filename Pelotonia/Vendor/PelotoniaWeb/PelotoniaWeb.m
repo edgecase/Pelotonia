@@ -535,15 +535,16 @@
         
         // save the database
         [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-            if (success) {
-                NSLog(@"You successfully saved your context.");
-                if (completeBlock) {
-                    completeBlock();
-                }
-            } else if (error) {
+            if (error) {
                 NSLog(@"Error saving context: %@", error.description);
                 if (failureBlock) {
                     failureBlock([error localizedDescription]);
+                }
+            } else {
+                // success
+                NSLog(@"You successfully saved your context.");
+                if (completeBlock) {
+                    completeBlock();
                 }
             }
         }];

@@ -1,8 +1,8 @@
-platform :ios, '7.0'
+platform :ios, '7.1'
 workspace 'Pelotonia'
 inhibit_all_warnings!
 
-
+pod 'Socialize', :podspec => 'https://raw.github.com/socialize/socialize-sdk-ios/master/Socialize.podspec'
 pod 'AFNetworking'
 pod 'Appirater'
 pod 'MBProgressHUD'
