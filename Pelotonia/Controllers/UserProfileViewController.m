@@ -136,6 +136,8 @@
     [self configureRecentPhotos];
     [self configureWorkoutCell];
     [self configureRiderCell];
+    
+    
 }
 
 - (NSInteger)workoutMiles {
@@ -411,7 +413,19 @@
 }
 
 - (IBAction)signIn:(id)sender {
-    [SZUserUtils showUserSettingsInViewController:self completion:nil];
+    if (![SZUserUtils userIsLinked]) {
+        [SZUserUtils showLinkDialogWithViewController:self
+                                           completion:^(SZSocialNetwork selectedNetwork) {
+            NSLog(@"Linked!");
+        } cancellation:^{
+            NSLog(@"Not linked!");
+        }];
+    }
+    else {
+        [SZUserUtils showUserProfileInViewController:self user:[SZUserUtils currentUser] completion:^(id<SocializeFullUser> user) {
+            NSLog(@"Showing user profile");
+        }];
+    }
 }
 
 #pragma mark -- UIImagePicker methods
