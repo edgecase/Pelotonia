@@ -413,6 +413,7 @@
 }
 
 - (IBAction)signIn:(id)sender {
+    // if the user is not yet linked to any social network, ensure that they do so
     if (![SZUserUtils userIsLinked]) {
         [SZUserUtils showLinkDialogWithViewController:self
                                            completion:^(SZSocialNetwork selectedNetwork) {
@@ -421,6 +422,7 @@
             NSLog(@"Not linked!");
         }];
     }
+    // if they are already linked, show their profile
     else {
         [SZUserUtils showUserProfileInViewController:self user:[SZUserUtils currentUser] completion:^(id<SocializeFullUser> user) {
             NSLog(@"Showing user profile");
