@@ -257,21 +257,15 @@
 }
 
 #pragma mark - open URL stuff
-- (BOOL)handleOpenURL:(NSURL*)url
-{
-    [Socialize handleOpenURL:url];
-    
-    return YES;
-}
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [self handleOpenURL:url];
+    return [Socialize handleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [self handleOpenURL:url];
+    return [Socialize handleOpenURL:url];
 }
 
 
