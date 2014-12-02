@@ -1014,7 +1014,7 @@
         <scene sceneID="9MF-OJ-M4j">
             <objects>
                 <tableViewController storyboardIdentifier="RidersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -1036,7 +1036,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" rowHeight="62" style="IBUITableViewCellStyleSubtitle" id="fvi-sS-Las">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" rowHeight="104" style="IBUITableViewCellStyleSubtitle" id="fvi-sS-Las">
                                 <rect key="frame" x="0.0" y="110" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fvi-sS-Las" id="9Le-vB-Iqg">
@@ -2750,10 +2750,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tZz-dL-tdX"/>
         <segue reference="42R-2Z-EJ1"/>
-        <segue reference="lZa-h3-ufJ"/>
         <segue reference="sBj-i1-1JD"/>
         <segue reference="s56-AL-OFT"/>
+        <segue reference="Af6-8I-wY6"/>
+        <segue reference="lZa-h3-ufJ"/>
     </inferredMetricsTieBreakers>
 </document>

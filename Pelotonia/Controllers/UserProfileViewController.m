@@ -76,26 +76,37 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
     self.navigationItem.titleView = imageView;
     
-    // if this is our first time loading, pop up the "this is how you use me" screen
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults objectForKey:@"firstRun"] || DEBUG) {
-        NSLog(@"popping up the 'intro' screens");
-        [defaults setObject:[NSDate date] forKey:@"firstRun"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self performSegueWithIdentifier:@"SegueToIntroViewController" sender:self];
-        
-//        IntroViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
-//        [self presentViewController:ivc animated:YES completion:nil];
-    }
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     [self configureView];
+
+    // if this is our first time loading, pop up the "this is how you use me" screen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (nil == [defaults objectForKey:@"firstRun"] || ([self showInDebug])) {
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSegueWithIdentifier:@"SegueToIntroViewController" sender:self];
+    }
+    
 }
 
+- (BOOL)showInDebug
+{
+    BOOL retval = FALSE;
+    
+    NSDate *lastRun = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstRun"];
+    
+    if ( DEBUG && ([lastRun daysAgo] > 1)) {
+        return TRUE;
+    }
+    
+    return retval;
+}
 
 - (void)viewDidUnload {
     [self setUserName:nil];
