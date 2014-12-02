@@ -1635,6 +1635,7 @@
                         <outlet property="riderProfileCell" destination="5v8-yE-dHT" id="6iR-IL-bfx"/>
                         <segue destination="sKZ-lE-nf9" kind="push" identifier="SegueToRiderProfile" id="tZz-dL-tdX"/>
                         <segue destination="kxB-9E-zZy" kind="modal" identifier="SegueToLinkProfile" id="3uV-Ni-IJj"/>
+                        <segue destination="R6E-qa-gmV" kind="modal" identifier="SegueToIntroViewController" id="JPo-oB-HER"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
