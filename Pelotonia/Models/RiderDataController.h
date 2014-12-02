@@ -26,6 +26,7 @@
 - (BOOL)containsRider:(Rider *)object;
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors;
 - (NSArray *)allRiders;
+- (void)save;
 
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder;

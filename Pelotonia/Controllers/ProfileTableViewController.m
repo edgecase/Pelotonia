@@ -501,6 +501,8 @@
     else {
         [dataController addObject:self.rider];
     }
+    // save the data
+    [dataController save];
     [self configureView];
 }
 

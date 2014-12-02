@@ -62,6 +62,7 @@
     // Register for Apple Push Notification Service
     [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
+    
     // Initialize our coredata instance
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"PelotoniaModel"];
 
