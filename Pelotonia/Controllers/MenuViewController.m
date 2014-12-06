@@ -15,7 +15,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Socialize/Socialize.h>
 #import "EventsTableViewController.h"
-#import "TestFlight.h"
 #import "UIColor+LightAndDark.h"
 
 
@@ -82,13 +81,13 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%@", myProfile.name];
             cell.imageView.layer.masksToBounds = YES;
             cell.imageView.layer.cornerRadius = 5.0;
-
-            [cell.imageView setImageWithURL:[NSURL URLWithString:[myProfile riderPhotoThumbUrl]]
-                           placeholderImage:[UIImage imageNamed:@"profile_default"]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                      [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(35, 35) interpolationQuality:kCGInterpolationDefault]];
-                                      [cell layoutSubviews];
+            
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[myProfile riderPhotoThumbUrl]] placeholderImage:[UIImage imageNamed:@"profile_default"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(35, 35) interpolationQuality:kCGInterpolationDefault]];
+                [cell layoutSubviews];
             }];
+            
+            
         }
         else {
             cell.textLabel.text = @"My Rider Profile";
@@ -126,7 +125,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SegueToRegister"]) {
-        [TestFlight passCheckpoint:@"ShowRegistrationDialog"];
         PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
 
         // see the registration form
@@ -136,7 +134,6 @@
         webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     }
     if ([segue.identifier isEqualToString:@"SegueToVideo"]) {
-        [TestFlight passCheckpoint:@"ShowSafetyVideo"];
         PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
         
         // see the registration form
@@ -147,7 +144,6 @@
     }
 
     if ([segue.identifier isEqualToString:@"SegueToBlog"]) {
-        [TestFlight passCheckpoint:@"ShowBlog"];
         PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
         
         // see the registration form
@@ -159,7 +155,7 @@
     
     if ([segue.identifier isEqualToString:@"SegueToEvents"]) {
         // update events database ...
-        EventsTableViewController *eventsVC = (EventsTableViewController *)[segue.destinationViewController visibleViewController];
+        // no-op
     }
 
 }

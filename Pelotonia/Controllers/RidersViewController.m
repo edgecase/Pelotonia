@@ -161,8 +161,9 @@
     UITableViewCell *_cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (_cell == nil)
     {
-        _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        _cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
+    
     // this trick with the temporary variable silences the warning about capturing cell strongly in the block below
     __weak UITableViewCell *cell = _cell;
     
@@ -171,27 +172,29 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         // we only have so much information in the search view
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.riderType];
     }
     else {
-        // looking at the "regular" view, so show all our information
+        // looking at the "regular" view, so get rider info from our list of riders
         rider = [[AppDelegate sharedDataController] objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", rider.route];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
+    _cell.textLabel.textColor = PRIMARY_DARK_GRAY;
+    _cell.textLabel.text = [NSString stringWithFormat:@"%@", rider.name];
+    _cell.detailTextLabel.textColor = PRIMARY_GREEN;
+    _cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",rider.route];
     
     [cell.imageView setImageWithURL:[NSURL URLWithString:rider.riderPhotoThumbUrl]
                    placeholderImage:[UIImage imageNamed:@"profile_default"]
-                            options:SDWebImageRefreshCached
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-         if (error) {
-             NSLog(@"RidersViewController::cellforrowatindexpath error: %@", error.localizedDescription);
-         }
-         [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-
-         [cell layoutSubviews];
-     } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,
+                                      NSURL *imageURL) {
+        if (error) {
+            NSLog(@"RidersViewController::cellforrowatindexpath error: %@",
+                  error.localizedDescription);
+        }
+        [cell.imageView setImage:[image thumbnailImage:60 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
+        
+        [cell layoutSubviews];
+    } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
     cell.textLabel.font = PELOTONIA_FONT(21);
     cell.detailTextLabel.font = PELOTONIA_FONT(15);
     

@@ -76,24 +76,37 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
     self.navigationItem.titleView = imageView;
     
-    // if this is our first time loading, pop up the "this is how you use me" screen
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults objectForKey:@"firstRun"] || DEBUG) {
-        NSLog(@"popping up the 'intro' screens");
-        [defaults setObject:[NSDate date] forKey:@"firstRun"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        IntroViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
-        [self presentViewController:ivc animated:YES completion:nil];
-    }
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     [self configureView];
+
+    // if this is our first time loading, pop up the "this is how you use me" screen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (nil == [defaults objectForKey:@"firstRun"] || ([self showInDebug])) {
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSegueWithIdentifier:@"SegueToIntroViewController" sender:self];
+    }
+    
 }
 
+- (BOOL)showInDebug
+{
+    BOOL retval = FALSE;
+    
+    NSDate *lastRun = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstRun"];
+    
+    if ( DEBUG && ([lastRun daysAgo] > 1)) {
+        return TRUE;
+    }
+    
+    return retval;
+}
 
 - (void)viewDidUnload {
     [self setUserName:nil];
@@ -123,6 +136,8 @@
     [self configureRecentPhotos];
     [self configureWorkoutCell];
     [self configureRiderCell];
+    
+    
 }
 
 - (NSInteger)workoutMiles {
@@ -181,7 +196,7 @@
         return [date2 compare:date1];
     }];
     
-    int numPhotos = [photos count];
+    NSUInteger numPhotos = [photos count];
     if (numPhotos >= 1) {
         [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
     }
@@ -212,25 +227,27 @@
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"SegueToRiderProfile"]) {
+    NSString *segueID = [segue identifier];
+    
+    if ([segueID isEqualToString:@"SegueToRiderProfile"]) {
         // seeing a rider profile next
         ProfileTableViewController *profVC = (ProfileTableViewController *)segue.destinationViewController;
         profVC.rider = [[AppDelegate sharedDataController] favoriteRider];
     }
     
-    if ([[segue identifier] isEqualToString:@"SegueToLinkProfile"]) {
+    if ([segueID isEqualToString:@"SegueToLinkProfile"]) {
         NSLog(@"linking profile...");
         FindRiderViewController *findRiderVC = (FindRiderViewController *)segue.destinationViewController;
         findRiderVC.delegate = self;
     }
     
-    if ([[segue identifier] isEqualToString:@"SegueToShowWorkoutList"]) {
+    if ([segueID isEqualToString:@"SegueToShowWorkoutList"]) {
         WorkoutListTableViewController *workoutVC = (WorkoutListTableViewController *)segue.destinationViewController;
         workoutVC.navigationItem.backBarButtonItem.title = self.rider.name;
         workoutVC.rider = self.rider;
     }
     
-    if ([[segue identifier] isEqualToString:@"SegueToNewWorkout"]) {
+    if ([segueID isEqualToString:@"SegueToNewWorkout"]) {
         // create a new workout
         NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
         newWorkoutVC.workout = [Workout defaultWorkout];
@@ -238,6 +255,10 @@
         newWorkoutVC.isNewWorkout = YES;
     }
     
+    if ([segueID isEqualToString:@"SegueToIntroViewController"]) {
+        IntroViewController *introViewController = (IntroViewController *)segue.destinationViewController;
+    }
+        
 }
 
 #pragma mark - Table view delegate
@@ -265,12 +286,11 @@
         self.riderDistance.text = self.rider.route;
         
         self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
-        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl]
-                        placeholderImage:[UIImage imageNamed:@"speedy_arrow"]
-                                 options:SDWebImageRefreshCached
-                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                   [self.riderProfileCell layoutSubviews];
-                               } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self.riderProfileCell layoutSubviews];
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
     }
     else {
         // let them pick a rider
@@ -393,7 +413,21 @@
 }
 
 - (IBAction)signIn:(id)sender {
-    [SZUserUtils showUserSettingsInViewController:self completion:nil];
+    // if the user is not yet linked to any social network, ensure that they do so
+    if (![SZUserUtils userIsLinked]) {
+        [SZUserUtils showLinkDialogWithViewController:self
+                                           completion:^(SZSocialNetwork selectedNetwork) {
+            NSLog(@"Linked!");
+        } cancellation:^{
+            NSLog(@"Not linked!");
+        }];
+    }
+    // if they are already linked, show their profile
+    else {
+        [SZUserUtils showUserProfileInViewController:self user:[SZUserUtils currentUser] completion:^(id<SocializeFullUser> user) {
+            NSLog(@"Showing user profile");
+        }];
+    }
 }
 
 #pragma mark -- UIImagePicker methods

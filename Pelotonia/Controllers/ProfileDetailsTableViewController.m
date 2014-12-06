@@ -81,19 +81,15 @@
         activityIndicator.center = cell.imageView.center;
         [activityIndicator startAnimating];
         
-        [cell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-         {
-             if (error != nil) {
-                 NSLog(@"ProfileDetailsTableViewController::configureView error: %@", error.localizedDescription);
-             }
-             [activityIndicator removeFromSuperview];
-             activityIndicator = nil;
-             [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
-             [cell layoutSubviews];
-         }];
-
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"pelotonia-icon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error != nil) {
+                NSLog(@"ProfileDetailsTableViewController::configureView error: %@", error.localizedDescription);
+            }
+            [activityIndicator removeFromSuperview];
+            activityIndicator = nil;
+            [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
+            [cell layoutSubviews];
+        }];
         
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {

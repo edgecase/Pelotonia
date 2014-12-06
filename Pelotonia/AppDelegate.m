@@ -10,7 +10,6 @@
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
-#import "TestFlight.h"
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
 #import "PelotoniaProfileViewController.h"
@@ -59,14 +58,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#ifdef TESTING
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] identifierForVendor].UUIDString];
-#endif
-    // set up test flight
-    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
 
     // Register for Apple Push Notification Service
     [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    
     
     // Initialize our coredata instance
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"PelotoniaModel"];
@@ -262,21 +257,15 @@
 }
 
 #pragma mark - open URL stuff
-- (BOOL)handleOpenURL:(NSURL*)url
-{
-    [Socialize handleOpenURL:url];
-    
-    return YES;
-}
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [self handleOpenURL:url];
+    return [Socialize handleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [self handleOpenURL:url];
+    return [Socialize handleOpenURL:url];
 }
 
 

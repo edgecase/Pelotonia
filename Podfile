@@ -1,12 +1,15 @@
-platform :ios, '7.0'
+platform :ios, '8.1'
 workspace 'Pelotonia'
+inhibit_all_warnings!
+
+pod 'Socialize', :podspec => 'https://raw.github.com/socialize/socialize-sdk-ios/master/Socialize.podspec'
 pod 'AFNetworking'
-pod 'Appirater', '~>2.0.2'
-pod 'MBProgressHUD', '~>0.8'
-pod 'SDWebImage', '~>3.5.2'
+pod 'Appirater'
+pod 'MBProgressHUD'
+pod 'SDWebImage'
 pod 'UIActivityIndicator-for-SDWebImage'
-pod 'ECSlidingViewController', '~>2.0.0'
+pod 'ECSlidingViewController'
 pod 'AAPullToRefresh'
 pod 'MagicalRecord/Shorthand'
 pod 'TTTAttributedLabel'
-
+pod 'SendGrid'

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Menu View Controller-->
@@ -293,7 +292,7 @@
             </objects>
             <point key="canvasLocation" x="-2106" y="900"/>
         </scene>
-        <!--News Table View Controller - News-->
+        <!--News-->
         <scene sceneID="Vd0-xw-R7F">
             <objects>
                 <tableViewController storyboardIdentifier="NewsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l3X-my-2Tf" customClass="NewsTableViewController" sceneMemberID="viewController">
@@ -351,7 +350,7 @@
             </objects>
             <point key="canvasLocation" x="-954" y="-917"/>
         </scene>
-        <!--News Detail Table View Controller - News-->
+        <!--News-->
         <scene sceneID="uJz-V2-mon">
             <objects>
                 <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="rfV-ZC-FFj" customClass="NewsDetailTableViewController" sceneMemberID="viewController">
@@ -485,7 +484,7 @@
             </objects>
             <point key="canvasLocation" x="-779" y="1818"/>
         </scene>
-        <!--Events Table View Controller - Events-->
+        <!--Events-->
         <scene sceneID="o2N-xs-NwA">
             <objects>
                 <tableViewController storyboardIdentifier="EventsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bb0-WR-2fE" customClass="EventsTableViewController" sceneMemberID="viewController">
@@ -549,7 +548,7 @@
             </objects>
             <point key="canvasLocation" x="-1433" y="3062"/>
         </scene>
-        <!--Event Details Table View Controller - Event Details-->
+        <!--Event Details-->
         <scene sceneID="TGx-Yi-ZRC">
             <objects>
                 <tableViewController storyboardIdentifier="EventDetailsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dm8-Dc-rTZ" customClass="EventDetailsTableViewController" sceneMemberID="viewController">
@@ -720,7 +719,7 @@
             </objects>
             <point key="canvasLocation" x="-219" y="1828"/>
         </scene>
-        <!--Pelotonia Profile View Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="xxc-lL-uMq">
             <objects>
                 <tableViewController storyboardIdentifier="PelotoniaProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="g1b-TM-wyi" customClass="PelotoniaProfileViewController" sceneMemberID="viewController">
@@ -981,7 +980,7 @@
             </objects>
             <point key="canvasLocation" x="-2846" y="900"/>
         </scene>
-        <!--Web View Controller - The Rider-->
+        <!--The Rider-->
         <scene sceneID="GzU-Wj-8a2">
             <objects>
                 <viewController title="The Rider" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iPq-SH-xf0" customClass="PRPWebViewController" sceneMemberID="viewController">
@@ -1011,11 +1010,11 @@
             </objects>
             <point key="canvasLocation" x="796" y="-1695"/>
         </scene>
-        <!--Riders View Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
                 <tableViewController storyboardIdentifier="RidersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -1037,7 +1036,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" rowHeight="62" style="IBUITableViewCellStyleSubtitle" id="fvi-sS-Las">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" rowHeight="104" style="IBUITableViewCellStyleSubtitle" id="fvi-sS-Las">
                                 <rect key="frame" x="0.0" y="110" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fvi-sS-Las" id="9Le-vB-Iqg">
@@ -1144,17 +1143,17 @@
             </objects>
             <point key="canvasLocation" x="2633" y="623"/>
         </scene>
-        <!--About Table View Controller - About-->
+        <!--About-->
         <scene sceneID="IN3-sS-WWU">
             <objects>
                 <tableViewController storyboardIdentifier="AboutTableViewController" title="About" modalTransitionStyle="flipHorizontal" id="KrS-bT-Crh" customClass="AboutTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SEf-tL-Ilh">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SEf-tL-Ilh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="pkT-z8-3Cb">
                                 <cells>
@@ -1187,26 +1186,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IQu-Re-8UJ">
-                                                    <rect key="frame" x="205" y="0.0" width="77" height="59"/>
+                                                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow @Pelotonia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ceb-kK-7Fs">
+                                                    <rect key="frame" x="42" y="1" width="155" height="58"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IQu-Re-8UJ">
+                                                    <rect key="frame" x="205" y="7" width="56" height="46"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <state key="normal" image="210-twitterbird">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="twitterButtonClicked:" destination="KrS-bT-Crh" eventType="touchUpInside" id="eKz-Lp-Znh"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow @Pelotonia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ceb-kK-7Fs">
-                                                    <rect key="frame" x="42" y="1" width="155" height="58"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rbo-OO-CVK" rowHeight="60" style="IBUITableViewCellStyleDefault" id="cjQ-90-wt0">
                                         <rect key="frame" x="0.0" y="209" width="320" height="60"/>
@@ -1226,7 +1227,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
-                                            <segue destination="sqm-pg-TNy" kind="modal" id="HW8-5s-9Cg"/>
+                                            <segue destination="sqm-pg-TNy" kind="modal" identifier="segueToFeedback" id="sKe-C9-bPX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
@@ -1257,7 +1258,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="tvQ-OG-bvb">
-                                                    <rect key="frame" x="20" y="20" width="280" height="387"/>
+                                                    <rect key="frame" x="20" y="8" width="280" height="388"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <string key="text">Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.</string>
@@ -1402,12 +1403,13 @@
                         <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <connections>
+                        <outlet property="feedbackText" destination="c1I-QD-aWZ" id="bGu-uZ-IXm"/>
                         <outlet property="navBar" destination="lFG-vz-FjZ" id="iba-2u-Iy9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3002" y="2416"/>
+            <point key="canvasLocation" x="2256" y="876"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -1423,7 +1425,7 @@
             </objects>
             <point key="canvasLocation" x="1380" y="2344"/>
         </scene>
-        <!--Activity View Controller - Pelotonia Stream-->
+        <!--Pelotonia Stream-->
         <scene sceneID="m8a-Js-YyP">
             <objects>
                 <tableViewController storyboardIdentifier="ActivityViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QjF-de-6rP" customClass="ActivityViewController" sceneMemberID="viewController">
@@ -1442,7 +1444,7 @@
             </objects>
             <point key="canvasLocation" x="890" y="2344"/>
         </scene>
-        <!--User Profile View Controller - Rider-->
+        <!--Rider-->
         <scene sceneID="ctE-OW-v4P">
             <objects>
                 <tableViewController id="elF-Cv-4kH" customClass="UserProfileViewController" sceneMemberID="viewController">
@@ -1636,6 +1638,7 @@
                         <outlet property="riderProfileCell" destination="5v8-yE-dHT" id="6iR-IL-bfx"/>
                         <segue destination="sKZ-lE-nf9" kind="push" identifier="SegueToRiderProfile" id="tZz-dL-tdX"/>
                         <segue destination="kxB-9E-zZy" kind="modal" identifier="SegueToLinkProfile" id="3uV-Ni-IJj"/>
+                        <segue destination="R6E-qa-gmV" kind="modal" identifier="SegueToIntroViewController" id="JPo-oB-HER"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDZ-yT-LJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1643,7 +1646,7 @@
             </objects>
             <point key="canvasLocation" x="1051" y="-623"/>
         </scene>
-        <!--New Workout Table View Controller - Workout-->
+        <!--Workout-->
         <scene sceneID="Dif-Vk-6YK">
             <objects>
                 <tableViewController id="MxZ-EQ-0gl" customClass="NewWorkoutTableViewController" sceneMemberID="viewController">
@@ -1727,27 +1730,6 @@
                                                     <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
                                                         <!--2030-12-31 11:00:00 +0000-->
                                                     </date>
-                                                    <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                                    </timeZone>
                                                     <connections>
                                                         <action selector="rideDateChanged:" destination="MxZ-EQ-0gl" eventType="valueChanged" id="wY7-nT-0nr"/>
                                                     </connections>
@@ -1894,27 +1876,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <date key="date" timeIntervalSinceReferenceDate="421514486.442554">
                                                         <!--2014-05-11 15:21:26 +0000-->
                                                     </date>
-                                                    <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <data key="data">
-VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
-y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
-5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
-8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
-AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
-DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
-HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
-KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
-OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
-Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
-VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
-Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
-cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
-f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
-AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</data>
-                                                    </timeZone>
                                                     <connections>
                                                         <action selector="workoutTimeLengthChanged:" destination="MxZ-EQ-0gl" eventType="valueChanged" id="GDD-K4-OEp"/>
                                                     </connections>
@@ -1949,7 +1910,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4282" y="-1072"/>
         </scene>
-        <!--Workout List Table View Controller - Workouts-->
+        <!--Workouts-->
         <scene sceneID="J4K-7a-ycC">
             <objects>
                 <tableViewController id="QiU-8k-CgN" customClass="WorkoutListTableViewController" sceneMemberID="viewController">
@@ -2045,7 +2006,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <scene sceneID="q8h-0Q-4DF">
             <objects>
                 <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="kxB-9E-zZy" customClass="FindRiderViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="22" sectionFooterHeight="22" id="1XG-E2-w47">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="1XG-E2-w47">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
@@ -2053,8 +2014,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <color key="sectionIndexColor" red="0.63701701164245605" green="0.72903871536254883" blue="0.79776239395141602" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" prompt="Search for your Rider" placeholder="Last Name or RIder ID" showsScopeBar="YES" id="nAr-q3-Id4">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" placeholder="Last Name or RIder ID" showsCancelButton="YES" showsScopeBar="YES" id="nAr-q3-Id4">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="barTintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
@@ -2068,7 +2029,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCells" rowHeight="62" id="FL1-ag-CY8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCells" rowHeight="67" id="FL1-ag-CY8">
                                 <rect key="frame" x="0.0" y="141" width="320" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FL1-ag-CY8" id="Ecu-9U-QwS">
@@ -2082,6 +2043,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="kxB-9E-zZy" id="dkh-64-qPU"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="e9N-qA-dbN">
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="Ksa-OA-tll">
                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
@@ -2169,7 +2131,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3631" y="623"/>
         </scene>
-        <!--Profile Table View Controller - Profile-->
+        <!--Profile-->
         <scene sceneID="sul-NI-wcg">
             <objects>
                 <tableViewController storyboardIdentifier="ProfileTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sKZ-lE-nf9" customClass="ProfileTableViewController" sceneMemberID="viewController">
@@ -2325,6 +2287,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="sKZ-lE-nf9" id="Rum-2f-gr0"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Profile" id="wbs-AM-LQQ">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="QCn-eb-sjF">
                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
@@ -2346,7 +2309,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3718" y="-50"/>
         </scene>
-        <!--Donors Table View Controller - Donors-->
+        <!--Donors-->
         <scene sceneID="FtB-4h-IjJ">
             <objects>
                 <tableViewController storyboardIdentifier="DonorsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lcc-VX-nqL" customClass="DonorsTableViewController" sceneMemberID="viewController">
@@ -2417,7 +2380,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </items>
                         </navigationBar>
                         <sections>
-                            <tableViewSection headerTitle="Support &lt;rider>" id="q78-pQ-0Et">
+                            <tableViewSection headerTitle="Support &lt;rider&gt;" id="q78-pQ-0Et">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2ps-zj-8ql">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
@@ -2568,7 +2531,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="4946" y="398"/>
         </scene>
-        <!--Navigation Controller - Pelotonia-->
+        <!--Pelotonia-->
         <scene sceneID="de9-z0-TWw">
             <objects>
                 <navigationController storyboardIdentifier="RidersNavViewController" title="Pelotonia" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZpJ-uT-0fb" sceneMemberID="viewController">
@@ -2612,7 +2575,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="457" y="-608"/>
         </scene>
-        <!--Navigation Controller - About-->
+        <!--About-->
         <scene sceneID="OTL-Q0-hmp">
             <objects>
                 <navigationController storyboardIdentifier="AboutNavViewController" title="About" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dbJ-Hy-gcq" sceneMemberID="viewController">
@@ -2791,9 +2754,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
-        <segue reference="lZa-h3-ufJ"/>
-        <segue reference="sBj-i1-1JD"/>
         <segue reference="tZz-dL-tdX"/>
+        <segue reference="sBj-i1-1JD"/>
         <segue reference="s56-AL-OFT"/>
+        <segue reference="VAG-5d-ToW"/>
     </inferredMetricsTieBreakers>
 </document>

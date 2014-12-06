@@ -9,6 +9,7 @@
 #import "RiderDataController.h"
 #import "PelotoniaWeb.h"
 #import "Workout.h"
+#import "AppDelegate.h"
 
 @implementation RiderDataController
 
@@ -108,6 +109,12 @@
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors
 {
     [_riderList sortUsingDescriptors:descriptors];
+}
+
+- (void)save
+{
+    AppDelegate *app = [[UIApplication sharedApplication] delegate];
+    [app archiveData];
 }
 
 // Archive methods

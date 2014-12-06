@@ -59,17 +59,14 @@
     self.titleLabel.font = PELOTONIA_FONT_BOLD(21);
     
     __weak EventDetailsTableViewController *wself = self;
-    [self.titleTableViewCell.imageView setImageWithURL:[NSURL URLWithString:_event.imageLink]
-                   placeholderImage:[UIImage imageNamed:@"83-calendar-gray"]
-                            options:SDWebImageRefreshCached
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                              if (error) {
-                                  NSLog(@"error setting event image: %@", [error localizedDescription]);
-                              }
-                              else {
-                                  [wself.titleTableViewCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(50, 50) interpolationQuality:kCGInterpolationDefault]];
-                                  [wself.titleTableViewCell layoutSubviews];
-                              }
+    [self.titleTableViewCell.imageView sd_setImageWithURL:[NSURL URLWithString:_event.imageLink] placeholderImage:[UIImage imageNamed:@"83-calendar-gray"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            NSLog(@"error setting event image: %@", [error localizedDescription]);
+        }
+        else {
+            [wself.titleTableViewCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(50, 50) interpolationQuality:kCGInterpolationDefault]];
+            [wself.titleTableViewCell layoutSubviews];
+        }
     }];
 
     

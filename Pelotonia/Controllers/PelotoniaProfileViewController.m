@@ -10,7 +10,6 @@
 #import "PelotoniaProfileViewController.h"
 #import "PelotoniaWeb.h"
 #import "CommentTableViewCell.h"
-#import "TestFlight.h"
 #import "NSNumber+Currency.h"
 #import "NSDictionary+JSONConversion.h"
 
@@ -146,8 +145,9 @@
             cell.titleString = [NSString stringWithFormat:@"%@, %@", [[activity user] userName], [NSDate stringForDisplayFromDate:[activity date] prefixed:YES alwaysDisplayTime:NO]];
             cell.commentString = [activity text];
             
-            [cell.imageView setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]]
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[activity user] smallImageUrl]]
                            placeholderImage:[UIImage imageNamed:@"profile_default"]];
+            
         }
         [cell layoutSubviews];
         return cell;
@@ -305,7 +305,6 @@
     
     shareDialog.completionBlock = ^(NSArray *shares) {
         // Dismiss however you want here
-        [TestFlight passCheckpoint:@"SharePelotoniaProfile"];
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
