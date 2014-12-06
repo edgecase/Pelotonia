@@ -24,40 +24,40 @@ PODS:
   - Appirater (2.0.4)
   - Bolts (1.1.3)
   - ECSlidingViewController (2.0.3)
-  - Facebook-iOS-SDK (3.19.0):
+  - Facebook-iOS-SDK (3.20.0):
     - Bolts (~> 1.0)
-  - Loopy (1.1.0):
+  - Loopy (1.1.1):
     - AFNetworking
   - MagicalRecord/Shorthand (2.2)
   - MBProgressHUD (0.9)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
-  - Socialize (3.1.0.1):
-    - Facebook-iOS-SDK (= 3.19)
+  - Socialize (3.1.1):
+    - Facebook-iOS-SDK (= 3.20)
     - Loopy
-    - Socialize/arc (= 3.1.0.1)
-    - Socialize/no-arc (= 3.1.0.1)
+    - Socialize/arc (= 3.1.1)
+    - Socialize/no-arc (= 3.1.1)
     - STTwitter
     - SZBlocksKit
     - SZJSONKit
     - SZOAuthConsumer
-  - Socialize/arc (3.1.0.1):
-    - Facebook-iOS-SDK (= 3.19)
+  - Socialize/arc (3.1.1):
+    - Facebook-iOS-SDK (= 3.20)
     - Loopy
     - Socialize/no-arc
     - STTwitter
     - SZBlocksKit
     - SZJSONKit
     - SZOAuthConsumer
-  - Socialize/no-arc (3.1.0.1):
-    - Facebook-iOS-SDK (= 3.19)
+  - Socialize/no-arc (3.1.1):
+    - Facebook-iOS-SDK (= 3.20)
     - Loopy
     - STTwitter
     - SZBlocksKit
     - SZJSONKit
     - SZOAuthConsumer
-  - STTwitter (0.1.5)
+  - STTwitter (0.1.6)
   - SZBlocksKit (2.1.0):
     - SZBlocksKit/All (= 2.1.0)
   - SZBlocksKit/All (2.1.0):
@@ -101,13 +101,13 @@ SPEC CHECKSUMS:
   Appirater: cbdb7f305562cfde585300bfff86da01ae559deb
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
-  Facebook-iOS-SDK: cb7d74759d0b1ba546e6e6f1dde407b0d4e448d6
-  Loopy: 99503648c58f74b0b4f0eb2003903ce706e6bea2
+  Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
+  Loopy: 15bbbacb7e058e5fcdc972aa1708eb9bd70c7535
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  Socialize: 346d5ac5719b42399152a0c9382c6e93456e6004
-  STTwitter: 60f28af91d622b9a3f74f28cd021413277d413bb
+  Socialize: e0bf7eb388e27e2a27731f06d6108704767315cf
+  STTwitter: f5ca425b5636da2ab18ceba49c55a51300a476c6
   SZBlocksKit: 659b06061c9179b20674e8f475661187d4f7a6a6
   SZJSONKit: 9b7d3cbf8f8cd21ec56d89950a0de1fadaca766e
   SZOAuthConsumer: b62a98025846d76778ca4f24528a5c51b8e66ee6

@@ -7,6 +7,7 @@
 //
 
 #import "FeedbackViewController.h"
+#import <Socialize/Socialize.h>
 
 @interface FeedbackViewController ()
 
@@ -44,11 +45,25 @@
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
-//    NSString *feedback = self.feedbackText.text;
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString *feedback = self.feedbackText.text;
+    // send the feedback to support@isandlot.com
+    [self sendFeedback:feedback];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)sendFeedback:(NSString *)feedback {
+    id<SZEntity> entity = [SZEntity entityWithKey:@"some_entity" name:@"Some Entity"];
+    SZShareOptions *options = [SZShareUtils userShareOptions];
+    
+    [SZShareUtils shareViaEmailWithViewController:self options:options entity:entity success:^(id<SocializeShare> share) {
+        NSLog(@"succeeded sending feedback");
+    } failure:^(NSError *error) {
+        NSLog(@"Failed sending feedback");
+    }];
+}
+
 @end
