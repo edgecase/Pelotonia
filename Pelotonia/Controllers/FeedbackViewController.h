@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SendGrid/SendGrid.h>
+#import <SendGrid/SendGridEmail.h>
 
 @interface FeedbackViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextView *feedbackText;
@@ -14,4 +16,6 @@
 - (IBAction)cancelButtonPressed:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+
+
 @end

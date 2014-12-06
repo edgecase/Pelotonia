@@ -33,6 +33,10 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
+  - SendGrid (0.3.0):
+    - AFNetworking (~> 2.0)
+    - SMTPAPI
+  - SMTPAPI (0.2.0)
   - Socialize (3.1.1):
     - Facebook-iOS-SDK (= 3.20)
     - Loopy
@@ -87,6 +91,7 @@ DEPENDENCIES:
   - MagicalRecord/Shorthand
   - MBProgressHUD
   - SDWebImage
+  - SendGrid
   - Socialize (from `https://raw.github.com/socialize/socialize-sdk-ios/master/Socialize.podspec`)
   - TTTAttributedLabel
   - UIActivityIndicator-for-SDWebImage
@@ -106,6 +111,8 @@ SPEC CHECKSUMS:
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SendGrid: cc1980dee8b2fba2a82ad0ff41e02f92bc213e70
+  SMTPAPI: 6dd830b6fb939e2cd288e68c455a44613ddbbbb5
   Socialize: e0bf7eb388e27e2a27731f06d6108704767315cf
   STTwitter: f5ca425b5636da2ab18ceba49c55a51300a476c6
   SZBlocksKit: 659b06061c9179b20674e8f475661187d4f7a6a6

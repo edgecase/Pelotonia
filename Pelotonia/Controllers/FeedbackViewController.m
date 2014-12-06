@@ -48,7 +48,7 @@
     NSString *feedback = self.feedbackText.text;
     // send the feedback to support@isandlot.com
     [self sendFeedback:feedback];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -56,14 +56,14 @@
 }
 
 - (void)sendFeedback:(NSString *)feedback {
-    id<SZEntity> entity = [SZEntity entityWithKey:@"some_entity" name:@"Some Entity"];
-    SZShareOptions *options = [SZShareUtils userShareOptions];
+    SendGrid *sendgrid = [SendGrid apiUser:@"support@isandlot.com" apiKey:@"1drink2many!"];
     
-    [SZShareUtils shareViaEmailWithViewController:self options:options entity:entity success:^(id<SocializeShare> share) {
-        NSLog(@"succeeded sending feedback");
-    } failure:^(NSError *error) {
-        NSLog(@"Failed sending feedback");
-    }];
+    SendGridEmail *email = [[SendGridEmail alloc] init];
+    email.to = @"support@isandlot.com";
+    email.from = @"other@example.com";
+    email.subject = @"Pelotonia App Feedback";
+    email.text = feedback;
+    [sendgrid sendWithWeb:email];
 }
 
 @end

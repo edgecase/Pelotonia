@@ -1225,7 +1225,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
-                                            <segue destination="sqm-pg-TNy" kind="modal" id="HW8-5s-9Cg"/>
+                                            <segue destination="sqm-pg-TNy" kind="modal" identifier="segueToFeedback" id="sKe-C9-bPX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9lF-7j-HuU" rowHeight="53" style="IBUITableViewCellStyleDefault" id="eUX-am-qsE">
@@ -1401,12 +1401,13 @@
                         <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <connections>
+                        <outlet property="feedbackText" destination="c1I-QD-aWZ" id="bGu-uZ-IXm"/>
                         <outlet property="navBar" destination="lFG-vz-FjZ" id="iba-2u-Iy9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0PT-U5-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3002" y="2416"/>
+            <point key="canvasLocation" x="2256" y="876"/>
         </scene>
         <!--Comments List View Controller-->
         <scene sceneID="6u1-wC-evC">
@@ -2751,9 +2752,9 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="42R-2Z-EJ1"/>
-        <segue reference="sBj-i1-1JD"/>
         <segue reference="tZz-dL-tdX"/>
+        <segue reference="sBj-i1-1JD"/>
         <segue reference="s56-AL-OFT"/>
-        <segue reference="lZa-h3-ufJ"/>
+        <segue reference="VAG-5d-ToW"/>
     </inferredMetricsTieBreakers>
 </document>
