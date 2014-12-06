@@ -24,19 +24,6 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // configure the UI appearance of the window
-    self.navBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        self.navBar.tintColor = PRIMARY_GREEN;
-        self.navBar.barTintColor = PRIMARY_DARK_GRAY;
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -58,11 +45,13 @@
 - (void)sendFeedback:(NSString *)feedback {
     SendGrid *sendgrid = [SendGrid apiUser:@"support@isandlot.com" apiKey:@"1drink2many!"];
     
+    NSString *username = [[SZUserUtils currentUser] userName];
+    NSString *displayName = [[SZUserUtils currentUser] displayName];
     SendGridEmail *email = [[SendGridEmail alloc] init];
     email.to = @"support@isandlot.com";
-    email.from = @"other@example.com";
+    email.from = @"feedback@pelotonia.org";
     email.subject = @"Pelotonia App Feedback";
-    email.text = feedback;
+    email.text = [NSString stringWithFormat:@"Name: %@\nUserName: %@\n%@", displayName, username, feedback];
     [sendgrid sendWithWeb:email];
 }
 
