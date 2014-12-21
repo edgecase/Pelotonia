@@ -125,32 +125,19 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"SegueToRegister"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
+        // due to apple developer guidelines, am not allowed to launch within the browser control directly.
+        // at some point in the near future, allow users to register from their profiles directly, using some
+        // web forms submitted directly to the Pelotonia site
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/register"]];
 
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/register"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
     }
     if ([segue.identifier isEqualToString:@"SegueToVideo"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
-        
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/ride/safety"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/ride/safety"]];
     }
 
     if ([segue.identifier isEqualToString:@"SegueToBlog"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
-        
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/the-blog/"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/the-blog"]];
     }
     
     if ([segue.identifier isEqualToString:@"SegueToEvents"]) {

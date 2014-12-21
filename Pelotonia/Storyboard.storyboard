@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="61J-5L-bDV">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Menu View Controller-->
@@ -247,9 +247,6 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="6HY-Nt-L96" kind="custom" identifier="SegueToBlog" customClass="ECSlidingSegue" id="uHP-Lq-co9"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pN5-ej-CIF" imageView="BVp-Ag-Fky" style="IBUITableViewCellStyleDefault" id="HrD-3N-1ys">
                                         <rect key="frame" x="0.0" y="440" width="320" height="44"/>
@@ -980,36 +977,6 @@
             </objects>
             <point key="canvasLocation" x="-2846" y="900"/>
         </scene>
-        <!--The Rider-->
-        <scene sceneID="GzU-Wj-8a2">
-            <objects>
-                <viewController title="The Rider" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iPq-SH-xf0" customClass="PRPWebViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WPS-OQ-Gno">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" id="5Fu-eG-gtD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="hfz-Jo-Psc">
-                        <barButtonItem key="leftBarButtonItem" image="259-list" id="O8m-SK-zNH">
-                            <connections>
-                                <segue destination="viQ-Jc-Afm" kind="unwind" unwindAction="unwindToMenuViewController:" id="yTf-N2-B7B"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dXl-AT-3Bu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="viQ-Jc-Afm" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="796" y="-1695"/>
-        </scene>
         <!--Pelotonia-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
@@ -1258,7 +1225,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="tvQ-OG-bvb">
-                                                    <rect key="frame" x="20" y="8" width="280" height="388"/>
+                                                    <rect key="frame" x="20" y="8" width="280" height="389"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <string key="text">Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.</string>
@@ -2686,26 +2653,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9W-Q5-MD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1959" y="3062"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4gn-75-4IF">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6HY-Nt-L96" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ego-WT-avI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="barTintColor" red="0.32941177487373352" green="0.36862745881080627" blue="0.3960784375667572" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="iPq-SH-xf0" kind="relationship" relationship="rootViewController" id="4hf-03-pPY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EXq-6n-AUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="79" y="-1688"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hsC-6e-PBh">
