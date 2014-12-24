@@ -1195,7 +1195,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="tvQ-OG-bvb">
-                                                    <rect key="frame" x="19" y="8" width="280" height="390"/>
+                                                    <rect key="frame" x="19" y="8" width="280" height="391"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <string key="text">Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.</string>
@@ -2258,7 +2258,7 @@
                         <color key="separatorColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="65" id="dvl-9m-22v">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="donorNameCell" rowHeight="65" id="dvl-9m-22v">
                                 <rect key="frame" x="0.0" y="22" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dvl-9m-22v" id="TLD-TP-6fl">
