@@ -51,9 +51,12 @@
 @property (nonatomic, strong) NSString *pelotonTotalOfAllMembers;
 @property (nonatomic, strong) NSString *pelotonGrandTotal;
 @property (nonatomic, strong) NSString *pelotonCaptain;
+@property (nonatomic, strong) NSArray *donors;
 
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;
+
++ (Rider *)pelotoniaRider;
 
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder;

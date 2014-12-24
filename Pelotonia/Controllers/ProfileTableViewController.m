@@ -6,24 +6,25 @@
 //
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
+#import <Social/Social.h>
+#import <Socialize/Socialize.h>
 #import "ProfileTableViewController.h"
 #import "AppDelegate.h"
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "SendPledgeModalViewController.h"
 #import "ProfileDetailsTableViewController.h"
 #import "NSDate+Helper.h"
 #import "CommentTableViewCell.h"
 #import "NSDictionary+JSONConversion.h"
-#import <AAPullToRefresh/AAPullToRefresh.h>
-#import <Social/Social.h>
-#import <Socialize/Socialize.h>
-#import "TestFlight.h"
+#import "DonorsTableViewController.h"
 
-#define SECTION_1_HEADER_HEIGHT   40.0
+#define SECTION_1_HEADER_HEIGHT   60.0
 
 
 @interface ProfileTableViewController () {
@@ -32,12 +33,12 @@
 
 @end
 
-@implementation ProfileTableViewController 
+@implementation ProfileTableViewController
+
 @synthesize donationProgress;
 @synthesize nameAndRouteCell;
 @synthesize riderComments;
 @synthesize entity;
-@synthesize actionBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,47 +53,31 @@
 {
     [super viewDidLoad];
     
+    // get the pull to refresh working
     __weak ProfileTableViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshRider:v];
         [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:2.0f];
     }];
-    
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
     
     // set up socialize
-    if (self.entity == nil)
-    {
-        self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                self.rider.story, @"szsd_description",
-                                self.rider.riderPhotoThumbUrl, @"szsd_thumb",
-                                self.rider.riderId, @"riderID",
-                                nil];
-        
-        NSString *jsonString = [params toJSONString];
-        entity.meta = jsonString;
-        [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
-            NSLog(@"Successfully updated entity meta: %@", [serverEntity meta]);
-        } failure:^(NSError *error) {
-            NSLog(@"Failure: %@", [error localizedDescription]);
-        }];
-    }
+    self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            self.rider.story, @"szsd_description",
+                            self.rider.riderPhotoThumbUrl, @"szsd_thumb",
+                            self.rider.riderId, @"riderID",
+                            nil];
     
-    // configure the UI appearance of the window
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        [self setNeedsStatusBarAppearanceUpdate];
-        [self.navigationController.navigationBar setTintColor:PRIMARY_GREEN];
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
+    NSString *jsonString = [params toJSONString];
+    entity.meta = jsonString;
+    [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
+        NSLog(@"it has %d likes, %d comments, %d shares, %d views", [serverEntity likes], [serverEntity comments], [serverEntity shares], [serverEntity views]);
 
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    } failure:^(NSError *error) {
+        NSLog(@"Failure: %@", [error localizedDescription]);
+    }];
 }
 
 - (void)viewDidUnload
@@ -110,7 +95,31 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [SZViewUtils viewEntity:self.entity success:^(id<SocializeView> view) {
+        NSLog(@"Entity recorded another view ");
+    } failure:^(NSError *error) {
+        NSLog(@"Unable to view entity %@", [self.entity displayName]);
+    }];
     [self configureView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self refreshRider:_tv];
+}
+
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
+-(BOOL)shouldAutorotate
+
+{
+    return NO;
 }
 
 
@@ -119,44 +128,30 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc
-{
-}
-
 //implementation
-
-
-- (void)setRider:(Rider *)rider
-{
-    _rider = rider;
-}
-
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([self respondsToSelector:NSSelectorFromString(segue.identifier)]) {
-        if ([segue.identifier isEqualToString:@"showPledge:"]) {
-            [self showPledge:(SendPledgeModalViewController *)segue.destinationViewController];
-        }
-        if ([segue.identifier isEqualToString:@"showDetails:"]) {
-            [self showDetails:(ProfileDetailsTableViewController *)segue.destinationViewController];
-        }
+        [self performSelector:NSSelectorFromString(segue.identifier) withObject:segue.destinationViewController];
     }
     else {
         NSLog(@"%@ is not recognized segue", segue.identifier);
     }
 }
 
+- (void)segueToDonorList:(DonorsTableViewController *)donorViewController {
+    donorViewController.donorList = self.rider.donors;
+}
+
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController
 {
-    [TestFlight passCheckpoint:@"ShowPledgeMailDialog"];
     pledgeViewController.rider = self.rider;
     pledgeViewController.delegate = self;
 }
 
 - (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController
 {
-    [TestFlight passCheckpoint:@"ShowRiderStory"];
     profileDetailsViewController.rider = self.rider;
 }
 
@@ -193,8 +188,8 @@
             cell.titleString = [self getTitleFromComment:comment];
             cell.commentString = [self getTextFromComment:comment];
             
-            [cell.imageView setImageWithURL:[self getImageURLFromComment:comment]
-                           placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
+            [cell.imageView sd_setImageWithURL:[self getImageURLFromComment:comment]
+                           placeholderImage:[UIImage imageNamed:@"profile_default"]];
         }
         [cell layoutSubviews];
         return cell;
@@ -207,7 +202,7 @@
     if (section == 1)
     {
         NSInteger num = [self.riderComments count];
-        NSLog(@"Section 1 has %d cells", num);
+        NSLog(@"Section 1 has %ld cells", (long)num);
         return num;
     }
     else
@@ -228,7 +223,9 @@
     }
     if (indexPath.section == 1) {
         // open up a commentdetailview view
-        [self manuallyShowCommentsList];
+        id<SocializeActivity> comment = [riderComments objectAtIndex:indexPath.row];
+        SocializeActivityDetailsViewController *avc = [[SocializeActivityDetailsViewController alloc] initWithActivity:comment];
+        [self.navigationController pushViewController:avc animated:YES];
     }
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -236,7 +233,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return [super numberOfSectionsInTableView:tableView];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -248,16 +245,7 @@
 {
     CGFloat sz = 40;
     
-    if (indexPath.section == 0 && indexPath.row == 2)
-    {
-        // progress row -- hide if we're a volunteer rider
-        if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
-            [self.rider.riderType isEqualToString:@"Volunteer"])
-        {
-            sz = 0;
-        }
-    }
-    else if (indexPath.section == 1)
+    if (indexPath.section == 1)
     {
         id<SZComment> riderComment = [self.riderComments objectAtIndex:indexPath.row];
         NSString *comment = [self getTextFromComment:riderComment];
@@ -274,7 +262,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     
     // if dynamic section make all rows the same indentation level as row 0
     if (section == 1) {
@@ -290,17 +278,17 @@
     if (section == 1) {
         // create a view that says "Activity"
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, SECTION_1_HEADER_HEIGHT)];
+        headerView.backgroundColor = PRIMARY_DARK_GRAY;
+        
         UIButton *writePostButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        writePostButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        [writePostButton setTitle:@"Rider Wall" forState:UIControlStateNormal];
-        NSInteger writeButtonW = tableView.bounds.size.width;
-        NSInteger writeButtonH = 35;
-        [writePostButton setFrame:CGRectMake((self.view.bounds.size.width - writeButtonW)/2,
-                                             0, writeButtonW, writeButtonH)];
+        NSInteger writeButtonW = (tableView.bounds.size.width);
+        NSInteger writeButtonH = SECTION_1_HEADER_HEIGHT;
+        [writePostButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+        [writePostButton setFrame:CGRectMake(0, 0, writeButtonW, writeButtonH)];
         [writePostButton setBackgroundColor:PRIMARY_GREEN];
-        [writePostButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        writePostButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
-        [writePostButton setImage:[UIImage imageNamed:@"08-chat.png"] forState:UIControlStateNormal];
+        writePostButton.tintColor = [UIColor whiteColor];
+        [writePostButton setTitle:@"Post To Wall" forState:UIControlStateNormal];
+        [writePostButton setImage:[UIImage imageNamed:@"08-chat"] forState:UIControlStateNormal];
         [writePostButton addTarget:self action:@selector(manuallyShowCommentsList) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:writePostButton];
@@ -354,23 +342,17 @@
 #pragma mark -- view configuration
 - (void)manuallyShowCommentsList
 {
-    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:self.entity];
-    comments.completionBlock = ^{
-        
-        // Dismiss however you want here
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
+    SZComposeCommentViewController *commentVC = [[SZComposeCommentViewController alloc] initWithEntity:self.entity];
     
     // Present however you want here
-    [self presentViewController:comments animated:YES completion:nil];
+    [self presentViewController:commentVC animated:YES completion:nil];
 }
 
 - (void)reloadComments
 {
     [SZCommentUtils getCommentsByEntity:self.entity success:^(NSArray *comments) {
-        NSLog(@"Fetched comments successfully, %@", comments);
         self.riderComments = comments;
-        [self.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     } failure:^(NSError *error) {
         NSLog(@"Failed to fetch comments: %@", [error localizedDescription]);
     }];
@@ -380,8 +362,11 @@
 - (void)refreshRider:(AAPullToRefresh *)v
 {
     [self.rider refreshFromWebOnComplete:^(Rider *updatedRider) {
-        [self getLikesByEntity];
+        self.rider = updatedRider;
         [self configureView];
+
+        // update the comments in section 2 of our table
+        [self reloadComments];
     }
     onFailure:^(NSString *error) {
         NSLog(@"Unable to get profile for rider. Error: %@", error);
@@ -393,10 +378,7 @@
 - (BOOL)following
 {
     // return true if current rider is in the dataController
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    RiderDataController *dataController = appDelegate.riderDataController;
-    
-    return [dataController containsRider:self.rider];
+    return [[AppDelegate sharedDataController] containsRider:self.rider];
 }
 
 - (void)configureView
@@ -411,7 +393,9 @@
         [self.rider.riderType isEqualToString:@"Peloton"]) {
         self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
         self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
-        self.donationProgress.hidden = YES;
+
+        // Riders and Pelotons are the only ones who get progress
+        self.donationProgress.progress = 1.0;
     }
     else
     {
@@ -427,39 +411,36 @@
     if (self.following)
     {
         [self.starFollowButton setTitle:[NSString stringWithFormat:@"Following"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star.png"] forState:UIControlStateNormal];
+        [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star"] forState:UIControlStateNormal];
     }
     else
     {
         [self.starFollowButton setTitle:[NSString stringWithFormat:@"Follow"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-star.png"] forState:UIControlStateNormal];
+        [self.starFollowButton setImage:[UIImage imageNamed:@"28-star"] forState:UIControlStateNormal];
     }
     
     // this masks the photo to the tableviewcell
     self.nameAndRouteCell.imageView.layer.masksToBounds = YES;
     self.nameAndRouteCell.imageView.layer.cornerRadius = 5.0;
-    
+
     // now we resize the photo and the cell so that the photo looks right
-    __block UIActivityIndicatorView *activityIndicator;
-    [self.nameAndRouteCell.imageView addSubview:activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
-    activityIndicator.center = self.nameAndRouteCell.imageView.center;
-    [activityIndicator startAnimating];
+    if (self.rider.riderPhotoUrl) {
+        self.nameAndRouteCell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                                                                                         if (error) {
+                                                                                                                             NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
+                                                                                                                         }
+                                                                                                                         else {
+                                                                                                                             self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
+                                                                                                                             [self.nameAndRouteCell layoutSubviews];
+                                                                                                                         }
+
+                                                                                                                         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        
+            }
     
-    [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-            placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-     {
-         if (error != nil) {
-             NSLog(@"ProfileTableViewController::configureView error: %@", error.localizedDescription);
-         }
-         [activityIndicator removeFromSuperview];
-         activityIndicator = nil;
-         [self.nameAndRouteCell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
-         [self.nameAndRouteCell layoutSubviews];
-     }];
-    
-    // update the comments in section 2 of our table
-    [self reloadComments];
 }
 
 - (void)postAlert:(NSString *)msg {
@@ -486,7 +467,7 @@
         [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
         [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
         
-        NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you!  Please visit my <a href=%@>profile</a> to complete your pledge of $%@ to %@'s Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia 12 on August 10-12, 2012. The ride will span two days and will cover as many as 180 miles. In its first three years, Pelotonia has attracted over 8,300 riders from 38 states, over 2,800 volunteers, hundreds of thousands of donors and raised $25.4 million for cancer research. In 2011 alone, a record $13.1 million was raised. Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.name, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
+        NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you!  Please visit my <a href=%@>profile</a> to complete your pledge of $%@ to %@'s Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia this year. The ride will span two days and will cover as many as 180 miles. In its first 5 years, Pelotonia has attracted over 15,000 riders from 38 states, over 4,000 volunteers, hundreds of thousands of donors and raised over $60 million for cancer research. <br/><br/>Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.name, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
         
         NSLog(@"msgBody: %@", msg);
         [mailComposer setMessageBody:msg isHTML:YES];
@@ -501,7 +482,6 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
 {
-    [TestFlight passCheckpoint:@"SentPledgeMail"];
     if(error) {
         NSLog(@"ERROR - mailComposeController: %@", [error localizedDescription]);
     }
@@ -510,59 +490,25 @@
 
 #pragma Socialize stuff
 
-- (void)getLikesByEntity
-{
-    [SZLikeUtils getLikesForEntity:self.entity start:nil end:nil success:^(NSArray *likes) {
-        NSLog(@"Got likes: %@", likes);
-        self.numLikes = [likes count];
-        [self configureView];
-    } failure:^(NSError *error) {
-        self.numLikes = 0;
-        NSLog(@"Failed getting likes: %@", [error localizedDescription]);
-        [self configureView];
-    }];
-}
-
-- (void)like
-{
-    [SZLikeUtils likeWithEntity:self.entity options:nil networks:SZAvailableSocialNetworks()
-    success:^(id<SZLike> like) {
-        NSLog(@"Created like: %d", [like objectID]);
-    } failure:^(NSError *error) {
-        NSLog(@"Failed creating like: %@", [error localizedDescription]);
-    }];
-}
-
-- (void)unlike
-{
-    [SZLikeUtils unlike:self.entity success:^(id<SZLike> like) {
-        NSLog(@"Deleted like: %d", [like objectID]);
-    } failure:^(NSError *error) {
-        NSLog(@"Failed deleting like: %@", [error localizedDescription]);
-    }];
-}
-
 - (IBAction)followRider:(id)sender
 {
     // add the current rider to the main list of riders
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    RiderDataController *dataController = appDelegate.riderDataController;
+    RiderDataController *dataController = [AppDelegate sharedDataController];
     
     if (self.following) {
-        [TestFlight passCheckpoint:@"UnfollowRider"];
         [dataController removeObject:self.rider];
     }
     else {
-        [TestFlight passCheckpoint:@"FollowRider"];
         [dataController addObject:self.rider];
     }
+    // save the data
+    [dataController save];
     [self configureView];
 }
 
 
 - (IBAction)shareProfile:(id)sender
 {
-    NSString *txtToShare = [NSString stringWithFormat:@"Please support %@'s Pelotonia Ride!", self.rider.name];
     
     NSString *descriptionText = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Donations can be made in support of riders and will fund essential research at The James Cancer Hospital and Solove Research Institute. See the purpose, check the progress, make a difference.";
 
@@ -570,24 +516,24 @@
     shareDialog.title = [NSString stringWithFormat:@"Share %@", self.rider.name];
     
     SZShareOptions *options = [SZShareUtils userShareOptions];
-    options.dontShareLocation = YES;
     
     options.willAttemptPostingToSocialNetworkBlock = ^(SZSocialNetwork network, SZSocialNetworkPostData *postData) {
         if (network == SZSocialNetworkTwitter) {
+            SZShareOptions *twoptions = (SZShareOptions *)postData.options;
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"twitter"] objectForKey:@"entity_url"];
-            
-            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", txtToShare, entityURL];
+            NSString *customStatus = [NSString stringWithFormat:@"%@ %@", twoptions.text, entityURL];
             
             [postData.params setObject:customStatus forKey:@"status"];
             
         } else if (network == SZSocialNetworkFacebook) {
+            SZShareOptions *fboptions = (SZShareOptions *)postData.options;
             NSString *entityURL = [[postData.propagationInfo objectForKey:@"facebook"] objectForKey:@"entity_url"];
             NSString *displayName = [postData.entity displayName];
-            NSString *customMessage = [NSString stringWithFormat:@"%@", txtToShare];
+            NSString *customMessage = [NSString stringWithFormat:@"%@", fboptions.text];
             
-            [postData.params setObject:customMessage forKey:@"message"];
+            [postData.params setObject:customMessage forKey:@"caption"];
             [postData.params setObject:entityURL forKey:@"link"];
-            [postData.params setObject:txtToShare forKey:@"caption"];
+            [postData.params setObject:customMessage forKey:@"message"];
             [postData.params setObject:displayName forKey:@"name"];
             [postData.params setObject:descriptionText forKey:@"description"];
         }
@@ -607,14 +553,13 @@
     
     shareDialog.completionBlock = ^(NSArray *shares) {
         // Dismiss however you want here
-        [TestFlight passCheckpoint:@"ShareRiderProfile"];
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
     shareDialog.cancellationBlock = ^() {
         [self dismissViewControllerAnimated:YES completion:nil];
     };
-
+    
     [self presentViewController:shareDialog animated:YES completion:nil];
     
 }
@@ -653,6 +598,10 @@
 - (void)done
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)manuallyTriggered {
+    [_tv manuallyTriggered];
 }
 
 

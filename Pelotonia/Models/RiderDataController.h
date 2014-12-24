@@ -13,7 +13,11 @@
     NSMutableArray *_riderList;
 }
 
-- (unsigned)count;
+@property (strong, nonatomic) Rider *favoriteRider;
+@property (strong, nonatomic) NSMutableArray *workouts;
+@property (strong, nonatomic) NSMutableArray *photoKeys;
+
+- (NSInteger)count;
 - (Rider *)objectAtIndex:(NSUInteger)index;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)addObject:(Rider *)object;
@@ -22,6 +26,7 @@
 - (BOOL)containsRider:(Rider *)object;
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors;
 - (NSArray *)allRiders;
+- (void)save;
 
 // NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder;

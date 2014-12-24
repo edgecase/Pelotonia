@@ -8,6 +8,8 @@
 
 
 #import <UIKit/UIKit.h>
+#import "RiderDataController.h"
+#import <SDWebImage/SDImageCache.h>
 
 #define IF_IOS60_OR_GREATER(...) \
 if (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iPhoneOS_6_0) \
@@ -25,6 +27,9 @@ __VA_ARGS__ \
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) RiderDataController *riderDataController;
 
++ (RiderDataController *)sharedDataController;
+
 - (void)archiveData;
+
 
 @end

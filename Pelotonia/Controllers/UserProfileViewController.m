@@ -14,22 +14,38 @@
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Resize.h"
 #import "UIImage+Alpha.h"
+#import "RiderDataController.h"
+#import "WorkoutListTableViewController.h"
+#import "AppDelegate.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
+#import "FindRiderViewController.h"
+#import "IntroViewController.h"
+
+#ifndef DEBUG
+#define DEBUG   0
+#endif
 
 @interface UserProfileViewController ()
 
 @end
 
 @implementation UserProfileViewController {
+    NSArray *_workouts;
     AAPullToRefresh *_tv;
 }
 
 
 @synthesize currentUser;
 @synthesize recentComments;
+@synthesize library;
+
+// property overloads
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -43,36 +59,70 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.currentUser = [SZUserUtils currentUser];
+    self.library = [[ALAssetsLibrary alloc] init];
+    self.rider = [[AppDelegate sharedDataController] favoriteRider];
+    _workouts = [[AppDelegate sharedDataController] workouts];
 
     __weak UserProfileViewController *weakSelf = self;
     _tv = [self.tableView addPullToRefreshPosition:AAPullToRefreshPositionTop ActionHandler:^(AAPullToRefresh *v) {
         [weakSelf refreshUser];
-//        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
+        [v performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.5f];
     }];
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
-    self.navigationController.navigationBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self.navigationController.navigationBar respondsToSelector:@selector(setBarTintColor:)]) {
-        self.navigationController.navigationBar.barTintColor = PRIMARY_DARK_GRAY;
-        self.navigationController.navigationBar.tintColor = PRIMARY_GREEN;
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-    }
-
+    
+    // logo in title bar
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
+    self.navigationItem.titleView = imageView;
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_tv manuallyTriggered];
+    
+    [self configureView];
+
+    // if this is our first time loading, pop up the "this is how you use me" screen
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (nil == [defaults objectForKey:@"firstRun"] || ([self showInDebug])) {
+        [defaults setObject:[NSDate date] forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSegueWithIdentifier:@"SegueToIntroViewController" sender:self];
+    }
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    self.currentUser = [SZUserUtils currentUser];
+- (BOOL)showInDebug
+{
+    BOOL retval = FALSE;
+    
+    NSDate *lastRun = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstRun"];
+    
+    if ( DEBUG && ([lastRun daysAgo] > 1)) {
+        return TRUE;
+    }
+    
+    return retval;
 }
+
+- (void)viewDidUnload {
+    [self setUserName:nil];
+    [self setUserType:nil];
+    [self setUserPhoto:nil];
+    self.library = nil;
+    [super viewDidUnload];
+}
+
+- (void)dealloc
+{
+    [self.tableView removeObserver:_tv forKeyPath:@"contentOffset"];
+    [self.tableView removeObserver:_tv forKeyPath:@"contentSize"];
+    [self.tableView removeObserver:_tv forKeyPath:@"frame"];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -80,198 +130,201 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)getActionsByUserOnAllEntities
-{
-    [SZCommentUtils getCommentsByUser:nil first:nil last:nil success:^(NSArray *comments) {
-        self.recentComments = comments;
-        [self.tableView reloadData];
-        [_tv performSelector:@selector(stopIndicatorAnimation) withObject:nil afterDelay:1.0f];
+#pragma mark -- regular implementation
 
-    } failure:^(NSError *error) {
-        NSLog(@"unable to get recent comments: %@", [error localizedDescription]);
+- (void) configureView {
+    [self configureRecentPhotos];
+    [self configureWorkoutCell];
+    [self configureRiderCell];
+    
+    
+}
+
+- (NSInteger)workoutMiles {
+    NSInteger sum = 0;
+    for (Workout *w in _workouts) {
+        sum += w.distanceInMiles;
+    }
+    return sum;
+}
+- (void)configureWorkoutCell
+{
+    // show details of most recent workout
+    if ([_workouts count] > 0) {
+        NSArray *workoutsSorted = [_workouts sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            Workout *w1 = (Workout *)obj1;
+            Workout *w2 = (Workout *)obj2;
+            return [w2.date compare:w1.date];
+        }];
+        Workout *mostRecent = [workoutsSorted objectAtIndex:0];
+        self.recentWorkoutDateLabel.text = [NSString stringWithFormat:@"%@ (%ld Miles)", [mostRecent.date stringWithFormat:@"MMM dd"], (long)mostRecent.distanceInMiles];
+        self.milesThisYearLabel.text = [NSString stringWithFormat:@"%ld", (long)[self workoutMiles]];
+    }
+    else {
+        self.recentWorkoutDateLabel.text = @"None Yet";
+        self.milesThisYearLabel.text = @"0";
+    }
+}
+
+- (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
+{
+    NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
+    // load the image from the asset library
+    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+        if (asset) {
+            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+        }
+        else {
+            NSLog(@"couldn't find image");
+            [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
+        }
+    } failureBlock:^(NSError *error) {
+        NSLog(@"error loading image %@", [error localizedDescription]);
+        [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
     }];
 }
 
-- (void)configureView
+- (void)configureRecentPhotos
 {
-    [self setUserNameCell:nil];
+    NSArray *photos = [[AppDelegate sharedDataController] photoKeys];
+    
+    photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDictionary *photoDict1 = (NSDictionary *)obj1;
+        NSDictionary *photoDict2 = (NSDictionary *)obj2;
+        NSDate *date1 = [photoDict1 objectForKey:@"date"];
+        NSDate *date2 = [photoDict2 objectForKey:@"date"];
+        return [date2 compare:date1];
+    }];
+    
+    NSUInteger numPhotos = [photos count];
+    if (numPhotos >= 1) {
+        [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
+    }
+    if (numPhotos >= 2) {
+        [self setImageView:self.recentImage2 fromPhotos:photos atIndex:1];
+    }
+    if (numPhotos >= 3) {
+        [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
+    }
 }
 
 - (void)refreshUser
 {
-    [self getActionsByUserOnAllEntities];
-    [self configureView];
+    if (self.rider) {
+        [self.rider refreshFromWebOnComplete:^(Rider *rider) {
+            [[AppDelegate sharedDataController] setFavoriteRider:rider];
+            [self configureView];
+        } onFailure:^(NSString *errorMessage) {
+            NSLog(@"Unable to refresh user");
+        }];
+    }
+    else {
+        [self configureView];
+    }
 }
 
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
+    NSString *segueID = [segue identifier];
+    
+    if ([segueID isEqualToString:@"SegueToRiderProfile"]) {
+        // seeing a rider profile next
+        ProfileTableViewController *profVC = (ProfileTableViewController *)segue.destinationViewController;
+        profVC.rider = [[AppDelegate sharedDataController] favoriteRider];
+    }
+    
+    if ([segueID isEqualToString:@"SegueToLinkProfile"]) {
+        NSLog(@"linking profile...");
+        FindRiderViewController *findRiderVC = (FindRiderViewController *)segue.destinationViewController;
+        findRiderVC.delegate = self;
+    }
+    
+    if ([segueID isEqualToString:@"SegueToShowWorkoutList"]) {
+        WorkoutListTableViewController *workoutVC = (WorkoutListTableViewController *)segue.destinationViewController;
+        workoutVC.navigationItem.backBarButtonItem.title = self.rider.name;
+        workoutVC.rider = self.rider;
+    }
+    
+    if ([segueID isEqualToString:@"SegueToNewWorkout"]) {
+        // create a new workout
+        NewWorkoutTableViewController *newWorkoutVC = (NewWorkoutTableViewController *)[[segue.destinationViewController viewControllers] objectAtIndex:0];
+        newWorkoutVC.workout = [Workout defaultWorkout];
+        newWorkoutVC.delegate = self;
+        newWorkoutVC.isNewWorkout = YES;
+    }
+    
+    if ([segueID isEqualToString:@"SegueToIntroViewController"]) {
+        // no-op, nothing to do
+//        IntroViewController *introViewController = (IntroViewController *)segue.destinationViewController;
+    }
+        
 }
-
 
 #pragma mark - Table view delegate
-- (void)manuallyShowCommentsListWithEntity:(id<SZEntity>)entity
-{
-    SZCommentsListViewController *comments = [[SZCommentsListViewController alloc] initWithEntity:entity];
-    comments.completionBlock = ^{
-        
-        // Dismiss however you want here
-        [self dismissViewControllerAnimated:YES completion:nil];
-    };
-    
-    // Present however you want here
-    [self presentViewController:comments animated:YES completion:nil];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0)
-    {
+    
+    // clicked a linked profile
+    if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [SZUserUtils showUserSettingsInViewController:self completion:^{
-                NSLog(@"Done showing settings");
-            }];
+            if (self.rider) {
+                [self performSegueWithIdentifier:@"SegueToRiderProfile" sender:self];
+            }
+            else {
+                [self performSegueWithIdentifier:@"SegueToLinkProfile" sender:self];
+            }
         }
     }
-    else if (indexPath.section == 1)
-    {
-        id<SZComment> comment = [self.recentComments objectAtIndex:indexPath.row];
-        [self manuallyShowCommentsListWithEntity:[comment entity]];
-    }
 }
 
-
-- (void)setUserNameCell:(__weak UITableViewCell *)cell
+- (void)configureRiderCell
 {
-    if ([self.currentUser firstName]) {
+    if (self.rider) {
+        self.riderName.text = self.rider.name;
+        self.riderDistance.text = self.rider.route;
         
-        self.userName.text  = [NSString stringWithFormat:@"%@ %@", [self.currentUser firstName], [self.currentUser lastName]];
-        self.userType.text = [self.currentUser description];
+        self.riderPhoto.contentMode = UIViewContentModeScaleAspectFit;
         
-        // this masks the photo to the tableviewcell
-        self.userProfileImageView.layer.masksToBounds = YES;
-        self.userProfileImageView.layer.cornerRadius = 5.0;
-        [self.userProfileImageView setImageWithURL:[NSURL URLWithString:[self.currentUser large_image_uri]]
-                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                  [cell.imageView setImage:[image thumbnailImage:50 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationDefault]];
-                                  [cell layoutSubviews];
-                              }
-         ];
+        [self.riderPhoto setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoThumbUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self.riderProfileCell layoutSubviews];
+        } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
     }
     else {
-        self.userName.text = @"Sign In";
-        self.userType.text = @"Support Pelotonia with your friends";
+        // let them pick a rider
+        self.riderName.text = @"Your Rider Profile";
+        self.riderDistance.text = nil;
+        [self.riderPhoto setImage:[UIImage imageNamed:@"speedy_arrow"]];
     }
+    self.riderName.font = PELOTONIA_FONT(21);
+    self.riderDistance.font = PELOTONIA_FONT(16);
+
 }
 
-
-- (NSString *)getTitleFromComment:(id<SZComment>) comment
-{
-    return [NSString stringWithFormat:@"%@, %@", [[comment user] userName], [NSDate stringForDisplayFromDate:[comment date] prefixed:YES alwaysDisplayTime:NO]];
-}
-
-- (NSString *)getTextFromComment:(id<SZComment>) comment
-{
-    return [comment text];
-}
-
-- (NSURL *)getImageURLFromComment:(id<SZComment>) comment
-{
-    NSString *strURL = [[comment user] smallImageUrl];
-    return [NSURL URLWithString:strURL];
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *_cell;
-
-    // only handle the dynamic section.  static cells handled in configureView
-    if (indexPath.section == 0)
-    {
-        _cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
-    
-    if (indexPath.section == 1)
-    {
-        // current activity
-        id<SZComment> activity = [self.recentComments objectAtIndex:indexPath.row];
-        
-        CommentTableViewCell *cell = [CommentTableViewCell cellForTableView:tableView];
-        cell.titleString = [self getTitleFromComment:activity];
-        cell.commentString = [self getTextFromComment:activity];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        [cell.imageView setImageWithURL:[self getImageURLFromComment:activity]
-                       placeholderImage:[UIImage imageNamed:@"profile_default.jpg"]];
-
-        
-        _cell = (UITableViewCell *)cell;
-        [_cell layoutSubviews];
-    }
-    
-    return _cell;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
-        return 26;
-    }
-    else
-    {
-        return [super tableView:tableView heightForHeaderInSection:section];
-    }
+    return [super tableView:tableView heightForHeaderInSection:section];
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 1) {
-        if ([self.recentComments count] > 0) {
-            return @"Activity";
-        }
-        else {
-            return @"";
-        }
-    }
-    else {
-        return nil;
-    }
+    return [super tableView:tableView titleForHeaderInSection:section];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 24)];
-    label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(24);
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = [UIColor blackColor];
-    label.text = [self tableView:tableView titleForHeaderInSection:section];
-    
-    [headerView addSubview:label];
-    return headerView;
+    return [super tableView:tableView viewForHeaderInSection:section];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1)
-    {
-        NSInteger num = [self.recentComments count];
-        NSLog(@"Section 1 has %d cells", num);
-        return num;
-    }
-    else
-    {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    }
+    return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 
@@ -282,42 +335,21 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat sz = 26;
-    
-    if (indexPath.section == 1)
-    {
-        // figure out Pelotonia activity cell
-        id<SZComment> riderComment = [self.recentComments objectAtIndex:indexPath.row];
-        NSString *comment = [self getTextFromComment:riderComment];
-        NSString *title = [self getTitleFromComment:riderComment];
-        sz = [CommentTableViewCell getTotalHeightForCellWithCommentText:comment andTitle:title];
-    }
-    else
-    {
-        sz = [super tableView:tableView heightForRowAtIndexPath:indexPath];
-    }
-    
-    return sz;
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
-    
     // if dynamic section make all rows the same indentation level as row 0
-    if (section == 1)
-    {
-        return [super tableView:tableView indentationLevelForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-    }
-    else
-    {
-        return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
-    }
+    return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
 }
 
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) {
+        return YES;
+    }
     return NO;
 }
 
@@ -328,23 +360,192 @@
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return UITableViewCellEditingStyleDelete;
+    }
     return UITableViewCellEditingStyleNone;
 }
 
-
-- (void)viewDidUnload {
-    [self setUserName:nil];
-    [self setUserType:nil];
-    [self setUserProfileImageView:nil];
-    [super viewDidUnload];
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the dataController
+        [[AppDelegate sharedDataController] setFavoriteRider:nil];
+        self.rider = nil;
+        [self configureRiderCell];
+    }
 }
 
 
-#pragma mark -- PullToRefreshDelegate
 
--(void)manualRefresh:(NSNotification *)notification
+#pragma mark -
+#pragma mark -- FindRiderViewController methods
+
+- (void)findRiderViewControllerDidCancel:(FindRiderViewController *)controller
 {
-    [_tv manuallyTriggered];
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)findRiderViewControllerDidSelectRider:(FindRiderViewController *)controller rider:(Rider *)rider
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    [[AppDelegate sharedDataController] setFavoriteRider:rider];
+    self.rider = rider;
+    [self configureRiderCell];
+}
+
+- (IBAction)addPhotoToAlbum:(id)sender
+{
+    // show action sheet allowing picking or taking image
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Photo", @"Take Picture", nil];
+    [sheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        if (buttonIndex == 0) {
+            [self startMediaBrowserFromViewController:self usingDelegate:self];
+        }
+        if (buttonIndex == 1) {
+            [self startCameraControllerFromViewController:self usingDelegate:self];
+        }
+    }
+}
+
+- (IBAction)signIn:(id)sender {
+    // if the user is not yet linked to any social network, ensure that they do so
+    if (![SZUserUtils userIsLinked]) {
+        [SZUserUtils showLinkDialogWithViewController:self
+                                           completion:^(SZSocialNetwork selectedNetwork) {
+            NSLog(@"Linked!");
+        } cancellation:^{
+            NSLog(@"Not linked!");
+        }];
+    }
+    // if they are already linked, show their profile
+    else {
+        [SZUserUtils showUserProfileInViewController:self user:[SZUserUtils currentUser] completion:^(id<SocializeFullUser> user) {
+            NSLog(@"Showing user profile");
+        }];
+    }
+}
+
+#pragma mark -- UIImagePicker methods
+- (BOOL) startCameraControllerFromViewController: (UIViewController*) controller
+                                   usingDelegate: (id <UIImagePickerControllerDelegate,
+                                                   UINavigationControllerDelegate>) delegate {
+    
+    if (([UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeCamera] == NO)
+        || (delegate == nil)
+        || (controller == nil))
+        return NO;
+    
+    UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
+    cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+    
+    // Displays a control that allows the user to choose picture or
+    // movie capture, if both are available:
+    if ([[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera] containsObject:(NSString *)kUTTypeImage]) {
+        cameraUI.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeImage, nil];
+    }
+    
+    // Hides the controls for moving & scaling pictures, or for
+    // trimming movies. To instead show the controls, use YES.
+    cameraUI.allowsEditing = YES;
+    
+    cameraUI.delegate = delegate;
+    
+    [controller presentViewController:cameraUI animated:YES completion:nil];
+    return YES;
+}
+
+- (BOOL) startMediaBrowserFromViewController: (UIViewController*) controller
+                               usingDelegate: (id <UIImagePickerControllerDelegate,
+                                               UINavigationControllerDelegate>) delegate
+{
+    
+    if (([UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)
+        || (delegate == nil)
+        || (controller == nil))
+        return NO;
+    
+    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+    mediaUI.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    
+    // Displays saved pictures and movies, if both are available, from the
+    // Camera Roll album.
+    mediaUI.mediaTypes =
+    [UIImagePickerController availableMediaTypesForSourceType:
+     UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    
+    // Hides the controls for moving & scaling pictures, or for
+    // trimming movies. To instead show the controls, use YES.
+    mediaUI.allowsEditing = YES;
+    
+    mediaUI.delegate = delegate;
+    [controller presentViewController:mediaUI animated:YES completion:nil];
+    return YES;
+}
+
+// For responding to the user tapping Cancel.
+- (void) imagePickerControllerDidCancel: (UIImagePickerController *) picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+// For responding to the user accepting a newly-captured picture or movie
+- (void) imagePickerController: (UIImagePickerController *) picker
+ didFinishPickingMediaWithInfo: (NSDictionary *) info {
+    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToSave;
+    
+    // Handle a still image capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0) == kCFCompareEqualTo) {
+        
+        editedImage = (UIImage *) [info objectForKey:UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:UIImagePickerControllerOriginalImage];
+        
+        if (editedImage) {
+            imageToSave = editedImage;
+        } else {
+            imageToSave = originalImage;
+        }
+        
+        // Save the new image (original or edited) to the Camera Roll
+        [self.library writeImageToSavedPhotosAlbum:imageToSave.CGImage
+                                          metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                                   completionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error) {
+                NSLog(@"error writing image: %@", [error localizedDescription]);
+            }
+            else {
+                // no error, so put it in the cache, and add to our list of images
+                NSString *key = [assetURL absoluteString];
+                [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
+                [[[AppDelegate sharedDataController] photoKeys] addObject:@{@"key" : key, @"date" : [NSDate date]}];
+                
+                [picker dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
+}
+
+#pragma mark -- NewWorkouTableViewControllerDelegate
+- (void)userDidCancelNewWorkout:(NewWorkoutTableViewController *)vc
+{
+    [vc dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)userDidEnterNewWorkout:(NewWorkoutTableViewController *)vc workout:(Workout *)workout
+{
+    [[[AppDelegate sharedDataController] workouts] addObject:workout];
+    _workouts = [[AppDelegate sharedDataController] workouts];
+    [vc dismissViewControllerAnimated:YES completion:nil];
+    [self configureWorkoutCell];
 }
 
 

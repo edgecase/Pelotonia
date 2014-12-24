@@ -13,7 +13,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 
+- (IBAction)twitterButtonClicked:(id)sender;
 - (IBAction)done:(id)sender;
 
 @end

@@ -10,9 +10,9 @@
 #import "RiderDataController.h"
 #import "Pelotonia-Colors.h"
 #import "Appirater.h"
-#import "TestFlight.h"
 #import "NSDictionary+JSONConversion.h"
 #import "ProfileTableViewController.h"
+#import "PelotoniaProfileViewController.h"
 #import "RidersViewController.h"
 #import "InitialSlidingViewController.h"
 #import "MenuViewController.h"
@@ -58,15 +58,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#ifdef TESTING
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] identifierForVendor].UUIDString];
-#endif
-    // set up test flight
-    [TestFlight takeOff:@"55b1afb9-fb17-43db-91a9-5b9797d9f481"];
 
     // Register for Apple Push Notification Service
     [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
     
+    
+    // Initialize our coredata instance
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"PelotoniaModel"];
+
     // clear the SDWebImageCache
     [[[SDWebImageManager sharedManager] imageCache] clearDisk];
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
@@ -78,14 +77,23 @@
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     shadow.shadowBlurRadius = 0.0;
-    shadow.shadowOffset = CGSizeMake(0.0, -1.0);
+    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-           NSForegroundColorAttributeName: SECONDARY_LIGHT_GRAY,
+           NSForegroundColorAttributeName: [UIColor whiteColor],
            NSShadowAttributeName: shadow,
-           NSFontAttributeName: PELOTONIA_FONT(20),
+           NSFontAttributeName: PELOTONIA_SECONDARY_FONT_BOLD(0),
            }];
-
+    [[UINavigationBar appearance] setTintColor: PRIMARY_GREEN];
+    [[UINavigationBar appearance] setBarTintColor:PRIMARY_DARK_GRAY];
+    [[UINavigationBar appearance] setBackgroundColor:PRIMARY_DARK_GRAY];
+        
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = SECONDARY_LIGHT_GRAY;
+    pageControl.currentPageIndicatorTintColor = SECONDARY_GREEN;
+    pageControl.backgroundColor = [UIColor clearColor];
+    
+    
     // set the socialize api key and secret, register your app here: http://www.getsocialize.com/apps/
     [Socialize storeConsumerKey:@"26caf692-9893-4f89-86d4-d1f1ae45eb3b"];
     [Socialize storeConsumerSecret:@"6b070689-31a9-4f5a-907e-4422d87a9e42"];
@@ -96,27 +104,45 @@
     [Socialize setEntityLoaderBlock:^(UINavigationController *navigationController, id<SocializeEntity>entity) {
         NSDictionary *metaDict = [NSDictionary dictionaryWithContentsOfJSONString:[entity meta]];
         NSString *riderID = [metaDict objectForKey:@"riderID"];
-        Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
-        rider.profileUrl = [entity key];
         
-        [rider refreshFromWebOnComplete:^(Rider *rider) {
-
+        if ([riderID isEqualToString:@"PELOTONIA"]) {
+            // this is the pelotonia entity
             // navigate to the riders view controller & show the profile
             InitialSlidingViewController *rvc = (InitialSlidingViewController *)self.window.rootViewController;
             UINavigationController *nvc = (UINavigationController *)rvc.topViewController;
             
-            ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
-            profileViewController.rider = rider;
+            PelotoniaProfileViewController *pelotoniaVC = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"PelotoniaProfileViewController"];
             
             if (navigationController == nil)
             {
-                [nvc pushViewController:profileViewController animated:YES];
+                [nvc pushViewController:pelotoniaVC animated:YES];
             } else {
-                [navigationController pushViewController:profileViewController animated:YES];
+                [navigationController pushViewController:pelotoniaVC animated:YES];
             }
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
-        }];
+        }
+        else {
+            Rider *rider = [[Rider alloc] initWithName:[entity name] andId:riderID];
+            rider.profileUrl = [entity key];
+            
+            [rider refreshFromWebOnComplete:^(Rider *rider) {
+
+                // navigate to the riders view controller & show the profile
+                InitialSlidingViewController *rvc = (InitialSlidingViewController *)self.window.rootViewController;
+                UINavigationController *nvc = (UINavigationController *)rvc.topViewController;
+                
+                ProfileTableViewController *profileViewController = [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"ProfileTableViewController"];
+                profileViewController.rider = rider;
+                
+                if (navigationController == nil)
+                {
+                    [nvc pushViewController:profileViewController animated:YES];
+                } else {
+                    [navigationController pushViewController:profileViewController animated:YES];
+                }
+            } onFailure:^(NSString *errorMessage) {
+                NSLog(@"Unknown Rider: %@. Error: %@", [entity name], errorMessage);
+            }];
+        }
     }];
     
     // Handle Socialize notification at launch
@@ -126,8 +152,14 @@
     }
     
     // call the Appirater class
+    [Appirater setAppId:@"550038050"];
+    [Appirater setDaysUntilPrompt:5];
+    [Appirater setUsesUntilPrompt:3];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
-
+        
     return YES;
 }
 
@@ -160,6 +192,7 @@
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [self archiveData];
+    [[NSManagedObjectContext defaultContext] saveToPersistentStoreAndWait];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -175,13 +208,14 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-  // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
 }
 
 
 // data controller methods
 #pragma mark -- data controller
-- (NSString *)PelotoniaFiles:(NSString *)fileName
++ (NSString *)PelotoniaFiles:(NSString *)fileName
 {
     // get list of directories in sandbox
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -193,44 +227,47 @@
     return [documentDirectory stringByAppendingPathComponent:fileName];
 }
 
-- (NSString *)riderFilePath 
++ (NSString *)riderFilePath
 {
-    return [self PelotoniaFiles:@"Riders"];
-}
-
-- (BOOL)handleOpenURL:(NSURL*)url
-{
-    [Socialize handleOpenURL:url];
-    
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    return [self handleOpenURL:url];
-}
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [self handleOpenURL:url];
+    return [AppDelegate PelotoniaFiles:@"Riders"];
 }
 
 - (RiderDataController *)riderDataController {
-    if (_riderDataController == nil) {
-        _riderDataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[self riderFilePath]];
-        if (_riderDataController == nil) {
-            _riderDataController = [[RiderDataController alloc] init]; 
-        }
-    }
-    return _riderDataController;
+    return [AppDelegate sharedDataController];
 }
 
 - (void)archiveData
 {
     // get the game list & write it out
-    [NSKeyedArchiver archiveRootObject:self.riderDataController toFile:[self riderFilePath]];
-    
+    [NSKeyedArchiver archiveRootObject:self.riderDataController toFile:[AppDelegate riderFilePath]];
 }
+
++ (RiderDataController *)sharedDataController
+{
+    static RiderDataController *dataController = nil;
+    
+    if (dataController == nil)
+    {
+        dataController = [NSKeyedUnarchiver unarchiveObjectWithFile:[self riderFilePath]];
+        if (dataController == nil) {
+            dataController = [[RiderDataController alloc] init];
+        }
+    }
+    return dataController;
+}
+
+#pragma mark - open URL stuff
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [Socialize handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [Socialize handleOpenURL:url];
+}
+
 
 
 

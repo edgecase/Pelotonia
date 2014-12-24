@@ -7,7 +7,7 @@
 //
 
 #import "FeedbackViewController.h"
-#import "TestFlight.h"
+#import <Socialize/Socialize.h>
 
 @interface FeedbackViewController ()
 
@@ -24,19 +24,6 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // configure the UI appearance of the window
-    self.navBar.tintColor = PRIMARY_DARK_GRAY;
-    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        self.navBar.tintColor = PRIMARY_GREEN;
-        self.navBar.barTintColor = PRIMARY_DARK_GRAY;
-        [self.navigationController.navigationBar setTranslucent:NO];
-        self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-        [self setNeedsStatusBarAppearanceUpdate];
-    }
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -46,11 +33,26 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     NSString *feedback = self.feedbackText.text;
-    [TestFlight submitFeedback:feedback];
+    // send the feedback to support@isandlot.com
+    [self sendFeedback:feedback];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)sendFeedback:(NSString *)feedback {
+    SendGrid *sendgrid = [SendGrid apiUser:@"support@isandlot.com" apiKey:@"1drink2many!"];
+    
+    NSString *username = [[SZUserUtils currentUser] userName];
+    NSString *displayName = [[SZUserUtils currentUser] displayName];
+    SendGridEmail *email = [[SendGridEmail alloc] init];
+    email.to = @"support@isandlot.com";
+    email.from = @"feedback@pelotonia.org";
+    email.subject = @"Pelotonia App Feedback";
+    email.text = [NSString stringWithFormat:@"Name: %@\nUserName: %@\n%@", displayName, username, feedback];
+    [sendgrid sendWithWeb:email];
+}
+
 @end

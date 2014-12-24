@@ -66,8 +66,8 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         // name/id cell
         cell.textLabel.font = PELOTONIA_FONT(21);
-        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
-        cell.textLabel.textColor = PRIMARY_GREEN;
+        cell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(18);
+        cell.detailTextLabel.textColor = PRIMARY_GREEN;
         cell.textLabel.text = self.rider.name;
         cell.detailTextLabel.text = self.rider.route;
         
@@ -81,24 +81,22 @@
         activityIndicator.center = cell.imageView.center;
         [activityIndicator startAnimating];
         
-        [cell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl]
-                       placeholderImage:[UIImage imageNamed:@"pelotonia-icon.png"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType)
-         {
-             if (error != nil) {
-                 NSLog(@"ProfileDetailsTableViewController::configureView error: %@", error.localizedDescription);
-             }
-             [activityIndicator removeFromSuperview];
-             activityIndicator = nil;
-             [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
-             [cell layoutSubviews];
-         }];
-
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"pelotonia-icon"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error != nil) {
+                NSLog(@"ProfileDetailsTableViewController::configureView error: %@", error.localizedDescription);
+            }
+            [activityIndicator removeFromSuperview];
+            activityIndicator = nil;
+            [cell.imageView setImage:[image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(100, 100) interpolationQuality:kCGInterpolationDefault]];
+            [cell layoutSubviews];
+        }];
         
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {
-        self.riderStoryTextView.text = self.rider.story;
         self.riderStoryTextView.textColor = PRIMARY_DARK_GRAY;
+        [self.riderStoryTextView setFont:PELOTONIA_SECONDARY_FONT(21)]; //    [UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+        [self.riderStoryTextView setScrollEnabled:YES];
+        self.riderStoryTextView.text = self.rider.story;
     }
     
     return cell;
@@ -109,7 +107,7 @@
     if (indexPath.section == 0)
     {
         if (indexPath.row == 1) {
-            UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            UIFont *font = PELOTONIA_SECONDARY_FONT(18); //  [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
             CGSize initialSize = CGSizeMake(self.riderStoryTextView.bounds.size.width, CGFLOAT_MAX);
             
             NSAttributedString *attributedText =
@@ -119,7 +117,7 @@
             CGRect rect = [attributedText boundingRectWithSize:initialSize
                                                        options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                                        context:nil];
-            return ceilf(rect.size.height/2);
+            return ceilf(rect.size.height);
         }
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

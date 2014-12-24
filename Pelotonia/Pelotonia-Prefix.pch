@@ -12,6 +12,10 @@
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
     #import <Parse/Parse.h>
-    #import "ECSlidingViewController.h"
+    #import <ECSlidingViewController/ECSlidingViewController.h>
     #import "Pelotonia-Colors.h"
+    #import <CoreData/CoreData.h>
+
+    #define MR_SHORTHAND
+    #import <MagicalRecord/CoreData+MagicalRecord.h>
 #endif

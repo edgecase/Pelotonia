@@ -10,7 +10,9 @@
 #import "PRPWebViewController.h"
 #import "ECSlidingViewController.h"
 #import "Pelotonia-Colors.h"
-#import "TestFlight.h"
+#import "PelotoniaWeb.h"
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
 
 @interface AboutTableViewController ()
 
@@ -68,7 +70,7 @@
     [super viewWillAppear:animated];
     self.storyTextView.backgroundColor = [UIColor clearColor];
     self.storyTextView.opaque = NO;
-    self.storyTextView.text = @"Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.";
+    self.storyTextView.text = pelotoniaStory;
     self.storyTextView.font = PELOTONIA_SECONDARY_FONT(17);
     self.storyTextView.textColor = PRIMARY_DARK_GRAY;
 
@@ -98,6 +100,59 @@
 
 
 #pragma mark -- Custom Functionality
+- (IBAction)twitterButtonClicked:(id)sender {
+    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+    
+    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    
+    [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
+        if(granted) {
+            // Get the list of Twitter accounts.
+            NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+            
+            // For the sake of brevity, we'll assume there is only one Twitter account present.
+            // You would ideally ask the user which account they want to tweet from, if there is more than one Twitter account present.
+            if ([accountsArray count] > 0) {
+                // Grab the initial Twitter account to tweet from.
+                ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+                                
+                NSDictionary *values = @{@"screen_name": @"Pelotonia", @"follow": @"true"};
+                
+                //requestForServiceType
+                
+                SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                            requestMethod:SLRequestMethodPOST
+                                                                      URL:[NSURL URLWithString:@"https://api.twitter.com/1/friendships/create.json"] parameters:values];
+                [postRequest setAccount:twitterAccount];
+                [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+                    NSString *output = [NSString stringWithFormat:@"HTTP response status: %li Error %ld",
+                                        (long)[urlResponse statusCode],(long)error.code];
+                    NSLog(@"%@error %@", output,error.description);
+                    if ([urlResponse statusCode] == 200) {
+                        [self performSelectorOnMainThread:@selector(successTwitter) withObject:nil waitUntilDone:NO];
+                    }
+                    else {
+                        [self performSelectorOnMainThread:@selector(failTwitter) withObject:nil waitUntilDone:NO];
+                    }
+                }];
+            }
+            
+        }
+    }];
+}
+
+- (void)successTwitter
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"You are now following @pelotonia" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+
+- (void)failTwitter
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Unable to follow Pelotonia at this time.  Please try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+
 - (IBAction)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

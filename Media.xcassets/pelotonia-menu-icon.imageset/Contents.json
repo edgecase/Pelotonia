@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "pelotonia-menu-icon.png"
+      "filename" : "Icon-Menu.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "pelotonia-menu-icon@2x.png"
+      "filename" : "Icon-Menu@2x.png"
     }
   ],
   "info" : {
