@@ -256,7 +256,8 @@
     }
     
     if ([segueID isEqualToString:@"SegueToIntroViewController"]) {
-        IntroViewController *introViewController = (IntroViewController *)segue.destinationViewController;
+        // no-op, nothing to do
+//        IntroViewController *introViewController = (IntroViewController *)segue.destinationViewController;
     }
         
 }

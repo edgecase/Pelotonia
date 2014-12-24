@@ -146,7 +146,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="prs-1i-qZR" imageView="iLB-Cs-tVm" style="IBUITableViewCellStyleDefault" id="mi4-If-9ni">
                                         <rect key="frame" x="0.0" y="264" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mi4-If-9ni" id="FaA-8X-yG7">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="4" contentMode="center" tableViewCell="mi4-If-9ni" id="FaA-8X-yG7">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -166,14 +166,11 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToRegister" customClass="ECSlidingSegue" id="0mA-u6-zGO"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="UQs-xu-b74" imageView="ZeJ-um-VEd" style="IBUITableViewCellStyleDefault" id="nvU-Ie-1E2">
                                         <rect key="frame" x="0.0" y="308" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nvU-Ie-1E2" id="GeE-76-36D">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="center" tableViewCell="nvU-Ie-1E2" id="GeE-76-36D">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -193,9 +190,6 @@
                                             <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Txg-Ru-1NB" kind="custom" identifier="SegueToVideo" customClass="ECSlidingSegue" id="42R-2Z-EJ1"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="IXX-mr-QaB" imageView="x8E-8x-ikN" style="IBUITableViewCellStyleDefault" id="uk7-di-3hb">
                                         <rect key="frame" x="0.0" y="352" width="320" height="44"/>
@@ -227,7 +221,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="7fa-kJ-gGh" imageView="LEd-Ft-WBD" style="IBUITableViewCellStyleDefault" id="BB6-m7-LoJ">
                                         <rect key="frame" x="0.0" y="396" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BB6-m7-LoJ" id="rs3-m3-kr2">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="7" contentMode="center" tableViewCell="BB6-m7-LoJ" id="rs3-m3-kr2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -935,30 +929,6 @@
             </objects>
             <point key="canvasLocation" x="-621" y="-2008"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="0nN-M1-RyW">
-            <objects>
-                <viewController storyboardIdentifier="RegistrationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ty3-fs-mIs" customClass="PRPWebViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eAb-cR-7a0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="oz0-bU-PKc">
-                        <barButtonItem key="leftBarButtonItem" image="259-list" id="BQ2-mk-1z8">
-                            <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <segue destination="egm-XV-4e8" kind="unwind" unwindAction="unwindToMenuViewController:" id="plS-c1-Nlj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pIJ-AL-Q9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="egm-XV-4e8" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1435" y="1584"/>
-        </scene>
         <!--Initial Sliding View Controller-->
         <scene sceneID="PXw-g9-HR8">
             <objects>
@@ -1225,7 +1195,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="tvQ-OG-bvb">
-                                                    <rect key="frame" x="20" y="8" width="280" height="389"/>
+                                                    <rect key="frame" x="19" y="8" width="280" height="390"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <string key="text">Pelotonia is a grassroots bike tour with one goal: to end cancer. Pelotonia raises money for innovative and life saving cancer research at The Ohio State University Comprehensive Cancer Center - James Cancer Hospital and Solove Research Institute. Driven by the passion of its cyclists and volunteers, and their family and friends, Pelotonia's annual cycling experience will be a place of hope, energy and determination. Pelotonia proudly directs 100% of every dollar raised to research. It is a community of people coming together to chase down cancer and defeat it.</string>
@@ -2565,29 +2535,6 @@
             <point key="canvasLocation" x="1185" y="864"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="eh8-Lx-hEY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Txg-Ru-1NB" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="swt-Dc-06C">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="barTintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Ty3-fs-mIs" kind="relationship" relationship="rootViewController" id="xMT-TV-ueh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uII-Xe-H8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="865" y="1584"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="LYY-Zk-UIy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fZ0-s7-gH7" sceneMemberID="viewController">
@@ -2700,10 +2647,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="42R-2Z-EJ1"/>
-        <segue reference="tZz-dL-tdX"/>
+        <segue reference="Af6-8I-wY6"/>
+        <segue reference="VAG-5d-ToW"/>
         <segue reference="sBj-i1-1JD"/>
         <segue reference="s56-AL-OFT"/>
-        <segue reference="VAG-5d-ToW"/>
     </inferredMetricsTieBreakers>
 </document>
