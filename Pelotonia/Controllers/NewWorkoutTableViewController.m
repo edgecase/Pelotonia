@@ -145,7 +145,7 @@
 }
 
 - (void)setTimeLabelText {
-    self.workoutTimeLengthCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld Hrs %02ld Min", self.workout.timeInMinutes/60, self.workout.timeInMinutes % 60];
+    self.workoutTimeLengthCell.detailTextLabel.text = [NSString stringWithFormat:@"%d Hrs %02d Min", (int)(self.workout.timeInMinutes/60), (int)(self.workout.timeInMinutes % 60)];
 }
 
 
@@ -275,7 +275,7 @@
     else if (pickerView == self.workoutDistancePicker) {
         if (component == 0) {
             // title is 5 * the row we're asking for (0, 5, 10, ... 95, 100)
-            retval = [NSString stringWithFormat:@"%ld Miles", (row * MILES_STEP)];
+            retval = [NSString stringWithFormat:@"%d Miles", (int)(row * MILES_STEP)];
         }
     }
     return retval;

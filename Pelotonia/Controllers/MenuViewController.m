@@ -7,7 +7,6 @@
 //
 
 #import "MenuViewController.h"
-#import "PRPWebViewController.h"
 #import "Pelotonia-Colors.h"
 #import "UIImage+Resize.h"
 #import "AppDelegate.h"
@@ -16,6 +15,18 @@
 #import <Socialize/Socialize.h>
 #import "EventsTableViewController.h"
 #import "UIColor+LightAndDark.h"
+
+
+static NSInteger kProfileButton     = 0;
+//static NSInteger kTeamButton        = 1;
+//static NSInteger kPelotoniaButton   = 2;
+
+//static NSInteger kNewsButton      = 0;
+static NSInteger kRegisterButton  = 1;
+static NSInteger kVideoButton     = 2;
+//static NSInteger kEventsButton    = 3;
+static NSInteger kBlogButton = 4;
+//static NSInteger kAboutButton     = 5;
 
 
 @interface MenuViewController ()
@@ -73,7 +84,7 @@
     __weak UITableViewCell *cell = _cell;
     
     cell.textLabel.font = PELOTONIA_SECONDARY_FONT(20);
-    if (indexPath.row == ID_PROFILE_MENU && indexPath.section == 0)
+    if (indexPath.row == kProfileButton && indexPath.section == 0)
     {
         Rider *myProfile;
         if ((myProfile = [[AppDelegate sharedDataController] favoriteRider])) {
@@ -119,62 +130,37 @@
     return 30.0;
 }
 
-
-
-#pragma mark - preparation for segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([segue.identifier isEqualToString:@"SegueToRegister"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
-
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/register"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
-    }
-    if ([segue.identifier isEqualToString:@"SegueToVideo"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
+    if (indexPath.section == 1) {
         
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/ride/safety"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
-    }
-
-    if ([segue.identifier isEqualToString:@"SegueToBlog"]) {
-        PRPWebViewController *webVC = (PRPWebViewController *) [[segue destinationViewController] visibleViewController];
-        
-        // see the registration form
-        webVC.url = [NSURL URLWithString:@"http://www.pelotonia.org/the-blog/"];
-        webVC.showsDoneButton = NO;
-        webVC.delegate = self;
-        webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
+        if (indexPath.row == kRegisterButton) {
+            // due to apple developer guidelines, am not allowed to launch within the browser control directly.
+            // at some point in the near future, allow users to register from their profiles directly, using some
+            // web forms submitted directly to the Pelotonia site
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/register"]];
+        }
+        else if (indexPath.row == kBlogButton) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/the-blog"]];
+        }
+        else if (indexPath.row == kVideoButton) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/ride/safety"]];
+        }
     }
     
-    if ([segue.identifier isEqualToString:@"SegueToEvents"]) {
-        // update events database ...
-        // no-op
-    }
-
 }
 
-
-#pragma mark - PRPWebViewControllerDelegate
-- (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
-    NSLog(@"webControllerDidFinishLoading!");
-}
-
-- (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
-}
-
-- (BOOL)webController:(PRPWebViewController *)controller shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return [self shouldAutorotate];
-}
-
-
+#pragma mark - preparation for segue
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    
+//    if ([segue.identifier isEqualToString:@"SegueToEvents"]) {
+//        // update events database ...
+//        // no-op
+//    }
+//
+//}
 
 
 
