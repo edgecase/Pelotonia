@@ -2,12 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "PelotoniaBadge-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
       "filename" : "PelotoniaBadge.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "PelotoniaBadge@3x.png"
     }
   ],
   "info" : {

@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "logotype_grn.png"
+      "filename" : "Pelotonia-Logo.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "logotype_grn@2x.png"
+      "filename" : "Pelotonia-Logo@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "Pelotonia-Logo@3x.png"
     }
   ],
   "info" : {

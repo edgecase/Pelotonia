@@ -73,8 +73,8 @@
     _tv.borderColor = [UIColor whiteColor];
     
     // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
-    self.navigationItem.titleView = imageView;
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
+//    self.navigationItem.titleView = imageView;
     
     
 }
@@ -301,6 +301,7 @@
     }
     self.riderName.font = PELOTONIA_FONT(21);
     self.riderDistance.font = PELOTONIA_FONT(16);
+    self.navigationController.navigationItem.title = self.riderName.text;
 
 }
 

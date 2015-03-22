@@ -18,15 +18,10 @@
 
 
 static NSInteger kProfileButton     = 0;
-//static NSInteger kTeamButton        = 1;
-//static NSInteger kPelotoniaButton   = 2;
 
-//static NSInteger kNewsButton      = 0;
 static NSInteger kRegisterButton  = 1;
 static NSInteger kVideoButton     = 2;
-//static NSInteger kEventsButton    = 3;
 static NSInteger kBlogButton = 4;
-//static NSInteger kAboutButton     = 5;
 
 
 @interface MenuViewController ()
@@ -101,7 +96,6 @@ static NSInteger kBlogButton = 4;
             
         }
         else {
-            cell.textLabel.text = @"My Rider Profile";
             [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
         }
     }

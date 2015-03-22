@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PRPWebViewControllerDelegate.h"
 
-@interface AboutTableViewController : UITableViewController <PRPWebViewControllerDelegate>
+@interface AboutTableViewController : UITableViewController <UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITextView *storyTextView;

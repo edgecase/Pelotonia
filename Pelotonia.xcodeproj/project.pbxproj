@@ -962,8 +962,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -996,8 +996,8 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D52D81C0-5A00-4E1F-A210-F71142987927";
+				PROVISIONING_PROFILE = "ed732227-34f5-4775-8900-c67dbd7b982f";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed732227-34f5-4775-8900-c67dbd7b982f";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1085,8 +1085,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1131,7 +1131,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1147,7 +1147,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1180,8 +1180,8 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F120471-7728-4600-BE58-1C6AE7CD1F21";
+				PROVISIONING_PROFILE = "0c05cd93-b8eb-4967-abbd-e2add9c24904";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0c05cd93-b8eb-4967-abbd-e2add9c24904";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";

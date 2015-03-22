@@ -58,11 +58,7 @@
 
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
-    self.navigationItem.titleView = imageView;
-    
+        
 }
 
 - (void)viewDidUnload

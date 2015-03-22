@@ -14,6 +14,11 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 
+static NSInteger FAQ_ROW = 5;
+static NSInteger PELOTONIA_ROW = 3;
+static NSInteger SANDLOT_ROW = 6;
+
+
 @interface AboutTableViewController ()
 
 @end
@@ -168,41 +173,20 @@
     return UIInterfaceOrientationMaskPortrait;
 }
 
-- (void)setupWebViewController:(PRPWebViewController *)webVC forURL:(NSString *)url
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // see the registration form
-    webVC.url = [NSURL URLWithString:url];
-    webVC.showsDoneButton = NO;
-    webVC.delegate = self;
-    webVC.backgroundColor = [UIColor colorWithRed:0.151 green:0.151 blue:0.151 alpha:1.000];
-}
-
-#pragma mark - Segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"SegueToFAQ"]) {
-        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org/ride/faq"];
+    if (indexPath.row == FAQ_ROW) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/ride/faq"]];
     }
-    
-    if ([segue.identifier isEqualToString:@"SegueToPelotonia"]) {
-        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.pelotonia.org"];
+    else if (indexPath.row == PELOTONIA_ROW) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org"]];
     }
-    
-    if ([segue.identifier isEqualToString:@"SegueToSandlot"]) {
-        [self setupWebViewController:segue.destinationViewController forURL:@"http://www.isandlot.com/about-us"];
+    else if (indexPath.row == SANDLOT_ROW) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.isandlot.com/about-us"]];
     }
-
 }
 
 
-#pragma mark - PRPWebViewControllerDelegate
-- (void)webControllerDidFinishLoading:(PRPWebViewController *)controller {
-    NSLog(@"webControllerDidFinishLoading!");
-}
-
-- (void)webController:(PRPWebViewController *)controller didFailLoadWithError:(NSError *)error {
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil]  show];
-}
 
 
 @end
