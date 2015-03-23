@@ -80,7 +80,7 @@
     shadow.shadowOffset = CGSizeMake(0.0, 1.0);
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-           NSForegroundColorAttributeName: PRIMARY_GREEN,
+           NSForegroundColorAttributeName: SECONDARY_LIGHT_GRAY,
            NSShadowAttributeName: shadow,
            NSFontAttributeName: PELOTONIA_FONT_BOLD(21),
            }];

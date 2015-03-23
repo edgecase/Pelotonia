@@ -568,7 +568,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="0.3294117647" green="0.36862745099999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
@@ -944,10 +944,10 @@
                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Last Name or Peloton Name" translucent="NO" showsScopeBar="YES" id="2DY-1a-ipm">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Last Name or Peloton Name" showsCancelButton="YES" translucent="NO" showsScopeBar="YES" id="2DY-1a-ipm">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="barTintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             <scopeButtonTitles>
@@ -1282,13 +1282,13 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Feedback" id="pF9-Dn-8X1">
-                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="SJQ-LE-SDM">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="SJQ-LE-SDM">
                                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="cancelButtonPressed:" destination="sqm-pg-TNy" id="wTq-rB-3pB"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="T8g-FZ-32x">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="T8g-FZ-32x">
                                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                                             <connections>
                                                 <action selector="doneButtonPressed:" destination="sqm-pg-TNy" id="zDB-mY-Xz2"/>
@@ -1301,7 +1301,7 @@
                                 <rect key="frame" x="20" y="74" width="280" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="c1I-QD-aWZ">
@@ -1930,15 +1930,15 @@
                         <color key="separatorColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <color key="sectionIndexColor" red="0.63701701164245605" green="0.72903871536254883" blue="0.79776239395141602" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" placeholder="Last Name or RIder ID" showsCancelButton="YES" showsScopeBar="YES" id="nAr-q3-Id4">
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" placeholder="Last Name or Rider ID" showsCancelButton="YES" translucent="NO" showsScopeBar="YES" id="nAr-q3-Id4">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="tintColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="barTintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                             <textInputTraits key="textInputTraits"/>
                             <scopeButtonTitles>
                                 <string>Last Name</string>
-                                <string>Rider ID</string>
+                                <string>ID</string>
                             </scopeButtonTitles>
                             <connections>
                                 <outlet property="delegate" destination="kxB-9E-zZy" id="uGz-v5-A8h"/>

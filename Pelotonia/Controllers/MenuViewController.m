@@ -109,8 +109,8 @@ static NSInteger kBlogButton = 4;
     headerView.backgroundColor = [PRIMARY_DARK_GRAY darkerColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 21)];
-    label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(21);
+    label.textColor = SECONDARY_LIGHT_GRAY;
+    label.font = PELOTONIA_FONT_BOLD(21);
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = [UIColor clearColor];
 

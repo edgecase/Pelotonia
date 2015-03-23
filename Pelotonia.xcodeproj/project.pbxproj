@@ -208,10 +208,6 @@
 		BB6816D616C725B9000E120F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		BB6816D816C726D5000E120F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BB6816DA16C726DE000E120F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		BB78D32317F925F600DE639C /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		BB78D32817F925F600DE639C /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
 		BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LightAndDark.m"; sourceTree = "<group>"; };
 		BB78D33117FA8D3100DE639C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -444,17 +440,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BB78D32217F925F600DE639C /* TestFlightSDK2 */ = {
-			isa = PBXGroup;
-			children = (
-				BB78D32317F925F600DE639C /* libTestFlight.a */,
-				BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */,
-				BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */,
-				BB78D32817F925F600DE639C /* TestFlight.h */,
-			);
-			path = TestFlightSDK2;
-			sourceTree = "<group>";
-		};
 		BBAA247718B04B5D006BA30E /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,7 +647,6 @@
 			isa = PBXGroup;
 			children = (
 				BBF496E519392F84007D7D67 /* hpple */,
-				BB78D32217F925F600DE639C /* TestFlightSDK2 */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 			);

@@ -301,8 +301,7 @@
     }
     self.riderName.font = PELOTONIA_FONT(21);
     self.riderDistance.font = PELOTONIA_FONT(16);
-    self.navigationController.navigationItem.title = self.riderName.text;
-
+    self.navigationItem.title = self.riderName.text;
 }
 
 

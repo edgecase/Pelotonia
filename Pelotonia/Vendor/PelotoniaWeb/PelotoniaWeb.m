@@ -310,7 +310,8 @@
      </td>
      */
     TFHppleElement *td = [[tr childrenWithClassName:@"events-namevenue"] objectAtIndex:0];
-    return td.text;
+    NSString *text = (td.text ? td.text : @"See Description for Address");
+    return text;
 }
 
 + (NSString *)getEventNameFromRow:(TFHppleElement *)tr

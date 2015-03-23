@@ -296,6 +296,10 @@
 
 #pragma mark -
 #pragma mark UISearchDisplayController Delegate Methods
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    return YES;
+}
+
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
 {
     tableView.backgroundColor = self.tableView.backgroundColor;

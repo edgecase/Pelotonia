@@ -129,7 +129,7 @@
                                           usingFont:self.descriptionCell.textLabel.font
                                            forWidth:self.tableView.bounds.size.width];
     }
-    else if (indexPath.row == 2) {
+    else if (indexPath.row == 2 && self.event.address) {
         height = [self calculateTableRowSizeForString:self.event.address
                                             usingFont:self.descriptionCell.textLabel.font
                                              forWidth:self.tableView.bounds.size.width];

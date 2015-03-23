@@ -148,7 +148,7 @@
     sectionTitleLabel.textColor = [UIColor whiteColor];
     sectionTitleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     sectionTitleLabel.backgroundColor = [UIColor clearColor];
-    sectionTitleLabel.font = PELOTONIA_SECONDARY_FONT(21);
+    sectionTitleLabel.font = PELOTONIA_FONT_BOLD(21);
     
     [headerView addSubview:sectionTitleLabel];
     return headerView;
