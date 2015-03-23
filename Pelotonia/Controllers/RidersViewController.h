@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PelotoniaWeb.h"
+#import "FindRiderViewController.h"
 #import "Rider.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate> {
+@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, FindRiderViewControllerDelegate> {
     NSMutableArray *_riderSearchResults;
 }
 

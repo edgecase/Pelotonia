@@ -950,10 +950,6 @@
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="barTintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            <scopeButtonTitles>
-                                <string>Last Name</string>
-                                <string>ID</string>
-                            </scopeButtonTitles>
                             <connections>
                                 <outlet property="delegate" destination="puZ-qr-IB2" id="Uka-Vz-Dup"/>
                             </connections>
@@ -996,6 +992,11 @@
                             <connections>
                                 <action selector="revealMenu:" destination="puZ-qr-IB2" id="ryz-Jd-Brb"/>
                                 <segue destination="xhw-vx-22F" kind="unwind" unwindAction="unwindToMenuViewController:" id="NWc-zj-WQ9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Rfc-BD-vuE">
+                            <connections>
+                                <segue destination="kxB-9E-zZy" kind="modal" identifier="segueToFindRider" id="icE-Ng-qJb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2124,48 +2125,25 @@
                                             <segue destination="lcc-VX-nqL" kind="push" identifier="segueToDonorList:" id="qh7-vh-R12"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hW8-28-e5C">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="euw-ez-8sA" rowHeight="60" style="IBUITableViewCellStyleDefault" id="hW8-28-e5C">
                                         <rect key="frame" x="0.0" y="212" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hW8-28-e5C" id="D2h-6z-4yL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QI2-0Y-2QJ">
-                                                    <rect key="frame" x="164" y="0.0" width="136" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Follow" image="28-star">
-                                                        <color key="titleColor" red="0.3294117647" green="0.36862745099999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="followRider:" destination="sKZ-lE-nf9" eventType="touchUpInside" id="bpc-07-jDz"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RgP-fD-eB3">
-                                                    <rect key="frame" x="20" y="0.0" width="136" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <state key="normal" title="Support" image="pelotonia-menu-icon">
-                                                        <color key="titleColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <segue destination="g8Z-dt-BpM" kind="modal" identifier="showPledge:" id="NCk-Ha-gvw"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Sponsor this Rider" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="euw-ez-8sA">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
+                                        <connections>
+                                            <segue destination="g8Z-dt-BpM" kind="modal" identifier="showPledge:" id="kir-mD-FSq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2218,7 +2196,6 @@
                         <outlet property="pledgeAmountTextField" destination="c1P-ip-4p9" id="TwP-nW-EPh"/>
                         <outlet property="raisedAmountLabel" destination="CIQ-0U-vqG" id="1aQ-YK-Hoe"/>
                         <outlet property="raisedLabel" destination="O0k-wY-gNJ" id="Key-af-aRA"/>
-                        <outlet property="starFollowButton" destination="QI2-0Y-2QJ" id="r4s-0C-DyT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QcO-hV-t6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2593,7 +2570,6 @@
         <image name="216-compose" width="23" height="18"/>
         <image name="259-list" width="20" height="14"/>
         <image name="275-broadcast" width="26" height="24"/>
-        <image name="28-star" width="26" height="26"/>
         <image name="46-movie-2" width="20" height="25"/>
         <image name="83-calendar" width="23" height="25"/>
         <image name="83-calendar-gray" width="23" height="25"/>
@@ -2614,7 +2590,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sBj-i1-1JD"/>
-        <segue reference="tZz-dL-tdX"/>
         <segue reference="s56-AL-OFT"/>
+        <segue reference="icE-Ng-qJb"/>
+        <segue reference="Af6-8I-wY6"/>
     </inferredMetricsTieBreakers>
 </document>

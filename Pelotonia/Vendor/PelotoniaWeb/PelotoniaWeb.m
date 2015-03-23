@@ -133,7 +133,12 @@
             
             // get the photos' URLs
             NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
-            NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
+            NSString *altRiderPhotoUrlXPath = @"//div[@id='touts']/div[1]/a/img";
+            NSArray *photoNodes = [parser searchWithXPathQuery:riderPhotoUrlXPath];
+            if ([photoNodes count] == 0) {
+                photoNodes = [parser searchWithXPathQuery:altRiderPhotoUrlXPath];
+            }
+            NSString *riderPhotoRelativeUrl = [[[photoNodes objectAtIndex:0] attributes] valueForKey:@"src"];
             NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
             rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
             
