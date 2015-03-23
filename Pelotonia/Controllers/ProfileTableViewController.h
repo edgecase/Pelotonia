@@ -30,7 +30,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *nameAndRouteCell;
 @property (weak, nonatomic) IBOutlet UILabel *raisedAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;
-@property (weak, nonatomic) IBOutlet UIButton *starFollowButton;
 
 // non-UI properties
 @property (strong, nonatomic) Rider *rider;
@@ -45,7 +44,6 @@
 - (void)showPledge:(SendPledgeModalViewController *)pledgeViewController;
 - (void)showDetails:(ProfileDetailsTableViewController *)profileDetailsViewController;
 - (IBAction)shareProfile:(id)sender;
-- (IBAction)followRider:(id)sender;
 - (void)done;
 
 
