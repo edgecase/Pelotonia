@@ -53,54 +53,102 @@
     return self;
 }
 
-
-
 #pragma mark -- Properties
 
-- (NSString *)totalCommit 
-{
-    NSString *value = @"0";
-
-    if (self.highRoller == YES) {
-        value = @"4000";
-    }
-    else
-    {
-        if ([self.riderType isEqualToString:@"Rider"]) {
-            if ([self.route length] == 0) {
-                value = @"0";
-            }
-            if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
-                value = @"2,200";
-            }
-            if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
-                value = @"2,200";
-            }
-            if ([self.route isEqualToString:@"Columbus to Gambier"]) {
-                value = @"1,800";
-            }
-            if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
-                value = @"1,800";
-            }
-            if ([self.route isEqualToString:@"Columbus to New Albany"]) {
-                value = @"1,250";
-            }
-            if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
-                value = @"1,200";
-            }
-        }
-        else
-        {
-            value = @"0";
-        }
-    }
-    return [NSString stringWithFormat:@"$%@.00", value];
+- (BOOL)isRider {
+    return [self.riderType isEqualToString:@"Rider"];
 }
 
+- (BOOL)isPeloton {
+    return [self.riderType containsString:@"Peloton"];
+}
+
+- (BOOL)isVirtualRider {
+    return [self.riderType containsString:@"Virtual"];
+}
+
+- (BOOL)isVolunteer {
+    return [self.riderType containsString:@"Volunteer"];
+}
+
+- (NSInteger)distance {
+    NSInteger value = 25;
+    
+    if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
+        value = 180;
+    }
+    else if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
+        value = 150;
+    }
+    else if ([self.route isEqualToString:@"Columbus to Gambier"]) {
+        value = 100;
+    }
+    else if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
+        value = 75;
+    }
+    else if ([self.route isEqualToString:@"Columbus to New Albany"]) {
+        value = 50;
+    }
+    else if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
+        value = 25;
+    }
+    
+    return value;
+}
+
+- (NSString *)totalCommit
+{
+    NSString *value = @"$0.00";
+
+    if (self.isRider) {
+        if ((self.route == nil) || ([self.route length] == 0)) {
+            NSLog(@"unable to read rider's route, 0 totalCommit");
+            value = @"$0.00";
+        }
+        else if (self.highRoller == YES) {
+            value = @"$4,000.00";
+        }
+        else if (self.distance == 180 || self.distance == 150) {
+            // overnight to columbus or pickerington
+            value = @"$2,200.00";
+        }
+        else if (self.distance == 75 || self.distance == 100) {
+            // to gambier from columbus or pickerington
+            value = @"$1,800.00";
+        }
+        else if (self.distance == 50) {
+            // to new albany
+            value = @"$1,250.00";
+        }
+        else {
+            // to pickerington
+            value = @"$1,200.00";
+        }
+    }
+    else if (self.isPeloton) {
+        // pelotons commit is everyone's total
+        value = self.pelotonGrandTotal;
+    }
+    else if (self.isVirtualRider || self.isVolunteer) {
+        // virtual riders have no commit
+        value = self.amountRaised;
+    }
+    return value;
+}
+
+- (NSString *)riderDetailText
+{
+    if (self.isRider) {
+        return self.route;
+    }
+    else {
+        return self.riderType;
+    }
+}
 
 - (NSString *)totalRaised
 {
-    if ([self.pelotonGrandTotal length] > 0) {
+    if (self.isPeloton) {
         return self.pelotonGrandTotal;
     }
     else {
@@ -108,10 +156,10 @@
     }    
 }
 
-- (NSNumber *)pctRaised
+- (float)pctRaised
 {
-    if (self.totalCommit == 0) {
-        return [NSNumber numberWithFloat:100.0];
+    if (self.isVolunteer || self.isVirtualRider) {
+        return 1.00;
     }
     else
     {
@@ -119,15 +167,13 @@
         [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         [formatter setLenient:YES];
         
-        NSNumber *totalRaised = [formatter numberFromString:self.totalRaised];
-        NSNumber *totalCommit = [formatter numberFromString:self.totalCommit];
+        float raised = [formatter numberFromString:self.totalRaised].floatValue;
+        float commit = [formatter numberFromString:self.totalCommit].floatValue;
         
-        float raised = totalRaised.floatValue;
-        float commit = totalCommit.floatValue;
         if (commit == 0.0) {
-            commit = 1;
+            commit = raised;
         }
-        return [NSNumber numberWithFloat:(raised/commit)*100];
+        return raised/commit;
     }
 }
 

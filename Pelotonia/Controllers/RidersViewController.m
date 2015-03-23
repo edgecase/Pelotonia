@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "RidersViewController.h"
 #import "RiderDataController.h"
+#import "FindRiderViewController.h"
 #import "ProfileTableViewController.h"
 #import "AboutTableViewController.h"
 #import "SearchViewController.h"
@@ -113,6 +114,10 @@
 {
     if ([segue.identifier isEqualToString:@"prepareProfile:"]) {
         [self prepareProfile:(ProfileTableViewController *)segue.destinationViewController];
+    }
+    if ([segue.identifier isEqualToString:@"segueToFindRider"]) {
+        FindRiderViewController *frvc = (FindRiderViewController *)segue.destinationViewController;
+        frvc.delegate = self;
     }
 }
 
@@ -269,28 +274,16 @@
      */    
     [self.riderSearchResults removeAllObjects];
 
-    /*
-     search the web for all riders matching the searchText
+    /* 
+     search the list of riders for all matching ones
      */
-    if ([scope isEqualToString:@"ID"]) {
-        NSLog(@"Searching for %@ by ID", searchText);
-        [PelotoniaWeb searchForRiderWithLastName:@"" riderId:searchText onComplete:^(NSArray *searchResults) {
-            [self.riderSearchResults addObjectsFromArray:searchResults];
-            [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"%@", errorMessage);
-        }];
-        
-    }
-    else {
-        NSLog(@"Searching for %@ by Name", searchText);
-        [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
-            [self.riderSearchResults addObjectsFromArray:searchResults];
-            [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"%@", errorMessage);
-        }];
-    }
+    RiderDataController *dataController = [AppDelegate sharedDataController];
+    NSArray *riders = [dataController allRiders];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    NSArray *searchResults = [riders filteredArrayUsingPredicate:resultPredicate];
+    [self.riderSearchResults addObjectsFromArray:searchResults];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+    
 }
 
 
@@ -307,6 +300,8 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
+    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
@@ -320,7 +315,6 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
-    NSLog(@"Pelotonia: searchBarSearchButtonClicked %@", searchBar);
     [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
 }
 
@@ -328,6 +322,29 @@
 {
     [self reloadTableData];
 }
+
+#pragma mark FindRiderViewControllerDelegate
+- (void)findRiderViewControllerDidCancel:(FindRiderViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)findRiderViewControllerDidSelectRider:(FindRiderViewController *)controller rider:(Rider *)rider
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+
+    // add the current rider to the main list of riders
+    RiderDataController *dataController = [AppDelegate sharedDataController];
+    
+    if (![dataController containsRider:rider]) {
+        [dataController addObject:rider];
+    }
+    
+    // save the database
+    [dataController save];
+    
+}
+
 
 
 @end
