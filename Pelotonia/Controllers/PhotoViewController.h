@@ -13,8 +13,9 @@
 @interface PhotoViewController : UIViewController<UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIActionSheetDelegate>
 
 @property (weak, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSArray *photos;
+@property (strong, nonatomic) NSMutableArray *photos;
 @property (assign, nonatomic) NSInteger initialPhotoIndex;
-- (IBAction)sharePhoto:(id)sender;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 
+- (IBAction)sharePhoto:(id)sender;
 @end

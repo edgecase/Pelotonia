@@ -28,7 +28,6 @@
 {
     if (self = [super init]) {
         [self initializeDefaultList];
-        self.library = [[ALAssetsLibrary alloc] init];
         return self;
     }
     return nil;

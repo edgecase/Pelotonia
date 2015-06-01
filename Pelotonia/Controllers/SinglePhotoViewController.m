@@ -8,6 +8,7 @@
 
 #import "SinglePhotoViewController.h"
 #import "UIImage+Resize.h"
+#import "AppDelegate.h"
 #import <SDWebImage/SDImageCache.h>
 
 @interface SinglePhotoViewController ()
@@ -19,6 +20,7 @@
 @synthesize library;
 @synthesize imageView;
 @synthesize imageData;
+@synthesize index;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +34,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[ALAssetsLibrary alloc] init];
+    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.view bringSubviewToFront:self.toolbar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,5 +101,14 @@
     }else{
         [self.imageView setFrame:CGRectMake(0, 0, 475, 320)];
     }
+}
+
+- (IBAction)trashPhoto:(id)sender {
+    NSLog(@"delete called");
+    [[[AppDelegate sharedDataController] photoKeys] removeObjectAtIndex:self.index];
+    SDImageCache *cache = [SDImageCache sharedImageCache];
+    [cache clearDisk];
+    [cache clearMemory];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

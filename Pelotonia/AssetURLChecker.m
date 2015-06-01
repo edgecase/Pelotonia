@@ -60,6 +60,7 @@
 
 #import "AssetURLChecker.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "AppDelegate.h"
 
 @implementation AssetURLChecker
 
@@ -70,7 +71,7 @@ enum { WDASSETURL_PENDINGREADS = 1, WDASSETURL_ALLFINISHED = 0};
     __block NSConditionLock * albumReadLock = [[NSConditionLock alloc] initWithCondition:WDASSETURL_PENDINGREADS];
     //this *MUST* execute on a background thread, ALAssetLibrary tries to use the main thread and will hang if you're on the main thread.
     dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        ALAssetsLibrary * assetLibrary = [[ALAssetsLibrary alloc] init];
+        ALAssetsLibrary * assetLibrary = [[AppDelegate sharedDataController] sharedAssetsLibrary];
         [assetLibrary assetForURL:assetURL
                       resultBlock:^(ALAsset *asset) {
                           exists = (asset != nil);

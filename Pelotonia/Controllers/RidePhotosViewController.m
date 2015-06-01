@@ -7,6 +7,7 @@
 //
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "AppDelegate.h"
 #import "RidePhotosViewController.h"
 #import "RiderPhotoCell.h"
 #import "PhotoViewController.h"
@@ -33,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[ALAssetsLibrary alloc] init];
+    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
 }
 
 - (void)viewDidUnload
@@ -44,6 +45,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     _photos = [[AppDelegate sharedDataController] photoKeys];
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
