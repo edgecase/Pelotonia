@@ -22,6 +22,7 @@
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 #import "FindRiderViewController.h"
@@ -59,7 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[ALAssetsLibrary alloc] init];
+    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
     _workouts = [[AppDelegate sharedDataController] workouts];
 
@@ -71,11 +72,6 @@
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-    
-    // logo in title bar
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
-//    self.navigationItem.titleView = imageView;
-    
     
 }
 
@@ -132,12 +128,15 @@
 
 #pragma mark -- regular implementation
 
+- (NSArray *)photos
+{
+    return [[AppDelegate sharedDataController] photoKeys];
+}
+
 - (void) configureView {
     [self configureRecentPhotos];
     [self configureWorkoutCell];
     [self configureRiderCell];
-    
-    
 }
 
 - (NSInteger)workoutMiles {
@@ -168,44 +167,41 @@
 
 - (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
 {
-    NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
-    // load the image from the asset library
-    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-        if (asset) {
-            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
-        }
-        else {
-            NSLog(@"couldn't find image");
-            [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
-        }
-    } failureBlock:^(NSError *error) {
-        NSLog(@"error loading image %@", [error localizedDescription]);
-        [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-    }];
+    if (index < [photos count]) {
+        NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
+        
+        // load the image from the asset library
+        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+            if (asset) {
+                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+            }
+            else {
+                [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
+            }
+        } failureBlock:^(NSError *error) {
+            NSLog(@"error loading image %@", [error localizedDescription]);
+            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+        }];
+    }
+    else {
+        [view setImage:nil];
+    }
+
 }
 
 - (void)configureRecentPhotos
 {
-    NSArray *photos = [[AppDelegate sharedDataController] photoKeys];
-    
-    photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSArray *sortedPhotos = [self.photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSDictionary *photoDict1 = (NSDictionary *)obj1;
         NSDictionary *photoDict2 = (NSDictionary *)obj2;
         NSDate *date1 = [photoDict1 objectForKey:@"date"];
         NSDate *date2 = [photoDict2 objectForKey:@"date"];
         return [date2 compare:date1];
     }];
-    
-    NSUInteger numPhotos = [photos count];
-    if (numPhotos >= 1) {
-        [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
-    }
-    if (numPhotos >= 2) {
-        [self setImageView:self.recentImage2 fromPhotos:photos atIndex:1];
-    }
-    if (numPhotos >= 3) {
-        [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
-    }
+
+    [self setImageView:self.recentImage1 fromPhotos:sortedPhotos atIndex:0];
+    [self setImageView:self.recentImage2 fromPhotos:sortedPhotos atIndex:1];
+    [self setImageView:self.recentImage3 fromPhotos:sortedPhotos atIndex:2];
 }
 
 - (void)refreshUser
@@ -436,11 +432,10 @@
                                    usingDelegate: (id <UIImagePickerControllerDelegate,
                                                    UINavigationControllerDelegate>) delegate {
     
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypeCamera] == NO)
-        || (delegate == nil)
-        || (controller == nil))
+    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO) ||
+        (delegate == nil) || (controller == nil)) {
         return NO;
+    }
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -453,7 +448,7 @@
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    cameraUI.allowsEditing = YES;
+    cameraUI.allowsEditing = NO;
     
     cameraUI.delegate = delegate;
     
@@ -477,13 +472,12 @@
     
     // Displays saved pictures and movies, if both are available, from the
     // Camera Roll album.
-    mediaUI.mediaTypes =
-    [UIImagePickerController availableMediaTypesForSourceType:
+    mediaUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:
      UIImagePickerControllerSourceTypeSavedPhotosAlbum];
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    mediaUI.allowsEditing = YES;
+    mediaUI.allowsEditing = NO;
     
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
@@ -515,22 +509,19 @@
             imageToSave = originalImage;
         }
         
-        // Save the new image (original or edited) to the Camera Roll
-        [self.library writeImageToSavedPhotosAlbum:imageToSave.CGImage
-                                          metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
-                                   completionBlock:^(NSURL *assetURL, NSError *error) {
-            if (error) {
+        [self.library saveImage:imageToSave toAlbum:@"Pelotonia" withCompletionBlock:^(NSURL *assetURL, NSError *error) {
+            if (error!=nil) {
                 NSLog(@"error writing image: %@", [error localizedDescription]);
             }
             else {
-                // no error, so put it in the cache, and add to our list of images
                 NSString *key = [assetURL absoluteString];
                 [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
                 [[[AppDelegate sharedDataController] photoKeys] addObject:@{@"key" : key, @"date" : [NSDate date]}];
-                
-                [picker dismissViewControllerAnimated:YES completion:nil];
             }
         }];
+        
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
     }
 }
 

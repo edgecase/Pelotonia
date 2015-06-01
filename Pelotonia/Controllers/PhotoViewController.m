@@ -12,12 +12,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Social/Social.h>
 
-@interface PhotoViewController () {
-    ALAssetsLibrary *library;
-}
-
-@end
-
 @implementation PhotoViewController
 
 @synthesize pageViewController = _pageViewController;
@@ -36,15 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoPageViewController"];
     self.pageViewController.delegate = self;
     self.pageViewController.dataSource = self;
-    library = [[ALAssetsLibrary alloc] init];
+    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
     
     SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:self.initialPhotoIndex];
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
     
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
@@ -72,6 +66,7 @@
     SinglePhotoViewController *photoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePhotoViewController"];
     
     photoViewController.imageData = [self.photos objectAtIndex:index];
+    photoViewController.index = index;
     return photoViewController;
 }
 
@@ -124,7 +119,7 @@
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
     NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
 
-    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
+    [self.library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
         // success - share the photo via facebook
         ALAssetRepresentation *rep = [asset defaultRepresentation];
         CGImageRef image = [rep fullScreenImage];
@@ -139,17 +134,6 @@
         // failure
         NSLog(@"An error occurred: %@", [error localizedDescription]);
     }];
-}
-
-
-- (void)removeCurrentPhotoFromList
-{
-    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-
-    NSMutableArray *photosArray = [[AppDelegate sharedDataController] photoKeys];
-    [photosArray removeObjectAtIndex:currentIndex];
-    self.photos = [[AppDelegate sharedDataController] photoKeys];
-    
 }
 
 @end
