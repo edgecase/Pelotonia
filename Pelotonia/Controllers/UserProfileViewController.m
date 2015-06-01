@@ -78,8 +78,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self configureView];
-
     // if this is our first time loading, pop up the "this is how you use me" screen
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -90,6 +88,13 @@
     }
     
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self configureView];
+}
+
 
 - (BOOL)showInDebug
 {
@@ -146,6 +151,7 @@
     }
     return sum;
 }
+
 - (void)configureWorkoutCell
 {
     // show details of most recent workout
@@ -191,6 +197,7 @@
 
 - (void)configureRecentPhotos
 {
+    NSLog(@"%lu photos", (unsigned long)[self.photos count]);
     NSArray *sortedPhotos = [self.photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSDictionary *photoDict1 = (NSDictionary *)obj1;
         NSDictionary *photoDict2 = (NSDictionary *)obj2;
@@ -516,11 +523,10 @@
             else {
                 NSString *key = [assetURL absoluteString];
                 [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
-                [[[AppDelegate sharedDataController] photoKeys] addObject:@{@"key" : key, @"date" : [NSDate date]}];
+                [self.photos addObject:@{@"key":key, @"date":[NSDate date]}];
             }
+            [picker dismissViewControllerAnimated:YES completion:nil];
         }];
-        
-        [picker dismissViewControllerAnimated:YES completion:nil];
         
     }
 }
