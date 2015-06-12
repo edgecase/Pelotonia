@@ -1535,7 +1535,7 @@
                                 <segue destination="gxJ-6o-AuJ" kind="unwind" unwindAction="unwindToMenuViewController:" id="i1h-FX-aju"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="073-vE-cfB">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="073-vE-cfB">
                             <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="signIn:" destination="elF-Cv-4kH" id="EUL-Mh-Bfd"/>
@@ -2604,9 +2604,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="3uV-Ni-IJj"/>
+        <segue reference="tZz-dL-tdX"/>
         <segue reference="sBj-i1-1JD"/>
         <segue reference="s56-AL-OFT"/>
-        <segue reference="icE-Ng-qJb"/>
-        <segue reference="Af6-8I-wY6"/>
     </inferredMetricsTieBreakers>
 </document>
