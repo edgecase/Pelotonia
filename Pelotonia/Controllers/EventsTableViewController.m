@@ -94,12 +94,11 @@
 - (void)fetchAllEvents
 {
     // get all events for this current calendar year
-    NSString *begOfYear = [NSString stringWithFormat:@"%ld-01-01", (long)[[NSDate date] year]];
+    NSDate *dateBeginning = [NSDate dateYesterday];
     NSString *endOfYear = [NSString stringWithFormat:@"%ld-01-01", (long)[[NSDate date] year] + 1];
-    NSDate *dateBegOfYear = [NSDate dateFromString:begOfYear withFormat:@"YYYY-MM-DD"];
     NSDate *dateEndOfYear = [NSDate dateFromString:endOfYear withFormat:@"YYYY-MM-DD"];
     NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)",
-                             dateBegOfYear, dateEndOfYear];
+                             dateBeginning, dateEndOfYear];
     self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
     
 }
