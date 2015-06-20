@@ -17,6 +17,7 @@
 #import "NSDate+Helper.h"
 
 @interface EventsTableViewController ()
+
 - (void)refresh;
 
 @end
@@ -48,7 +49,6 @@
     }];
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
     
     // on first load, there will be nothing in the local database, so we have to go to the network
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
@@ -86,19 +86,17 @@
         [self.tableView reloadData];
     } onFailure:^(NSString *errorMessage) {
         NSLog(@"can't get pelotonia events");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We're sorry" message:@"We are unable to get the latest Peltonia events. Please make sure you are connected to the network." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }];
-    
 }
 
 
 - (void)fetchAllEvents
 {
-    // get all events for this current calendar year
-    NSDate *dateBeginning = [NSDate dateYesterday];
-    NSString *endOfYear = [NSString stringWithFormat:@"%ld-01-01", (long)[[NSDate date] year] + 1];
-    NSDate *dateEndOfYear = [NSDate dateFromString:endOfYear withFormat:@"YYYY-MM-DD"];
-    NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)",
-                             dateBeginning, dateEndOfYear];
+    // get all events for now to 1 year from now
+    NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)", [NSDate dateYesterday], [NSDate dateWithDaysFromNow:365]];
+
     self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
     
 }
@@ -132,7 +130,7 @@
     EventTableViewCell *cell = [EventTableViewCell cellForTableView:tableView];
     
     cell.event = (Event *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+
     return cell;
 }
 
