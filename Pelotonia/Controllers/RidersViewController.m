@@ -56,7 +56,7 @@
     }];
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
+    
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
         

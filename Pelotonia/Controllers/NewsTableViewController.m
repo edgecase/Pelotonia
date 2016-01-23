@@ -88,7 +88,7 @@
 - (void)fetchAllEvents
 {
     // get all news for this current calendar year
-    self.fetchedResultsController = [NewsItem fetchAllSortedBy:@"dateTime" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+    self.fetchedResultsController = [NewsItem MR_fetchAllSortedBy:@"dateTime" ascending:NO withPredicate:nil groupBy:nil delegate:self];
 }
 
 

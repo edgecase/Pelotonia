@@ -83,7 +83,7 @@
 {
     if ([segue.identifier isEqualToString:@"segueToShowPhoto"]) {
         PhotoViewController *vc = (PhotoViewController *)segue.destinationViewController;
-        vc.photos = _photos;
+        vc.photos = [_photos mutableCopy];
         RiderPhotoCell *rc = (RiderPhotoCell *)sender;
         vc.initialPhotoIndex = rc.tag;
     }

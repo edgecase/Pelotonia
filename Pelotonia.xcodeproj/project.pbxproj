@@ -111,9 +111,6 @@
 		BBEA1E3B19607B5F008B933E /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3A19607B5F008B933E /* EventCategory.m */; };
 		BBEA1E3E19607B60008B933E /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3D19607B60008B933E /* NewsItem.m */; };
 		BBEA1E4119608D20008B933E /* NewsDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */; };
-		BBF496F019392F84007D7D67 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496E919392F84007D7D67 /* TFHpple.m */; };
-		BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496EB19392F84007D7D67 /* TFHppleElement.m */; };
-		BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496ED19392F84007D7D67 /* XPathQuery.m */; };
 		BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF496F319393050007D7D67 /* libxml2.2.dylib */; };
 		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -288,12 +285,6 @@
 		BBEA1E3D19607B60008B933E /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItem.m; path = Models/NewsItem.m; sourceTree = "<group>"; };
 		BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailTableViewController.h; path = Controllers/NewsDetailTableViewController.h; sourceTree = "<group>"; };
 		BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailTableViewController.m; path = Controllers/NewsDetailTableViewController.m; sourceTree = "<group>"; };
-		BBF496E819392F84007D7D67 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
-		BBF496E919392F84007D7D67 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
-		BBF496EA19392F84007D7D67 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
-		BBF496EB19392F84007D7D67 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
-		BBF496EC19392F84007D7D67 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
-		BBF496ED19392F84007D7D67 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		BBF496F319393050007D7D67 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
 		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
@@ -472,20 +463,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		BBF496E519392F84007D7D67 /* hpple */ = {
-			isa = PBXGroup;
-			children = (
-				BBF496E819392F84007D7D67 /* TFHpple.h */,
-				BBF496E919392F84007D7D67 /* TFHpple.m */,
-				BBF496EA19392F84007D7D67 /* TFHppleElement.h */,
-				BBF496EB19392F84007D7D67 /* TFHppleElement.m */,
-				BBF496EC19392F84007D7D67 /* XPathQuery.h */,
-				BBF496ED19392F84007D7D67 /* XPathQuery.m */,
-			);
-			name = hpple;
-			path = Vendor/hpple;
-			sourceTree = "<group>";
-		};
 		BCE3B7A715AE49DA00205530 = {
 			isa = PBXGroup;
 			children = (
@@ -654,7 +631,6 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				BBF496E519392F84007D7D67 /* hpple */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 			);
@@ -698,6 +674,7 @@
 				BBF159DC176C28C500DFA92C /* ShellScript */,
 				BCE3B7B015AE49DA00205530 /* Resources */,
 				17118B413CE84F48A2F75643 /* Copy Pods Resources */,
+				E1096C375360C3445732B8D2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -714,7 +691,7 @@
 		BCE3B7A915AE49DA00205530 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					BCE3B7B115AE49DA00205530 = {
 						DevelopmentTeam = E8N9T3D525;
@@ -835,6 +812,21 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
+		E1096C375360C3445732B8D2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -872,7 +864,6 @@
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
-				BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BB5561AC1B1BC29300C57A6D /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
@@ -887,7 +878,6 @@
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
 				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 				BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */,
-				BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */,
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
 				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,
 				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
@@ -896,7 +886,6 @@
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
 				BB93182818B91ED3003A3AC0 /* PelotoniaProfileViewController.m in Sources */,
 				BBDF064C1953CDF000FEED39 /* EventDetailsTableViewController.m in Sources */,
-				BBF496F019392F84007D7D67 /* TFHpple.m in Sources */,
 				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 				BBAA222D18AF9F7A006BA30E /* DonorsTableViewController.m in Sources */,
 				BBAA247618B04B4C006BA30E /* Workout.m in Sources */,
@@ -923,6 +912,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -935,6 +925,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -991,6 +982,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ed732227-34f5-4775-8900-c67dbd7b982f";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed732227-34f5-4775-8900-c67dbd7b982f";
@@ -1007,6 +999,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1018,8 +1011,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1046,6 +1041,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1058,6 +1054,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1126,6 +1123,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1175,6 +1173,7 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d25bcaef-ff3e-4611-b95a-00214b344e5b";

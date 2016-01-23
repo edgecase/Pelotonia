@@ -97,7 +97,7 @@
     // get all events for now to 1 year from now
     NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)", [NSDate dateYesterday], [NSDate dateWithDaysFromNow:365]];
 
-    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
+    self.fetchedResultsController = [Event MR_fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
     
 }
 
@@ -171,7 +171,7 @@
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [event deleteEntity];
+        [event MR_deleteEntity];
     }
 }
 

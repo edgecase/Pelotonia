@@ -56,7 +56,7 @@
 }
 
 //iOS 6+
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return (UIInterfaceOrientationMaskAllButUpsideDown);
 }
