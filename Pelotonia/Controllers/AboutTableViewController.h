@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PRPWebViewControllerDelegate.h"
 
 @interface AboutTableViewController : UITableViewController <UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;

@@ -417,12 +417,8 @@
 
 - (void)postAlert:(NSString *)msg {
     // alert that they need to authorize first
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for your Pledge"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thank you for your Pledge" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)sendPledgeMailToEmail:(NSString *)email withAmount:(NSString *)amount

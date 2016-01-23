@@ -7,7 +7,6 @@
 //
 
 #import "AboutTableViewController.h"
-#import "PRPWebViewController.h"
 #import "ECSlidingViewController.h"
 #import "Pelotonia-Colors.h"
 #import "PelotoniaWeb.h"

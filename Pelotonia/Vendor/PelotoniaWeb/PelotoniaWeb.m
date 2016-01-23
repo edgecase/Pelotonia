@@ -31,7 +31,10 @@
     NSString *urlString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    NSString *queryString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    [manager GET:queryString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // success
         NSLog(@"completing network call");
         TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
@@ -671,8 +674,7 @@
             }
             
             // have to do this weirdness b/c of smart quotes and special dashes in the Pelotonia CMS db
-            elemText = [elemText stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
-            elemText = [elemText stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            elemText = [elemText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
             
             // sometimes we have null nodes
             if (elemText && ([elemText length] > 0)) {

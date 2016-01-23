@@ -34,7 +34,7 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoPageViewController"];
     self.pageViewController.delegate = self;
     self.pageViewController.dataSource = self;
-    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
+    self.library = [PHPhotoLibrary sharedPhotoLibrary];
     
     SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:self.initialPhotoIndex];
     NSArray *viewControllers = @[startingViewController];
@@ -119,21 +119,21 @@
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
     NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
 
-    [self.library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
-        // success - share the photo via facebook
-        ALAssetRepresentation *rep = [asset defaultRepresentation];
-        CGImageRef image = [rep fullScreenImage];
-        NSArray* dataToShare = @[[UIImage imageWithCGImage:image]];
-
-        UIActivityViewController* activityViewController =
-        [[UIActivityViewController alloc] initWithActivityItems:dataToShare
-                                          applicationActivities:nil];
-        [self presentViewController:activityViewController animated:YES completion:nil];
-        
-    } failureBlock:^(NSError *error) {
-        // failure
-        NSLog(@"An error occurred: %@", [error localizedDescription]);
-    }];
+//    [self.library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
+//        // success - share the photo via facebook
+//        ALAssetRepresentation *rep = [asset defaultRepresentation];
+//        CGImageRef image = [rep fullScreenImage];
+//        NSArray* dataToShare = @[[UIImage imageWithCGImage:image]];
+//
+//        UIActivityViewController* activityViewController =
+//        [[UIActivityViewController alloc] initWithActivityItems:dataToShare
+//                                          applicationActivities:nil];
+//        [self presentViewController:activityViewController animated:YES completion:nil];
+//        
+//    } failureBlock:^(NSError *error) {
+//        // failure
+//        NSLog(@"An error occurred: %@", [error localizedDescription]);
+//    }];
 }
 
 @end

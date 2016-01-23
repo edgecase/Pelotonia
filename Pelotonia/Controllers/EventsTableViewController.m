@@ -86,8 +86,11 @@
         [self.tableView reloadData];
     } onFailure:^(NSString *errorMessage) {
         NSLog(@"can't get pelotonia events");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We're sorry" message:@"We are unable to get the latest Peltonia events. Please make sure you are connected to the network." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We're sorry" message:@"We are unable to get the latest Pelotonia events. Please make sure you are connected to the network." preferredStyle:UIAlertControllerStyleAlert];
+
+        [self presentViewController:alert animated:YES completion:nil];
+
+
     }];
 }
 

@@ -10,7 +10,6 @@
 #import "PelotoniaWeb.h"
 #import "Workout.h"
 #import "AppDelegate.h"
-#import "AssetURLChecker.h"
 
 @implementation RiderDataController
 
@@ -39,11 +38,9 @@
     return _riderList;
 }
 
-- (ALAssetsLibrary *)sharedAssetsLibrary
+- (PHPhotoLibrary *)sharedAssetsLibrary
 {
-    if (self.library == nil) {
-        self.library = [[ALAssetsLibrary alloc] init];
-    }
+    self.library = [PHPhotoLibrary sharedPhotoLibrary];
     return self.library;
 }
 
@@ -55,11 +52,11 @@
     if (_photoKeys != nil) {
         // trim out the photo keys that have gone missing since last open
         for (int i = 0; i < [_photoKeys count]; i++) {
-            NSString *key = [[_photoKeys objectAtIndex:i] objectForKey:@"key"];
-            BOOL assetExists = [AssetURLChecker assetExists:[NSURL URLWithString:key]];
-            if (assetExists) {
+//            NSString *key = [[_photoKeys objectAtIndex:i] objectForKey:@"key"];
+//            BOOL assetExists = [AssetURLChecker assetExists:[NSURL URLWithString:key]];
+//            if (assetExists) {
                 [tempKeys addObject:[_photoKeys objectAtIndex:i]];
-            }
+//            }
         }
     }
 

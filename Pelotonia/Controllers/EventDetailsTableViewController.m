@@ -158,7 +158,7 @@
             address = [address stringByAppendingString:[NSString stringWithFormat:@",%@", state]];
         }
         
-        NSString *stringURL = [NSString stringWithFormat:mapsScheme, [address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *stringURL = [NSString stringWithFormat:mapsScheme, [address stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];
     }

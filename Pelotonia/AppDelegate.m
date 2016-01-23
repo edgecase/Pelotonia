@@ -75,7 +75,6 @@
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
     // set default appearance
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
     
     NSShadow *shadow = [[NSShadow alloc] init];

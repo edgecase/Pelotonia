@@ -67,19 +67,19 @@
     NSString *key = [self.imageData objectForKey:@"key"];
     [[SDImageCache sharedImageCache] queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) {
         if (image == nil) {
-            [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-                // success, so set the image appropriately
-                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-                self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-                ALAssetRepresentation *rep = [asset defaultRepresentation];
-                CGImageRef image = [rep fullScreenImage];
-                [self.imageView setImage:[UIImage imageWithCGImage:image]];
-                
-            } failureBlock:^(NSError *error) {
-                NSLog(@"error loading image %@", [error localizedDescription]);
-                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-                [self.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImage:self.imageView.bounds.size interpolationQuality:kCGInterpolationHigh]];
-            }];
+//            [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+//                // success, so set the image appropriately
+//                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//                self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//                ALAssetRepresentation *rep = [asset defaultRepresentation];
+//                CGImageRef image = [rep fullScreenImage];
+//                [self.imageView setImage:[UIImage imageWithCGImage:image]];
+//                
+//            } failureBlock:^(NSError *error) {
+//                NSLog(@"error loading image %@", [error localizedDescription]);
+//                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//                [self.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImage:self.imageView.bounds.size interpolationQuality:kCGInterpolationHigh]];
+//            }];
         }
         else {
             [self.imageView setImage:image];

@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
+    self.library = [PHPhotoLibrary sharedPhotoLibrary];
 }
 
 - (void)viewDidUnload
@@ -69,13 +69,13 @@
     NSLog(@"loading cell %ld", (long)indexPath.row);
     
     // load the image from the absolute URL
-    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-        [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
-        cell.tag = indexPath.row;
-    } failureBlock:^(NSError *error) {
-        NSLog(@"error loading image %@", [error localizedDescription]);
-        [cell.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:cell.imageView.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-    }];
+//    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+//        [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
+//        cell.tag = indexPath.row;
+//    } failureBlock:^(NSError *error) {
+//        NSLog(@"error loading image %@", [error localizedDescription]);
+//        [cell.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:cell.imageView.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+//    }];
     return cell;
 }
 

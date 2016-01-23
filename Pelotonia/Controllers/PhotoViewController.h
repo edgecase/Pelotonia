@@ -6,7 +6,9 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import Photos;
+
 #import "PhotoPageViewController.h"
 #import "SinglePhotoViewController.h"
 
@@ -15,7 +17,7 @@
 @property (weak, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) NSMutableArray *photos;
 @property (assign, nonatomic) NSInteger initialPhotoIndex;
-@property (strong, nonatomic) ALAssetsLibrary *library;
+@property (strong, nonatomic) PHPhotoLibrary *library;
 
 - (IBAction)sharePhoto:(id)sender;
 @end

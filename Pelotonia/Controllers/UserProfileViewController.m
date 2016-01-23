@@ -22,7 +22,7 @@
 #import <AAPullToRefresh/AAPullToRefresh.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
-#import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "PHPhotoLibrary+CustomPhotoAlbum.h"
 #import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 #import "FindRiderViewController.h"
@@ -177,17 +177,17 @@
         NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
         
         // load the image from the asset library
-        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-            if (asset) {
-                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
-            }
-            else {
-                [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
-            }
-        } failureBlock:^(NSError *error) {
-            NSLog(@"error loading image %@", [error localizedDescription]);
-            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-        }];
+//        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
+//            if (asset) {
+//                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+//            }
+//            else {
+//                [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
+//            }
+//        } failureBlock:^(NSError *error) {
+//            NSLog(@"error loading image %@", [error localizedDescription]);
+//            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
+//        }];
     }
     else {
         [view setImage:nil];
@@ -400,20 +400,23 @@
 - (IBAction)addPhotoToAlbum:(id)sender
 {
     // show action sheet allowing picking or taking image
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Photo", @"Take Picture", nil];
-    [sheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        if (buttonIndex == 0) {
-            [self startMediaBrowserFromViewController:self usingDelegate:self];
-        }
-        if (buttonIndex == 1) {
-            [self startCameraControllerFromViewController:self usingDelegate:self];
-        }
-    }
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Choose Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // do what we do when we choose photo
+        [self startMediaBrowserFromViewController:self usingDelegate:self];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Take Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // do what we do when we take picture
+        [self startCameraControllerFromViewController:self usingDelegate:self];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
 }
 
 - (IBAction)signIn:(id)sender {
