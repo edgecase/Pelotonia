@@ -937,27 +937,17 @@
         <!--Your Team-->
         <scene sceneID="9MF-OJ-M4j">
             <objects>
-                <tableViewController storyboardIdentifier="RidersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RidersViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="puZ-qr-IB2" customClass="RidersViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="uvz-tz-iUZ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Last Name or Peloton Name" showsCancelButton="YES" translucent="NO" showsScopeBar="YES" id="2DY-1a-ipm">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="tintColor" red="0.3294117647" green="0.36862745099999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="barTintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                            <connections>
-                                <outlet property="delegate" destination="puZ-qr-IB2" id="Uka-Vz-Dup"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="riderCell" textLabel="xaU-yn-x1J" detailTextLabel="dli-ow-PwI" rowHeight="104" style="IBUITableViewCellStyleSubtitle" id="fvi-sS-Las">
-                                <rect key="frame" x="0.0" y="110" width="320" height="104"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="104"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fvi-sS-Las" id="9Le-vB-Iqg">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="103"/>
@@ -986,7 +976,6 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Your Team" id="dR0-l0-2SN">
                         <barButtonItem key="leftBarButtonItem" image="259-list" id="QZU-aO-8lk">
                             <color key="tintColor" red="0.22352941179999999" green="0.83529411760000005" blue="0.1764705882" alpha="1" colorSpace="deviceRGB"/>
@@ -1011,7 +1000,6 @@
                 <searchDisplayController id="98K-l2-sFA">
                     <connections>
                         <outlet property="delegate" destination="puZ-qr-IB2" id="4T3-Mx-N7F"/>
-                        <outlet property="searchBar" destination="2DY-1a-ipm" id="zNc-zR-tP0"/>
                         <outlet property="searchContentsController" destination="puZ-qr-IB2" id="z3W-WP-HYX"/>
                         <outlet property="searchResultsDataSource" destination="puZ-qr-IB2" id="M2j-g9-sQc"/>
                         <outlet property="searchResultsDelegate" destination="puZ-qr-IB2" id="9QT-Jn-Dd7"/>

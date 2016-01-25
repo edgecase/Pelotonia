@@ -14,7 +14,7 @@
 
 @class RiderDataController;
 
-@interface RidersViewController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate, FindRiderViewControllerDelegate> {
+@interface RidersViewController : UITableViewController <UISearchBarDelegate, UISearchResultsUpdating, FindRiderViewControllerDelegate> {
     NSMutableArray *_riderSearchResults;
 }
 
