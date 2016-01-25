@@ -44,11 +44,16 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2992</string>
+	<string>3000</string>
 	<key>FacebookAppID</key>
 	<string>269799726466566</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Baksheesh-Bold.ttf</string>

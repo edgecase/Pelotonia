@@ -65,9 +65,9 @@
     // set up socialize
     self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            self.rider.riderId, @"riderID",
                             self.rider.story, @"szsd_description",
                             self.rider.riderPhotoThumbUrl, @"szsd_thumb",
-                            self.rider.riderId, @"riderID",
                             nil];
     
     NSString *jsonString = [params toJSONString];
