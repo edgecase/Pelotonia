@@ -38,6 +38,8 @@
 
 // NSObject methods
 
+static NSDictionary *_routesDict = nil;
+
 - (id)init {
     if (self = [super init]) {
         return self;
@@ -52,6 +54,23 @@
     }
     return self;
 }
+
+#pragma mark -- Globals
+- (NSDictionary *)routesInfo
+{
+    if (_routesDict == nil) {
+        _routesDict = @{
+                        @"Columbus to Pickerington": @{ @"distance": @25, @"minimum":@1250 },
+                        @"Columbus to New Albany":   @{ @"distance": @50, @"minimum":@1500 },
+                        @"New Albany to Gambier":    @{ @"distance": @50, @"minimum":@1750 },
+                        @"Columbus to Gambier":      @{ @"distance": @100, @"minimum":@2000 },
+                        @"New Albany to Gambier and Back":   @{ @"distance": @130, @"minimum":@2500 },
+                        @"Columbus to Gambier and Back":     @{ @"distance": @180, @"minimum":@2500 },
+                       };
+    }
+    return _routesDict;
+}
+
 
 #pragma mark -- Properties
 
@@ -72,28 +91,14 @@
 }
 
 - (NSInteger)distance {
-    NSInteger value = 25;
-    
-    if ([self.route isEqualToString:@"Columbus to Gambier and Back"]) {
-        value = 180;
-    }
-    else if ([self.route isEqualToString:@"Pickerington to Gambier and Back"]) {
-        value = 150;
-    }
-    else if ([self.route isEqualToString:@"Columbus to Gambier"]) {
-        value = 100;
-    }
-    else if ([self.route isEqualToString:@"Pickerington to Gambier"]) {
-        value = 75;
-    }
-    else if ([self.route isEqualToString:@"Columbus to New Albany"]) {
-        value = 50;
-    }
-    else if ([self.route isEqualToString:@"Columbus to Pickerington"]) {
-        value = 25;
+    NSNumber *value;
+
+    value = [[self.routesInfo objectForKey:self.route ] objectForKey:@"distance"];
+    if (value == nil) {
+        value = @25;
     }
     
-    return value;
+    return [value integerValue];
 }
 
 - (NSString *)totalCommit
@@ -103,30 +108,19 @@
     if (self.isRider) {
         if ((self.route == nil) || ([self.route length] == 0)) {
             NSLog(@"unable to read rider's route, 0 totalCommit");
-            value = @"$0.00";
         }
         else if (self.highRoller == YES) {
-            value = @"$4,000.00";
-        }
-        else if (self.distance == 180 || self.distance == 150) {
-            // overnight to columbus or pickerington
-            value = @"$2,200.00";
-        }
-        else if (self.distance == 75 || self.distance == 100) {
-            // to gambier from columbus or pickerington
-            value = @"$1,800.00";
-        }
-        else if (self.distance == 50) {
-            // to new albany
-            value = @"$1,250.00";
+            value = @"$5,000.00";
         }
         else {
-            // to pickerington
-            value = @"$1,200.00";
+            NSNumber *amount = [[self.routesInfo objectForKey:self.route] objectForKey:@"minimum"];
+            if (value != nil) {
+                value = [NSString stringWithFormat:@"$%.2lf", [amount doubleValue]];
+            }
         }
     }
     else if (self.isPeloton) {
-        // pelotons commit is everyone's total
+        // a peloton's commit is everyone's total
         value = self.pelotonGrandTotal;
     }
     else if (self.isVirtualRider || self.isVolunteer) {
@@ -175,6 +169,12 @@
         }
         return raised/commit;
     }
+}
+
+- (void)setRoute:(NSString *)route
+{
+    _route = route;
+    
 }
 
 - (NSString *)route

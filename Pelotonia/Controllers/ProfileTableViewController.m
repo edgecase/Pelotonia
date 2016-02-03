@@ -65,13 +65,16 @@
     // set up socialize
     self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            self.rider.riderId, @"riderID",
-                            self.rider.story, @"szsd_description",
-                            self.rider.riderPhotoThumbUrl, @"szsd_thumb",
-                            nil];
+                                self.rider.riderId, @"riderID",
+                                self.rider.story, @"szsd_description",
+                                self.rider.riderPhotoThumbUrl, @"szsd_thumb",
+                                nil];
+
+    if ([params count] > 0 ) {
+        NSString *jsonString = [params toJSONString];
+        entity.meta = jsonString;
+    }
     
-    NSString *jsonString = [params toJSONString];
-    entity.meta = jsonString;
     [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
         NSLog(@"it has %d likes, %d comments, %d shares, %d views", [serverEntity likes], [serverEntity comments], [serverEntity shares], [serverEntity views]);
 

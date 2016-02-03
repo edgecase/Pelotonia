@@ -9,6 +9,6 @@ typedef void(^SaveImageCompletion)(NSURL* assetURL, NSError* error);
 
 @interface PHPhotoLibrary(CustomPhotoAlbum)
 
--(void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
+-(void)saveImage:(UIImage*)image toAlbum:(PHAssetCollection*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock;
 
 @end

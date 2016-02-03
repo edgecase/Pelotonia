@@ -6,6 +6,8 @@
 //
 //
 
+@import Photos;
+
 #import "UserProfileViewController.h"
 #import "PelotoniaLogInViewController.h"
 #import "PelotoniaSignUpViewController.h"
@@ -39,6 +41,11 @@
 @implementation UserProfileViewController {
     NSArray *_workouts;
     AAPullToRefresh *_tv;
+    
+    PHAssetCollection *assetCollection;
+    bool albumFound;
+    PHObjectPlaceholder *assetCollectionPlaceholder;
+    PHAssetCollection *collection;
 }
 
 
@@ -72,6 +79,9 @@
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
+    
+    // create the photo album
+    [self createAlbum:@"Pelotonia"];
     
 }
 
@@ -500,6 +510,60 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+// for managing albums & photos
+
+-(void)createAlbum: (NSString *)name
+{
+    if ([PHPhotoLibrary authorizationStatus] != PHAuthorizationStatusNotDetermined) {
+        PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+        fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title = %@", name];
+        PHFetchResult *collection_result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:fetchOptions];
+        
+        if (collection_result.firstObject) {
+            albumFound = true;
+            assetCollection = collection_result.firstObject;
+        }
+        else {
+            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                PHAssetCollectionChangeRequest *createAlbumRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:name];
+                assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection;
+            } completionHandler:^(BOOL success, NSError * _Nullable error) {
+                if (success == TRUE) {
+                    albumFound = TRUE;
+                    
+                }
+                else {
+                    albumFound = FALSE;
+                    
+                    PHFetchResult *collectionFetchResult = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[assetCollectionPlaceholder.localIdentifier] options:nil];
+                    assetCollection = collectionFetchResult.firstObject;
+                }
+            }];
+        }
+    }
+
+}
+
+- (void)showImages
+{
+    PHFetchResult *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+    PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+    
+    [assets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isMemberOfClass:[PHAsset class]]) {
+            PHAsset *asset = obj;
+            CGSize imageSize = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+            
+            [imageManager requestImageForAsset:asset targetSize:imageSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                // add image data to list of images for the profile
+            }];
+        }
+    }];
+}
+
+
 // For responding to the user accepting a newly-captured picture or movie
 - (void) imagePickerController: (UIImagePickerController *) picker
  didFinishPickingMediaWithInfo: (NSDictionary *) info {
@@ -519,7 +583,7 @@
             imageToSave = originalImage;
         }
         
-        [self.library saveImage:imageToSave toAlbum:@"Pelotonia" withCompletionBlock:^(NSURL *assetURL, NSError *error) {
+        [self.library saveImage:imageToSave toAlbum:assetCollection withCompletionBlock:^(NSURL *assetURL, NSError *error) {
             if (error!=nil) {
                 NSLog(@"error writing image: %@", [error localizedDescription]);
             }
@@ -527,6 +591,7 @@
                 NSString *key = [assetURL absoluteString];
                 [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
                 [self.photos addObject:@{@"key":key, @"date":[NSDate date]}];
+                [self showImages];
             }
             [picker dismissViewControllerAnimated:YES completion:nil];
         }];

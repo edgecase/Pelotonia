@@ -71,6 +71,7 @@
 
 // implementation
 - (void)refreshFromWebOnComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
+- (NSDictionary *)routesInfo;
 
 @end
 
