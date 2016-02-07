@@ -147,14 +147,22 @@ static NSInteger SANDLOT_ROW = 6;
 
 - (void)successTwitter
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"You are now following @pelotonia" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alert show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success!" message:@"You are now following @pelotonia" preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)failTwitter
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Unable to follow Pelotonia at this time.  Please try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-    [alert show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"Unable to follow Pelotonia at this time.  Please try again later." preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)done:(id)sender {

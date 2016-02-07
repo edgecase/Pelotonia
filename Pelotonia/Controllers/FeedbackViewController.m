@@ -42,6 +42,12 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)editingDidEnd:(id)sender {
+    UITextField *tfEmail = (UITextField *)sender;
+    
+    [self.doneButton setEnabled:[self isValidEmail:tfEmail.text]];
+}
+
 - (void)sendFeedback:(NSString *)feedback {
     SendGrid *sendgrid = [SendGrid apiUser:@"support@isandlot.com" apiKey:@"1drink2many!"];
     
@@ -49,10 +55,17 @@
     NSString *displayName = [[SZUserUtils currentUser] displayName];
     SendGridEmail *email = [[SendGridEmail alloc] init];
     email.to = @"support@isandlot.com";
-    email.from = @"feedback@pelotonia.org";
+    email.from = self.userEmailAddress.text;
     email.subject = @"Pelotonia App Feedback";
     email.text = [NSString stringWithFormat:@"Name: %@\nUserName: %@\n%@", displayName, username, feedback];
     [sendgrid sendWithWeb:email];
+}
+
+- (BOOL)isValidEmail: (NSString *)address
+{
+    NSString *someRegexp = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", someRegexp];
+    return [emailTest evaluateWithObject:address];
 }
 
 @end
