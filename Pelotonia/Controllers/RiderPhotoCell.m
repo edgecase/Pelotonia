@@ -19,13 +19,12 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)setImageAsset:(PHAsset *)imageAsset
 {
-    // Drawing code
+    [self.imageManager requestImageForAsset:imageAsset targetSize:CGSizeMake(165, 165) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        self.imageView.image = result;
+    }];
 }
-*/
+
 
 @end

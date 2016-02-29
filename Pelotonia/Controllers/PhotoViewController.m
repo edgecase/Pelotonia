@@ -119,6 +119,7 @@
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
     NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
 
+    
 //    [self.library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
 //        // success - share the photo via facebook
 //        ALAssetRepresentation *rep = [asset defaultRepresentation];

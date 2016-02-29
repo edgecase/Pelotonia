@@ -11,11 +11,9 @@
 #import "RidePhotosViewController.h"
 #import "RiderPhotoCell.h"
 #import "PhotoViewController.h"
-#import "UIImage+Resize.h"
-#import "AppDelegate.h"
 
 @interface RidePhotosViewController () {
-    NSArray *_photos;
+
 }
 
 @end
@@ -35,6 +33,8 @@
 {
     [super viewDidLoad];
     self.library = [PHPhotoLibrary sharedPhotoLibrary];
+    self.photos = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    self.imageManager = [[PHCachingImageManager alloc] init];
 }
 
 - (void)viewDidUnload
@@ -44,7 +44,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    _photos = [[AppDelegate sharedDataController] photoKeys];
     [self.collectionView reloadData];
 }
 
@@ -58,24 +57,16 @@
 #pragma mark -- UICollectionViewDataSource methods
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [_photos count];
+    return [self.photos count];
 }
 
 // The cell that is returned must be retrieved from a call to - dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RiderPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"riderPhotoCell" forIndexPath:indexPath];
-    NSString *key = [[_photos objectAtIndex:indexPath.row] objectForKey:@"key"];
-    NSLog(@"loading cell %ld", (long)indexPath.row);
+    cell.imageAsset = [self.photos objectAtIndex:indexPath.row];
+    cell.imageManager = self.imageManager;
     
-    // load the image from the absolute URL
-//    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-//        [cell.imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
-//        cell.tag = indexPath.row;
-//    } failureBlock:^(NSError *error) {
-//        NSLog(@"error loading image %@", [error localizedDescription]);
-//        [cell.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:cell.imageView.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-//    }];
     return cell;
 }
 
