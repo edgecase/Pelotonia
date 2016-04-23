@@ -92,12 +92,4 @@
     }
 }
 
-- (IBAction)trashPhoto:(id)sender {
-    NSLog(@"delete called");
-    [[[AppDelegate sharedDataController] photoKeys] removeObjectAtIndex:self.index];
-    SDImageCache *cache = [SDImageCache sharedImageCache];
-    [cache clearDisk];
-    [cache clearMemory];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 @end

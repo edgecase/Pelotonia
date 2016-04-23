@@ -714,7 +714,7 @@
                             <tableViewSection id="Lpj-6n-A8b">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="69" id="NB2-oE-g8G">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NB2-oE-g8G" id="lZ2-j5-334">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
@@ -730,7 +730,7 @@
                                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="428" id="Dhr-uU-rUB">
-                                        <rect key="frame" x="0.0" y="69" width="320" height="428"/>
+                                        <rect key="frame" x="0.0" y="133" width="320" height="428"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dhr-uU-rUB" id="WB7-jp-8su">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="427"/>
@@ -1880,20 +1880,6 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="pJQ-Xf-Oy9">
-                                <rect key="frame" x="0.0" y="485" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="s2R-Ze-wa9"/>
-                                    <barButtonItem systemItem="trash" id="sdp-fZ-X3E">
-                                        <connections>
-                                            <action selector="trashPhoto:" destination="IXk-D3-aWK" id="BFP-C1-IwJ"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.22352941330000001" green="0.83529412749999998" blue="0.1764705926" alpha="1" colorSpace="deviceRGB"/>
@@ -1903,7 +1889,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imageView" destination="Tjh-5G-bzV" id="naw-FH-s19"/>
-                        <outlet property="toolbar" destination="pJQ-Xf-Oy9" id="cAd-5S-6h7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l3T-f9-msa" userLabel="First Responder" sceneMemberID="firstResponder"/>

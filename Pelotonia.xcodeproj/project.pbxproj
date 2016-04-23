@@ -59,7 +59,6 @@
 		BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB22414C17F529030054F16D /* FeedbackViewController.m */; };
 		BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */; };
 		BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */; };
-		BB5561AC1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5561AB1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m */; };
 		BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */; };
 		BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */; };
 		BB5D2434178A477300A4429A /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5D2433178A477300A4429A /* NSDate+Helper.m */; };
@@ -189,8 +188,6 @@
 		BB2865E9176ABB05001BA804 /* ProfileDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileDetailsTableViewController.m; path = Controllers/ProfileDetailsTableViewController.m; sourceTree = "<group>"; };
 		BB32006D178E668A0035A2BA /* NSDictionary+JSONConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSONConversion.h"; sourceTree = "<group>"; };
 		BB32006E178E668A0035A2BA /* NSDictionary+JSONConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSONConversion.m"; sourceTree = "<group>"; };
-		BB5561AA1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PHPhotoLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
-		BB5561AB1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PHPhotoLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		BB5D24221789EEB800A4429A /* PRPSmartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPSmartTableViewCell.h; sourceTree = "<group>"; };
 		BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPSmartTableViewCell.m; sourceTree = "<group>"; };
 		BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentTableViewCell.h; path = Controllers/CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -531,8 +528,6 @@
 		BCE3B7BD15AE49DA00205530 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BB5561AA1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.h */,
-				BB5561AB1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m */,
 				BB5D2435178A484900A4429A /* NSDate-Utilities.h */,
 				BB5D2436178A484900A4429A /* NSDate-Utilities.m */,
 				BB5D2432178A477300A4429A /* NSDate+Helper.h */,
@@ -846,7 +841,6 @@
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
-				BB5561AC1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m in Sources */,
 				BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */,
 				BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */,
 				BBD5CA061CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift in Sources */,
