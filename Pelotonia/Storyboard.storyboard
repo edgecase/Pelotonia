@@ -125,15 +125,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Classifieds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pIx-My-x2y">
-                                                    <rect key="frame" x="54" y="0.0" width="251" height="43"/>
+                                                    <rect key="frame" x="58" y="0.0" width="247" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" red="0.32941177490000001" green="0.36862745879999997" blue="0.3960784376" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pelotonia-menu-icon" id="TRt-70-uDj">
-                                                    <rect key="frame" x="15" y="9" width="24" height="24"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="442-information-symbol1" id="TRt-70-uDj">
+                                                    <rect key="frame" x="15" y="7" width="28" height="28"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -2414,12 +2414,13 @@
         <image name="210-twitterbird" width="22" height="22"/>
         <image name="216-compose" width="23" height="18"/>
         <image name="259-list" width="20" height="14"/>
+        <image name="442-information-symbol1" width="28" height="28"/>
         <image name="46-movie-2" width="20" height="25"/>
         <image name="83-calendar" width="23" height="25"/>
         <image name="83-calendar-gray" width="23" height="25"/>
         <image name="86-camera-white" width="24" height="18"/>
         <image name="LaunchImage" width="24" height="24"/>
-        <image name="Pelotonia_logo_annual" width="216" height="38"/>
+        <image name="Pelotonia_logo_annual" width="216" height="35"/>
         <image name="logotype_grn" width="220" height="25"/>
         <image name="pelotonia-menu-icon" width="24" height="24"/>
         <image name="profile_default" width="300" height="300"/>

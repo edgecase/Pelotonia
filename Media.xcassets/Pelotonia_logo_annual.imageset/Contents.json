@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "pelotonia-annual-logo.png"
+      "filename" : "Pelotonia_logo_annual-1.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "pelotonia-annual-logo@2x.png"
+      "filename" : "pelotonia_logo_annual-2.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "pelotonia-annual-logo@3x.png"
+      "filename" : "pelotonia_logo_annual-3.png",
+      "scale" : "3x"
     }
   ],
   "info" : {
