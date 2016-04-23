@@ -18,9 +18,9 @@
 
 
 static NSInteger kProfileButton     = 0;
-
 static NSInteger kRegisterButton  = 1;
 static NSInteger kVideoButton     = 2;
+static NSInteger kClassifiedsButton = 0;
 static NSInteger kBlogButton = 4;
 
 
@@ -134,6 +134,9 @@ static NSInteger kBlogButton = 4;
             // web forms submitted directly to the Pelotonia site
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/register"]];
+        }
+        else if (indexPath.row == kClassifiedsButton) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pelotonia.org/classifieds"]];
         }
         else if (indexPath.row == kBlogButton) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/the-blog"]];

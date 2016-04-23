@@ -104,12 +104,10 @@
 		BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062D19524FCA00FEED39 /* EventTableViewCell.m */; };
 		BBDF0631195253C300FEED39 /* PelotoniaModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */; };
 		BBDF064C1953CDF000FEED39 /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */; };
-		BBEA1E3219607981008B933E /* NewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3119607981008B933E /* NewsTableViewController.m */; };
 		BBEA1E3519607AE0008B933E /* NewsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3419607AE0008B933E /* NewsItemTableViewCell.m */; };
 		BBEA1E3819607B5F008B933E /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3719607B5F008B933E /* Event.m */; };
 		BBEA1E3B19607B5F008B933E /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3A19607B5F008B933E /* EventCategory.m */; };
 		BBEA1E3E19607B60008B933E /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3D19607B60008B933E /* NewsItem.m */; };
-		BBEA1E4119608D20008B933E /* NewsDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */; };
 		BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF496F319393050007D7D67 /* libxml2.2.dylib */; };
 		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -269,8 +267,6 @@
 		BBDF0630195253C300FEED39 /* PelotoniaModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PelotoniaModel.xcdatamodel; sourceTree = "<group>"; };
 		BBDF064A1953CDF000FEED39 /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = Controllers/EventDetailsTableViewController.h; sourceTree = "<group>"; };
 		BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = Controllers/EventDetailsTableViewController.m; sourceTree = "<group>"; };
-		BBEA1E3019607981008B933E /* NewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsTableViewController.h; path = Controllers/NewsTableViewController.h; sourceTree = "<group>"; };
-		BBEA1E3119607981008B933E /* NewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsTableViewController.m; path = Controllers/NewsTableViewController.m; sourceTree = "<group>"; };
 		BBEA1E3319607AE0008B933E /* NewsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItemTableViewCell.h; path = Controllers/NewsItemTableViewCell.h; sourceTree = "<group>"; };
 		BBEA1E3419607AE0008B933E /* NewsItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItemTableViewCell.m; path = Controllers/NewsItemTableViewCell.m; sourceTree = "<group>"; };
 		BBEA1E3619607B5F008B933E /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
@@ -279,8 +275,6 @@
 		BBEA1E3A19607B5F008B933E /* EventCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCategory.m; path = Models/EventCategory.m; sourceTree = "<group>"; };
 		BBEA1E3C19607B60008B933E /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItem.h; path = Models/NewsItem.h; sourceTree = "<group>"; };
 		BBEA1E3D19607B60008B933E /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItem.m; path = Models/NewsItem.m; sourceTree = "<group>"; };
-		BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailTableViewController.h; path = Controllers/NewsDetailTableViewController.h; sourceTree = "<group>"; };
-		BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailTableViewController.m; path = Controllers/NewsDetailTableViewController.m; sourceTree = "<group>"; };
 		BBF496F319393050007D7D67 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
 		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
@@ -591,10 +585,6 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
 				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
-				BBEA1E3019607981008B933E /* NewsTableViewController.h */,
-				BBEA1E3119607981008B933E /* NewsTableViewController.m */,
-				BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */,
-				BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */,
 				BB93182618B91ED3003A3AC0 /* PelotoniaProfileViewController.h */,
 				BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */,
 				BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */,
@@ -836,13 +826,11 @@
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
-				BBEA1E4119608D20008B933E /* NewsDetailTableViewController.m in Sources */,
 				BBAA222A18AEEBB4006BA30E /* Donor.m in Sources */,
 				BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */,
 				BBEA1E3519607AE0008B933E /* NewsItemTableViewCell.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 				BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */,
-				BBEA1E3219607981008B933E /* NewsTableViewController.m in Sources */,
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
