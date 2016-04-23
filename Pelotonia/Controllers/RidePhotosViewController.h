@@ -8,10 +8,10 @@
 
 @import UIKit;
 @import Photos;
+#import "Pelotonia-Swift.h"
 
 @interface RidePhotosViewController : UICollectionViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (strong, nonatomic) PHPhotoLibrary *library;
 @property (strong, nonatomic) PHFetchResult *photos;
 @property (strong, nonatomic) PHCachingImageManager *imageManager;
 

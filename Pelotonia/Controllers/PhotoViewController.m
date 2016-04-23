@@ -34,7 +34,6 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoPageViewController"];
     self.pageViewController.delegate = self;
     self.pageViewController.dataSource = self;
-    self.library = [PHPhotoLibrary sharedPhotoLibrary];
     
     SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:self.initialPhotoIndex];
     NSArray *viewControllers = @[startingViewController];
@@ -65,14 +64,14 @@
     // Create a new view controller and pass suitable data.
     SinglePhotoViewController *photoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePhotoViewController"];
     
-    photoViewController.imageData = [self.photos objectAtIndex:index];
+    photoViewController.asset = [self.photos objectAtIndex:index];
     photoViewController.index = index;
     return photoViewController;
 }
 
 - (NSUInteger)indexOfViewController:(SinglePhotoViewController *)viewController
 {
-    return [self.photos indexOfObject:viewController.imageData];
+    return [self.photos indexOfObject:viewController.asset];
 }
 
 #pragma mark -- UIPageViewControllerDelegate and DataSource methods
@@ -116,25 +115,18 @@
 
 - (IBAction)sharePhoto:(id)sender
 {
+    // this is where we share photos
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
-
+    PHAsset *photo = [self.photos objectAtIndex:currentIndex];
     
-//    [self.library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
-//        // success - share the photo via facebook
-//        ALAssetRepresentation *rep = [asset defaultRepresentation];
-//        CGImageRef image = [rep fullScreenImage];
-//        NSArray* dataToShare = @[[UIImage imageWithCGImage:image]];
-//
-//        UIActivityViewController* activityViewController =
-//        [[UIActivityViewController alloc] initWithActivityItems:dataToShare
-//                                          applicationActivities:nil];
-//        [self presentViewController:activityViewController animated:YES completion:nil];
-//        
-//    } failureBlock:^(NSError *error) {
-//        // failure
-//        NSLog(@"An error occurred: %@", [error localizedDescription]);
-//    }];
+    [[PHImageManager defaultManager] requestImageForAsset:photo targetSize:CGSizeMake(320, 480) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[result] applicationActivities:nil];
+        
+        [self.navigationController presentViewController:activityViewController animated:YES completion:nil];
+
+    }];
+    
 }
 
 @end

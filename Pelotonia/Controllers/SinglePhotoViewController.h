@@ -12,10 +12,9 @@
 
 @interface SinglePhotoViewController : UIViewController
 
-@property (strong, nonatomic) NSDictionary *imageData;
+@property (strong, nonatomic) PHAsset *asset;
 @property (assign, nonatomic) NSUInteger index;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) PHPhotoLibrary *library;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 - (IBAction)trashPhoto:(id)sender;
 

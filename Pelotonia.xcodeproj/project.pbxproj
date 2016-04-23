@@ -99,6 +99,7 @@
 		BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */; };
 		BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */; };
 		BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E818CCD99300CAFFF7 /* IntroViewController.m */; };
+		BBD5CA061CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */; };
 		BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062A19524F9800FEED39 /* EventsTableViewController.m */; };
 		BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062D19524FCA00FEED39 /* EventTableViewCell.m */; };
 		BBDF0631195253C300FEED39 /* PelotoniaModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */; };
@@ -259,6 +260,8 @@
 		BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroPageViewController.m; path = Controllers/IntroPageViewController.m; sourceTree = "<group>"; };
 		BBC012E718CCD99300CAFFF7 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = Controllers/IntroViewController.h; sourceTree = "<group>"; };
 		BBC012E818CCD99300CAFFF7 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Controllers/IntroViewController.m; sourceTree = "<group>"; };
+		BBD5CA041CB95BE70095A4A9 /* Pelotonia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Bridging-Header.h"; sourceTree = "<group>"; };
+		BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PelotoniaPhotosLibrary.swift; path = Models/PelotoniaPhotosLibrary.swift; sourceTree = "<group>"; };
 		BBDF062919524F9800FEED39 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsTableViewController.h; path = Controllers/EventsTableViewController.h; sourceTree = "<group>"; };
 		BBDF062A19524F9800FEED39 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsTableViewController.m; path = Controllers/EventsTableViewController.m; sourceTree = "<group>"; };
 		BBDF062C19524FCA00FEED39 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewCell.h; path = Controllers/EventTableViewCell.h; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 		BBAA247718B04B5D006BA30E /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				BBAA248618B44C67006BA30E /* RiderPhotoCell.h */,
+				BBAA248718B44C67006BA30E /* RiderPhotoCell.m */,
 				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
 				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
 				BBAA222E18AFA0BB006BA30E /* DonorTableViewCell.h */,
@@ -641,10 +646,10 @@
 				BCE3B81D15AE5B6F00205530 /* Rider.m */,
 				4D35C72715B116E5006E5D5D /* RiderDataController.h */,
 				4D35C72815B116E5006E5D5D /* RiderDataController.m */,
-				BBAA248618B44C67006BA30E /* RiderPhotoCell.h */,
-				BBAA248718B44C67006BA30E /* RiderPhotoCell.m */,
 				BBAA247418B04B4C006BA30E /* Workout.h */,
 				BBAA247518B04B4C006BA30E /* Workout.m */,
+				BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */,
+				BBD5CA041CB95BE70095A4A9 /* Pelotonia-Bridging-Header.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -856,6 +861,7 @@
 				BB5561AC1B1BC29300C57A6D /* PHPhotoLibrary+CustomPhotoAlbum.m in Sources */,
 				BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */,
 				BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */,
+				BBD5CA061CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift in Sources */,
 				BBEA1E3E19607B60008B933E /* NewsItem.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
@@ -935,6 +941,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
@@ -962,6 +969,7 @@
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -972,6 +980,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ed732227-34f5-4775-8900-c67dbd7b982f";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ed732227-34f5-4775-8900-c67dbd7b982f";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1064,6 +1073,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				CURRENT_PROJECT_VERSION = 17;
@@ -1098,6 +1108,7 @@
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -1112,6 +1123,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1126,6 +1139,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
@@ -1153,6 +1167,7 @@
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1163,6 +1178,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d25bcaef-ff3e-4611-b95a-00214b344e5b";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";

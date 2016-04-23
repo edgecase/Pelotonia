@@ -5,9 +5,17 @@
 //  Created by Mark Harris on 4/26/13.
 //
 //
+//  This is the view that you see when you launch the application.
+//  it displays the user's picture, recent photos & workouts, and
+//  their current fundraising tally.
 
 @import Photos;
 
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <Socialize/Socialize.h>
 #import "UserProfileViewController.h"
 #import "PelotoniaLogInViewController.h"
 #import "PelotoniaSignUpViewController.h"
@@ -19,16 +27,10 @@
 #import "RiderDataController.h"
 #import "WorkoutListTableViewController.h"
 #import "AppDelegate.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AAPullToRefresh/AAPullToRefresh.h>
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
-#import "PHPhotoLibrary+CustomPhotoAlbum.h"
-#import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 #import "FindRiderViewController.h"
 #import "IntroViewController.h"
+#import "Pelotonia-Swift.h"
 
 #ifndef DEBUG
 #define DEBUG   0
@@ -79,10 +81,6 @@
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-    
-    // create the photo album
-    [self createAlbum:@"Pelotonia"];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -143,11 +141,6 @@
 
 #pragma mark -- regular implementation
 
-- (NSArray *)photos
-{
-    return [[AppDelegate sharedDataController] photoKeys];
-}
-
 - (void) configureView {
     [self configureRecentPhotos];
     [self configureWorkoutCell];
@@ -181,45 +174,40 @@
     }
 }
 
-- (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
+- (void)setImageView:(UIImageView *)view toPhoto:(PHAsset *)photo withManager:(PHImageManager *)manager
 {
-    if (index < [photos count]) {
-        NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
-        
-        // load the image from the asset library
-//        [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-//            if (asset) {
-//                [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
-//            }
-//            else {
-//                [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
-//            }
-//        } failureBlock:^(NSError *error) {
-//            NSLog(@"error loading image %@", [error localizedDescription]);
-//            [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
-//        }];
-    }
-    else {
-        [view setImage:nil];
-    }
+    UIImage *defaultImage =
+    [[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                                                                        bounds:self.recentImage1.bounds.size
+                                                          interpolationQuality:kCGInterpolationDefault];
 
+    [manager requestImageForAsset:photo targetSize:CGSizeMake(100, 100) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if (result != nil) {
+            [view setImage:[result roundedCornerImage:5 borderSize:1]];
+        }
+        else {
+            [view setImage:[defaultImage roundedCornerImage:5 borderSize:1]];
+        }
+    }];
 }
 
 - (void)configureRecentPhotos
 {
-    NSLog(@"%lu photos", (unsigned long)[self.photos count]);
-    NSArray *sortedPhotos = [self.photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDictionary *photoDict1 = (NSDictionary *)obj1;
-        NSDictionary *photoDict2 = (NSDictionary *)obj2;
-        NSDate *date1 = [photoDict1 objectForKey:@"date"];
-        NSDate *date2 = [photoDict2 objectForKey:@"date"];
-        return [date2 compare:date1];
+    [[AppDelegate pelotoniaPhotoLibrary] images:^(PHFetchResult * _Nonnull photos) {
+        PHImageManager *manager = [PHImageManager defaultManager];
+        
+        if (photos.count > 0) {
+            [self setImageView:self.recentImage1 toPhoto:[photos objectAtIndex:0] withManager:manager];
+        }
+        if (photos.count > 1) {
+            [self setImageView:self.recentImage2 toPhoto:[photos objectAtIndex:1] withManager:manager];
+        }
+        if (photos.count > 2) {
+            [self setImageView:self.recentImage3 toPhoto:[photos objectAtIndex:2] withManager:manager];
+        }
     }];
-
-    [self setImageView:self.recentImage1 fromPhotos:sortedPhotos atIndex:0];
-    [self setImageView:self.recentImage2 fromPhotos:sortedPhotos atIndex:1];
-    [self setImageView:self.recentImage3 fromPhotos:sortedPhotos atIndex:2];
 }
+
 
 - (void)refreshUser
 {
@@ -510,39 +498,6 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-// for managing albums & photos
-
--(void)createAlbum: (NSString *)name
-{
-    if ([PHPhotoLibrary authorizationStatus] != PHAuthorizationStatusNotDetermined) {
-        PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-        fetchOptions.predicate = [NSPredicate predicateWithFormat:@"title = %@", name];
-        PHFetchResult *collection_result = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:fetchOptions];
-        
-        if (collection_result.firstObject) {
-            albumFound = true;
-            assetCollection = collection_result.firstObject;
-        }
-        else {
-            [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                PHAssetCollectionChangeRequest *createAlbumRequest = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:name];
-                assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection;
-            } completionHandler:^(BOOL success, NSError * _Nullable error) {
-                if (success == TRUE) {
-                    albumFound = TRUE;
-                    
-                }
-                else {
-                    albumFound = FALSE;
-                    
-                    PHFetchResult *collectionFetchResult = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[assetCollectionPlaceholder.localIdentifier] options:nil];
-                    assetCollection = collectionFetchResult.firstObject;
-                }
-            }];
-        }
-    }
-
-}
 
 - (void)showImages
 {
@@ -556,8 +511,13 @@
             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
             options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
             
-            [imageManager requestImageForAsset:asset targetSize:imageSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                // add image data to list of images for the profile
+            [imageManager requestImageForAsset:asset
+                                    targetSize:imageSize
+                                   contentMode:PHImageContentModeAspectFill
+                                       options:options
+                                 resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                                     // add image data to list of images for the profile
+                                     
             }];
         }
     }];
@@ -583,19 +543,15 @@
             imageToSave = originalImage;
         }
         
-        [self.library saveImage:imageToSave toAlbum:assetCollection withCompletionBlock:^(NSURL *assetURL, NSError *error) {
-            if (error!=nil) {
+        [[AppDelegate pelotoniaPhotoLibrary] saveImage:imageToSave completion:^(NSURL * _Nullable url, NSError * _Nullable error) {
+            if (error != nil) {
                 NSLog(@"error writing image: %@", [error localizedDescription]);
             }
             else {
-                NSString *key = [assetURL absoluteString];
-                [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
-                [self.photos addObject:@{@"key":key, @"date":[NSDate date]}];
                 [self showImages];
             }
             [picker dismissViewControllerAnimated:YES completion:nil];
         }];
-        
     }
 }
 

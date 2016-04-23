@@ -37,7 +37,7 @@
 @property (strong, nonatomic) id<SZFullUser> currentUser;
 @property (strong, nonatomic) Rider *rider;
 @property (strong, nonatomic) NSArray *recentComments;
-@property (strong, nonatomic) NSMutableArray *photos;
+
 
 - (IBAction)addPhotoToAlbum:(id)sender;
 - (IBAction)signIn:(id)sender;

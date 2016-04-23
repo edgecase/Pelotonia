@@ -17,5 +17,5 @@
     #import <CoreData/CoreData.h>
 
     #import <MagicalRecord/MagicalRecord.h>
-
+    #import "Pelotonia-Swift.h"
 #endif

@@ -17,10 +17,9 @@
 
 @implementation SinglePhotoViewController
 
-@synthesize library;
 @synthesize imageView;
-@synthesize imageData;
 @synthesize index;
+@synthesize asset;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,27 +62,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSString *key = [self.imageData objectForKey:@"key"];
-    [[SDImageCache sharedImageCache] queryDiskCacheForKey:key done:^(UIImage *image, SDImageCacheType cacheType) {
-        if (image == nil) {
-//            [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-//                // success, so set the image appropriately
-//                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//                self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//                ALAssetRepresentation *rep = [asset defaultRepresentation];
-//                CGImageRef image = [rep fullScreenImage];
-//                [self.imageView setImage:[UIImage imageWithCGImage:image]];
-//                
-//            } failureBlock:^(NSError *error) {
-//                NSLog(@"error loading image %@", [error localizedDescription]);
-//                self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//                [self.imageView setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImage:self.imageView.bounds.size interpolationQuality:kCGInterpolationHigh]];
-//            }];
-        }
-        else {
-            [self.imageView setImage:image];
-        }
-    }];
+    PHImageManager *manager = [PHImageManager defaultManager];
+    
+    [manager requestImageForAsset:self.asset
+                                 targetSize: CGSizeMake(320, 475)
+                                contentMode: PHImageContentModeAspectFit
+                                    options: nil
+                              resultHandler: ^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                                  if (result != nil) {
+                                      self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+                                      [self.imageView setImage:result];
+                                  }
+                              }];
 }
 
 - (void)viewWillLayoutSubviews

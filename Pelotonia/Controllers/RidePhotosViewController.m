@@ -6,11 +6,11 @@
 //
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "AppDelegate.h"
 #import "RidePhotosViewController.h"
 #import "RiderPhotoCell.h"
 #import "PhotoViewController.h"
+#import "Pelotonia-Swift.h"
 
 @interface RidePhotosViewController () {
 
@@ -32,14 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [PHPhotoLibrary sharedPhotoLibrary];
-    self.photos = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
-    self.imageManager = [[PHCachingImageManager alloc] init];
-}
 
-- (void)viewDidUnload
-{
-    self.library = nil;
+    [[AppDelegate pelotoniaPhotoLibrary] images:^(PHFetchResult * _Nonnull photos) {
+        self.photos = photos;
+    }];
+    self.imageManager = [[PHCachingImageManager alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,8 +61,18 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RiderPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"riderPhotoCell" forIndexPath:indexPath];
-    cell.imageAsset = [self.photos objectAtIndex:indexPath.row];
+    
+    cell.tag = indexPath.row;
     cell.imageManager = self.imageManager;
+    
+    [self.imageManager requestImageForAsset: [self.photos objectAtIndex:indexPath.row]
+                                 targetSize: CGSizeMake(165, 165)
+                                contentMode: PHImageContentModeAspectFit
+                                    options: nil
+                              resultHandler: ^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                                  [cell.imageView setImage:result];
+                              }];
+
     
     return cell;
 }
@@ -74,7 +81,7 @@
 {
     if ([segue.identifier isEqualToString:@"segueToShowPhoto"]) {
         PhotoViewController *vc = (PhotoViewController *)segue.destinationViewController;
-        vc.photos = [_photos mutableCopy];
+        vc.photos = self.photos;
         RiderPhotoCell *rc = (RiderPhotoCell *)sender;
         vc.initialPhotoIndex = rc.tag;
     }

@@ -239,6 +239,20 @@
     return [AppDelegate sharedDataController];
 }
 
++ (PelotoniaPhotosLibrary *)pelotoniaPhotoLibrary
+{
+    static PelotoniaPhotosLibrary *photoLibrary = nil;
+
+    if (photoLibrary == nil) {
+        photoLibrary = [[PelotoniaPhotosLibrary alloc] init];
+        [photoLibrary album:^(PHAssetCollection * _Nonnull album) {
+            NSLog(@"Created album successfully!");
+        }];
+    }
+    
+    return photoLibrary;
+}
+
 - (void)archiveData
 {
     // get the game list & write it out
