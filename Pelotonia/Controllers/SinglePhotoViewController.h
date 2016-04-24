@@ -15,7 +15,5 @@
 @property (strong, nonatomic) PHAsset *asset;
 @property (assign, nonatomic) NSUInteger index;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-- (IBAction)trashPhoto:(id)sender;
 
 @end

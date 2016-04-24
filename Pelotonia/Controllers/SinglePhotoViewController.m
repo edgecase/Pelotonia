@@ -38,7 +38,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.view bringSubviewToFront:self.toolbar];
 }
 
 - (void)didReceiveMemoryWarning
