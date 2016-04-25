@@ -1,4 +1,4 @@
-platform :ios, '8.1'
+platform :ios, '9.0'
 workspace 'Pelotonia'
 inhibit_all_warnings!
 

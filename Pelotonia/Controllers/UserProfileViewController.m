@@ -181,12 +181,16 @@
                                                                         bounds:self.recentImage1.bounds.size
                                                           interpolationQuality:kCGInterpolationDefault];
 
-    [manager requestImageForAsset:photo targetSize:CGSizeMake(100, 100) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    [manager requestImageForAsset:photo
+                       targetSize:CGSizeMake(100, 100)
+                      contentMode:PHImageContentModeAspectFill
+                          options:nil
+                    resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         if (result != nil) {
-            [view setImage:[result roundedCornerImage:5 borderSize:1]];
+            [view setImage:result];
         }
         else {
-            [view setImage:[defaultImage roundedCornerImage:5 borderSize:1]];
+            [view setImage:defaultImage];
         }
     }];
 }
