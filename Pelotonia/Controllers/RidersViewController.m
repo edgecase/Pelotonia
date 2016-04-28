@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "RidersViewController.h"
 #import "RiderDataController.h"
+#import "FindRiderViewController.h"
 #import "ProfileTableViewController.h"
 #import "AboutTableViewController.h"
 #import "SearchViewController.h"
@@ -55,14 +56,21 @@
     }];
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
+    
+    self.navigationController.navigationBar.translucent = YES;
+    
+    // set up the search controller
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.delegate = self;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    self.definesPresentationContext = YES;
+    [self.searchController.searchBar sizeToFit];
+    
     // set up the search results
     self.riderSearchResults = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
-    self.navigationItem.titleView = imageView;
-    
+        
 }
 
 - (void)viewDidUnload
@@ -93,6 +101,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark -- UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSString *searchString = searchController.searchBar.text;
+    [self filterContentForSearchText:searchString scope:searchController.searchBar.selectedScopeButtonIndex];
+     
+    [self.tableView reloadData];
+}
+
 #pragma mark -- pull to refresh view
 - (void)refresh
 {
@@ -118,13 +135,17 @@
     if ([segue.identifier isEqualToString:@"prepareProfile:"]) {
         [self prepareProfile:(ProfileTableViewController *)segue.destinationViewController];
     }
+    if ([segue.identifier isEqualToString:@"segueToFindRider"]) {
+        FindRiderViewController *frvc = (FindRiderViewController *)segue.destinationViewController;
+        frvc.delegate = self;
+    }
 }
 
 - (void)prepareProfile:(ProfileTableViewController *)profileTableViewController
 {
     Rider *rider = nil;
-    if ([self.searchDisplayController isActive]) {
-        rider = [self.riderSearchResults objectAtIndex:[self.searchDisplayController.searchResultsTableView indexPathForSelectedRow].row];
+    if (self.searchController.active && ![self.searchController.searchBar.text  isEqual: @""]) {
+        rider = [self.riderSearchResults objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         profileTableViewController.rider = rider;
     }
     else {
@@ -132,6 +153,19 @@
         profileTableViewController.rider = rider;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.searchController.active && ![self.searchController.searchBar.text  isEqual: @""] ) {
+        // take us to the profile view
+        [self performSegueWithIdentifier:@"prepareProfile:" sender:self];
+    }
+    else {
+        // do nothing, this is handled by our segue in the storyboard
+    }
+    
+}
+
 
 
 #pragma mark - Table view data source
@@ -145,7 +179,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // return the number of riders in our data source or in the search results
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active && ![self.searchController.searchBar.text  isEqual: @""]) {
         return [self.riderSearchResults count];
     }
     else {
@@ -169,7 +203,7 @@
     
     // Configure the cell...
     Rider *rider = nil;
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active && ![self.searchController.searchBar.text  isEqual: @""]) {
         // we only have so much information in the search view
         rider = [self.riderSearchResults objectAtIndex:indexPath.row];
     }
@@ -211,7 +245,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    if (self.searchController.active) {
         return NO;
     }
     else {
@@ -237,8 +271,6 @@
 }
 
 
-
-
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -247,87 +279,47 @@
 }
 
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        // take us to the profile view
-        [self performSegueWithIdentifier:@"prepareProfile:" sender:self];
-    }
-    else {
-        // do nothing, this is handled by our segue in the storyboard
-    }
-    
-}
-
-
 #pragma mark -
 #pragma mark Content Filtering
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope
 {
     NSLog(@"Searching for content %@", searchText);
-    /*
-     Update the filtered array based on the search text and scope.
-     */    
+    
+    // Update the filtered array based on the search text and scope.
     [self.riderSearchResults removeAllObjects];
 
-    /*
-     search the web for all riders matching the searchText
-     */
-    if ([scope isEqualToString:@"ID"]) {
-        NSLog(@"Searching for %@ by ID", searchText);
-        [PelotoniaWeb searchForRiderWithLastName:@"" riderId:searchText onComplete:^(NSArray *searchResults) {
-            [self.riderSearchResults addObjectsFromArray:searchResults];
-            [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"%@", errorMessage);
-        }];
-        
+    // search the list of riders for all matchine
+    RiderDataController *dataController = [AppDelegate sharedDataController];
+    NSArray *riders = [dataController allRiders];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", searchText];
+    NSArray *searchResults = [riders filteredArrayUsingPredicate:resultPredicate];
+    [self.riderSearchResults addObjectsFromArray:searchResults];
+}
+
+
+#pragma mark FindRiderViewControllerDelegate
+- (void)findRiderViewControllerDidCancel:(FindRiderViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)findRiderViewControllerDidSelectRider:(FindRiderViewController *)controller rider:(Rider *)rider
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+
+    // add the current rider to the main list of riders
+    RiderDataController *dataController = [AppDelegate sharedDataController];
+    
+    if (![dataController containsRider:rider]) {
+        [dataController addObject:rider];
     }
-    else {
-        NSLog(@"Searching for %@ by Name", searchText);
-        [PelotoniaWeb searchForRiderWithLastName:searchText riderId:@"" onComplete:^(NSArray *searchResults) {
-            [self.riderSearchResults addObjectsFromArray:searchResults];
-            [self.searchDisplayController.searchResultsTableView reloadData];
-        } onFailure:^(NSString *errorMessage) {
-            NSLog(@"%@", errorMessage);
-        }];
-    }
+    
+    // save the database
+    [dataController save];
+    
 }
 
-
-#pragma mark -
-#pragma mark UISearchDisplayController Delegate Methods
-- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
-{
-    tableView.backgroundColor = self.tableView.backgroundColor;
-}
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
-
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
-{
-    NSLog(@"Pelotonia: searchBarSearchButtonClicked %@", searchBar);
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
-}
-
-- (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView 
-{
-    [self reloadTableData];
-}
 
 
 @end

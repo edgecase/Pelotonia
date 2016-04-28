@@ -14,8 +14,11 @@
 @property (weak, nonatomic) IBOutlet UITextView *feedbackText;
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)editingDidEnd:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
+@property (weak, nonatomic) IBOutlet UITextField *userEmailAddress;
 
 @end

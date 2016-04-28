@@ -31,7 +31,10 @@
     NSString *urlString = [NSString stringWithFormat:@"https://www.mypelotonia.org/riders_searchresults.jsp?SearchType=&LastName=%@&RiderID=%@&RideDistance=&ZipCode=&", lastName, riderId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    NSString *queryString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    [manager GET:queryString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         // success
         NSLog(@"completing network call");
         TFHpple *parser = [TFHpple hppleWithHTMLData:[operation responseData]];
@@ -49,7 +52,8 @@
                 } else if ([classAttribute isEqualToString:@"id"]) {
                     rider.riderId = [[riderAttributeColumn firstChild] content];
                 } else if ([classAttribute isEqualToString:@"photo"]) {
-                    NSString *relativeUrl = [[[[[[riderAttributeColumn children] objectAtIndex:1] children] objectAtIndex:1] attributes] valueForKey:@"src"];
+                    TFHppleElement *elem = [[riderAttributeColumn children] objectAtIndex:1];
+                    NSString *relativeUrl = [[[[elem children] objectAtIndex:1] attributes] valueForKey:@"src"];
                     rider.riderPhotoThumbUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", relativeUrl];
                 } else if ([classAttribute isEqualToString:@"donate"]) {
                     NSString *relativeUrl = [[[[riderAttributeColumn children] objectAtIndex:1] attributes] valueForKey:@"href"];
@@ -133,7 +137,12 @@
             
             // get the photos' URLs
             NSString *riderPhotoUrlXPath = @"//div[@id='touts']/div[1]/img";
-            NSString *riderPhotoRelativeUrl = [[[[parser searchWithXPathQuery:riderPhotoUrlXPath] objectAtIndex:0] attributes] valueForKey:@"src"];
+            NSString *altRiderPhotoUrlXPath = @"//div[@id='touts']/div[1]/a/img";
+            NSArray *photoNodes = [parser searchWithXPathQuery:riderPhotoUrlXPath];
+            if ([photoNodes count] == 0) {
+                photoNodes = [parser searchWithXPathQuery:altRiderPhotoUrlXPath];
+            }
+            NSString *riderPhotoRelativeUrl = [[[photoNodes objectAtIndex:0] attributes] valueForKey:@"src"];
             NSString *riderPhotoAbsoluteUrl = [NSString stringWithFormat:@"https://www.mypelotonia.org/%@", riderPhotoRelativeUrl];
             rider.riderPhotoUrl = riderPhotoAbsoluteUrl;
             
@@ -310,7 +319,8 @@
      </td>
      */
     TFHppleElement *td = [[tr childrenWithClassName:@"events-namevenue"] objectAtIndex:0];
-    return td.text;
+    NSString *text = (td.text ? td.text : @"See Description for Address");
+    return text;
 }
 
 + (NSString *)getEventNameFromRow:(TFHppleElement *)tr
@@ -416,7 +426,7 @@
             }
             event.eventDesc = description;
             // save the database
-            [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
                 if (success) {
                     NSLog(@"You successfully saved your context.");
                     if (completeBlock) {
@@ -443,11 +453,11 @@
 + (void)parseEventRow:(TFHppleElement *)row forCategory:(EventCategory *)category
 {
     NSString *title = [self getEventNameFromRow:row];
-    Event *event = [Event findFirstByAttribute:@"title" withValue:title];
+    Event *event = [Event MR_findFirstByAttribute:@"title" withValue:title];
     
     if (event == nil) {
         // not already in database, so create it
-        event = [Event createEntity];
+        event = [Event MR_createEntity];
 
         // category
         [category addEventsObject:event];
@@ -482,9 +492,9 @@
         
         // first parse out the pelotonia events
         NSArray *nodes = [parser searchWithXPathQuery:pelotoniaEventsPath];
-        EventCategory *category = [EventCategory findFirstByAttribute:@"name" withValue:@"Pelotonia"];
+        EventCategory *category = [EventCategory MR_findFirstByAttribute:@"name" withValue:@"Pelotonia"];
         if (category == nil) {
-            category = [EventCategory createEntity];
+            category = [EventCategory MR_createEntity];
             category.name = @"Pelotonia";
         }
         for (TFHppleElement *node in nodes) {
@@ -500,9 +510,9 @@
         // now get the rider events
         NSString *riderEventsPath = @"//*[@id='events-rider-events']/table/tr";
         NSArray *riderEvents = [parser searchWithXPathQuery:riderEventsPath];
-        category = [EventCategory findFirstByAttribute:@"name" withValue:@"Rider Events"];
+        category = [EventCategory MR_findFirstByAttribute:@"name" withValue:@"Rider Events"];
         if (category == nil) {
-            category = [EventCategory createEntity];
+            category = [EventCategory MR_createEntity];
             category.name = @"Rider Events";
         }
         for (TFHppleElement *node in riderEvents) {
@@ -518,9 +528,9 @@
         // now get the training rides
         NSString *trainingRidesPath = @"//*[@id='events-training-rides']/table/tr";
         NSArray *trainingRides = [parser searchWithXPathQuery:trainingRidesPath];
-        category = [EventCategory findFirstByAttribute:@"name" withValue:@"Training Rides"];
+        category = [EventCategory MR_findFirstByAttribute:@"name" withValue:@"Training Rides"];
         if (category == nil) {
-            category = [EventCategory createEntity];
+            category = [EventCategory MR_createEntity];
             category.name = @"Training Rides";
         }
         for (TFHppleElement *node in trainingRides) {
@@ -534,7 +544,7 @@
         }
         
         // save the database
-        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (error) {
                 NSLog(@"Error saving context: %@", error.description);
                 if (failureBlock) {
@@ -561,12 +571,12 @@
     // title is in the H3
     TFHppleElement *titleNode = [[newsItemNode firstChildWithTagName:@"h3"] firstChildWithTagName:@"a"];
     NSString *title = [[[newsItemNode firstChildWithTagName:@"h3"] firstChildWithTagName:@"a"] text];
-    NewsItem *newsItem = [NewsItem findFirstByAttribute:@"title" withValue:title];
+    NewsItem *newsItem = [NewsItem MR_findFirstByAttribute:@"title" withValue:title];
     
     if (newsItem == nil) {
         // not in database, so delete it & replace
 //        [newsItem deleteEntity];
-        newsItem = [NewsItem createEntity];
+        newsItem = [NewsItem MR_createEntity];
     }
     newsItem.title = title;
     
@@ -605,7 +615,7 @@
         }
 
         // save the database
-        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
                 if (completeBlock) {
@@ -664,8 +674,7 @@
             }
             
             // have to do this weirdness b/c of smart quotes and special dashes in the Pelotonia CMS db
-            elemText = [elemText stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
-            elemText = [elemText stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            elemText = [elemText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
             
             // sometimes we have null nodes
             if (elemText && ([elemText length] > 0)) {
@@ -674,7 +683,7 @@
         }
         item.detail = detailString;
         // save the database
-        [[NSManagedObjectContext defaultContext] saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
                 if (completeBlock) {

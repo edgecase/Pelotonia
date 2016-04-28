@@ -18,15 +18,10 @@
 
 
 static NSInteger kProfileButton     = 0;
-//static NSInteger kTeamButton        = 1;
-//static NSInteger kPelotoniaButton   = 2;
-
-//static NSInteger kNewsButton      = 0;
 static NSInteger kRegisterButton  = 1;
 static NSInteger kVideoButton     = 2;
-//static NSInteger kEventsButton    = 3;
+static NSInteger kClassifiedsButton = 0;
 static NSInteger kBlogButton = 4;
-//static NSInteger kAboutButton     = 5;
 
 
 @interface MenuViewController ()
@@ -63,7 +58,7 @@ static NSInteger kBlogButton = 4;
     
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAllButUpsideDown;
 }
@@ -101,7 +96,6 @@ static NSInteger kBlogButton = 4;
             
         }
         else {
-            cell.textLabel.text = @"My Rider Profile";
             [cell.imageView setImage:[[UIImage imageNamed:@"pelotonia-menu-icon"] thumbnailImage:25 transparentBorder:1 cornerRadius:5 interpolationQuality:kCGInterpolationHigh]];
         }
     }
@@ -115,8 +109,8 @@ static NSInteger kBlogButton = 4;
     headerView.backgroundColor = [PRIMARY_DARK_GRAY darkerColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, tableView.bounds.size.width - 10, 21)];
-    label.textColor = PRIMARY_GREEN;
-    label.font = PELOTONIA_FONT(21);
+    label.textColor = SECONDARY_LIGHT_GRAY;
+    label.font = PELOTONIA_FONT_BOLD(21);
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = [UIColor clearColor];
 
@@ -140,6 +134,9 @@ static NSInteger kBlogButton = 4;
             // web forms submitted directly to the Pelotonia site
             
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/register"]];
+        }
+        else if (indexPath.row == kClassifiedsButton) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://pelotonia.org/classifieds"]];
         }
         else if (indexPath.row == kBlogButton) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.pelotonia.org/the-blog"]];

@@ -17,6 +17,7 @@
 #import "NSDate+Helper.h"
 
 @interface EventsTableViewController ()
+
 - (void)refresh;
 
 @end
@@ -48,7 +49,6 @@
     }];
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-
     
     // on first load, there will be nothing in the local database, so we have to go to the network
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
@@ -86,21 +86,21 @@
         [self.tableView reloadData];
     } onFailure:^(NSString *errorMessage) {
         NSLog(@"can't get pelotonia events");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We're sorry" message:@"We are unable to get the latest Pelotonia events. Please make sure you are connected to the network." preferredStyle:UIAlertControllerStyleAlert];
+
+        [self presentViewController:alert animated:YES completion:nil];
+
+
     }];
-    
 }
 
 
 - (void)fetchAllEvents
 {
-    // get all events for this current calendar year
-    NSString *begOfYear = [NSString stringWithFormat:@"%ld-01-01", (long)[[NSDate date] year]];
-    NSString *endOfYear = [NSString stringWithFormat:@"%ld-01-01", (long)[[NSDate date] year] + 1];
-    NSDate *dateBegOfYear = [NSDate dateFromString:begOfYear withFormat:@"YYYY-MM-DD"];
-    NSDate *dateEndOfYear = [NSDate dateFromString:endOfYear withFormat:@"YYYY-MM-DD"];
-    NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)",
-                             dateBegOfYear, dateEndOfYear];
-    self.fetchedResultsController = [Event fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
+    // get all events for now to 1 year from now
+    NSPredicate *thisYear = [NSPredicate predicateWithFormat:@"(%@ <= startDateTime) AND (startDateTime < %@)", [NSDate dateYesterday], [NSDate dateWithDaysFromNow:365]];
+
+    self.fetchedResultsController = [Event MR_fetchAllSortedBy:@"category,startDateTime" ascending:YES withPredicate:thisYear groupBy:@"category" delegate:self];
     
 }
 
@@ -133,7 +133,7 @@
     EventTableViewCell *cell = [EventTableViewCell cellForTableView:tableView];
     
     cell.event = (Event *)[self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+
     return cell;
 }
 
@@ -148,7 +148,7 @@
     sectionTitleLabel.textColor = [UIColor whiteColor];
     sectionTitleLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     sectionTitleLabel.backgroundColor = [UIColor clearColor];
-    sectionTitleLabel.font = PELOTONIA_SECONDARY_FONT(21);
+    sectionTitleLabel.font = PELOTONIA_FONT_BOLD(21);
     
     [headerView addSubview:sectionTitleLabel];
     return headerView;
@@ -174,7 +174,7 @@
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        [event deleteEntity];
+        [event MR_deleteEntity];
     }
 }
 

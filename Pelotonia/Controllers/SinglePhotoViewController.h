@@ -6,11 +6,14 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+@import UIKit;
+@import Photos;
+
 
 @interface SinglePhotoViewController : UIViewController
-@property (strong, nonatomic) NSDictionary *imageData;
+
+@property (strong, nonatomic) PHAsset *asset;
+@property (assign, nonatomic) NSUInteger index;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) ALAssetsLibrary *library;
+
 @end

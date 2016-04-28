@@ -92,26 +92,21 @@
 		BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248A18B4533C006BA30E /* SinglePhotoViewController.m */; };
 		BBAA248E18B5A631006BA30E /* PhotoPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */; };
 		BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAA249018B5B1D5006BA30E /* PhotoViewController.m */; };
-		BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBABDD76174B195C004B64D5 /* PRPWebViewController.m */; };
 		BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */; };
 		BBB399A6195FB9F5009B1FDF /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB399A4195FB9F5009B1FDF /* EventKit.framework */; };
 		BBB399A7195FB9F5009B1FDF /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBB399A5195FB9F5009B1FDF /* EventKitUI.framework */; };
 		BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E218CCD72500CAFFF7 /* IntroContentViewController.m */; };
 		BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */; };
 		BBC012E918CCD99300CAFFF7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC012E818CCD99300CAFFF7 /* IntroViewController.m */; };
+		BBD5CA061CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */; };
 		BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062A19524F9800FEED39 /* EventsTableViewController.m */; };
 		BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062D19524FCA00FEED39 /* EventTableViewCell.m */; };
 		BBDF0631195253C300FEED39 /* PelotoniaModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BBDF062F195253C300FEED39 /* PelotoniaModel.xcdatamodeld */; };
 		BBDF064C1953CDF000FEED39 /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */; };
-		BBEA1E3219607981008B933E /* NewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3119607981008B933E /* NewsTableViewController.m */; };
 		BBEA1E3519607AE0008B933E /* NewsItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3419607AE0008B933E /* NewsItemTableViewCell.m */; };
 		BBEA1E3819607B5F008B933E /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3719607B5F008B933E /* Event.m */; };
 		BBEA1E3B19607B5F008B933E /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3A19607B5F008B933E /* EventCategory.m */; };
 		BBEA1E3E19607B60008B933E /* NewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E3D19607B60008B933E /* NewsItem.m */; };
-		BBEA1E4119608D20008B933E /* NewsDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */; };
-		BBF496F019392F84007D7D67 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496E919392F84007D7D67 /* TFHpple.m */; };
-		BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496EB19392F84007D7D67 /* TFHppleElement.m */; };
-		BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF496ED19392F84007D7D67 /* XPathQuery.m */; };
 		BBF496F419393050007D7D67 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF496F319393050007D7D67 /* libxml2.2.dylib */; };
 		BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */; };
 		BCE3B7B715AE49DA00205530 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE3B7B615AE49DA00205530 /* UIKit.framework */; };
@@ -208,10 +203,6 @@
 		BB6816D616C725B9000E120F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		BB6816D816C726D5000E120F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		BB6816DA16C726DE000E120F /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		BB78D32317F925F600DE639C /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		BB78D32817F925F600DE639C /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		BB78D32E17FA7E9100DE639C /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
 		BB78D32F17FA7E9100DE639C /* UIColor+LightAndDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LightAndDark.m"; sourceTree = "<group>"; };
 		BB78D33117FA8D3100DE639C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -254,9 +245,6 @@
 		BBAA248D18B5A631006BA30E /* PhotoPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoPageViewController.m; path = Controllers/PhotoPageViewController.m; sourceTree = "<group>"; };
 		BBAA248F18B5B1D5006BA30E /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoViewController.h; path = Controllers/PhotoViewController.h; sourceTree = "<group>"; };
 		BBAA249018B5B1D5006BA30E /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoViewController.m; path = Controllers/PhotoViewController.m; sourceTree = "<group>"; };
-		BBABDD75174B195C004B64D5 /* PRPWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewController.h; sourceTree = "<group>"; };
-		BBABDD76174B195C004B64D5 /* PRPWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRPWebViewController.m; sourceTree = "<group>"; };
-		BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRPWebViewControllerDelegate.h; sourceTree = "<group>"; };
 		BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+IDSearch.h"; sourceTree = "<group>"; };
 		BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+IDSearch.m"; sourceTree = "<group>"; };
 		BBB399A4195FB9F5009B1FDF /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -267,6 +255,8 @@
 		BBC012E518CCD83500CAFFF7 /* IntroPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroPageViewController.m; path = Controllers/IntroPageViewController.m; sourceTree = "<group>"; };
 		BBC012E718CCD99300CAFFF7 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroViewController.h; path = Controllers/IntroViewController.h; sourceTree = "<group>"; };
 		BBC012E818CCD99300CAFFF7 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Controllers/IntroViewController.m; sourceTree = "<group>"; };
+		BBD5CA041CB95BE70095A4A9 /* Pelotonia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pelotonia-Bridging-Header.h"; sourceTree = "<group>"; };
+		BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PelotoniaPhotosLibrary.swift; path = Models/PelotoniaPhotosLibrary.swift; sourceTree = "<group>"; };
 		BBDF062919524F9800FEED39 /* EventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventsTableViewController.h; path = Controllers/EventsTableViewController.h; sourceTree = "<group>"; };
 		BBDF062A19524F9800FEED39 /* EventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventsTableViewController.m; path = Controllers/EventsTableViewController.m; sourceTree = "<group>"; };
 		BBDF062C19524FCA00FEED39 /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTableViewCell.h; path = Controllers/EventTableViewCell.h; sourceTree = "<group>"; };
@@ -274,8 +264,6 @@
 		BBDF0630195253C300FEED39 /* PelotoniaModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PelotoniaModel.xcdatamodel; sourceTree = "<group>"; };
 		BBDF064A1953CDF000FEED39 /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = Controllers/EventDetailsTableViewController.h; sourceTree = "<group>"; };
 		BBDF064B1953CDF000FEED39 /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = Controllers/EventDetailsTableViewController.m; sourceTree = "<group>"; };
-		BBEA1E3019607981008B933E /* NewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsTableViewController.h; path = Controllers/NewsTableViewController.h; sourceTree = "<group>"; };
-		BBEA1E3119607981008B933E /* NewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsTableViewController.m; path = Controllers/NewsTableViewController.m; sourceTree = "<group>"; };
 		BBEA1E3319607AE0008B933E /* NewsItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItemTableViewCell.h; path = Controllers/NewsItemTableViewCell.h; sourceTree = "<group>"; };
 		BBEA1E3419607AE0008B933E /* NewsItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItemTableViewCell.m; path = Controllers/NewsItemTableViewCell.m; sourceTree = "<group>"; };
 		BBEA1E3619607B5F008B933E /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Models/Event.h; sourceTree = "<group>"; };
@@ -284,14 +272,6 @@
 		BBEA1E3A19607B5F008B933E /* EventCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventCategory.m; path = Models/EventCategory.m; sourceTree = "<group>"; };
 		BBEA1E3C19607B60008B933E /* NewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsItem.h; path = Models/NewsItem.h; sourceTree = "<group>"; };
 		BBEA1E3D19607B60008B933E /* NewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsItem.m; path = Models/NewsItem.m; sourceTree = "<group>"; };
-		BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsDetailTableViewController.h; path = Controllers/NewsDetailTableViewController.h; sourceTree = "<group>"; };
-		BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsDetailTableViewController.m; path = Controllers/NewsDetailTableViewController.m; sourceTree = "<group>"; };
-		BBF496E819392F84007D7D67 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
-		BBF496E919392F84007D7D67 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
-		BBF496EA19392F84007D7D67 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
-		BBF496EB19392F84007D7D67 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
-		BBF496EC19392F84007D7D67 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
-		BBF496ED19392F84007D7D67 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		BBF496F319393050007D7D67 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendPledgeModalViewController.h; path = Controllers/SendPledgeModalViewController.h; sourceTree = "<group>"; };
 		BBF5C29E17242DBE00E5376A /* SendPledgeModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendPledgeModalViewController.m; path = Controllers/SendPledgeModalViewController.m; sourceTree = "<group>"; };
@@ -444,20 +424,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BB78D32217F925F600DE639C /* TestFlightSDK2 */ = {
-			isa = PBXGroup;
-			children = (
-				BB78D32317F925F600DE639C /* libTestFlight.a */,
-				BB78D32617F925F600DE639C /* TestFlight+AsyncLogging.h */,
-				BB78D32717F925F600DE639C /* TestFlight+ManualSessions.h */,
-				BB78D32817F925F600DE639C /* TestFlight.h */,
-			);
-			path = TestFlightSDK2;
-			sourceTree = "<group>";
-		};
 		BBAA247718B04B5D006BA30E /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				BBAA248618B44C67006BA30E /* RiderPhotoCell.h */,
+				BBAA248718B44C67006BA30E /* RiderPhotoCell.m */,
 				BB5D24251789EEFA00A4429A /* CommentTableViewCell.h */,
 				BB5D24261789EEFA00A4429A /* CommentTableViewCell.m */,
 				BBAA222E18AFA0BB006BA30E /* DonorTableViewCell.h */,
@@ -479,20 +450,6 @@
 				BCE3B7CD15AE4A0C00205530 /* Storyboard.storyboard */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		BBF496E519392F84007D7D67 /* hpple */ = {
-			isa = PBXGroup;
-			children = (
-				BBF496E819392F84007D7D67 /* TFHpple.h */,
-				BBF496E919392F84007D7D67 /* TFHpple.m */,
-				BBF496EA19392F84007D7D67 /* TFHppleElement.h */,
-				BBF496EB19392F84007D7D67 /* TFHppleElement.m */,
-				BBF496EC19392F84007D7D67 /* XPathQuery.h */,
-				BBF496ED19392F84007D7D67 /* XPathQuery.m */,
-			);
-			name = hpple;
-			path = Vendor/hpple;
 			sourceTree = "<group>";
 		};
 		BCE3B7A715AE49DA00205530 = {
@@ -577,9 +534,6 @@
 				BB5D2433178A477300A4429A /* NSDate+Helper.m */,
 				BB5D24221789EEB800A4429A /* PRPSmartTableViewCell.h */,
 				BB5D24231789EEB800A4429A /* PRPSmartTableViewCell.m */,
-				BBABDD75174B195C004B64D5 /* PRPWebViewController.h */,
-				BBABDD76174B195C004B64D5 /* PRPWebViewController.m */,
-				BBABDD77174B195C004B64D5 /* PRPWebViewControllerDelegate.h */,
 				BBB3267816F6904D007153BC /* TFHppleElement+IDSearch.h */,
 				BBB3267916F6904D007153BC /* TFHppleElement+IDSearch.m */,
 				BCE3B7BE15AE49DA00205530 /* Pelotonia-Info.plist */,
@@ -626,10 +580,6 @@
 				BB9E096D171AFF360093FDD5 /* MenuViewController.m */,
 				BBAA247E18B0629A006BA30E /* NewWorkoutTableViewController.h */,
 				BBAA247F18B0629A006BA30E /* NewWorkoutTableViewController.m */,
-				BBEA1E3019607981008B933E /* NewsTableViewController.h */,
-				BBEA1E3119607981008B933E /* NewsTableViewController.m */,
-				BBEA1E3F19608D20008B933E /* NewsDetailTableViewController.h */,
-				BBEA1E4019608D20008B933E /* NewsDetailTableViewController.m */,
 				BB93182618B91ED3003A3AC0 /* PelotoniaProfileViewController.h */,
 				BB93182718B91ED3003A3AC0 /* PelotoniaProfileViewController.m */,
 				BBAA248C18B5A631006BA30E /* PhotoPageViewController.h */,
@@ -642,8 +592,6 @@
 				4DFA61DF15F8545800BD7514 /* ProfileTableViewController.m */,
 				BBAA248318B4484B006BA30E /* RidePhotosViewController.h */,
 				BBAA248418B4484B006BA30E /* RidePhotosViewController.m */,
-				BBAA248618B44C67006BA30E /* RiderPhotoCell.h */,
-				BBAA248718B44C67006BA30E /* RiderPhotoCell.m */,
 				BCE3B7D315AE4E7200205530 /* RidersViewController.h */,
 				BCE3B7D415AE4E7200205530 /* RidersViewController.m */,
 				BBF5C29D17242DBE00E5376A /* SendPledgeModalViewController.h */,
@@ -661,8 +609,6 @@
 		BCE3B7DC15AE511F00205530 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				BBF496E519392F84007D7D67 /* hpple */,
-				BB78D32217F925F600DE639C /* TestFlightSDK2 */,
 				4D15DDD41621C8E00050DB17 /* UIImageExtras */,
 				0531B93415B2227B0015A003 /* PelotoniaWeb */,
 			);
@@ -687,6 +633,8 @@
 				4D35C72815B116E5006E5D5D /* RiderDataController.m */,
 				BBAA247418B04B4C006BA30E /* Workout.h */,
 				BBAA247518B04B4C006BA30E /* Workout.m */,
+				BBD5CA051CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift */,
+				BBD5CA041CB95BE70095A4A9 /* Pelotonia-Bridging-Header.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -704,6 +652,7 @@
 				BBF159DC176C28C500DFA92C /* ShellScript */,
 				BCE3B7B015AE49DA00205530 /* Resources */,
 				17118B413CE84F48A2F75643 /* Copy Pods Resources */,
+				E1096C375360C3445732B8D2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -720,7 +669,7 @@
 		BCE3B7A915AE49DA00205530 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					BCE3B7B115AE49DA00205530 = {
 						DevelopmentTeam = E8N9T3D525;
@@ -841,6 +790,21 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
+		E1096C375360C3445732B8D2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -857,13 +821,11 @@
 				BCE3B7D515AE4E7200205530 /* RidersViewController.m in Sources */,
 				BCE3B81E15AE5B6F00205530 /* Rider.m in Sources */,
 				4D35C72915B116E5006E5D5D /* RiderDataController.m in Sources */,
-				BBEA1E4119608D20008B933E /* NewsDetailTableViewController.m in Sources */,
 				BBAA222A18AEEBB4006BA30E /* Donor.m in Sources */,
 				BBC012E618CCD83500CAFFF7 /* IntroPageViewController.m in Sources */,
 				BBEA1E3519607AE0008B933E /* NewsItemTableViewCell.m in Sources */,
 				0531B93815B222B10015A003 /* PelotoniaWeb.m in Sources */,
 				BBAA249118B5B1D5006BA30E /* PhotoViewController.m in Sources */,
-				BBEA1E3219607981008B933E /* NewsTableViewController.m in Sources */,
 				BB78D33017FA7E9100DE639C /* UIColor+LightAndDark.m in Sources */,
 				4DFA61E015F8545800BD7514 /* ProfileTableViewController.m in Sources */,
 				BB22414D17F529030054F16D /* FeedbackViewController.m in Sources */,
@@ -877,11 +839,11 @@
 				4D15DDDE1621C9140050DB17 /* UIImage+RoundedCorner.m in Sources */,
 				BBC012E318CCD72500CAFFF7 /* IntroContentViewController.m in Sources */,
 				BBB3267A16F6904D007153BC /* TFHppleElement+IDSearch.m in Sources */,
-				BBF496F119392F84007D7D67 /* TFHppleElement.m in Sources */,
 				BBAA222418AD8BB8006BA30E /* FindRiderViewController.m in Sources */,
 				BB9E096B171AFCCD0093FDD5 /* InitialSlidingViewController.m in Sources */,
 				BBAA248B18B4533C006BA30E /* SinglePhotoViewController.m in Sources */,
 				BBDF062E19524FCA00FEED39 /* EventTableViewCell.m in Sources */,
+				BBD5CA061CB95BE70095A4A9 /* PelotoniaPhotosLibrary.swift in Sources */,
 				BBEA1E3E19607B60008B933E /* NewsItem.m in Sources */,
 				BB9E096E171AFF360093FDD5 /* MenuViewController.m in Sources */,
 				BBF5C29F17242DBE00E5376A /* SendPledgeModalViewController.m in Sources */,
@@ -889,9 +851,7 @@
 				BBAA248518B4484B006BA30E /* RidePhotosViewController.m in Sources */,
 				BBA66C15172A9FD9002DE00A /* ActivityViewController.m in Sources */,
 				BBA66C39172AA00E002DE00A /* UserProfileViewController.m in Sources */,
-				BBABDD78174B195C004B64D5 /* PRPWebViewController.m in Sources */,
 				BBDF062B19524F9800FEED39 /* EventsTableViewController.m in Sources */,
-				BBF496F219392F84007D7D67 /* XPathQuery.m in Sources */,
 				BB2865EA176ABB05001BA804 /* ProfileDetailsTableViewController.m in Sources */,
 				BB5D24241789EEB800A4429A /* PRPSmartTableViewCell.m in Sources */,
 				BB5D24271789EEFA00A4429A /* CommentTableViewCell.m in Sources */,
@@ -900,7 +860,6 @@
 				BB5D2437178A484900A4429A /* NSDate-Utilities.m in Sources */,
 				BB93182818B91ED3003A3AC0 /* PelotoniaProfileViewController.m in Sources */,
 				BBDF064C1953CDF000FEED39 /* EventDetailsTableViewController.m in Sources */,
-				BBF496F019392F84007D7D67 /* TFHpple.m in Sources */,
 				BB32006F178E668A0035A2BA /* NSDictionary+JSONConversion.m in Sources */,
 				BBAA222D18AF9F7A006BA30E /* DonorsTableViewController.m in Sources */,
 				BBAA247618B04B4C006BA30E /* Workout.m in Sources */,
@@ -927,6 +886,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -935,10 +895,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -950,7 +912,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PODS_ROOT = "${SRCROOT}/Pods ";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "97b1dd0c-757b-418f-a534-d76c092bf1e5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97b1dd0c-757b-418f-a534-d76c092bf1e5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -962,6 +925,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
@@ -988,16 +953,19 @@
 					"\"$(PODS_ROOT)/Headers/MagicalRecord\"/**",
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D52D81C0-5A00-4E1F-A210-F71142987927";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "eb8919af-69e1-43ff-b363-2332cb44961e";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1011,6 +979,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1019,11 +988,14 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1041,6 +1013,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PODS_ROOT = "${SRCROOT}/Pods ";
+				PROVISIONING_PROFILE = "97b1dd0c-757b-418f-a534-d76c092bf1e5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1050,6 +1023,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1058,10 +1032,12 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mark Harris (L2TNTTK5TB)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1073,7 +1049,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PODS_ROOT = "${SRCROOT}/Pods ";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "6d3e0ebf-3c13-4e7a-9b6a-202d903c7e47";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6d3e0ebf-3c13-4e7a-9b6a-202d903c7e47";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1085,6 +1062,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
@@ -1118,7 +1097,8 @@
 					"\"$(PODS_ROOT)/Headers/MagicalRecord\"/**",
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -1130,8 +1110,11 @@
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1146,6 +1129,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 17;
@@ -1172,16 +1157,19 @@
 					"\"$(PODS_ROOT)/Headers/MagicalRecord\"/**",
 				);
 				INFOPLIST_FILE = "Pelotonia/Pelotonia-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 					"$(inherited)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F120471-7728-4600-BE58-1C6AE7CD1F21";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6d3e0ebf-3c13-4e7a-9b6a-202d903c7e47";
+				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
 				VALID_ARCHS = "armv7 armv7s arm64";

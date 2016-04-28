@@ -129,7 +129,7 @@
                                           usingFont:self.descriptionCell.textLabel.font
                                            forWidth:self.tableView.bounds.size.width];
     }
-    else if (indexPath.row == 2) {
+    else if (indexPath.row == 2 && self.event.address) {
         height = [self calculateTableRowSizeForString:self.event.address
                                             usingFont:self.descriptionCell.textLabel.font
                                              forWidth:self.tableView.bounds.size.width];
@@ -158,7 +158,7 @@
             address = [address stringByAppendingString:[NSString stringWithFormat:@",%@", state]];
         }
         
-        NSString *stringURL = [NSString stringWithFormat:mapsScheme, [address stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString *stringURL = [NSString stringWithFormat:mapsScheme, [address stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         NSURL *url = [NSURL URLWithString:stringURL];
         [[UIApplication sharedApplication] openURL:url];
     }

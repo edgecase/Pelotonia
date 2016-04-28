@@ -12,12 +12,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Social/Social.h>
 
-@interface PhotoViewController () {
-    ALAssetsLibrary *library;
-}
-
-@end
-
 @implementation PhotoViewController
 
 @synthesize pageViewController = _pageViewController;
@@ -36,15 +30,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PhotoPageViewController"];
     self.pageViewController.delegate = self;
     self.pageViewController.dataSource = self;
-    library = [[ALAssetsLibrary alloc] init];
     
     SinglePhotoViewController *startingViewController = [self viewControllerAtIndex:self.initialPhotoIndex];
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
     
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
@@ -71,13 +64,14 @@
     // Create a new view controller and pass suitable data.
     SinglePhotoViewController *photoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePhotoViewController"];
     
-    photoViewController.imageData = [self.photos objectAtIndex:index];
+    photoViewController.asset = [self.photos objectAtIndex:index];
+    photoViewController.index = index;
     return photoViewController;
 }
 
 - (NSUInteger)indexOfViewController:(SinglePhotoViewController *)viewController
 {
-    return [self.photos indexOfObject:viewController.imageData];
+    return [self.photos indexOfObject:viewController.asset];
 }
 
 #pragma mark -- UIPageViewControllerDelegate and DataSource methods
@@ -121,34 +115,17 @@
 
 - (IBAction)sharePhoto:(id)sender
 {
+    // this is where we share photos
     NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-    NSDictionary *photo = [self.photos objectAtIndex:currentIndex];
+    PHAsset *photo = [self.photos objectAtIndex:currentIndex];
+    
+    [[PHImageManager defaultManager] requestImageForAsset:photo targetSize:CGSizeMake(320, 480) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
 
-    [library assetForURL:[NSURL URLWithString:[photo objectForKey:@"key"]] resultBlock:^(ALAsset *asset) {
-        // success - share the photo via facebook
-        ALAssetRepresentation *rep = [asset defaultRepresentation];
-        CGImageRef image = [rep fullScreenImage];
-        NSArray* dataToShare = @[[UIImage imageWithCGImage:image]];
-
-        UIActivityViewController* activityViewController =
-        [[UIActivityViewController alloc] initWithActivityItems:dataToShare
-                                          applicationActivities:nil];
-        [self presentViewController:activityViewController animated:YES completion:nil];
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[result] applicationActivities:nil];
         
-    } failureBlock:^(NSError *error) {
-        // failure
-        NSLog(@"An error occurred: %@", [error localizedDescription]);
+        [self.navigationController presentViewController:activityViewController animated:YES completion:nil];
+
     }];
-}
-
-
-- (void)removeCurrentPhotoFromList
-{
-    NSInteger currentIndex = [self indexOfViewController:[[self.pageViewController viewControllers] objectAtIndex:0]];
-
-    NSMutableArray *photosArray = [[AppDelegate sharedDataController] photoKeys];
-    [photosArray removeObjectAtIndex:currentIndex];
-    self.photos = [[AppDelegate sharedDataController] photoKeys];
     
 }
 

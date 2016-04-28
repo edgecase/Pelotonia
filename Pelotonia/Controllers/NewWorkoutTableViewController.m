@@ -91,53 +91,34 @@
     // share the workout details over facebook or twitter
 
     // prompt for which service to share with (FB/Twitter/etc)
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share workout to...?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:Nil otherButtonTitles:@"Facebook", @"Twitter", nil];
-    [sheet showFromBarButtonItem:[self.navigationItem rightBarButtonItem] animated:YES];
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:@"Share workout to...?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //share to facebook
+        [self shareCurrentWorkout:SLServiceTypeFacebook];
+
+    }]];
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //share to twitter
+        [self shareCurrentWorkout:SLServiceTypeTwitter];
+    }]];
+
+    [self presentViewController:sheet animated:YES completion:nil];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)shareCurrentWorkout: (NSString *)with
 {
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        if (buttonIndex == 0) {
-            [self shareCurrentWorkoutWithFacebook];
-        }
-        if (buttonIndex == 1) {
-            [self shareCurrentWorkoutWithTwitter];
-        }
-    }
-}
-
-- (void)shareCurrentWorkoutWithFacebook
-{
-    
     // success - share the Workout via facebook
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+    if([SLComposeViewController isAvailableForServiceType:with]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:with];
         
-        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %ld miles, %@", (long)self.workout.distanceInMiles, self.workout.description]];
-
+        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %ld miles, %@",
+                                    (long)self.workout.distanceInMiles, self.workout.description]];
+        
         if (self.rider) {
             [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
         }
         [self presentViewController:controller animated:YES completion:nil];
     }
-}
-
-- (void)shareCurrentWorkoutWithTwitter
-{
-    
-    // success - share the Workout via twitter
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    {
-        SLComposeViewController *controller = [SLComposeViewController
-                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [controller setInitialText:[NSString stringWithFormat:@"Pelotonia workout: %ld miles, %@", (long)self.workout.distanceInMiles, self.workout.description]];
-        if (self.rider) {
-            [controller addURL:[NSURL URLWithString:self.rider.profileUrl]];
-        }
-        [self presentViewController:controller animated:YES completion:nil];
-    }
-    
 }
 
 - (void)setDistanceLabelText {

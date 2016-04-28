@@ -6,9 +6,14 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import Photos;
+
 
 @interface RiderPhotoCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) PHAsset *imageAsset;
+@property (strong, nonatomic) PHImageManager *imageManager;
+
 @end

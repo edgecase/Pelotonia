@@ -3,12 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "28-star.png"
+      "filename" : "black-star.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "28-star@2x.png"
+      "filename" : "black-star@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "black-star@3x.png"
     }
   ],
   "info" : {

@@ -38,10 +38,29 @@
     return _riderList;
 }
 
+- (PHPhotoLibrary *)sharedAssetsLibrary
+{
+    self.library = [PHPhotoLibrary sharedPhotoLibrary];
+    return self.library;
+}
+
 - (NSMutableArray *)photoKeys {
-    if (_photoKeys == nil) {
-        _photoKeys = [[NSMutableArray alloc] initWithCapacity:0];
+    // have to do this to make sure that the stashed keys in our
+    // file still are valid on this particular device
+    NSMutableArray *tempKeys = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if (_photoKeys != nil) {
+        // trim out the photo keys that have gone missing since last open
+        for (int i = 0; i < [_photoKeys count]; i++) {
+//            NSString *key = [[_photoKeys objectAtIndex:i] objectForKey:@"key"];
+//            BOOL assetExists = [AssetURLChecker assetExists:[NSURL URLWithString:key]];
+//            if (assetExists) {
+                [tempKeys addObject:[_photoKeys objectAtIndex:i]];
+//            }
+        }
     }
+
+    _photoKeys = tempKeys;
     return _photoKeys;
 }
 

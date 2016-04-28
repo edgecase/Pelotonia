@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Rider.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+@import Photos;
+
 
 @interface RiderDataController : NSObject <NSCoding> {
     NSMutableArray *_riderList;
@@ -16,6 +19,7 @@
 @property (strong, nonatomic) Rider *favoriteRider;
 @property (strong, nonatomic) NSMutableArray *workouts;
 @property (strong, nonatomic) NSMutableArray *photoKeys;
+@property (strong, nonatomic) PHPhotoLibrary *library;
 
 - (NSInteger)count;
 - (Rider *)objectAtIndex:(NSUInteger)index;
@@ -26,6 +30,7 @@
 - (BOOL)containsRider:(Rider *)object;
 - (void)sortRidersUsingDescriptors:(NSArray *)descriptors;
 - (NSArray *)allRiders;
+- (PHPhotoLibrary *)sharedAssetsLibrary;
 - (void)save;
 
 // NSCoding

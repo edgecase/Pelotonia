@@ -65,13 +65,16 @@
     // set up socialize
     self.entity = [SZEntity entityWithKey:self.rider.profileUrl name:self.rider.name];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            self.rider.story, @"szsd_description",
-                            self.rider.riderPhotoThumbUrl, @"szsd_thumb",
-                            self.rider.riderId, @"riderID",
-                            nil];
+                                self.rider.riderId, @"riderID",
+                                self.rider.story, @"szsd_description",
+                                self.rider.riderPhotoThumbUrl, @"szsd_thumb",
+                                nil];
+
+    if ([params count] > 0 ) {
+        NSString *jsonString = [params toJSONString];
+        entity.meta = jsonString;
+    }
     
-    NSString *jsonString = [params toJSONString];
-    entity.meta = jsonString;
     [SZEntityUtils addEntity:entity success:^(id<SZEntity> serverEntity) {
         NSLog(@"it has %d likes, %d comments, %d shares, %d views", [serverEntity likes], [serverEntity comments], [serverEntity shares], [serverEntity views]);
 
@@ -86,7 +89,6 @@
     [self setNameAndRouteCell:nil];
     [self setRaisedAmountLabel:nil];
     [self setRaisedLabel:nil];
-    [self setStarFollowButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -214,13 +216,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        if (indexPath.row == 3)
-        {
-            // show the "share on..." dialog
-            [self shareProfile:nil];
-        }
-    }
     if (indexPath.section == 1) {
         // open up a commentdetailview view
         id<SocializeActivity> comment = [riderComments objectAtIndex:indexPath.row];
@@ -285,7 +280,7 @@
         NSInteger writeButtonH = SECTION_1_HEADER_HEIGHT;
         [writePostButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
         [writePostButton setFrame:CGRectMake(0, 0, writeButtonW, writeButtonH)];
-        [writePostButton setBackgroundColor:PRIMARY_GREEN];
+        [writePostButton setBackgroundColor:PRIMARY_DARK_GRAY];
         writePostButton.tintColor = [UIColor whiteColor];
         [writePostButton setTitle:@"Post To Wall" forState:UIControlStateNormal];
         [writePostButton setImage:[UIImage imageNamed:@"08-chat"] forState:UIControlStateNormal];
@@ -387,37 +382,20 @@
     
     // set the name & ID appropriately
     self.nameAndRouteCell.textLabel.text = self.rider.name;
-    if ([self.rider.riderType isEqualToString:@"Virtual Rider"] ||
-        [self.rider.riderType isEqualToString:@"Volunteer"] ||
-        [self.rider.riderType isEqualToString:@"Super Peloton"] ||
-        [self.rider.riderType isEqualToString:@"Peloton"]) {
-        self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.riderType];
-        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
-
+    self.nameAndRouteCell.detailTextLabel.text = self.rider.riderDetailText;
+    if ([self.rider isRider]) {
         // Riders and Pelotons are the only ones who get progress
-        self.donationProgress.progress = 1.0;
+        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
     }
     else
     {
         // Riders and Pelotons are the only ones who get progress
-        self.nameAndRouteCell.detailTextLabel.text = [NSString stringWithFormat:@"%@", self.rider.route];
-        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@ of %@", self.rider.totalRaised, self.rider.totalCommit];
-        self.donationProgress.progress = [self.rider.pctRaised floatValue]/100.0;
+        self.raisedAmountLabel.text = [NSString stringWithFormat:@"%@", self.rider.totalRaised];
     }
+    self.donationProgress.progress = self.rider.pctRaised;
     
     self.nameAndRouteCell.textLabel.font = PELOTONIA_FONT(21);
     self.nameAndRouteCell.detailTextLabel.font = PELOTONIA_SECONDARY_FONT(17);
-    
-    if (self.following)
-    {
-        [self.starFollowButton setTitle:[NSString stringWithFormat:@"Following"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-green-star"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.starFollowButton setTitle:[NSString stringWithFormat:@"Follow"] forState:UIControlStateNormal];
-        [self.starFollowButton setImage:[UIImage imageNamed:@"28-star"] forState:UIControlStateNormal];
-    }
     
     // this masks the photo to the tableviewcell
     self.nameAndRouteCell.imageView.layer.masksToBounds = YES;
@@ -428,29 +406,22 @@
         self.nameAndRouteCell.imageView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self.nameAndRouteCell.imageView setImageWithURL:[NSURL URLWithString:self.rider.riderPhotoUrl] placeholderImage:[UIImage imageNamed:@"speedy_arrow"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                                                                                         if (error) {
-                                                                                                                             NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
-                                                                                                                         }
-                                                                                                                         else {
-                                                                                                                             self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
-                                                                                                                             [self.nameAndRouteCell layoutSubviews];
-                                                                                                                         }
-
-                                                                                                                         } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
-        
-            }
+                if (error) {
+                    NSLog(@"ProfileTableViewController::configureView error: %@", [error localizedDescription]);
+                }
+                else {
+                    self.nameAndRouteCell.imageView.image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(120, 90) interpolationQuality:kCGInterpolationDefault];
+                    [self.nameAndRouteCell layoutSubviews];
+                }
+             } usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }
     
 }
 
 - (void)postAlert:(NSString *)msg {
     // alert that they need to authorize first
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Thank you for your Pledge"
-                                                    message:msg
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Thank you for your Pledge" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)sendPledgeMailToEmail:(NSString *)email withAmount:(NSString *)amount
@@ -467,7 +438,7 @@
         [mailComposer setModalPresentationStyle:UIModalPresentationFormSheet];
         [mailComposer setSubject:@"Thank you for your support of Pelotonia"];
         
-        NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you!  Please visit my <a href=%@>profile</a> to complete your pledge of $%@ to %@'s Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia this year. The ride will span two days and will cover as many as 180 miles. In its first 5 years, Pelotonia has attracted over 15,000 riders from 38 states, over 4,000 volunteers, hundreds of thousands of donors and raised over $60 million for cancer research. <br/><br/>Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.name, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
+        NSString *msg = [NSString stringWithFormat:@"<HTML><BODY>Thank you!  Please visit my <a href=%@>profile</a> to complete your pledge of $%@ to %@'s Pelotonia ride.<br/><br/>Pelotonia is a grassroots bike tour with one goal: to end cancer. More than 10,000 supporters are expected to be a part of Pelotonia this year. The ride will span two days and will cover as many as 180 miles. In its first 6 years, Pelotonia has attracted over 22,000 riders from 38 states, over 6,000 volunteers, hundreds of thousands of donors and raised over $80 million for cancer research. <br/><br/>Because operational expenses are covered by Pelotonia funding partners, 100%% of every dollar raised is donated directly to life-saving cancer research at The Ohio State University Comprehensive Cancer Center-James Cancer Hospital and Solove Research Institute. I am writing to ask you to help me raise funds for this incredible event. Large or small, every donation makes a difference.<br/><br/>We all know someone who has been affected by cancer. One of every two American men and one of every three American women will be diagnosed with cancer at some point in their lives. By supporting Pelotonia and me, you will help improve lives through innovative research with the ultimate goal of winning the war against cancer. I would love to have your support, as this is truly a unique opportunity to be a part of something special.<br/><br/>When you follow the link below, you will find my personal rider profile and a simple and secure way to make any size donation you wish.<br/><br/>Think of this as a donation not to me, or Pelotonia, but directly to The OSUCCC-James to fund cancer research. Please consider supporting my effort and this great cause. My rider profile can be found at the following link: <a href='%@'>%@</a><br/><br/>Thanks for the support!<br/><br/>Sincerely,<br/>%@</BODY></HTML>", self.rider.donateUrl, amount, self.rider.name, self.rider.donateUrl, self.rider.donateUrl, self.rider.name];
         
         NSLog(@"msgBody: %@", msg);
         [mailComposer setMessageBody:msg isHTML:YES];
@@ -489,23 +460,6 @@
 }
 
 #pragma Socialize stuff
-
-- (IBAction)followRider:(id)sender
-{
-    // add the current rider to the main list of riders
-    RiderDataController *dataController = [AppDelegate sharedDataController];
-    
-    if (self.following) {
-        [dataController removeObject:self.rider];
-    }
-    else {
-        [dataController addObject:self.rider];
-    }
-    // save the data
-    [dataController save];
-    [self configureView];
-}
-
 
 - (IBAction)shareProfile:(id)sender
 {

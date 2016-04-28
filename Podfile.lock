@@ -1,85 +1,93 @@
 PODS:
   - AAPullToRefresh (1.0.2)
-  - AFNetworking (2.5.0):
-    - AFNetworking/NSURLConnection (= 2.5.0)
-    - AFNetworking/NSURLSession (= 2.5.0)
-    - AFNetworking/Reachability (= 2.5.0)
-    - AFNetworking/Security (= 2.5.0)
-    - AFNetworking/Serialization (= 2.5.0)
-    - AFNetworking/UIKit (= 2.5.0)
-  - AFNetworking/NSURLConnection (2.5.0):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.0):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.0)
-  - AFNetworking/Security (2.5.0)
-  - AFNetworking/Serialization (2.5.0)
-  - AFNetworking/UIKit (2.5.0):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Appirater (2.0.4)
-  - Bolts (1.1.3)
+  - Appirater (2.0.5)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bolts (1.7.0):
+    - Bolts/AppLinks (= 1.7.0)
+    - Bolts/Tasks (= 1.7.0)
+  - Bolts/AppLinks (1.7.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.7.0)
   - ECSlidingViewController (2.0.3)
   - Facebook-iOS-SDK (3.20.0):
     - Bolts (~> 1.0)
-  - Loopy (1.1.1):
-    - AFNetworking
-  - MagicalRecord/Shorthand (2.2)
-  - MBProgressHUD (0.9)
-  - SDWebImage (3.7.1):
-    - SDWebImage/Core (= 3.7.1)
-  - SDWebImage/Core (3.7.1)
-  - SendGrid (0.3.0):
+  - hpple (0.2.0)
+  - Loopy (1.1.3):
+    - AFNetworking (= 2.6.3)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - MBProgressHUD (0.9.2)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SendGrid (0.2.6):
     - AFNetworking (~> 2.0)
     - SMTPAPI
   - SMTPAPI (0.2.0)
-  - Socialize (3.1.1):
-    - Facebook-iOS-SDK (= 3.20)
+  - Socialize (3.1.3):
+    - BlocksKit
+    - Facebook-iOS-SDK (= 3.20.0)
     - Loopy
-    - Socialize/arc (= 3.1.1)
-    - Socialize/no-arc (= 3.1.1)
-    - STTwitter
-    - SZBlocksKit
+    - Socialize/arc (= 3.1.3)
+    - Socialize/no-arc (= 3.1.3)
+    - STTwitter (= 0.1.4)
     - SZJSONKit
     - SZOAuthConsumer
-  - Socialize/arc (3.1.1):
-    - Facebook-iOS-SDK (= 3.20)
+  - Socialize/arc (3.1.3):
+    - BlocksKit
+    - Facebook-iOS-SDK (= 3.20.0)
     - Loopy
     - Socialize/no-arc
-    - STTwitter
-    - SZBlocksKit
+    - STTwitter (= 0.1.4)
     - SZJSONKit
     - SZOAuthConsumer
-  - Socialize/no-arc (3.1.1):
-    - Facebook-iOS-SDK (= 3.20)
+  - Socialize/no-arc (3.1.3):
+    - BlocksKit
+    - Facebook-iOS-SDK (= 3.20.0)
     - Loopy
-    - STTwitter
-    - SZBlocksKit
+    - STTwitter (= 0.1.4)
     - SZJSONKit
     - SZOAuthConsumer
-  - STTwitter (0.1.6)
-  - SZBlocksKit (2.1.0):
-    - SZBlocksKit/All (= 2.1.0)
-  - SZBlocksKit/All (2.1.0):
-    - SZBlocksKit/Core
-    - SZBlocksKit/DynamicDelegate
-    - SZBlocksKit/MessageUI
-    - SZBlocksKit/UIKit
-  - SZBlocksKit/Core (2.1.0)
-  - SZBlocksKit/DynamicDelegate (2.1.0):
-    - SZBlocksKit/MiniFFI
-  - SZBlocksKit/MessageUI (2.1.0):
-    - SZBlocksKit/DynamicDelegate
-  - SZBlocksKit/MiniFFI (2.1.0)
-  - SZBlocksKit/UIKit (2.1.0):
-    - SZBlocksKit/DynamicDelegate
+  - STTwitter (0.1.4)
   - SZJSONKit (1.5)
   - SZOAuthConsumer (0.0.2)
-  - TTTAttributedLabel (1.11.0)
+  - TTTAttributedLabel (1.13.4)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
 
@@ -88,10 +96,11 @@ DEPENDENCIES:
   - AFNetworking
   - Appirater
   - ECSlidingViewController
-  - MagicalRecord/Shorthand
+  - hpple (~> 0.2)
+  - MagicalRecord
   - MBProgressHUD
   - SDWebImage
-  - SendGrid
+  - SendGrid (~> 0.2.6)
   - Socialize (from `https://raw.github.com/socialize/socialize-sdk-ios/master/Socialize.podspec`)
   - TTTAttributedLabel
   - UIActivityIndicator-for-SDWebImage
@@ -101,24 +110,25 @@ EXTERNAL SOURCES:
     :podspec: https://raw.github.com/socialize/socialize-sdk-ios/master/Socialize.podspec
 
 SPEC CHECKSUMS:
-  AAPullToRefresh: 87c33c4e0527930ba7dcc698edce6c49c9a0b2af
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
-  Appirater: cbdb7f305562cfde585300bfff86da01ae559deb
-  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
-  ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
-  Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
-  Loopy: 15bbbacb7e058e5fcdc972aa1708eb9bd70c7535
-  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
-  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  SendGrid: cc1980dee8b2fba2a82ad0ff41e02f92bc213e70
-  SMTPAPI: 6dd830b6fb939e2cd288e68c455a44613ddbbbb5
-  Socialize: e0bf7eb388e27e2a27731f06d6108704767315cf
-  STTwitter: f5ca425b5636da2ab18ceba49c55a51300a476c6
-  SZBlocksKit: 659b06061c9179b20674e8f475661187d4f7a6a6
+  AAPullToRefresh: 9170fe976bad38329656fc852ee84f8095d3718e
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
+  Facebook-iOS-SDK: 7f22c5d87e0f5da398f7d2a231bf55149f004585
+  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
+  Loopy: ce856c2c1a9bbc7b4770f501942157f2294a7a65
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SendGrid: dc8275118d276ad56cfbb8a9ebcdecf0a4387f36
+  SMTPAPI: 84bcd13fb0c572a7a16c2045ebb4f32c97892c90
+  Socialize: cf7187e66ae99772088dc904f2cd9c22d0c444f7
+  STTwitter: 106de2253a24bb5a21d8817d3f40abbb341aba4a
   SZJSONKit: 9b7d3cbf8f8cd21ec56d89950a0de1fadaca766e
   SZOAuthConsumer: b62a98025846d76778ca4f24528a5c51b8e66ee6
-  TTTAttributedLabel: e63baa4d3b8798ea259f5d9f55720002b4bbbd66
-  UIActivityIndicator-for-SDWebImage: 8bd92c15280fbe54816448c6b14674145eee05c7
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.39.0

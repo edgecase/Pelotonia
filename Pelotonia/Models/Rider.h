@@ -38,11 +38,12 @@
 @property (nonatomic, strong) NSString *profileUrl;
 @property (nonatomic, strong) NSString *riderType;
 @property (nonatomic, strong) NSString *route;
+@property (nonatomic, readonly) NSInteger distance;
 @property (nonatomic, strong) NSString *story;
 @property (nonatomic, assign) BOOL highRoller;
 @property (nonatomic, readonly) NSString *totalCommit;
 @property (nonatomic, readonly) NSString *totalRaised;
-@property (nonatomic, readonly) NSNumber *pctRaised;
+@property (nonatomic, readonly) float pctRaised;
 
 @property (nonatomic, strong) NSString *riderPhotoUrl;
 @property (nonatomic, strong) NSString *amountRaised;
@@ -52,6 +53,12 @@
 @property (nonatomic, strong) NSString *pelotonGrandTotal;
 @property (nonatomic, strong) NSString *pelotonCaptain;
 @property (nonatomic, strong) NSArray *donors;
+
+@property (nonatomic, readonly) NSString *riderDetailText;
+@property (nonatomic, readonly) BOOL isRider;
+@property (nonatomic, readonly) BOOL isPeloton;
+@property (nonatomic, readonly) BOOL isVirtualRider;
+@property (nonatomic, readonly) BOOL isVolunteer;
 
 // NSObject & initialization
 - (id)initWithName:(NSString *)name andId:(NSString *)riderId;
@@ -64,6 +71,7 @@
 
 // implementation
 - (void)refreshFromWebOnComplete:(void(^)(Rider *rider))completeBlock onFailure:(void(^)(NSString *errorMessage))failureBlock;
+- (NSDictionary *)routesInfo;
 
 @end
 

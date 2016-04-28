@@ -6,15 +6,17 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import Photos;
+
 #import "PhotoPageViewController.h"
 #import "SinglePhotoViewController.h"
 
 @interface PhotoViewController : UIViewController<UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIActionSheetDelegate>
 
 @property (weak, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSArray *photos;
+@property (strong, nonatomic) PHFetchResult *photos;
 @property (assign, nonatomic) NSInteger initialPhotoIndex;
-- (IBAction)sharePhoto:(id)sender;
 
+- (IBAction)sharePhoto:(id)sender;
 @end

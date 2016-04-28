@@ -6,11 +6,13 @@
 //
 //
 
-#import <UIKit/UIKit.h>
-#import <AssetsLibrary/AssetsLibrary.h>
+@import UIKit;
+@import Photos;
+#import "Pelotonia-Swift.h"
 
 @interface RidePhotosViewController : UICollectionViewController<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (strong, nonatomic) ALAssetsLibrary *library;
+@property (strong, nonatomic) PHFetchResult *photos;
+@property (strong, nonatomic) PHCachingImageManager *imageManager;
 
 @end

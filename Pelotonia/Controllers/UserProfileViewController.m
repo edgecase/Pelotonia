@@ -5,7 +5,17 @@
 //  Created by Mark Harris on 4/26/13.
 //
 //
+//  This is the view that you see when you launch the application.
+//  it displays the user's picture, recent photos & workouts, and
+//  their current fundraising tally.
 
+@import Photos;
+
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AAPullToRefresh/AAPullToRefresh.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
+#import <Socialize/Socialize.h>
 #import "UserProfileViewController.h"
 #import "PelotoniaLogInViewController.h"
 #import "PelotoniaSignUpViewController.h"
@@ -17,15 +27,10 @@
 #import "RiderDataController.h"
 #import "WorkoutListTableViewController.h"
 #import "AppDelegate.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AAPullToRefresh/AAPullToRefresh.h>
-#import <SDWebImage/UIImageView+WebCache.h>
-#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
-#import <Socialize/Socialize.h>
 #import "CommentTableViewCell.h"
 #import "FindRiderViewController.h"
 #import "IntroViewController.h"
+#import "Pelotonia-Swift.h"
 
 #ifndef DEBUG
 #define DEBUG   0
@@ -38,6 +43,11 @@
 @implementation UserProfileViewController {
     NSArray *_workouts;
     AAPullToRefresh *_tv;
+    
+    PHAssetCollection *assetCollection;
+    bool albumFound;
+    PHObjectPlaceholder *assetCollectionPlaceholder;
+    PHAssetCollection *collection;
 }
 
 
@@ -59,7 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.library = [[ALAssetsLibrary alloc] init];
+    self.library = [[AppDelegate sharedDataController] sharedAssetsLibrary];
     self.rider = [[AppDelegate sharedDataController] favoriteRider];
     _workouts = [[AppDelegate sharedDataController] workouts];
 
@@ -71,19 +81,11 @@
     
     _tv.imageIcon = [UIImage imageNamed:@"PelotoniaBadge"];
     _tv.borderColor = [UIColor whiteColor];
-    
-    // logo in title bar
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logotype_grn"]];
-    self.navigationItem.titleView = imageView;
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self configureView];
-
     // if this is our first time loading, pop up the "this is how you use me" screen
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -94,6 +96,13 @@
     }
     
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self configureView];
+}
+
 
 - (BOOL)showInDebug
 {
@@ -136,8 +145,6 @@
     [self configureRecentPhotos];
     [self configureWorkoutCell];
     [self configureRiderCell];
-    
-    
 }
 
 - (NSInteger)workoutMiles {
@@ -147,6 +154,7 @@
     }
     return sum;
 }
+
 - (void)configureWorkoutCell
 {
     // show details of most recent workout
@@ -166,47 +174,44 @@
     }
 }
 
-- (void) setImageView:(UIImageView *)view fromPhotos:(NSArray *)photos atIndex:(NSInteger)index
+- (void)setImageView:(UIImageView *)view toPhoto:(PHAsset *)photo withManager:(PHImageManager *)manager
 {
-    NSString *key = [[photos objectAtIndex:index] objectForKey:@"key"];
-    // load the image from the asset library
-    [self.library assetForURL:[NSURL URLWithString:key] resultBlock:^(ALAsset *asset) {
-        if (asset) {
-            [view setImage:[[UIImage imageWithCGImage:[asset thumbnail]] roundedCornerImage:5 borderSize:1]];
+    UIImage *defaultImage =
+    [[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit
+                                                                        bounds:self.recentImage1.bounds.size
+                                                          interpolationQuality:kCGInterpolationDefault];
+
+    [manager requestImageForAsset:photo
+                       targetSize:CGSizeMake(100, 100)
+                      contentMode:PHImageContentModeAspectFill
+                          options:nil
+                    resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if (result != nil) {
+            [view setImage:result];
         }
         else {
-            NSLog(@"couldn't find image");
-            [view setImage:[[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size interpolationQuality:kCGInterpolationDefault] roundedCornerImage:5 borderSize:1]];
+            [view setImage:defaultImage];
         }
-    } failureBlock:^(NSError *error) {
-        NSLog(@"error loading image %@", [error localizedDescription]);
-        [view setImage:[[UIImage imageNamed:@"profile_default_thumb"] resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:view.bounds.size  interpolationQuality:kCGInterpolationDefault]];
     }];
 }
 
 - (void)configureRecentPhotos
 {
-    NSArray *photos = [[AppDelegate sharedDataController] photoKeys];
-    
-    photos = [photos sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDictionary *photoDict1 = (NSDictionary *)obj1;
-        NSDictionary *photoDict2 = (NSDictionary *)obj2;
-        NSDate *date1 = [photoDict1 objectForKey:@"date"];
-        NSDate *date2 = [photoDict2 objectForKey:@"date"];
-        return [date2 compare:date1];
+    [[AppDelegate pelotoniaPhotoLibrary] images:^(PHFetchResult * _Nonnull photos) {
+        PHImageManager *manager = [PHImageManager defaultManager];
+        
+        if (photos.count > 0) {
+            [self setImageView:self.recentImage1 toPhoto:[photos objectAtIndex:0] withManager:manager];
+        }
+        if (photos.count > 1) {
+            [self setImageView:self.recentImage2 toPhoto:[photos objectAtIndex:1] withManager:manager];
+        }
+        if (photos.count > 2) {
+            [self setImageView:self.recentImage3 toPhoto:[photos objectAtIndex:2] withManager:manager];
+        }
     }];
-    
-    NSUInteger numPhotos = [photos count];
-    if (numPhotos >= 1) {
-        [self setImageView:self.recentImage1 fromPhotos:photos atIndex:0];
-    }
-    if (numPhotos >= 2) {
-        [self setImageView:self.recentImage2 fromPhotos:photos atIndex:1];
-    }
-    if (numPhotos >= 3) {
-        [self setImageView:self.recentImage3 fromPhotos:photos atIndex:2];
-    }
 }
+
 
 - (void)refreshUser
 {
@@ -301,7 +306,7 @@
     }
     self.riderName.font = PELOTONIA_FONT(21);
     self.riderDistance.font = PELOTONIA_FONT(16);
-
+    self.navigationItem.title = self.riderName.text;
 }
 
 
@@ -397,20 +402,23 @@
 - (IBAction)addPhotoToAlbum:(id)sender
 {
     // show action sheet allowing picking or taking image
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Source" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Photo", @"Take Picture", nil];
-    [sheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex != actionSheet.cancelButtonIndex) {
-        if (buttonIndex == 0) {
-            [self startMediaBrowserFromViewController:self usingDelegate:self];
-        }
-        if (buttonIndex == 1) {
-            [self startCameraControllerFromViewController:self usingDelegate:self];
-        }
-    }
+    UIAlertController *sheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Choose Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // do what we do when we choose photo
+        [self startMediaBrowserFromViewController:self usingDelegate:self];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Take Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // do what we do when we take picture
+        [self startCameraControllerFromViewController:self usingDelegate:self];
+    }]];
+    
+    [sheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:sheet animated:YES completion:nil];
 }
 
 - (IBAction)signIn:(id)sender {
@@ -436,11 +444,10 @@
                                    usingDelegate: (id <UIImagePickerControllerDelegate,
                                                    UINavigationControllerDelegate>) delegate {
     
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypeCamera] == NO)
-        || (delegate == nil)
-        || (controller == nil))
+    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == NO) ||
+        (delegate == nil) || (controller == nil)) {
         return NO;
+    }
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
     cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -453,7 +460,7 @@
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    cameraUI.allowsEditing = YES;
+    cameraUI.allowsEditing = NO;
     
     cameraUI.delegate = delegate;
     
@@ -477,13 +484,12 @@
     
     // Displays saved pictures and movies, if both are available, from the
     // Camera Roll album.
-    mediaUI.mediaTypes =
-    [UIImagePickerController availableMediaTypesForSourceType:
+    mediaUI.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:
      UIImagePickerControllerSourceTypeSavedPhotosAlbum];
     
     // Hides the controls for moving & scaling pictures, or for
     // trimming movies. To instead show the controls, use YES.
-    mediaUI.allowsEditing = YES;
+    mediaUI.allowsEditing = NO;
     
     mediaUI.delegate = delegate;
     [controller presentViewController:mediaUI animated:YES completion:nil];
@@ -495,6 +501,32 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+- (void)showImages
+{
+    PHFetchResult *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+    PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
+    
+    [assets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isMemberOfClass:[PHAsset class]]) {
+            PHAsset *asset = obj;
+            CGSize imageSize = CGSizeMake(asset.pixelWidth, asset.pixelHeight);
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+            
+            [imageManager requestImageForAsset:asset
+                                    targetSize:imageSize
+                                   contentMode:PHImageContentModeAspectFill
+                                       options:options
+                                 resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                                     // add image data to list of images for the profile
+                                     
+            }];
+        }
+    }];
+}
+
 
 // For responding to the user accepting a newly-captured picture or movie
 - (void) imagePickerController: (UIImagePickerController *) picker
@@ -515,21 +547,14 @@
             imageToSave = originalImage;
         }
         
-        // Save the new image (original or edited) to the Camera Roll
-        [self.library writeImageToSavedPhotosAlbum:imageToSave.CGImage
-                                          metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
-                                   completionBlock:^(NSURL *assetURL, NSError *error) {
-            if (error) {
+        [[AppDelegate pelotoniaPhotoLibrary] saveImage:imageToSave completion:^(NSURL * _Nullable url, NSError * _Nullable error) {
+            if (error != nil) {
                 NSLog(@"error writing image: %@", [error localizedDescription]);
             }
             else {
-                // no error, so put it in the cache, and add to our list of images
-                NSString *key = [assetURL absoluteString];
-                [[SDImageCache sharedImageCache] storeImage:imageToSave forKey:key];
-                [[[AppDelegate sharedDataController] photoKeys] addObject:@{@"key" : key, @"date" : [NSDate date]}];
-                
-                [picker dismissViewControllerAnimated:YES completion:nil];
+                [self showImages];
             }
+            [picker dismissViewControllerAnimated:YES completion:nil];
         }];
     }
 }

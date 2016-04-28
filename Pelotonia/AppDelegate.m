@@ -60,9 +60,13 @@
 {
 
     // Register for Apple Push Notification Service
-    [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
     
+    [application registerForRemoteNotifications];
     
+
     // Initialize our coredata instance
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"PelotoniaModel"];
 
@@ -71,23 +75,22 @@
     [[[SDWebImageManager sharedManager] imageCache] clearMemory];
 
     // set default appearance
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIButton appearance] setTintColor:PRIMARY_GREEN];
     
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     shadow.shadowBlurRadius = 0.0;
-    shadow.shadowOffset = CGSizeMake(0.0, 0.0);
+    shadow.shadowOffset = CGSizeMake(0.0, 1.0);
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-           NSForegroundColorAttributeName: [UIColor whiteColor],
+           NSForegroundColorAttributeName: SECONDARY_LIGHT_GRAY,
            NSShadowAttributeName: shadow,
-           NSFontAttributeName: PELOTONIA_SECONDARY_FONT_BOLD(0),
+           NSFontAttributeName: PELOTONIA_FONT_BOLD(21),
            }];
     [[UINavigationBar appearance] setTintColor: PRIMARY_GREEN];
     [[UINavigationBar appearance] setBarTintColor:PRIMARY_DARK_GRAY];
     [[UINavigationBar appearance] setBackgroundColor:PRIMARY_DARK_GRAY];
-        
+    
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = SECONDARY_LIGHT_GRAY;
     pageControl.currentPageIndicatorTintColor = SECONDARY_GREEN;
@@ -192,7 +195,7 @@
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [self archiveData];
-    [[NSManagedObjectContext defaultContext] saveToPersistentStoreAndWait];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -234,6 +237,20 @@
 
 - (RiderDataController *)riderDataController {
     return [AppDelegate sharedDataController];
+}
+
++ (PelotoniaPhotosLibrary *)pelotoniaPhotoLibrary
+{
+    static PelotoniaPhotosLibrary *photoLibrary = nil;
+
+    if (photoLibrary == nil) {
+        photoLibrary = [[PelotoniaPhotosLibrary alloc] init];
+        [photoLibrary album:^(PHAssetCollection * _Nonnull album) {
+            NSLog(@"Created album successfully!");
+        }];
+    }
+    
+    return photoLibrary;
 }
 
 - (void)archiveData
