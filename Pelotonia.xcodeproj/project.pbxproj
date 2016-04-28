@@ -1131,8 +1131,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sandlot Software, LLC (E8N9T3D525)";
 				CURRENT_PROJECT_VERSION = 17;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1167,8 +1167,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.pelotonia.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6d3e0ebf-3c13-4e7a-9b6a-202d903c7e47";
+				PROVISIONING_PROFILE = "519b2e82-5cc1-4582-8148-940d264e4454";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "519b2e82-5cc1-4582-8148-940d264e4454";
 				SWIFT_OBJC_BRIDGING_HEADER = "Pelotonia/Pelotonia-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "Pelotonia/Vendor/**";
