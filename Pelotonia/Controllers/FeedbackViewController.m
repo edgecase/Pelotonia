@@ -8,6 +8,7 @@
 
 #import "FeedbackViewController.h"
 #import <Socialize/Socialize.h>
+#import "SendgridPassword.h"
 
 @interface FeedbackViewController ()
 
@@ -49,7 +50,7 @@
 }
 
 - (void)sendFeedback:(NSString *)feedback {
-    SendGrid *sendgrid = [SendGrid apiUser:@"support@isandlot.com" apiKey:@"1drink2many!"];
+    SendGrid *sendgrid = [SendGrid apiUser:SENDGRID_USERNAME apiKey:SENDGRID_PASSWORD];
     
     NSString *username = [[SZUserUtils currentUser] userName];
     NSString *displayName = [[SZUserUtils currentUser] displayName];
